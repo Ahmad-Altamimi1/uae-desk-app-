@@ -1,0 +1,194 @@
+{
+  "Navbar": {
+    "register": "Register",
+    "login": "Login",
+    "offers": "Offers",
+    "flights": "Flights",
+    "hotels": "Hotels",
+    "cruises": "Cruises",
+    "make your trip": "Make Your Trip",
+    "who are we": "Who Are We",
+    "contact us": "Contact Us"
+  },
+  "Currencies": {
+    "JOD": "JOD",
+    "USD": "USD",
+    "EUR": "EUR",
+    "GBP": "GBP"
+  },
+  "Offers": {
+    "Hero": {
+      "book with us": "Book with us",
+      "heroTitle": "Discover Your Options For a",
+      "heroSpan": "Perfect and Unique Stay",
+      "heroSub": "Enjoy an unparalleled stay experience tailored to all your needs and desires. Whether you're looking for luxury, comfort, or even adventure, we provide the best options to ensure an unforgettable, perfect stay. Let us help you choose your ideal destination and explore the unique places that will make your trip truly special."
+    },
+    "PopularDestination": {
+      "title": "Popular",
+      "titleSpan": "Destinations",
+      "sub": "Explore the most sought-after destinations around the globe! From breathtaking landscapes to vibrant cities, these popular spots offer unforgettable experiences for every type of traveler. Whether you're seeking adventure, culture, or relaxation, these destinations have something for everyone. Discover where your next journey could take you!",
+      "France": "France",
+      "Italy": "Italy",
+      "Spain": "Spain",
+      "Japan": "Japan",
+      "Egypt": "Egypt",
+      "Australia": "Australia",
+      "Greece": "Greece",
+      "Thailand": "Thailand",
+      "residence": "Residence",
+      "allDestinations": "All Destinations"
+    },
+    "BestOffers": {
+      "title": "Best",
+      "titleSpan": "Offers",
+      "sub": "Discover unbeatable deals on your next adventure! Whether you're planning a relaxing getaway, a thrilling adventure, or a luxurious escape, our handpicked offers guarantee the best value for your travel needs. Don't miss out on exclusive discounts and special packages tailored to make your trip unforgettable. Book now and take advantage of these incredible offers before they’re gone!",
+      "allOffers": "All Offers",
+      "offerIncludes": "Offer Includes",
+      "flightTicket": "Round-trip flight ticket",
+      "airportTransfers": "Airport transfers",
+      "hotelAccommodation": "Hotel accommodation",
+      "meals": "Breakfast, lunch, and dinner",
+      "sharmElSheikh": "Sharm El Sheikh",
+      "seeMore": "See More",
+      "rate": "Rate",
+      "residence": "Residence",
+      "entertainmentEvent": "Entertainment event",
+      "beirut": "Beirut",
+      "freeDomesticFlights": "3 free domestic flights",
+      "duration": "For 3 days",
+      "startDate": "Starting from 16/04",
+      "startingFrom": "Starting from",
+      "taxAndFees": "Tax and fees"
+    },
+    "SpecialDiscounts": {
+      "title": "Special",
+      "titleSpan": "Discounts",
+      "sub": "Take advantage of exclusive discounts tailored just for you! These special offers are available for a limited time, so don’t miss your chance to save on your next booking.",
+      "allDiscounts": "All Discounts"
+    },
+    "BestHotels": {
+      "title": "Best",
+      "titleSpan": "Hotels",
+      "sub": "Discover the top-rated hotels that offer the perfect blend of luxury, comfort, and convenience. Whether you’re looking for a peaceful retreat or a vibrant city experience, these hotels are sure to exceed your expectations.",
+      "allHotels": "All Hotels",
+      "nightJOD": "JOD per night"
+    },
+    "rate": "Rate",
+    "onlyJOD": "JOD Only",
+    "UAE": "UAE",
+    "Abu Dhabi": "Abu Dhabi",
+    "Turkey": "Turkey",
+    "Istanbul": "Istanbul",
+    "Maldives": "Maldives",
+    "Evoro": "Evoro",
+    "Switzerland": "Switzerland",
+    "Zurich": "Zurich",
+    "Hilton": "Hilton",
+    "DeadSea": "Dead Sea",
+    "TheGrandBali": "The Grand Bali",
+    "Bali": "Bali",
+    "Rotana": "Rotana",
+    "Dubai": "Dubai",
+    "Ramada": "Ramada",
+    "KualaLumpur": "Kuala Lumpur",
+    "DiscoverJordan": {
+      "title": "Discover",
+      "titleSpan": "Jordan",
+      "sub": "Jordan is a beautiful country with many wonders to explore. From the ancient monuments of Petra to the vibrant culture of Amman, Jordan offers a unique and enriching experience for travelers. Discover the hidden gems, visit the ancient cities, and immerse yourself in the rich history of Jordan.",
+      "bookNow": "Book Now",
+      "discover": "Discover"
+    },
+    "AppPromotion": {
+      "title": "Upload",
+      "titleSpan": "Our App Now",
+      "sub": "Get the best experience with exclusive features, personalized content, and faster access by downloading our app today."
+    }
+  },
+  "enjoy": "Enjoy a comfortable travel experience with the airport transfer service.",
+  "delivery": "Make your transfer easier with Dallas delivery services!",
+  "bookNow": "Book Now",
+  "learnMore": "Learn more",
+  "Footer": {
+    "subscribe": "Subscribe to receive",
+    "latestUpdates": "All the latest updates",
+    "brief": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "Enter your email": "Enter your email",
+    "Email": "Email",
+    "Subscribing": "Subscribing...",
+    "Subscribe": "Subscribe",
+    "copyRight": "All rights reserved."
+  },
+  "Flights": {
+    "Discover": {
+      "title": "Discover",
+      "titleSpan": "Summer Offers",
+      "sub": "Uncover the best summer destinations with our exclusive offers. From serene beaches to adventurous mountain trails, the world is full of hidden gems waiting to be explored. Take advantage of these amazing deals and start your journey to unforgettable experiences this summer.",
+      "bookNow": "Book Now",
+      "discover": "Discover"
+    }
+  },
+  "SearchPanel": {
+    "destination": "Destination",
+    "number of days": "Number of days",
+    "Date": "Date",
+    "number of people and rooms": "Number of people",
+    "search now": "Search now",
+    "choose here": "Choose here",
+    "travelType": "Travel Type",
+    "roundTrip": "Round Trip",
+    "oneWay": "One Way",
+    "multiCity": "Multi City",
+    "from": "From",
+    "to": "To",
+    "date": "Date",
+    "passengers": "Passengers",
+    "ticketType": "Ticket Type",
+    "adult": "Adult",
+    "child": "Child",
+    "infant": "Infant",
+    "search": "Search",
+    "decrease": "Decrease",
+    "increase": "Increase",
+    "adultsLabel": "Adults",
+    "adultsAgeRange": ">12 Years",
+    "childrenLabel": "Children",
+    "childrenAgeRange": "2-12 Years",
+    "infantsLabel": "Infants",
+    "infantsAgeRange": "<2 Years",
+    "SearchPanel": {
+      "from": "From",
+      "to": "To",
+      "tripType": "Trip Type",
+      "departureDate": "Departure Date",
+      "returnDate": "Return Date",
+
+      "search": "Search",
+      "searching": "Searching..."
+    },
+    "FLIGHT_TYPE": {
+      "ROUND_TRIP": "Round Trip",
+      "ONE_WAY": "One Way",
+      "MULTI_CITY": "Multi City"
+    },
+    "passengerType": {
+      "Adult": "Adults",
+      "Child": "Children",
+      "Infant": "Infants"
+    },
+    "whoAreWe": {
+      "title": "How We Are",
+      "ourVision": "Our Vision:",
+      "ourMessage": "Our Message",
+      "Branch": {
+        "title": "Dalas ",
+        "sub": " Branches",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      },
+      "Blog": {
+        "title": "Our exclusive ",
+        "sub": "blog",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      }
+    }
+  }
+}
