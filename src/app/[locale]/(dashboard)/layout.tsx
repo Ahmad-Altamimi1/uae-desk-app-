@@ -15,10 +15,9 @@ import "../../globals.css";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { ReactNode } from "react";
+import { ReactNode, use } from "react";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import { description } from "@/components/chart-area-interactive";
 type Props = {
   children: ReactNode;
   params: Promise<{ locale: Locale }>;
@@ -45,9 +44,9 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({ children, params }: Props) {
-  const { locale } = await params;
-  const messages = await getMessages();
+export default function RootLayout({ children, params }: Props) {
+  const { locale } = use(params);
+  const messages = getMessages();
 
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -55,6 +54,7 @@ export default async function RootLayout({ children, params }: Props) {
 
   // Enable static rendering
   setRequestLocale(locale);
+
   return (
     <html
       dir={locale === "ar" ? "rtl" : "ltr"}
