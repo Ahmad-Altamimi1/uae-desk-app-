@@ -92,8 +92,9 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
   },
   {
     accessorKey: 'business_name',
-    header: "Business Name",
-    // header: <HeaderCell lable="title" />,
+
+    header: <HeaderCell lable="customers.businessName" />,
+    
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -105,8 +106,7 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
 
   {
     accessorKey: 'phone_number',
-    header: "Phone Number",
-    // header: <HeaderCell lable="title" />,
+    header: <HeaderCell lable="customers.phoneNumber" />,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -117,32 +117,23 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
   },
   {
     accessorKey: 'email',
-    header: "Email",
-    // header: <HeaderCell lable="title" />,
+    // header: "Email",
+    header: <HeaderCell lable="customers.email" />,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.phone_number}
-        </Badge>
-      </div>
-    ),
-  },
-  {
-    accessorKey: 'service',
-    header: "Services",
-    // header: <HeaderCell lable="title" />,
-    cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.phone_number}
+          {row.original.email}
         </Badge>
       </div>
     ),
   },
 
+
   {
     accessorKey: "status",
-    header: "Status",
+      header: <HeaderCell lable="customers.status" />,
+
+    // header: "Status",
     cell: ({ row }) => (
       <Badge variant="outline" className="text-muted-foreground px-1.5">
         {row.original.status === "Done" ? (
@@ -157,10 +148,10 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
 
   {
     accessorKey: "actions",
-    header: "Actions",
+    header: <HeaderCell lable="customers.actions" />,
     id: "actions",
     cell: () => <ActionCell />,
   },
-  
+
 
 ];
