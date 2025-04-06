@@ -30,7 +30,7 @@ export async function handleLogin(
   if (!validatedFields.success) {
     return {
       success: false,
-      error: "Invalid form data",
+      error: validatedFields.error.flatten().fieldErrors,
       data: {
         user: {
           access_token: "",
@@ -52,15 +52,15 @@ export async function handleLogin(
       rawFormData as Omit<ILoginRequest, "id">
     );
     const cookieStore = await cookies();
-console.log("loginResponse", loginResponse);
+    console.log("loginResponse", loginResponse);
 
     cookieStore.set("token", loginResponse.access_token);
 
     isOk = true;
     // return { success: true, data: loginResponse, error: null };
   } catch (error) {
-    console.log('errorerrorerror', error);
-    
+    console.log("errorerrorerror", error);
+
     return {
       success: false,
       error: (error as Error).message,
