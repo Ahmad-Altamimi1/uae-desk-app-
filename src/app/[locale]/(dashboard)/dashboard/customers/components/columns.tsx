@@ -27,7 +27,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { TableCellViewer } from "@/components/table/TableCellViewer";
 import ActionCell from "@/components/table/actionCell";
-import {IResponseCustomer} from '@/entities/dashboard'
+import { IResponseCustomer } from "@/entities/dashboard";
 import { HeaderCell } from "@/components/table/headerCell";
 // export const schema = z.object({
 //   id: z.number(),
@@ -91,8 +91,8 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     ),
   },
   {
-    accessorKey: 'first_name',
-    header: <HeaderCell lable="title" />,
+    accessorKey: "first_name",
+    header: <HeaderCell label="title" />,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
