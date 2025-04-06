@@ -91,10 +91,12 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     ),
   },
   {
-    accessorKey: 'business_name',
+    // accessorKey: 'business_name',
 
-    header: <HeaderCell lable="customers.businessName" />,
+    // header: <HeaderCell lable="customers.businessName" />,
     
+    accessorKey: "business_name",
+    header: <HeaderCell label="customers.businessName" />,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -106,7 +108,7 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
 
   {
     accessorKey: 'phone_number',
-    header: <HeaderCell lable="customers.phoneNumber" />,
+    header: <HeaderCell label="customers.phoneNumber" />,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -118,7 +120,7 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
   {
     accessorKey: 'email',
     // header: "Email",
-    header: <HeaderCell lable="customers.email" />,
+    header: <HeaderCell label="customers.email" />,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -131,7 +133,7 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
 
   {
     accessorKey: "status",
-      header: <HeaderCell lable="customers.status" />,
+      header: <HeaderCell label="customers.status" />,
 
     // header: "Status",
     cell: ({ row }) => (
@@ -148,7 +150,7 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
 
   {
     accessorKey: "actions",
-    header: <HeaderCell lable="customers.actions" />,
+    header: <HeaderCell label="customers.actions" />,
     id: "actions",
     cell: () => <ActionCell />,
   },
