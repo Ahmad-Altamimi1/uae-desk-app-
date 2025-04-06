@@ -21,6 +21,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
+      "@/form/*": ["./src/components/form/*"],
       "@/api/*": ["./src/lib/api/*"],
       "@/entities/dashboard/*": ["./src/entities/dashboard/*"],
       "@/constants/*": ["./src/constants/*"]
