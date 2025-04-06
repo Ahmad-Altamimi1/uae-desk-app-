@@ -15,7 +15,7 @@ import "../../globals.css";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { ReactNode, use } from "react";
+import { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 type Props = {
@@ -44,9 +44,9 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default function RootLayout({ children, params }: Props) {
-  const { locale } = use(params);
-  const messages = getMessages();
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params;
+  const messages = await getMessages();
 
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -54,19 +54,13 @@ export default function RootLayout({ children, params }: Props) {
 
   // Enable static rendering
   setRequestLocale(locale);
-
   return (
-    <html
-      dir={locale === "ar" ? "rtl" : "ltr"}
-      lang={typeof window !== "undefined" && locale === "ar" ? "ar" : "en"}
-    >
+    <html dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased
         ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
       >
-        <NextIntlClientProvider
-          messages={JSON.stringify(messages) as unknown as AbstractIntlMessages}
-        >
+        <NextIntlClientProvider messages={messages}>
           <SidebarProvider
             style={
               {

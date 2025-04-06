@@ -33,17 +33,12 @@ export default async function RootLayout({ children, params }: Props) {
 
   const messages = await getMessages();
   return (
-    <html
-      lang={locale}
-      dir={typeof window !== "undefined" && locale === "ar" ? "rtl" : "ltr"}
-    >
+    <html dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased
-        ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
+         ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
       >
-        <NextIntlClientProvider
-          messages={JSON.stringify(messages) as unknown as AbstractIntlMessages}
-        >
+        <NextIntlClientProvider messages={messages}>
           <QueryProvider>{children}</QueryProvider>
         </NextIntlClientProvider>
       </body>
