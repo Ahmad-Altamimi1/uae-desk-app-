@@ -5,8 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import { handleLogin } from "@/app/(dashboard)/actions/auth/auth";
 import { useActionState } from "react";
+import { handleLogin } from "@/app/[locale]/(dashboard)/actions";
 interface LoginState {
   success: boolean;
   data: null;

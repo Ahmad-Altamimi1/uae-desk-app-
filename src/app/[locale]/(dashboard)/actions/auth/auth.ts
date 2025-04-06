@@ -1,14 +1,13 @@
 "use server";
-import { ILogin } from "@/entities/dashboard";
-import { AuthService } from "@/api/services/dashboard";
+import { ILoginRequest, ILoginResponse } from "@/entities/dashboard";
+import { AuthService, headers } from "@/api/services/dashboard";
 import { z } from "zod";
+import { cookies } from "next/headers";
+import { redirect } from "@/i18n/navigation";
 
 interface LoginState {
   success: boolean;
-  data: {
-    password: string;
-    email: string;
-  };
+  data: ILoginResponse;
   error: string | null;
 }
 
@@ -17,7 +16,6 @@ export async function handleLogin(
   formData: FormData
 ): Promise<LoginState> {
   "use server";
-
   const validatedFields = z
     .object({
       password: z.string().min(3),
@@ -33,7 +31,9 @@ export async function handleLogin(
       success: false,
       error: "Invalid form data",
       data: {
-        email: "",
+        user: {
+          access_token: "",
+        },
         password: "",
       },
     };
@@ -46,15 +46,22 @@ export async function handleLogin(
 
   try {
     const loginResponse = await AuthService.login(
-      rawFormData as Omit<ILogin, "id">
+      rawFormData as Omit<ILoginRequest, "id">
     );
+    const cookieStore = await cookies();
 
+    cookieStore.set("token", loginResponse.access_token);
+    const locale = headers().get("x-next-locale") || "en";
+    redirect({
+      href: { pathname: "/dashboard" as "/" | "/pathnames" },
+      locale: locale,
+    });
     return { success: true, data: loginResponse, error: null };
   } catch (error) {
     return {
       success: false,
       error: (error as Error).message,
-      data: { email: "", password: "" },
+      data: { user: { access_token: "" }, password: "" },
     };
   }
 }

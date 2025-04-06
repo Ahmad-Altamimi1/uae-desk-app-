@@ -22,7 +22,8 @@
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
       "@/api/*": ["./src/lib/api/*"],
-      "@/entities/dashboard/*": ["./src/entities/dashboard/*"]
+      "@/entities/dashboard/*": ["./src/entities/dashboard/*"],
+      "@/constants/*": ["./src/constants/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

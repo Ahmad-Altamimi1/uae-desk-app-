@@ -1,18 +1,27 @@
-import { BASE_URL } from "@/constants";
+"use server";
+
 import { createApiClient } from "./clientConfig";
-import { ApiRoute, createHomeRoute } from "../routes";
-import { createActivityRoute } from "../routes/activitiesRoute";
-import { createMenuRoute } from "../routes/menuRoute";
-import { createEventsRoute } from "../routes/eventsRoute";
+import { ApiRoute } from ".";
+import { createCustomersRoute } from "./routes";
+import { BASE_URL } from "@/constants";
+import { getCookie } from "@/utils/cookiesHandler";
 
-export const baseApi = createApiClient({
-  baseURL: BASE_URL ?? "",
-  apiName: "",
-});
+const token = (await getCookie("token")) || "";
+if (!token) throw new Error("Token not found");
 
-export const apiRoutes: ApiRoute = {
-  homeRoute: createHomeRoute(baseApi),
-  activityRoute: createActivityRoute(baseApi),
-  menuRoute: createMenuRoute(baseApi),
-  eventsRoute: createEventsRoute(baseApi),
+export const baseApi = async () => {
+  return await createApiClient({
+    baseURL: BASE_URL ?? "",
+    apiName: "",
+    token,
+  });
 };
+export const apiRoutes: ApiRoute = {
+  CustomersRoute: createCustomersRoute(await baseApi()),
+};
+// export const getApiRoutes = async (): Promise<ApiRoute> => {
+//   const apiClient = await baseApi();
+//   return {
+//     CustomersRoute: createCustomersRoute(apiClient),
+//   };
+// };

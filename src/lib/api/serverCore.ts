@@ -1,3 +1,4 @@
+import { getCookie } from "@/utils/cookiesHandler";
 import endPoints from "./endpoints/dashboard";
 
 // Type definitions for better type safety
@@ -113,6 +114,7 @@ async function handleApiResponse<T>(response: Response): Promise<T> {
     if (response.status === 204) {
       return null as T;
     }
+
     return response.json();
   }
 
@@ -154,12 +156,19 @@ async function fetchWithTimeout<TResponse>(
     headers.set("Content-Type", "application/json");
   }
 
+  // Add bearer token
+  const token = await getCookie("token");
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+
   // Prepare the request
   const fetchPromise = fetch(url, {
     method,
     credentials: "include",
     headers,
     body: body ? JSON.stringify(body) : undefined,
+
     ...fetchOptions,
   });
 
@@ -189,7 +198,6 @@ export async function fetchApi<TResponse>(
   retries = 1
 ): Promise<TResponse> {
   const { skipCsrf = false } = options;
-
   if (!skipCsrf) {
     await getCsrfToken();
   }
