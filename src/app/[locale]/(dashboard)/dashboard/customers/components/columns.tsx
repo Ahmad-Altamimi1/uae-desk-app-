@@ -1,6 +1,5 @@
 "use client";
 
-import { schema } from "@/components/data-table";
 import { DragHandle } from "@/components/table/dragHandle";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@radix-ui/react-checkbox";
@@ -28,8 +27,19 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { TableCellViewer } from "@/components/table/TableCellViewer";
 import ActionCell from "@/components/table/actionCell";
+import {IResponseCustomer} from '@/entities/dashboard'
+import { HeaderCell } from "@/components/table/headerCell";
+// export const schema = z.object({
+//   id: z.number(),
+//   header: z.string(),
+//   type: z.string(),
+//   status: z.string(),
+//   target: z.string(),
+//   limit: z.string(),
+//   reviewer: z.string(),
+// });
 
-export const columns: ColumnDef<z.infer<typeof schema>>[] = [
+export const columns: ColumnDef<IResponseCustomer>[] = [
   {
     id: "drag",
     header: () => null,
@@ -76,6 +86,17 @@ export const columns: ColumnDef<z.infer<typeof schema>>[] = [
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
           {row.original.id}
+        </Badge>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'first_name',
+    header: <HeaderCell lable="title" />,
+    cell: ({ row }) => (
+      <div className="w-32">
+        <Badge variant="outline" className="text-muted-foreground px-1.5">
+          {row.original.first_name}
         </Badge>
       </div>
     ),
