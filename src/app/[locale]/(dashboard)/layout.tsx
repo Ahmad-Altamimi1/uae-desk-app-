@@ -38,6 +38,13 @@ export async function generateMetadata(props: Omit<Props, "children">) {
   return {
     title: t("title"),
     description: t("description"),
+    alternates: {
+      canonical: "/",
+      languages: {
+        en: "/en",
+        ar: "/ar",
+      },
+    },
   };
 }
 export function generateStaticParams() {
@@ -55,35 +62,35 @@ export default async function RootLayout({ children, params }: Props) {
   // Enable static rendering
   setRequestLocale(locale);
   return (
-    <html dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased
-        ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
-      >
-        <NextIntlClientProvider messages={messages}>
-          <SidebarProvider
-            style={
-              {
-                "--sidebar-width": "calc(var(--spacing) * 72)",
-                "--header-height": "calc(var(--spacing) * 12)",
-              } as React.CSSProperties
-            }
-          >
-            <AppSidebar variant="inset" />
-            <SidebarInset>
-              <SiteHeader />
-              <div className="flex flex-1 flex-col">
-                <div className="@container/main flex flex-1 flex-col gap-2">
-                  <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                    {children}
-                  </div>
+    <body
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      lang={locale}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased
+       ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
+    >
+      <NextIntlClientProvider messages={messages}>
+        <SidebarProvider
+          style={
+            {
+              "--sidebar-width": "calc(var(--spacing) * 72)",
+              "--header-height": "calc(var(--spacing) * 12)",
+            } as React.CSSProperties
+          }
+        >
+          <AppSidebar variant="inset" />
+          <SidebarInset>
+            <SiteHeader />
+            <div className="flex flex-1 flex-col">
+              <div className="@container/main flex flex-1 flex-col gap-2">
+                <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+                  {children}
                 </div>
               </div>
-            </SidebarInset>
-          </SidebarProvider>
-          <Toaster />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+            </div>
+          </SidebarInset>
+        </SidebarProvider>
+        <Toaster />
+      </NextIntlClientProvider>
+    </body>
   );
 }
