@@ -53,19 +53,20 @@ export function NavMain({
                   : "/dashboard"
               }
               className={cn(
-                item.url && "!cursor-pointer",
+                item.url && "!cursor-pointer ",
                 pathname === item.url &&
-                  "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
+                  "bg-white text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
               )}
               key={item.title}
             >
-              <SidebarMenuItem>
+              <SidebarMenuItem className="">
                 <SidebarMenuButton
                   tooltip={item.title}
                   className={cn(
                     !!item.url && item.url != "#"
                       ? "!cursor-pointer"
-                      : "cursor-context-menu"
+                      : "cursor-context-menu",
+                    "text-white hover:bg-white hover:text-primary"
                   )}
                 >
                   {item.icon && <item.icon />}
