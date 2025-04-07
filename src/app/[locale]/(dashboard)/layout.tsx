@@ -7,13 +7,13 @@ import {
 } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../../globals.css";
-import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Header from "@/components/layout/header";
+import { AppSidebar } from "@/components/layout/app-sidebar";
 type Props = {
   children: ReactNode;
   params: Promise<{ locale: Locale }>;

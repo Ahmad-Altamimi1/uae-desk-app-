@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import type * as React from "react";
 import {
   IconCamera,
   IconChartBar,
@@ -23,6 +23,7 @@ import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
+import { SidebarBackground } from "./sidebarBackGround";
 import {
   Sidebar,
   SidebarContent,
@@ -165,30 +166,37 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar
       collapsible="offcanvas"
       {...props}
-      className="pt-[120px] bg-primary"
+      className="relative pt-[120px] text-white"
     >
-      {/* TODO */}
-      <SidebarHeader className="bg-primary">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
-              <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+      {/* Background with circuit pattern */}
+      <SidebarBackground />
+
+      {/* Logo header with rounded white background */}
+      <SidebarHeader className="bg-transparent">
+        <div className="mx-2 rounded-xl bg-white p-3 text-primary shadow-sm">
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                className="data-[slot=sidebar-menu-button]:!p-1.5"
+              >
+                <a href="#">
+                  <IconInnerShadowTop className="!size-5" />
+                  <span className="text-base font-semibold">Acme Inc.</span>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </div>
       </SidebarHeader>
-      <SidebarContent className="bg-primary">
+
+      <SidebarContent className="bg-transparent">
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
-      <SidebarFooter className="bg-primary">
+
+      <SidebarFooter className="bg-transparent">
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
