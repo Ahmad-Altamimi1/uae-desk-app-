@@ -1,16 +1,35 @@
 {
-  "test":"test",
+  "test": "test",
   "RootLayout": {
     "title": "HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C Attendance",
     "description": "hhhhh"
   },
-  "dashboard":{
-    "title": "لوحة التحكم",
-    "description": "مرحبًا بك في لوحة التحكم الخاصة بك!",
-  "customers":{
-    "title": "العملاء",
-    "description": "مرحبًا بك في صفحة العملاء!",
-    "firstName": "الاسم الأول"
-  }
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Welcome to your dashboard!",
+    "customers": {
+      "title": "Customers",
+      "description": "Welcome to the customers page!",
+      "firstName": "First Name",
+      "businessName": "Business Name",
+      "phoneNumber": "Phone Number",
+      "email": "Email",
+      "services": "Services",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "roles": {
+      "title": "Roles",
+      "description": "Welcome to the users page!",
+      "name": "Name",
+      "code": "Code",
+      "actions": "Actions"
+    },
+    "permissions": {
+      "title": "Permissions",
+      "description": "Welcome to the permissions page!",
+      "name": "Name",
+      "actions": "Actions"
+    }
   }
 }
