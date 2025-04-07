@@ -29,21 +29,21 @@ const Header = () => {
             </div>
 
 
-            <div className="bg-[#F1F1F1] p-2 py-2 w-[50px] h-[50px] rounded-4xl">
-              <Image src="/flag.png" width={50} height={30} className="rounded-xl w-[50px] h-[30px]" alt="Logo" />
+            <div className="bg-[#F1F1F1] p-2 w-[40px] h-[40px] rounded-4xl">
+              <Image src="/flag.png" width={27} height={26} className="rounded-xl w-[27px] h-[26px]" alt="Logo" />
             </div>
 
 
-            <div className="relative bg-[#F1F1F1] p-3 py-3 w-[50px] h-[50px] rounded-4xl">
+            <div className="relative bg-[#F1F1F1] p-2 py-2 w-[40px] h-[40px] rounded-4xl">
               <div className="absolute top-0 right-0 bg-yellow-400 text-white text-xs font-semibold w-[14px] h-[14px] rounded-full flex items-center justify-center">
                 
               </div>
-              <FiBell className="text-gray-600" size={24} />
+              <FiBell className="text-gray-600" size={23} />
             </div>
 
 
-            <div className="bg-[#00713B0D] p-3 py-3 w-[50px] h-[50px] rounded-4xl ">
-              <FiSettings className="text-[#00713B]" size={24} />
+            <div className="bg-[#00713B0D] p-2 py-2 w-[40px] h-[40px] rounded-4xl ">
+              <FiSettings className="text-[#00713B]" size={23} />
 
             </div>
 
