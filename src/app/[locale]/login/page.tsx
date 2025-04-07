@@ -80,6 +80,8 @@ export default function LoginPage() {
                 <FiMail />
               </div>
             </div>
+
+            
             <Password />
 
             <div className="flex items-center space-x-2">
