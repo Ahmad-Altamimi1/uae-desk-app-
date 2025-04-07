@@ -6,7 +6,7 @@ import {
   getTranslations,
 } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../../globals.css";
+import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import {
   SidebarProvider,
@@ -58,37 +58,22 @@ export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
   const messages = await getMessages();
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
   // Enable static rendering
   setRequestLocale(locale);
   return (
-    <NextIntlClientProvider messages={messages}>
-      <SidebarProvider
-        className="relative"
-        style={
-          {
-            "--sidebar-width": "calc(var(--spacing) * 72)",
-            "--header-height": "calc(var(--spacing) * 12)",
-          } as React.CSSProperties
-        }
+    <html>
+      <body
+        dir={locale === "ar" ? "rtl" : "ltr"}
+        lang={locale}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased
+       ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
       >
-        <Header />
-        <AppSidebar variant="inset" />
-        <SidebarInset>
-          {/* <SiteHeader /> */}
-          <div className="flex flex-1 flex-col">
-            <div className="@container/main flex flex-1 flex-col gap-2">
-              <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                {children}
-              </div>
-            </div>
-          </div>
-        </SidebarInset>
-      </SidebarProvider>
-      <Toaster />
-    </NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          {children}
+
+          <Toaster />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
