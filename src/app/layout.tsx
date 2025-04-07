@@ -33,8 +33,10 @@ export default async function RootLayout({ children, params }: Props) {
 
   const messages = await getMessages();
   return (
-    <html dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
+    <html>
       <body
+        dir={locale === "ar" ? "rtl" : "ltr"}
+        lang={locale}
         className={`${geistSans.variable} ${geistMono.variable} antialiased
          ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
       >
