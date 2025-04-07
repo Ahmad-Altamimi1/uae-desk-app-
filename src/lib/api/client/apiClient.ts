@@ -1,8 +1,10 @@
+// lib/api/apiClient.ts
 "use server";
 
 import { createApiClient } from "./clientConfig";
-import { ApiRoute } from ".";
+import { ApiRoute } from "./types";
 import { createCustomersRoute } from "./routes";
+
 import { BASE_URL } from "@/constants";
 import { getCookie } from "@/utils/cookiesHandler";
 
@@ -16,12 +18,15 @@ export const baseApi = async () => {
     token,
   });
 };
+
 export const apiRoutes: ApiRoute = {
   CustomersRoute: createCustomersRoute(await baseApi()),
+  RolesRoute: createRolesRoute(await baseApi()),
 };
+
 // export const getApiRoutes = async (): Promise<ApiRoute> => {
 //   const apiClient = await baseApi();
 //   return {
 //     CustomersRoute: createCustomersRoute(apiClient),
+//     RolesRoute: createRolesRoute(apiClient),
 //   };
-// };

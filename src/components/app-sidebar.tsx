@@ -51,13 +51,18 @@ const data = {
       icon: IconListDetails,
     },
     {
-      title: "Lifecycle",
+      title: "Users",
       url: "#",
       icon: IconListDetails,
     },
     {
-      title: "Analytics",
-      url: "#",
+      title: "Roles",
+      url: "/roles",
+      icon: IconListDetails,
+    },
+    {
+      title: "Permissions",
+      url: "/permisions",
       icon: IconChartBar,
     },
     {

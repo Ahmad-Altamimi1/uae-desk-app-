@@ -5,13 +5,22 @@
     "title": "شركة هوليستيك ليجاسي للمحاسبة ذ.م.م",
     "description": "الأردن"
   },
-  "dashboard": {
-    "title": "لوحة التحكم",
-    "description": "مرحبًا بك في لوحة التحكم الخاصة بك!",
-    "customers": {
-      "title": "العملاء",
-      "description": "مرحبًا بك في صفحة العملاء!",
-      "firstName": "الاسم الأول"
+  
+    "dashboard": {
+      "title": "لوحة التحكم",
+      "description": "مرحبًا بك في لوحة التحكم الخاصة بك!",
+      "customers": {
+        "title": "العملاء",
+        "description": "مرحبًا بك في صفحة العملاء!",
+        "firstName": "الاسم الأول",
+        "businessName": "اسم النشاط",
+        "phoneNumber": "رقم الهاتف",
+        "email": "البريد الإلكتروني",
+        "services": "الخدمات",
+        "status": "الحالة",
+        "actions": "الإجراءات"
+      }
     }
-  }
+  
+  
 }

@@ -7,5 +7,6 @@ export const createCustomersRoute = (
 ): CustomersRoute => {
   return {
     getCustomers: () => apiClient?.get(endPoints.getCustomers),
+
   };
 };
