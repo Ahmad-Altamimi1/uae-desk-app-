@@ -1,5 +1,4 @@
 "use client";
-
 import { DragHandle } from "@/components/table/dragHandle";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@radix-ui/react-checkbox";
@@ -27,7 +26,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { TableCellViewer } from "@/components/table/TableCellViewer";
 import ActionCell from "@/components/table/actionCell";
-import { IResponseCustomer } from '@/entities/dashboard'
+import { IResponseCustomer } from "@/entities/dashboard";
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
 // export const schema = z.object({
@@ -95,7 +94,7 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     // accessorKey: 'business_name',
 
     // header: <HeaderCell lable="customers.businessName" />,
-    
+
     accessorKey: "business_name",
     header: <HeaderCell label="customers.businessName" />,
     cell: ({ row }) => (
@@ -108,7 +107,7 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
   },
 
   {
-    accessorKey: 'phone_number',
+    accessorKey: "phone_number",
     header: <HeaderCell label="customers.phoneNumber" />,
     cell: ({ row }) => (
       <div className="w-32">
@@ -119,7 +118,7 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     ),
   },
   {
-    accessorKey: 'email',
+    accessorKey: "email",
     // header: "Email",
     header: <HeaderCell label="customers.email" />,
     cell: ({ row }) => (
@@ -131,15 +130,11 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     ),
   },
 
-
   {
     accessorKey: "status",
     header: <HeaderCell label="customers.status" />,
-    cell: ({ row }) => (
-      <StatusCell status={row.original.status} />
-    ),
+    cell: ({ row }) => <StatusCell status={row.original.status} />,
   },
-  
 
   {
     accessorKey: "actions",
@@ -147,6 +142,4 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     id: "actions",
     cell: () => <ActionCell />,
   },
-
-
 ];

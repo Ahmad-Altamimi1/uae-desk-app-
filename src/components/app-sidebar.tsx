@@ -162,8 +162,13 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader>
+    <Sidebar
+      collapsible="offcanvas"
+      {...props}
+      className="pt-[120px] bg-primary"
+    >
+      {/* TODO */}
+      <SidebarHeader className="bg-primary">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
@@ -178,12 +183,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent className="">
+      <SidebarContent className="bg-primary">
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="bg-primary">
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
