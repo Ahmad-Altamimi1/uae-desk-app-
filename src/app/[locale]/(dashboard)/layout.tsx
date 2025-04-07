@@ -8,7 +8,7 @@ import {
 import { Geist, Geist_Mono } from "next/font/google";
 import "../../globals.css";
 import { SiteHeader } from "@/components/site-header";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -68,7 +68,6 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased
        ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
       >
-        <Header />
 
         <NextIntlClientProvider messages={messages}>
           <SidebarProvider
@@ -80,7 +79,8 @@ export default async function RootLayout({ children, params }: Props) {
               } as React.CSSProperties
             }
           >
-            <AppSidebar variant="inset" />
+            <Header />
+            <AppSidebar variant="inset" />  
             <SidebarInset>
               {/* <SiteHeader /> */}
               <div className="flex flex-1 flex-col">

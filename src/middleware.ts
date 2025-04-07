@@ -12,17 +12,17 @@ export default async function middleware(req: NextRequest) {
   const isLoginRoutes = /^\/(ar|en)\/login$/.test(pathname);
   const isLoggedIn = req.cookies.get("token")?.value !== "";
 
-  if (isProtectedRoute && !isLoggedIn) {
-    const loginUrl = req.nextUrl.clone();
-    loginUrl.pathname = `/${req.nextUrl.locale || "en"}/login`;
-    return NextResponse.redirect(loginUrl);
-  }
+  // if (isProtectedRoute && !isLoggedIn) {
+  //   const loginUrl = req.nextUrl.clone();
+  //   loginUrl.pathname = `/${req.nextUrl.locale || "en"}/login`;
+  //   return NextResponse.redirect(loginUrl);
+  // }
 
-  if (isLoginRoutes && isLoggedIn) {
-    const dashboardUrl = req.nextUrl.clone();
-    dashboardUrl.pathname = `/${req.nextUrl.locale || "en"}/dashboard`;
-    return NextResponse.redirect(dashboardUrl);
-  }
+  // if (isLoginRoutes && isLoggedIn) {
+  //   const dashboardUrl = req.nextUrl.clone();
+  //   dashboardUrl.pathname = `/${req.nextUrl.locale || "en"}/dashboard`;
+  //   return NextResponse.redirect(dashboardUrl);
+  // }
 
   return NextResponse.next();
 }
