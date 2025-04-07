@@ -24,7 +24,8 @@
       "@/form/*": ["./src/components/form/*"],
       "@/api/*": ["./src/lib/api/*"],
       "@/entities/dashboard/*": ["./src/entities/dashboard/*"],
-      "@/constants/*": ["./src/constants/*"]
+      "@/constants/*": ["./src/constants/*"],
+      "@/images/*": ["./images/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
