@@ -3,12 +3,18 @@ import React from "react";
 import { columns } from "./components/columns";
 // import data from "../data.json";
 import { api } from "@/lib/api/serverCore";
-import { cookies } from "next/headers";
+import { IResponseCustomer } from "@/entities/dashboard";
+import CreateButton from "@/components/table/createButton";
 
 const Page = async () => {
-  // const data = await routes.customers.getAll();
-  const data = await api.get("getCustomers");
-  return <DataTable columns={columns} data={data} />;
+  const data = await api.get<IResponseCustomer[]>("getCustomers");
+
+  return (
+    <>
+      <CreateButton title={"ADD"} href="customers/create" />
+      <DataTable columns={columns} data={data} />
+    </>
+  );
 };
 
 export default Page;

@@ -6,9 +6,7 @@ export const createCustomersRoute = (
   apiClient: AxiosInstance
 ): CustomersRoute => {
   return {
-    getCustomers: () => apiClient?.get(endPoints.customers.index),
-    getCustomer: (slug) => apiClient?.get(`api/resource/Customers/${slug}`),
+    getCustomers: () => apiClient?.get(endPoints.getCustomers),
 
-    
   };
 };

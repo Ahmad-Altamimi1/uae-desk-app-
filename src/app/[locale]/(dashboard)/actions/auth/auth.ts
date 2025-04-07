@@ -1,5 +1,5 @@
 "use server";
-import { ILoginRequest, ILoginResponse } from "@/entities/dashboard";
+import { ILoginResponse } from "@/entities/dashboard";
 import { AuthService } from "@/api/services/dashboard";
 import { z } from "zod";
 import { cookies } from "next/headers";
@@ -12,10 +12,7 @@ interface LoginState {
   error: string | null;
 }
 
-export async function handleLogin(
-  prevState: LoginState,
-  formData: FormData
-): Promise<LoginState> {
+export async function handleLogin(prevState: LoginState, formData: FormData) {
   "use server";
   const validatedFields = z
     .object({
@@ -48,19 +45,14 @@ export async function handleLogin(
   const locale = await getLocale();
 
   try {
-    const loginResponse = await AuthService.login(
-      rawFormData as Omit<ILoginRequest, "id">
-    );
+    const loginResponse = await AuthService.login(rawFormData);
     const cookieStore = await cookies();
-    console.log("loginResponse", loginResponse);
 
     cookieStore.set("token", loginResponse.access_token);
 
     isOk = true;
     // return { success: true, data: loginResponse, error: null };
   } catch (error) {
-    console.log("errorerrorerror", error);
-
     return {
       success: false,
       error: (error as Error).message,
