@@ -1,9 +1,4 @@
-import {
-  AbstractIntlMessages,
-  NextIntlClientProvider,
-  Locale,
-  hasLocale,
-} from "next-intl";
+import { NextIntlClientProvider, Locale, hasLocale } from "next-intl";
 import { Toaster } from "@/components/ui/sonner";
 import {
   getMessages,
@@ -43,6 +38,9 @@ export async function generateMetadata(props: Omit<Props, "children">) {
       languages: {
         en: "/en",
         ar: "/ar",
+      },
+      icons: {
+        icon: "./app.ico",
       },
     },
   };

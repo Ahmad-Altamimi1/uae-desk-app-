@@ -1,10 +1,6 @@
 import { GenericListResponse } from "../../../types";
-import { IGetCustomerPayload } from "./req";
-import { ICustomerItem, ICustomerList } from "./res";
+import { ICustomerList } from "./res";
 
 export type CustomersRoute = {
   getCustomers: () => Promise<GenericListResponse<ICustomerList[]>>;
-  getCustomer: (
-    slug: IGetCustomerPayload
-  ) => Promise<GenericListResponse<ICustomerItem>>;
 };
