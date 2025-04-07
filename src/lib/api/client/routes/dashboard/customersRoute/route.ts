@@ -8,5 +8,7 @@ export const createCustomersRoute = (
   return {
     getCustomers: () => apiClient?.get(endPoints.customers.index),
     getCustomer: (slug) => apiClient?.get(`api/resource/Customers/${slug}`),
+
+    
   };
 };

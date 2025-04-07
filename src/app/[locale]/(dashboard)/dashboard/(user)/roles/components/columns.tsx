@@ -27,7 +27,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { TableCellViewer } from "@/components/table/TableCellViewer";
 import ActionCell from "@/components/table/actionCell";
-import { IResponseCustomer } from '@/entities/dashboard'
+import { IResponseUsersRoles } from '@/entities/dashboard/users'
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
 // export const schema = z.object({
@@ -40,7 +40,7 @@ import { StatusCell } from "@/components/table/statusCell";
 //   reviewer: z.string(),
 // });
 
-export const columns: ColumnDef<IResponseCustomer>[] = [
+export const columns: ColumnDef<IResponseUsersRoles>[] = [
   {
     id: "drag",
     header: () => null,
@@ -80,6 +80,7 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     },
     enableHiding: false,
   },
+
   {
     accessorKey: "type",
     header: "Application ID",
@@ -92,61 +93,36 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     ),
   },
   {
-    // accessorKey: 'business_name',
-
-    // header: <HeaderCell lable="customers.businessName" />,
+   
     
-    accessorKey: "business_name",
-    header: <HeaderCell label="customers.businessName" />,
+    accessorKey: "name",
+    header: <HeaderCell label="roles.name" />,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.business_name}
+          {row.original.name}
         </Badge>
       </div>
     ),
   },
 
   {
-    accessorKey: 'phone_number',
-    header: <HeaderCell label="customers.phoneNumber" />,
+    accessorKey: 'code',
+    header: <HeaderCell label="roles.code" />,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.phone_number}
+          {row.original.code}
         </Badge>
       </div>
-    ),
-  },
-  {
-    accessorKey: 'email',
-    // header: "Email",
-    header: <HeaderCell label="customers.email" />,
-    cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.email}
-        </Badge>
-      </div>
-    ),
-  },
-
-
-  {
-    accessorKey: "status",
-    header: <HeaderCell label="customers.status" />,
-    cell: ({ row }) => (
-      <StatusCell status={row.original.status} />
     ),
   },
   
-
   {
     accessorKey: "actions",
-    header: <HeaderCell label="customers.actions" />,
+    header: <HeaderCell label="roles.actions" />,
     id: "actions",
     cell: () => <ActionCell />,
   },
-
-
+ 
 ];

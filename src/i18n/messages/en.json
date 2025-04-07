@@ -17,6 +17,19 @@
       "services": "Services",
       "status": "Status",
       "actions": "Actions"
+    },
+    "roles": {
+      "title": "Roles",
+      "description": "Welcome to the users page!",
+      "name": "Name",
+      "code": "Code",
+      "actions": "Actions"
+    },
+    "permissions": {
+      "title": "Permissions",
+      "description": "Welcome to the permissions page!",
+      "name": "Name",
+      "actions": "Actions"
     }
   }
 }
