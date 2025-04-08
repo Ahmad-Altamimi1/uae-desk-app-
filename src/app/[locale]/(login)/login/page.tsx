@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import { FiMail } from "react-icons/fi";
-import Password from "../../../components/form/password";
+import Password from "../../../../components/form/password";
 import { useActionState } from "react";
-import { handleLogin } from "../(dashboard)/actions";
+import { handleLogin } from "../../(dashboard)/actions";
 
 export default function LoginPage() {
   interface LoginState {
@@ -109,7 +109,7 @@ export default function LoginPage() {
               )}
             </button>
           </form>
-
+          {formState.error && <p className="text-red-500">{formState.error}</p>}
           <p className="text-xs text-center mt-10 text-gray-500">
             © All Rights Reserved -{" "}
             <span className="text-green-700 font-semibold">HLA</span> 2025

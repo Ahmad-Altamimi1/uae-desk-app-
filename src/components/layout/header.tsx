@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { SidebarMenuButton, SidebarTrigger } from "../ui/sidebar";
+import { SidebarTrigger } from "../ui/sidebar";
 import { FiBell, FiSettings } from "react-icons/fi";
 import ResetPassword from "@/app/[locale]/(dashboard)/dashboard/(profile)/resetPassword";
-import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -12,16 +12,8 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
 } from "@radix-ui/react-dropdown-menu";
-import {
-  IconDotsVertical,
-  IconUserCircle,
-  IconCreditCard,
-  IconNotification,
-  IconLogout,
-} from "@tabler/icons-react";
-import { get } from "http";
+import { IconLogout } from "@tabler/icons-react";
 import { getTranslations, getLocale } from "next-intl/server";
-import { FiMail, FiLock } from "react-icons/fi";
 
 const Header = async () => {
   const user = {
@@ -29,13 +21,13 @@ const Header = async () => {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   };
-  const locale = getLocale();
+  const locale = await getLocale();
   const t = await getTranslations({
     locale: locale,
     namespace: "dashboard.header",
   });
   return (
-    <div className=" w-full flex items-center justify-center  fixed  top-5 z-[100000]">
+    <div className=" w-full flex items-center justify-center  absolute  top-5 z-[100000]">
       <header className=" bg-white w-[90%] rounded-xl border py-6 shadow-sm  ">
         <div className="flex items-center justify-between px-4">
           <div className="flex items-center space-x-2">
