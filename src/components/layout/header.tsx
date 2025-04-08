@@ -68,7 +68,7 @@ const Header = async () => {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent
-                className="bg-white border rounded-xl shadow-md w-64"
+                className="bg-white border rounded-xl shadow-md w-50"
                 side="top"
                 sideOffset={4}
               >
@@ -93,7 +93,7 @@ const Header = async () => {
 
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
-                
+
                     <ResetPassword />
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
@@ -101,10 +101,11 @@ const Header = async () => {
                 <DropdownMenuSeparator className="my-2" />
 
                 <DropdownMenuItem>
-                  <div className="flex items-center gap-2 text-left text-sm leading-tight text-gray-700">
+                  <div className="flex items-center gap-2 text-left text-sm leading-tight text-red-500 ml-5">
                     <IconLogout />
-                    <span className="truncate text-xs">Log out</span>
-                  </div>
+                    <span className="truncate text-red-500 text-sm font-bold">Log out</span>
+                    </div>
+
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
