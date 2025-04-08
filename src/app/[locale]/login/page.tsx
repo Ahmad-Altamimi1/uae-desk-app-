@@ -2,7 +2,7 @@
 "use client";
 import Image from "next/image";
 import { FiMail, } from "react-icons/fi";
-import Password from "./components/password";
+import Password from "../../../components/form/password";
 import { useActionState } from "react";
 import { handleLogin } from "../(dashboard)/actions";
 

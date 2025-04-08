@@ -5,8 +5,13 @@
     "title": "HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C Attendance",
     "description": "hhhhh"
   },
+  
   "dashboard": {
-
+    "header": {
+      "title": "Dashboard",
+      "description": "Welcome to your dashboard!",
+      "Settings": "Settings"
+    },
     "title": "Dashboard",
     "description": "Welcome to your dashboard!",
     "customers": {
@@ -32,6 +37,22 @@
       "description": "Welcome to the permissions page!",
       "name": "Name",
       "actions": "Actions"
+    },
+    "updatePassword":{
+      "title": "Update Password",
+      "description": "Welcome to the update password page!",
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "update": "Update",
+      "placeholder":"Enter your old password",
+      "placeholderNew":"Enter your new password"
+    },  
+    "modal": {
+      "title": "Modal Title",
+      "description": "This is a modal description",
+      "close": "Close",
+      "save": "Save"
     }
   }
 }
