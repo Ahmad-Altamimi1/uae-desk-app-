@@ -163,15 +163,9 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar
-      collapsible="offcanvas"
-      {...props}
-      className="relative pt-[120px] text-white"
-    >
-      {/* Background with circuit pattern */}
+    <Sidebar collapsible="icon" {...props} className="  text-white">
       <SidebarBackground />
 
-      {/* Logo header with rounded white background */}
       <SidebarHeader className="bg-transparent">
         <div className="mx-2 rounded-xl bg-white p-3 text-primary shadow-sm">
           <SidebarMenu>

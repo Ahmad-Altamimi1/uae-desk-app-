@@ -47,6 +47,7 @@ export async function handleLogin(prevState: LoginState, formData: FormData) {
   try {
     const loginResponse = await AuthService.login(rawFormData);
     const cookieStore = await cookies();
+    console.log("loginResponseloginResponse", loginResponse);
 
     cookieStore.set("token", loginResponse.access_token);
 

@@ -90,7 +90,6 @@ export default async function RootLayout({ children, params }: Props) {
             </div>
           </div>
         </SidebarInset>
-
       </SidebarProvider>
       <Toaster />
     </NextIntlClientProvider>
