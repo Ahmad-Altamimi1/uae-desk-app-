@@ -6,9 +6,13 @@ import {
   getTranslations,
 } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -54,10 +58,6 @@ export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
   const messages = await getMessages();
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
   // Enable static rendering
   setRequestLocale(locale);
   return (
@@ -68,11 +68,9 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased
        ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
       >
-
         <NextIntlClientProvider messages={messages}>
-   
- {children}
-          
+          {children}
+
           <Toaster />
         </NextIntlClientProvider>
       </body>

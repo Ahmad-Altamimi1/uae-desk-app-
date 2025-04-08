@@ -8,7 +8,11 @@ import {
 import { Geist, Geist_Mono } from "next/font/google";
 import "../../globals.css";
 import { SiteHeader } from "@/components/site-header";
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -61,40 +65,30 @@ export default async function RootLayout({ children, params }: Props) {
   // Enable static rendering
   setRequestLocale(locale);
   return (
-    <html>
-      <body
-        dir={locale === "ar" ? "rtl" : "ltr"}
-        lang={locale}
-        className={`${geistSans.variable} ${geistMono.variable} antialiased
-       ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
+    <NextIntlClientProvider messages={messages}>
+      <SidebarProvider
+        className="relative"
+        style={
+          {
+            "--sidebar-width": "calc(var(--spacing) * 72)",
+            "--header-height": "calc(var(--spacing) * 12)",
+          } as React.CSSProperties
+        }
       >
-
-        <NextIntlClientProvider messages={messages}>
-          <SidebarProvider
-            className="relative"
-            style={
-              {
-                "--sidebar-width": "calc(var(--spacing) * 72)",
-                "--header-height": "calc(var(--spacing) * 12)",
-              } as React.CSSProperties
-            }
-          >
-            <Header />
-            <AppSidebar variant="inset" />  
-            <SidebarInset>
-              {/* <SiteHeader /> */}
-              <div className="flex flex-1 flex-col">
-                <div className="@container/main flex flex-1 flex-col gap-2">
-                  <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                    {children}
-                  </div>
-                </div>
+        <Header />
+        <AppSidebar variant="inset" />
+        <SidebarInset>
+          {/* <SiteHeader /> */}
+          <div className="flex flex-1 flex-col">
+            <div className="@container/main flex flex-1 flex-col gap-2">
+              <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+                {children}
               </div>
-            </SidebarInset>
-          </SidebarProvider>
-          <Toaster />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+            </div>
+          </div>
+        </SidebarInset>
+      </SidebarProvider>
+      <Toaster />
+    </NextIntlClientProvider>
   );
 }

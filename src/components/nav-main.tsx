@@ -1,4 +1,5 @@
 "use client";
+
 import { IconCirclePlusFilled, IconMail, type Icon } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,19 +8,15 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
 } from "@/components/ui/sidebar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu } from "lucide-react";
+import { useState } from "react";
 
 export function NavMain({
   items,
@@ -31,8 +28,9 @@ export function NavMain({
   }[];
 }) {
   const pathname = usePathname();
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(true);
 
-  // Find the active item to display in the dropdown trigger
+  // Find the active item
   const activeItem = items.find(
     (item) =>
       pathname === "/dashboard" + item.url ||
@@ -42,6 +40,7 @@ export function NavMain({
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
+        {/* First menu with Quick Create and Inbox buttons - keep as is */}
         <SidebarMenu>
           <SidebarMenuItem className="flex items-center gap-2">
             <SidebarMenuButton
@@ -62,24 +61,30 @@ export function NavMain({
           </SidebarMenuItem>
         </SidebarMenu>
 
+        {/* Second menu with navigation - convert dropdown to submenu */}
         <SidebarMenu>
           <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton
-                  tooltip="Navigation"
-                  className="text-white hover:bg-white hover:text-primary w-full justify-between"
-                >
-                  <div className="flex items-center gap-2">
-                    <Menu className="h-4 w-4" />
-                    <span>{activeItem ? activeItem.title : "Navigation"}</span>
-                  </div>
-                  <ChevronDown className="h-4 w-4 ml-2" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent side="right" align="start" className="w-56">
-                <DropdownMenuLabel>Navigation</DropdownMenuLabel>
-                <DropdownMenuSeparator />
+            {/* Main navigation button */}
+            <SidebarMenuButton
+              tooltip="Navigation"
+              className="text-white hover:bg-white hover:text-primary w-full justify-between"
+              onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}
+            >
+              <div className="flex items-center gap-2">
+                <Menu className="h-4 w-4" />
+                <span>{activeItem ? activeItem.title : "Navigation"}</span>
+              </div>
+              <ChevronDown
+                className={cn(
+                  "h-4 w-4 ml-2 transition-transform",
+                  isSubmenuOpen && "rotate-180"
+                )}
+              />
+            </SidebarMenuButton>
+
+            {/* Submenu with navigation items */}
+            {isSubmenuOpen && (
+              <SidebarMenuSub>
                 {items.map((item) => {
                   const fullUrl =
                     "/dashboard" + (item.url === "/" ? "" : item.url);
@@ -88,23 +93,21 @@ export function NavMain({
                     (pathname === "/dashboard" && item.url === "/");
 
                   return (
-                    <DropdownMenuItem
-                      key={item.title}
-                      className={cn(
-                        "cursor-pointer flex items-center gap-2",
-                        isActive && "bg-muted font-medium"
-                      )}
-                      asChild
-                    >
-                      <Link href={fullUrl}>
-                        {item.icon && <item.icon className="h-4 w-4" />}
-                        {item.title}
-                      </Link>
-                    </DropdownMenuItem>
+                    <SidebarMenuSubItem key={item.title}>
+                      <SidebarMenuSubButton asChild isActive={isActive}>
+                        <Link
+                          href={fullUrl}
+                          className="flex items-center gap-2 w-full"
+                        >
+                          {item.icon && <item.icon className="h-4 w-4" />}
+                          <span>{item.title}</span>
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
                   );
                 })}
-              </DropdownMenuContent>
-            </DropdownMenu>
+              </SidebarMenuSub>
+            )}
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroupContent>
