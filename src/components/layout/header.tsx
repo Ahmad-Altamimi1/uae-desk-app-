@@ -19,7 +19,7 @@ const Header = async () => {
   const locale = getLocale()
   const t = await getTranslations({ locale: locale, namespace: 'dashboard.header' });
   return (
-    <div className=" w-full flex items-center justify-center  fixed  top-5 z-[100000]">
+    <div className=" w-full flex items-center justify-center absolute  top-5 z-[100000]">
       <header className=" bg-white w-[90%] rounded-xl border py-6 shadow-sm  ">
         <div className="flex items-center justify-between px-4">
           <div className="flex items-center space-x-2">
