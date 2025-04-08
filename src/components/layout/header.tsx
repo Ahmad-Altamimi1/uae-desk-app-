@@ -82,20 +82,21 @@ const Header = async () => {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <div className="bg-[#00713B0D] p-2 py-2 w-[40px] h-[40px] rounded-4xl">
-                    <FiSettings
-                      className="text-[#00713B]"
-                      size={23}
-                      aria-label={t("Settings")}
-                    />
-                  </div>
-                </SidebarMenuButton>
+                <div
+                  className="bg-[#00713B0D] p-2 py-2 w-[40px] h-[40px] rounded-4xl outline-none focus:outline-none"
+                  tabIndex={0}
+                >
+                  <FiSettings
+                    className="text-[#00713B]"
+                    size={23}
+                    aria-label={t("Settings")}
+                  />
+                </div>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent
                 className="bg-white border rounded-xl shadow-md w-64"
-                side="top"
+                side="bottom"
                 sideOffset={4}
               >
                 <DropdownMenuLabel className="p-0 font-normal">
