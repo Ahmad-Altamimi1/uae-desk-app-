@@ -1,34 +1,51 @@
 import React from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { IconDotsVertical } from "@tabler/icons-react";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 const ActionCell = () => {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
-          size="icon"
-        >
-          <IconDotsVertical />
-          <span className="sr-only">Open menu</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-32">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="flex gap-4">
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button
+              size="sm"
+              variant="link"
+              className="bg-[#00713a13] rounded-3xl flex items-center gap-2"
+            >
+              <IconEdit className="text-[#00713B]" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="text-primary">
+            <p>Edit</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button
+              size="sm"
+              variant="link"
+
+              className="bg-red-100 rounded-3xl flex items-center gap-2"
+            >
+              <IconTrash className="text-red-500" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="text-red-500">
+            <p>Delete</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </div>
   );
 };
 

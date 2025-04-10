@@ -56,14 +56,14 @@ const ToolBar = ({ table }: { table: Table<unknown> }) => {
         <TabsTrigger value="focus-documents">Focus Documents</TabsTrigger>
       </TabsList> */}
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        {/* <DropdownMenuTrigger asChild>
           <Button variant="outline" size="sm">
             <IconLayoutColumns />
             <span className="hidden lg:inline">Customize Columns</span>
             <span className="lg:hidden">Columns</span>
             <IconChevronDown />
           </Button>
-        </DropdownMenuTrigger>
+        </DropdownMenuTrigger> */}
         <DropdownMenuContent align="end" className="w-56">
           {table
             .getAllColumns()

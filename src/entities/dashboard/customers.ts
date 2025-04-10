@@ -5,6 +5,8 @@ export interface IResponseCustomer {
     last_name: string;
     updated_by: string;
     business_name: string;
+    branch: string;
+    services: string;
     phone_number: string;
     second_number: string;
     email: string;

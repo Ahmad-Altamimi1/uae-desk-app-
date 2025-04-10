@@ -151,7 +151,9 @@ export function DataTable<TResponse>({
               id={sortableId}
             >
               <Table>
-                <TableHeader className="bg-muted sticky top-0 z-10">
+                
+            
+                <TableHeader className="bg-[#00713a17] sticky text-center justify-center top-0 z-10 ">
                   {table.getHeaderGroups().map((headerGroup) => (
                     <TableRow key={headerGroup.id}>
                       {headerGroup.headers.map((header) => {
@@ -170,6 +172,8 @@ export function DataTable<TResponse>({
                   ))}
                 </TableHeader>
                 <TableBody className="**:data-[slot=table-cell]:first:w-8">
+                 
+
                   {table.getRowModel().rows?.length ? (
                     <SortableContext
                       items={dataIds}

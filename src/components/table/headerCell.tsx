@@ -1,10 +1,12 @@
+import { cn } from "@/lib/utils";
 import { useLocale } from "next-globe-gen";
 import { useTranslations } from "next-intl";
 
 interface HeaderCellProps {
   label: string;
+  className?: string;
 }
-export const HeaderCell = ({ label }: HeaderCellProps) => {
+export const HeaderCell = ({ label ,className}: HeaderCellProps) => {
   // const isSorted = column.getIsSorted();
   // const isMultiSorted = column.getIsMultiSorted();
   // const isResizing = column.getIsResizing();
@@ -19,7 +21,10 @@ export const HeaderCell = ({ label }: HeaderCellProps) => {
     //     isSorted ? "bg-blue-100" : ""
     //   } ${isResizing ? "bg-gray-200" : ""}`}
     // >
-    <div className="flex items-center">
+    <div className={cn(
+      "flex items-center justify-center  text-center",
+      className
+    )}>
       {t(label)}
       {/* {isSorted && <span>{isMultiSorted ? "🔼" : "🔽"}</span>} */}
     </div>

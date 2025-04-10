@@ -22,7 +22,7 @@ interface Props {
   triggerButton?: React.ReactNode |string;
 }
 
-export function Modal({ title, description, children, close, confirm,triggerButton='open Modal' }: Props) {
+export function Modal({ title, description, children, close, confirm,triggerButton='modal.open' }: Props) {
   const t = useTranslations()
   const titleTranslate = title ? t(title) : t('dashboard.modal.title')
   const descriptionTranslate = description ? t(description) : t('dashboard.modal.description')
@@ -35,7 +35,7 @@ export function Modal({ title, description, children, close, confirm,triggerButt
 
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen}   >
       <DialogTrigger  onClick={(e)=>e.stopPropagation()} asChild>
         {typeof triggerButton == "string" ? (
           <Button variant="outline">{triggerButtonTranslate}</Button>
