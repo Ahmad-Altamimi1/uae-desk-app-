@@ -10,7 +10,9 @@ export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const isProtectedRoute = /^\/(ar|en)\/dashboard(\/.*)?$/.test(pathname);
   const isLoginRoutes = /^\/(ar|en)\/login$/.test(pathname);
-  const isLoggedIn = req.cookies.get("token")?.value !== "";
+  const isLoggedIn = !!req.cookies.get("token")?.value ;
+console.log('isLoggedIn',isLoggedIn);
+console.log('req.cookies.get("token")?.value',req.cookies.get("token")?.value);
 
   if (isProtectedRoute && !isLoggedIn) {
     const loginUrl = req.nextUrl.clone();

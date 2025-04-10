@@ -4,8 +4,15 @@
     "title": "HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C Attendance",
     "description": "hhhhh"
   },
+  "modal":{
+"open":"Open"
+  },
 
   "dashboard": {
+  "SL":"SL",
+  "Application ID":"Application ID",
+
+
     "header": {
       "title": "Dashboard",
       "description": "Welcome to your dashboard!",
@@ -14,18 +21,24 @@
     "title": "Dashboard",
     "description": "Welcome to your dashboard!",
     "customers": {
+      "Add":"Add New Customer",
       "CustomerInformation": "Customer Information",
       "FTAInformation": "FTA Information",
       "ServicesAndPaymentDetails": "Services And Payment Details",
       "title": "Customers",
-      "description": "Welcome to the customers page!",
+      "description": "All Customers On system ",
       "firstName": "First Name",
       "businessName": "Business Name",
       "phoneNumber": "Phone Number",
       "email": "Email",
       "services": "Services",
       "status": "Status",
-      "actions": "Actions"
+      "actions": "Actions",
+      "branchName": "Branch Name",
+      "servicesModalTitle": "Services",
+      "servicesModalDescription": ""
+
+
     },
     "roles": {
       "title": "Roles",
@@ -56,6 +69,7 @@
       "close": "Close",
       "save": "Save"
     }
+
   },
 
   "forms": {

@@ -2,22 +2,34 @@
 
 import type * as React from "react";
 import {
+  IconActivity,
   IconCamera,
   IconChartBar,
+  IconChecklist,
+  IconClock,
   IconDashboard,
   IconDatabase,
   IconFileAi,
   IconFileDescription,
   IconFileWord,
   IconFolder,
+  IconFolderPlus,
+  IconGitBranch,
   IconHelp,
+  IconHome,
   IconInnerShadowTop,
   IconListDetails,
   IconReport,
   IconSearch,
   IconSettings,
+  IconShieldCheck,
+  IconShieldLock,
+  IconUserCog,
   IconUsers,
+  IconWorldCog,
+
 } from "@tabler/icons-react";
+
 
 import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
@@ -42,39 +54,85 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "#",
-      icon: IconDashboard,
+      title: "Home",
+      url: "",
+      icon:  IconHome,
     },
     {
       title: "Customers",
       url: "/customers",
-      icon: IconListDetails,
+      icon: IconUsers,
     },
     {
-      title: "Users",
-      url: "#",
-      icon: IconListDetails,
+      title: "Employees",
+      url: "/employees",
+      icon:IconUserCog,
     },
+
     {
       title: "Roles",
       url: "/roles",
-      icon: IconListDetails,
+      icon: IconShieldCheck ,
     },
     {
       title: "Permissions",
       url: "/permisions",
-      icon: IconChartBar,
+      icon: IconShieldLock ,
     },
     {
-      title: "Projects",
-      url: "#",
-      icon: IconFolder,
+      title: "User Activity",
+      url: "/permisions",
+      icon: IconActivity,
     },
     {
-      title: "Team",
+      title: "Systems",
       url: "#",
-      icon: IconUsers,
+      icon: IconDatabase,
+    },
+    {
+      title: "Services",
+      url: "#",
+      icon: IconFileWord,
+    },
+    {
+      title: "Branches",
+      url: "#",
+      icon: IconGitBranch ,
+    },
+    {
+      title: "shifts",
+      url: "#",
+      icon: IconClock ,
+    },
+    {
+      title: "Attendances",
+      url: "#",
+      icon: IconChecklist ,
+    },
+    // {
+    //   title: "Invoices",
+    //   url: "#",
+    //   icon: IconUsers,
+    // },
+    // {
+    //   title: "Contacts",
+    //   url: "#",
+    //   icon: IconUsers,
+    // },
+    {
+      title: "Settings",
+      url: "#",
+      icon: IconSettings,
+    },
+    {
+      title: "Website Settings",
+      url: "#",
+      icon: IconWorldCog ,
+    },
+    {
+      title: "File Manager",
+      url: "#",
+      icon: IconFolderPlus ,
     },
   ],
   navClouds: [
@@ -142,23 +200,23 @@ const data = {
       icon: IconSearch,
     },
   ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: IconDatabase,
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: IconReport,
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: IconFileWord,
-    },
-  ],
+  // documents: [
+  //   {
+  //     name: "Data Library",
+  //     url: "#",
+  //     icon: IconDatabase,
+  //   },
+  //   {
+  //     name: "Reports",
+  //     url: "#",
+  //     icon: IconReport,
+  //   },
+  //   {
+  //     name: "Word Assistant",
+  //     url: "#",
+  //     icon: IconFileWord,
+  //   },
+  // ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -166,8 +224,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props} className="  text-white">
       <SidebarBackground />
 
-      <SidebarHeader className="bg-transparent">
-        <div className="mx-2 rounded-xl bg-white p-3 text-primary shadow-sm">
+      <SidebarHeader className="bg-transparent mt-[30%]">
+        {/* <div className="mx-2 rounded-xl bg-white p-3 text-primary shadow-sm">
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton
@@ -181,17 +239,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
-        </div>
+        </div> */}
       </SidebarHeader>
 
-      <SidebarContent className="bg-transparent">
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+      <SidebarContent className="bg-transparent ">
+        <div className="flex flex-col justify-center items-center flex-1">
+          <NavMain items={data.navMain.slice(0, 15)} />
+        </div>
+        {/* <NavDocuments items={data.documents} /> */}
+        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
 
       <SidebarFooter className="bg-transparent">
-        <NavUser user={data.user} />
+        {/* <NavUser user={data.user} /> */}
       </SidebarFooter>
     </Sidebar>
   );

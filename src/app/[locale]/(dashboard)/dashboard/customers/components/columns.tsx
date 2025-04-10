@@ -29,6 +29,10 @@ import ActionCell from "@/components/table/actionCell";
 import { IResponseCustomer } from "@/entities/dashboard";
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
+import ActionCustomerCell from "./actionCustomer";
+import { RowCell } from "@/components/table/rowCell";
+import { CustomerServices } from "./customerServices";
+// import ActionCustomerCell from "./ActionCustomer";
 // export const schema = z.object({
 //   id: z.number(),
 //   header: z.string(),
@@ -71,61 +75,87 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     enableSorting: false,
     enableHiding: false,
   },
+
+  // {
+  //   accessorKey: "header",
+  //   header: <HeaderCell label="SL" />,
+
+  //   cell: ({ row }) => {
+
+  //     return <TableCellViewer item={row.original} />;
+  //   },
+  //   enableHiding: false,
+  // },
+
+
   {
     accessorKey: "header",
-    header: "SL",
-    cell: ({ row }) => {
-      return <TableCellViewer item={row.original} />;
-    },
-    enableHiding: false,
-  },
-  {
-    accessorKey: "type",
-    header: "Application ID",
+    header: <HeaderCell label="SL" />,
+
     cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.id}
-        </Badge>
+      <div>
+        <RowCell label={row.index + 1} />
       </div>
     ),
   },
-  {
-    // accessorKey: 'business_name',
 
-    // header: <HeaderCell lable="customers.businessName" />,
+
+  {
+    accessorKey: "type",
+    header: <HeaderCell label="Application ID" />,
+
+
+    cell: ({ row }) => (
+
+
+      <div>
+        <RowCell label={row.original.customer_code} />
+      </div>
+    ),
+  },
+
+  {
 
     accessorKey: "business_name",
     header: <HeaderCell label="customers.businessName" />,
     cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.business_name}
-        </Badge>
+
+      <div>
+        <RowCell label={row.original.business_name} />
       </div>
     ),
   },
 
   {
-    accessorKey: "phone_number",
-    header: <HeaderCell label="customers.phoneNumber" />,
+    accessorKey: "branch_name",
+    header: <HeaderCell label="customers.branchName" />,
     cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.phone_number}
-        </Badge>
+
+
+      <div>
+        <RowCell label={row.original.branch}
+        />
       </div>
     ),
   },
+
+  {
+    accessorKey: "services",
+    header: <HeaderCell label="customers.services" />,
+    cell: ({ row }) => (
+
+      <CustomerServices services={row.original.services } />
+
+    ),
+  },
+
   {
     accessorKey: "email",
     // header: "Email",
     header: <HeaderCell label="customers.email" />,
     cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.email}
-        </Badge>
+      <div>
+        <RowCell label={row.original.email} />
       </div>
     ),
   },
@@ -133,13 +163,20 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
   {
     accessorKey: "status",
     header: <HeaderCell label="customers.status" />,
-    cell: ({ row }) => <StatusCell status={row.original.status} />,
+
+    cell: ({ row }) =>
+      <div>
+
+        <StatusCell status={row.original.status} />
+      </div>
+
   },
 
   {
     accessorKey: "actions",
     header: <HeaderCell label="customers.actions" />,
     id: "actions",
-    cell: () => <ActionCell />,
+    // cell: () => <ActionCustomerCell />,
+    cell: () => <ActionCustomerCell />,
   },
 ];
