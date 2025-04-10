@@ -76,7 +76,7 @@ const data = {
     },
     {
       title: "Permissions",
-      url: "/permisions",
+      url: "/permissions",
       icon: IconShieldLock ,
     },
     {

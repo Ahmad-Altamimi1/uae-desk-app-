@@ -20,7 +20,15 @@ const endPoints = {
   CustomerAddTaxId: "api/customers/{customer}/add-tax-id",
   CustomerEditStatus: "api/customers/edit-status",
   CustomerUpdateCreator: "api/customers/updateCreator",
+
+  /////////////
   getRoles: "api/roles/index",
   getPermissions: "api/permissions/index",
+
+  PermissionStore: "api/permissions/store",
+
+  
+  RolesCreate: "api/roles/create",
+  RolesStore: "api/roles/store",
 };
 export default endPoints;

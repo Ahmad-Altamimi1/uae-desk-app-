@@ -4,3 +4,10 @@ export interface IResponseUsersPermissions{
     name: string;
    
 }
+
+export interface IRequestUsersPermissions{
+    id: number;
+    name: string;
+
+  }
+  

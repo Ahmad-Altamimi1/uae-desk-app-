@@ -1,5 +1,6 @@
 {
   "ADD": "Add",
+  "submit": "Submit",
   "RootLayout": {
     "title": "HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C Attendance",
     "description": "hhhhh"
@@ -48,9 +49,10 @@
       "actions": "Actions"
     },
     "permissions": {
+      "Add": "Add New Permission",
       "title": "Permissions",
       "description": "Welcome to the permissions page!",
-      "name": "Name",
+      "name":"Name of permission",
       "actions": "Actions"
     },
     "updatePassword": {
@@ -97,6 +99,16 @@
       "label": "First Name",
       "placeholder": "Enter your first name",
       "helper": "We'll never share your first name",
+      "error": {
+        "required": "First Name is required",
+        "minLength": "First Name must be at least 3 characters",
+        "maxLength": "First Name must be less than 50 characters"
+      }
+    },
+    "name": {
+      "label": " Name of Permission",
+      "placeholder": "Enter your name",
+      "helper": "We'll never share your name",
       "error": {
         "required": "First Name is required",
         "minLength": "First Name must be at least 3 characters",
@@ -286,5 +298,10 @@
         "maxLength": "Tax ID must be less than 50 characters"
       }
     }
+  },
+
+  "commonValidations": {
+    "required": " this field is required",
+    "unique": " this field must be unique"
   }
 }
