@@ -1,5 +1,4 @@
 {
-
   "ADD": "Add",
   "RootLayout": {
     "title": "HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C Attendance",
@@ -8,6 +7,7 @@
   "modal":{
 "open":"Open"
   },
+
   "dashboard": {
   "SL":"SL",
   "Application ID":"Application ID",
@@ -22,6 +22,9 @@
     "description": "Welcome to your dashboard!",
     "customers": {
       "Add":"Add New Customer",
+      "CustomerInformation": "Customer Information",
+      "FTAInformation": "FTA Information",
+      "ServicesAndPaymentDetails": "Services And Payment Details",
       "title": "Customers",
       "description": "All Customers On system ",
       "firstName": "First Name",
@@ -50,16 +53,16 @@
       "name": "Name",
       "actions": "Actions"
     },
-    "updatePassword":{
+    "updatePassword": {
       "title": "Update Password",
       "description": "Welcome to the update password page!",
       "oldPassword": "Old Password",
       "newPassword": "New Password",
       "confirmPassword": "Confirm Password",
       "update": "Update",
-      "placeholder":"Enter your old password",
-      "placeholderNew":"Enter your new password"
-    },  
+      "placeholder": "Enter your old password",
+      "placeholderNew": "Enter your new password"
+    },
     "modal": {
       "title": "Modal Title",
       "description": "This is a modal description",
@@ -67,5 +70,221 @@
       "save": "Save"
     }
 
+  },
+
+  "forms": {
+    "submit": "Submit",
+    "username": {
+      "label": "Username",
+      "placeholder": "Enter your username",
+      "helper": "Choose a unique username",
+      "error": {
+        "required": "Username is required",
+        "minLength": "Username must be at least 3 characters",
+        "maxLength": "Username must be less than 50 characters"
+      }
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email",
+      "helper": "We'll never share your email",
+      "error": {
+        "required": "Email is required",
+        "invalidEmail": "Please enter a valid email address"
+      }
+    },
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "Enter your first name",
+      "helper": "We'll never share your first name",
+      "error": {
+        "required": "First Name is required",
+        "minLength": "First Name must be at least 3 characters",
+        "maxLength": "First Name must be less than 50 characters"
+      }
+    },
+
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter your last name",
+      "helper": "We'll never share your last name",
+      "error": {
+        "required": "Last Name is required",
+        "minLength": "Last Name must be at least 3 characters",
+        "maxLength": "Last Name must be less than 50 characters"
+      }
+    },
+    "businessName": {
+      "label": "Business Name",
+      "placeholder": "Enter your business name",
+      "helper": "We'll never share your business name",
+      "error": {
+        "required": "Business Name is required",
+        "minLength": "Business Name must be at least 3 characters",
+        "maxLength": "Business Name must be less than 50 characters"
+      }
+    },
+    "servicePrice": {
+      "label": "Service Price",
+      "placeholder": "Enter your service price",
+      "helper": "We'll never share your service price",
+      "error": {
+        "required": "Service Price is required",
+        "minLength": "Service Price must be at least 3 characters",
+        "maxLength": "Service Price must be less than 50 characters"
+      }
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "Enter your address",
+      "helper": "We'll never share your address",
+      "error": {
+        "required": "Address is required"
+      }
+    },
+    "phoneNumber": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number",
+      "helper": "We'll never share your phone number",
+      "error": {
+        "required": "Phone Number is required",
+        "minLength": "Phone Number must be at least 3 characters",
+        "maxLength": "Phone Number must be less than 50 characters"
+      }
+    },
+    "price": {
+      "label": "Price",
+      "placeholder": "Enter your price",
+      "helper": "We'll never share your price",
+      "error": {
+        "required": "Price is required",
+        "minLength": "Price must be at least 3 characters",
+        "maxLength": "Price must be less than 50 characters"
+      }
+    },
+
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password",
+      "helper": "Password must be at least 8 characters",
+      "error": {
+        "required": "Password is required",
+        "minLength": "Password must be at least 8 characters",
+        "pattern": "Password must include uppercase, lowercase, number and special character"
+      }
+    },
+    "confirmPassword": {
+      "label": "Confirm Password",
+      "placeholder": "Confirm your password",
+      "error": {
+        "required": "Please confirm your password",
+        "mismatch": "Passwords don't match"
+      }
+    },
+    "terms": {
+      "label": "I agree to the Terms and Conditions",
+      "error": {
+        "required": "You must agree to the terms and conditions"
+      }
+    },
+    "vatValue": {
+      "label": "VAT Value",
+      "placeholder": "Enter VAT value",
+      "helper": "Optional VAT value applied to the total",
+      "error": {
+        "number": "VAT value must be a number"
+      }
+    },
+    "branchId": {
+      "label": "Branch",
+      "placeholder": "Select a branch",
+      "helper": "Choose the branch associated with this entry",
+      "error": {
+        "required": "Branch is required"
+      }
+    },
+    "transactionRefrenceNumber": {
+      "label": "Transaction Reference Number",
+      "placeholder": "Enter transaction reference number",
+      "helper": "Optional reference number for the transaction"
+    },
+    "ftaRefrence": {
+      "label": "FTA Reference",
+      "placeholder": "Enter FTA reference",
+      "helper": "Optional FTA reference used for audit or tracking"
+    },
+    "ftaPassword": {
+      "label": "FTA Password",
+      "placeholder": "Enter FTA password",
+      "helper": "Used to access FTA services (optional)"
+    },
+    "ftaUserName": {
+      "label": "FTA Username",
+      "placeholder": "Enter FTA username",
+      "helper": "Username for accessing FTA services (optional)"
+    },
+    "paymentMethod": {
+      "label": "Payment Method",
+      "placeholder": "Select payment method",
+      "helper": "Specify the method used for the payment"
+    },
+    "gmailUserName": {
+      "label": "Gmail Username",
+      "placeholder": "Enter Gmail username",
+      "helper": "Optional Gmail username for email integration"
+    },
+    "gmailPassword": {
+      "label": "Gmail Password",
+      "placeholder": "Enter Gmail password",
+      "helper": "Optional Gmail password for email integration"
+    },
+    "serviceId": {
+      "label": "Services",
+      "placeholder": "Select services",
+      "helper": "List of selected services"
+    },
+
+    "entries": {
+      "label": "Entries",
+      "placeholder": "Entries",
+      "helper": "List of individual entry records",
+      "fields": {
+        "date": {
+          "label": "Date",
+          "placeholder": "Enter date",
+          "helper": "The date of the entry",
+          "error": {
+            "required": "Date is required"
+          }
+        },
+        "amount": {
+          "label": "Amount",
+          "placeholder": "Enter amount",
+          "helper": "The amount of the entry",
+          "error": {
+            "required": "Amount is required"
+          }
+        },
+
+        "description": {
+          "label": "Description",
+          "placeholder": "Enter description",
+          "helper": "Optional description for this entry"
+        }
+      }
+    },
+    "status": {
+      "label": "Status"
+    },
+    "taxId": {
+      "label": "Tax ID",
+      "placeholder": "Enter Tax ID",
+      "helper": "Optional Tax ID for tax purposes",
+      "error": {
+        "required": "Tax ID is required",
+        "minLength": "Tax ID must be at least 3 characters",
+        "maxLength": "Tax ID must be less than 50 characters"
+      }
+    }
   }
 }

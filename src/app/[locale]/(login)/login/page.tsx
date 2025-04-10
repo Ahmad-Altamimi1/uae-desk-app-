@@ -9,14 +9,7 @@ export default function LoginPage() {
   interface LoginState {
     success: boolean;
     data: null;
-
     error: string | null;
-  }
-
-  interface initialState {
-    success: boolean;
-    data: null;
-    error: null;
   }
 
   const initialState: LoginState = {
