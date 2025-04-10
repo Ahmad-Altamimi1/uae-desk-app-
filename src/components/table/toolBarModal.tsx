@@ -44,7 +44,7 @@ const ToolBarModal = ({ title, description, image, addButton, children }: ToolBa
                     </p>
                 </div>
             </div>
-            <Modal title={'dashboard.permissions.title'} description={"dashboard.permissions.description"}
+            <Modal title={title} description={description}
 
                 triggerButton={<>
                     <Button className="bg-[#00713B] px-6 py-3 text-base flex items-center gap-2">

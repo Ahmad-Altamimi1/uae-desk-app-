@@ -1,4 +1,3 @@
-"use server";
 import { z } from "zod";
 export const createRoleCreateSchema = (t: (key: string) => string) => {
   return z.object({

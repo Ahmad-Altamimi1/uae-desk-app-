@@ -1,6 +1,7 @@
 {
   "ADD": "Add",
   "submit": "Submit",
+  "loading": "loading...",
   "RootLayout": {
     "title": "HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C Attendance",
     "description": "hhhhh"
@@ -41,6 +42,7 @@
       "servicesModalDescription": ""
     },
     "roles": {
+      "Add": "Add New Roles",
       "title": "Roles",
       "description": "Welcome to the users page!",
       "name": "Name",
@@ -114,17 +116,17 @@
         "maxLength": "First Name must be less than 50 characters"
       }
     },
-
-    "lastName": {
-      "label": "Last Name",
-      "placeholder": "Enter your last name",
-      "helper": "We'll never share your last name",
+    "code": {
+      "label": " code of role ",
+      "placeholder": "Enter your code",
+      "helper": "We'll never share your code",
       "error": {
-        "required": "Last Name is required",
-        "minLength": "Last Name must be at least 3 characters",
-        "maxLength": "Last Name must be less than 50 characters"
+        "required": "code is required",
+        "minLength": "code must be at least 3 characters",
+        "maxLength": "code must be less than 50 characters"
       }
     },
+   
     "businessName": {
       "label": "Business Name",
       "placeholder": "Enter your business name",

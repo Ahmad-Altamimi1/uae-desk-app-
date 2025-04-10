@@ -30,6 +30,7 @@ import ActionCell from "@/components/table/actionCell";
 import { IResponseUsersRoles } from '@/entities/dashboard/users'
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
+import { RowCell } from "@/components/table/rowCell";
 // export const schema = z.object({
 //   id: z.number(),
 //   header: z.string(),
@@ -74,55 +75,54 @@ export const columns: ColumnDef<IResponseUsersRoles>[] = [
   },
   {
     accessorKey: "header",
-    header: "SL",
-    cell: ({ row }) => {
-      return <TableCellViewer item={row.original} />;
-    },
-    enableHiding: false,
-  },
+    header: <HeaderCell label="SL" />,
 
-  {
-    accessorKey: "type",
-    header: "Application ID",
     cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.id}
-        </Badge>
+      <div>
+        <RowCell label={row.index + 1} />
       </div>
     ),
   },
+
   {
-   
-    
+
+
     accessorKey: "name",
     header: <HeaderCell label="roles.name" />,
     cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.name}
-        </Badge>
+
+      <div>
+        <RowCell label={row.original.name} />
       </div>
+
+
+    ),
+  },
+  {
+
+
+    accessorKey: "code",
+    header: <HeaderCell label="roles.code" />,
+    cell: ({ row }) => (
+
+      <div>
+        <RowCell label={row.original.code} />
+      </div>
+
+
     ),
   },
 
   {
-    accessorKey: 'code',
-    header: <HeaderCell label="roles.code" />,
-    cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.code}
-        </Badge>
-      </div>
-    ),
-  },
-  
-  {
     accessorKey: "actions",
-    header: <HeaderCell label="roles.actions" />,
+    header: <HeaderCell label="permissions.actions" />,
     id: "actions",
-    cell: () => <ActionCell />,
+    cell: () => (
+      <div className="flex items-center justify-center">
+        <ActionCell />
+      </div>
+    )
+    
   },
- 
+
 ];

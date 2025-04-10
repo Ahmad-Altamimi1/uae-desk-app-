@@ -8,10 +8,11 @@ import { z } from "zod";
 import Input from "@/components/form/input";
 import { Key, User } from "lucide-react";
 import InputCollectionLabel from "@/components/form/inputCollectionLabel";
-import { useTransition } from "react";
+import { use, useTransition } from "react";
 import { permissionSchema } from "@/app/[locale]/(dashboard)/schema/permission";
 import { createPermission } from "@/app/[locale]/(dashboard)/actions/permissions";
 import ToolBar2 from "@/components/table/toolBar2";
+import { Toaster } from "sonner";
 
 type PermissionCreateFormValues = z.infer<ReturnType<typeof permissionSchema>>;
 
@@ -32,10 +33,14 @@ export default function PermissionCreateForm() {
 
     },
   });
-
+let response ;
   const onSubmit = (data: PermissionCreateFormValues) => {
-    startTransition(() => {
-     const response =  createPermission(data);
+    startTransition(async() => {
+      response =  await(createPermission(data));
+     if (response.error) {
+      // Toaster(response?.error);
+      
+     }
      console.log("responseresponseresponse",response);
      
     });
@@ -61,11 +66,17 @@ export default function PermissionCreateForm() {
             />
           </div>
         </div>
+       <p>
+       {response?.error}
+       </p>
         <button
           type="submit"
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
-          {t("submit")}
+      {isPending ?
+      <span> {t("loading")}</span>:
+      <span>{t("submit")}</span>
+    }    
         </button>
       </form>
     </>

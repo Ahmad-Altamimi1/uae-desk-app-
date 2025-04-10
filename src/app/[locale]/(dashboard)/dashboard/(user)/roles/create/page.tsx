@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import Input from "@/components/form/input";
+import { FaLock } from "react-icons/fa";
 
 import { Key, User } from "lucide-react";
 import InputCollectionLabel from "@/components/form/inputCollectionLabel";
@@ -11,14 +12,16 @@ import { useTransition } from "react";
 import { permissionSchema } from "@/app/[locale]/(dashboard)/schema/permission";
 import { createPermission } from "@/app/[locale]/(dashboard)/actions/permissions";
 import ToolBar2 from "@/components/table/toolBar2";
+import { createRoleCreateSchema } from "@/app/[locale]/(dashboard)/schema/role";
+import { createRoles } from "@/app/[locale]/(dashboard)/actions/roles";
 
-type RoleCreateFormValues = z.infer<ReturnType<typeof permissionSchema>>;
+type RoleCreateFormValues = z.infer<ReturnType<typeof createRoleCreateSchema >>;
 
 export default function RoleCreateForm() {
-    const t = useTranslations("forms");
+    const t = useTranslations('forms');
 
     const [isPending, startTransition] = useTransition();
-    const rolesSchema = roleSchema(t);
+    const rolesSchema = createRoleCreateSchema(t);
 
     const {
         register,
@@ -28,16 +31,21 @@ export default function RoleCreateForm() {
         resolver: zodResolver(rolesSchema),
         defaultValues: {
             name: "",
-
+            code: "",
         },
     });
 
     const onSubmit = (data: RoleCreateFormValues) => {
-        startTransition(() => {
-            createRole(data);
+        startTransition(async () => {
+            response = await (createRoles(data));
+            if (Response.error) {
+                // Toaster(response?.error);
+
+            }
+            console.log("responseresponseresponse", response);
+
         });
         console.log(data);
-        // Handle form submission here
     };
 
     return (
@@ -47,7 +55,7 @@ export default function RoleCreateForm() {
                 {/* <InputCollectionLabel title={"dashboard.permissions.title"} /> */}
                 <hr />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="col-span-1 md:col-span-2">
+                    <div className="col-span-1 md:col-span-2 space-y-4">
                         <Input
                             label={{ id: "name.label" }}
                             name="name"
@@ -57,13 +65,13 @@ export default function RoleCreateForm() {
                             startIcon={<Key size={18} />}
                         />
 
-                        <Input
+                        <Input 
                             label={{ id: "code.label" }}
                             name="code"
                             register={register}
                             error={errors.code?.message}
                             placeholder={{ id: "code.placeholder" }}
-                            startIcon={<Key size={18} />}
+                            startIcon={<FaLock  size={18} />}
                         />
                     </div>
                 </div>
@@ -71,7 +79,10 @@ export default function RoleCreateForm() {
                     type="submit"
                     className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
                 >
-                    {t("submit")}
+                    {isPending ?
+                        <span> {t("loading")}</span> :
+                        <span>{t("submit")}</span>
+                    }
                 </button>
             </form>
         </>

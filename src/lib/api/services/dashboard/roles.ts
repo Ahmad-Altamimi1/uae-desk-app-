@@ -1,10 +1,10 @@
 import { IResponseUsersRoles, IRequestUsersRoles } from "@/entities/dashboard";
 import { api } from "../../serverCore";
 
-export const PermissionService = {
+export const RolesService = {
   create: (data: Omit<IRequestUsersRoles, "id">) =>
     api.post<IResponseUsersRoles, Omit<IRequestUsersRoles, "id">>(
-      `Roles`,
+      `RolesStore`,
       data
     ),
   // fetchCUDApi("login", "POST", data),
