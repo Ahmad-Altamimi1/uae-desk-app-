@@ -10,9 +10,20 @@ export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const isProtectedRoute = /^\/(ar|en)\/dashboard(\/.*)?$/.test(pathname);
   const isLoginRoutes = /^\/(ar|en)\/login$/.test(pathname);
-  const isLoggedIn = !!req.cookies.get("token")?.value ;
-console.log('isLoggedIn',isLoggedIn);
-console.log('req.cookies.get("token")?.value',req.cookies.get("token")?.value);
+  const token = req.cookies.get("token")?.value;
+  let isLoggedIn = false;
+
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      if (payload.exp) {
+        const expirationDate = new Date(payload.exp * 1000);
+        isLoggedIn = expirationDate > new Date();
+      }
+    } catch (error) {
+      console.error("Invalid token", error);
+    }
+  }
 
   if (isProtectedRoute && !isLoggedIn) {
     const loginUrl = req.nextUrl.clone();

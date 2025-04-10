@@ -93,11 +93,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={cn(fullWidth && "w-full")}>
-        {!updateInput && (
+        {/* {!updateInput && (
           <label className="block text-sm font-medium text-gray-500 mb-2">
             {translatedLabel}
           </label>
-        )}
+        )} */}
         <div className="relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
             {startIcon && startIcon}
