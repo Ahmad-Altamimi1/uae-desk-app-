@@ -57,7 +57,7 @@ export function Modal({ title, description, children, close, confirm,triggerButt
           </div>
 
         </div>
-        <DialogFooter className="sm:justify-start">
+        {/* <DialogFooter className="sm:justify-start">
           <div onClick={() => {
             // e.preventDefault()
             console.log('close')
@@ -85,7 +85,7 @@ export function Modal({ title, description, children, close, confirm,triggerButt
             </Button>
           </div>
 
-        </DialogFooter>
+        </DialogFooter> */}
       </DialogContent>
     </Dialog>
   )

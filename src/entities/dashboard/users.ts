@@ -5,3 +5,9 @@ export interface IResponseUsersRoles{
     code: string;
    
 }
+export interface IRequestUsersRoles{
+    id: number;
+    name: string;
+    code: string;
+
+  }

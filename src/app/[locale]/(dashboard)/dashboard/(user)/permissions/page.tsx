@@ -4,12 +4,14 @@ import { columns } from "./components/columns";
 // import data from "../data.json";
 import { api } from "@/lib/api/serverCore";
 import { cookies } from "next/headers";
+import ToolBar2 from "@/components/table/toolBar2";
 import ToolBarModal from "@/components/table/toolBarModal";
-import PermissionCreateForm from "../permissions/create/page";
+import PermissionCreateForm from "./create/page";
 
 const Page = async () => {
   // const data = await routes.customers.getAll();
-  const data = await api.get("getRoles");
+
+  const data = await api.get("getPermissions");
   return <>
     <ToolBarModal
       title="dashboard.permissions.title"
@@ -21,14 +23,10 @@ const Page = async () => {
       }}
     >
 
-      <PermissionCreateForm />
+      <PermissionCreateForm/>
     </ToolBarModal>
-
-
-
     <DataTable columns={columns} data={data} />;
   </>
-
 };
 
 export default Page;

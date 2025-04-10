@@ -31,6 +31,7 @@ import { IResponseUsersRoles } from '@/entities/dashboard/users'
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
 import { IResponseUsersPermissions } from "@/entities/dashboard";
+import { RowCell } from "@/components/table/rowCell";
 // export const schema = z.object({
 //   id: z.number(),
 //   header: z.string(),
@@ -75,35 +76,29 @@ export const columns: ColumnDef<IResponseUsersPermissions>[] = [
   },
   {
     accessorKey: "header",
-    header: "SL",
-    cell: ({ row }) => {
-      return <TableCellViewer item={row.original} />;
-    },
-    enableHiding: false,
-  },
+    header: <HeaderCell label="SL" />,
 
-  {
-    accessorKey: "type",
-    header: "Application ID",
     cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.id}
-        </Badge>
+      <div>
+        <RowCell label={row.index + 1} />
       </div>
     ),
   },
+
+
+
   {
-   
-    
+
+
     accessorKey: "name",
     header: <HeaderCell label="permissions.name" />,
     cell: ({ row }) => (
-      <div className="w-32">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.name}
-        </Badge>
+
+      <div>
+        <RowCell label={row.original.name} />
       </div>
+
+
     ),
   },
 
@@ -111,7 +106,12 @@ export const columns: ColumnDef<IResponseUsersPermissions>[] = [
     accessorKey: "actions",
     header: <HeaderCell label="permissions.actions" />,
     id: "actions",
-    cell: () => <ActionCell />,
+    cell: () => (
+      <div className="p-3 flex items-center justify-center">
+        <ActionCell />
+      </div>
+    )
+    
   },
- 
+
 ];
