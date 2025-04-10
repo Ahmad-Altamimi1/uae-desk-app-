@@ -1,11 +1,10 @@
-
-
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import Input from "@/components/form/input";
+
 import { Key, User } from "lucide-react";
 import InputCollectionLabel from "@/components/form/inputCollectionLabel";
 import { useTransition } from "react";
@@ -77,4 +76,5 @@ export default function RoleCreateForm() {
             </form>
         </>
     );
+
 }
