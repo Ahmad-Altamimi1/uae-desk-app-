@@ -19,6 +19,7 @@ export async function createRoles(
     const t = await getTranslations();
     const rolesSchema = createRoleCreateSchema(t);
     const parsed = rolesSchema.safeParse(data);
+    console.log("datadatadatadata",data);
 
     if (!parsed.success) {
         return {

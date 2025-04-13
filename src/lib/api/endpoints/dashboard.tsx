@@ -29,10 +29,28 @@ const endPoints = {
 
   RolesCreate: "api/roles/create",
   RolesStore: "api/roles/store",
+
   //services
   getServices: "api/services/index",
+  ServicesCreate: "api/services/create",
+  ServicesStore: "api/services/store",
+
   //branches
   getBranches: "api/branches/index",
+  BranchesCreate: "api/branches/create",
+  BranchesStore: "api/branches/store",
+
+  //userActivity
+  getLogs:"api/logs",
+  getLogsById:"api/logs/{id}",
+
+//shifts
+  getShifts: "api/shifts/index",
+  ShiftsCreate: "api/shifts/create",
+  ShiftsStore: "api/shifts/store",
+
+  //attendance
+  getAttendance: "api/attendances/index",
 };
 
 export const tags: Record<keyof typeof endPoints, keyof typeof endPoints> =

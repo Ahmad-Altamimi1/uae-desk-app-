@@ -1,7 +1,6 @@
 {
   "ADD": "Add",
   "submit": "Submit",
-
   "loading": "loading...",
   "RootLayout": {
     "title": "HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C Attendance",
@@ -10,11 +9,9 @@
   "modal": {
     "open": "Open"
   },
-
   "dashboard": {
     "SL": "SL",
     "Application ID": "Application ID",
-
     "header": {
       "title": "Dashboard",
       "description": "Welcome to your dashboard!",
@@ -62,6 +59,56 @@
       "name": "Name of permission",
       "actions": "Actions"
     },
+    "userActivity": {
+      "title": "User Activity",
+      "description": "Welcome to the user activity page!",
+      "logtype": "Log Type",
+      "logdate": "Log Date",
+      "userId": "Done By",
+      "id": "ID",
+      "actions": "Actions"
+    },
+    "services": {
+      "Add": "Add New Service",
+      "title": " Services",
+      "name": "Services Name",
+      "description": "Welcome to the services page!",     
+      "actions": "Actions"
+    },
+    "branches": {
+      "Add": "Add New Branch",
+      "title": " Branches",
+      "name": "Branch Name",
+      "location": "Location",
+      "phoneNumber": "Phone Number",
+      "email": "Email",
+      "address": "Address",
+      "description": "Welcome to the branches page!",     
+      "actions": "Actions"
+    },
+    "shifts": {
+      "Add": "Add New Shift",
+      "title": " Shifts",
+      "name": "Shift Name",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "status": "Status",
+      "description": "Welcome to the shifts page!",     
+      "actions": "Actions"
+    },
+    "attendance": {
+      "title": " Attendance",
+      "name": "Name",
+      "user_name": "User Name",
+      "branchName": "Branch Name",
+      "login": "login Time",
+      "is_late": "Is Late",
+      "is_minutes": "Is Minutes",
+      "logout": "Logout Time",
+      "status": "Status",
+      "description": "Welcome to the shifts page!",     
+      "actions": "Actions"
+    },
     "updatePassword": {
       "title": "Update Password",
       "description": "Welcome to the update password page!",
@@ -79,13 +126,11 @@
       "save": "Save"
     }
   },
-
   "forms": {
     "submitting": "Submitting",
     "services": "services",
     "submit": "Submit",
     "submitRole": "Finish and Add Role ",
-
     "username": {
       "label": "Username",
       "placeholder": "Enter your username",
@@ -135,7 +180,6 @@
         "maxLength": "code must be less than 50 characters"
       }
     },
-   
     "businessName": {
       "label": "Business Name",
       "placeholder": "Enter your business name",
@@ -185,7 +229,6 @@
         "maxLength": "Price must be less than 50 characters"
       }
     },
-
     "password": {
       "label": "Password",
       "placeholder": "Enter your password",
@@ -266,7 +309,6 @@
       "placeholder": "Select services",
       "helper": "List of selected services"
     },
-
     "entries": {
       "label": "Entries",
       "placeholder": "Entries",
@@ -288,7 +330,6 @@
             "required": "Amount is required"
           }
         },
-
         "description": {
           "label": "Description",
           "placeholder": "Enter description",
@@ -310,7 +351,6 @@
       }
     }
   },
-
   "commonValidations": {
     "required": " this field is required",
     "unique": " this field must be unique"

@@ -77,22 +77,22 @@ const data = {
     },
     {
       title: "Services",
-      url: "#",
+      url: "/services",
       icon: IconFileWord,
     },
     {
       title: "Branches",
-      url: "#",
+      url: "/branches",
       icon: IconGitBranch,
     },
     {
       title: "shifts",
-      url: "#",
+      url: "/shifts",
       icon: IconClock,
     },
     {
       title: "Attendances",
-      url: "#",
+      url: "/attendances",
       icon: IconChecklist,
     },
     // {

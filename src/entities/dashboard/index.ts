@@ -4,3 +4,4 @@ export * from "./users";
 export * from "./permissions";
 export * from "./services";
 export * from "./branches";
+export * from "./log";
