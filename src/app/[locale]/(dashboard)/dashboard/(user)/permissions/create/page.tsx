@@ -1,18 +1,13 @@
-
-
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import Input from "@/components/form/input";
-import { Key, User } from "lucide-react";
-import InputCollectionLabel from "@/components/form/inputCollectionLabel";
-import { use, useTransition } from "react";
+import { Key } from "lucide-react";
+import { useTransition } from "react";
 import { permissionSchema } from "@/app/[locale]/(dashboard)/schema/permission";
 import { createPermission } from "@/app/[locale]/(dashboard)/actions/permissions";
-import ToolBar2 from "@/components/table/toolBar2";
-import { Toaster } from "sonner";
 
 type PermissionCreateFormValues = z.infer<ReturnType<typeof permissionSchema>>;
 
@@ -30,7 +25,6 @@ export default function PermissionCreateForm() {
     resolver: zodResolver(permissionsSchema),
     defaultValues: {
       name: "",
-
     },
   });
   let response;
@@ -50,7 +44,6 @@ export default function PermissionCreateForm() {
 
   return (
     <>
-
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* <InputCollectionLabel title={"dashboard.permissions.title"} /> */}
         <hr />

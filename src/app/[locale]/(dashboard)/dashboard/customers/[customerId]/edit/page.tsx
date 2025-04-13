@@ -1,42 +1,42 @@
-"use client";
+import {
+  IGetCustomer,
+  IResponseBranches,
+  IResponseCustomer,
+  IResponseServices,
+} from "@/entities/dashboard";
+import { api } from "@/lib/api/serverCore";
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "@/form/input";
-import { z } from "zod";
-import { customerFormSchema } from "../../components/utils/validation";
+import { UpdateCustomerForm } from "./components/updateCustomerForm";
+import { mapToSelectOptions } from "@/utils/mapToSelectOptions";
+interface IUpdateCustomerProps {
+  params: Promise<{ customerId: string }>;
+}
+const UpdateCustomer = async ({ params }: IUpdateCustomerProps) => {
+  const customerId = (await params).customerId;
+  const services = await api.get<IResponseCustomer[]>("getServices"); //TODO
+  const branches = await api.get<IResponseCustomer[]>("getBranches"); //TODO
+  const customer = await api.get<IGetCustomer>(["CustomerEdit", customerId]);
 
-type FormData = z.infer<typeof customerFormSchema>;
+  const branchOptions = mapToSelectOptions(
+    branches,
+    (b) => b.branch_name,
+    (b) => b.id
+  );
 
-const MyForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(customerFormSchema),
-  });
-
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-  };
+  const serviceOptions = mapToSelectOptions(
+    services,
+    (s) => s.name,
+    (s) => s.id,
+    (b) => ({ price: { value: b.price || 23 } })
+  );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        label="Username"
-        {...register("username")}
-        error={errors.username?.message}
-      />
-      <Input
-        label="Password"
-        type="password"
-        {...register("password")}
-        error={errors.password?.message}
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <UpdateCustomerForm
+      serviceOptions={serviceOptions}
+      branchOptions={branchOptions}
+      data={customer.data}
+    />
   );
 };
 
-export default MyForm;
+export default UpdateCustomer;

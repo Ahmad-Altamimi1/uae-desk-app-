@@ -4,22 +4,16 @@ import type * as React from "react";
 import {
   IconActivity,
   IconCamera,
-  IconChartBar,
   IconChecklist,
   IconClock,
-  IconDashboard,
   IconDatabase,
   IconFileAi,
   IconFileDescription,
   IconFileWord,
-  IconFolder,
   IconFolderPlus,
   IconGitBranch,
   IconHelp,
   IconHome,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
   IconSearch,
   IconSettings,
   IconShieldCheck,
@@ -27,23 +21,15 @@ import {
   IconUserCog,
   IconUsers,
   IconWorldCog,
-
 } from "@tabler/icons-react";
 
-
-import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
-import { NavUser } from "@/components/nav-user";
 import { SidebarBackground } from "./sidebarBackGround";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
 const data = {
@@ -56,7 +42,7 @@ const data = {
     {
       title: "Home",
       url: "",
-      icon:  IconHome,
+      icon: IconHome,
     },
     {
       title: "Customers",
@@ -66,22 +52,22 @@ const data = {
     {
       title: "Employees",
       url: "/employees",
-      icon:IconUserCog,
+      icon: IconUserCog,
     },
 
     {
       title: "Roles",
       url: "/roles",
-      icon: IconShieldCheck ,
+      icon: IconShieldCheck,
     },
     {
       title: "Permissions",
       url: "/permissions",
-      icon: IconShieldLock ,
+      icon: IconShieldLock,
     },
     {
       title: "User Activity",
-      url: "/permisions",
+      url: "/useractivity",
       icon: IconActivity,
     },
     {
@@ -97,17 +83,17 @@ const data = {
     {
       title: "Branches",
       url: "#",
-      icon: IconGitBranch ,
+      icon: IconGitBranch,
     },
     {
       title: "shifts",
       url: "#",
-      icon: IconClock ,
+      icon: IconClock,
     },
     {
       title: "Attendances",
       url: "#",
-      icon: IconChecklist ,
+      icon: IconChecklist,
     },
     // {
     //   title: "Invoices",
@@ -127,12 +113,12 @@ const data = {
     {
       title: "Website Settings",
       url: "#",
-      icon: IconWorldCog ,
+      icon: IconWorldCog,
     },
     {
       title: "File Manager",
       url: "#",
-      icon: IconFolderPlus ,
+      icon: IconFolderPlus,
     },
   ],
   navClouds: [
