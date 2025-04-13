@@ -1,4 +1,4 @@
-import { NextIntlClientProvider, Locale, hasLocale } from "next-intl";
+import { NextIntlClientProvider, Locale } from "next-intl";
 import { Toaster } from "@/components/ui/sonner";
 import {
   getMessages,
@@ -7,17 +7,11 @@ import {
 } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteHeader } from "@/components/site-header";
-import {
-  SidebarProvider,
-  SidebarInset,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
-import { notFound } from "next/navigation";
-import Header from "@/components/layout/header";
-import { AppSidebar } from "@/components/layout/app-sidebar";
+import { Metadata } from "next";
+import Head from "next/head";
+import { APP_URL, defaultLanguage, languages } from "@/constants";
 type Props = {
   children: ReactNode;
   params: Promise<{ locale: Locale }>;
@@ -32,9 +26,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export async function generateMetadata(props: Omit<Props, "children">) {
+export async function generateMetadata(
+  props: Omit<Props, "children">
+): Promise<Metadata> {
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "RootLayout" });
+
   return {
     title: t("title"),
     description: t("description"),
@@ -44,6 +41,7 @@ export async function generateMetadata(props: Omit<Props, "children">) {
         en: "/en",
         ar: "/ar",
       },
+
       icons: {
         icon: "./app.ico",
       },
@@ -58,7 +56,6 @@ export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
   const messages = await getMessages();
 
-  // Enable static rendering
   setRequestLocale(locale);
   return (
     <html>
@@ -68,10 +65,24 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased
        ${locale === "ar" ? "font-arabic" : "font-english"} bg-gray-100`}
       >
+        <Head>
+          {languages.map((lang) => (
+            <link
+              key={lang}
+              rel="alternate"
+              hrefLang={lang}
+              href={APP_URL + lang}
+            />
+          ))}
+          <link
+            rel="alternate"
+            hrefLang="x-default"
+            href={`${APP_URL + defaultLanguage}`}
+          />
+          <link rel="canonical" href={APP_URL + locale} />
+        </Head>
         <NextIntlClientProvider messages={messages}>
           {children}
-
-          <Toaster />
         </NextIntlClientProvider>
       </body>
     </html>

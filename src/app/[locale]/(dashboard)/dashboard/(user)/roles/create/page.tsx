@@ -15,66 +15,63 @@ import ToolBar2 from "@/components/table/toolBar2";
 type RoleCreateFormValues = z.infer<ReturnType<typeof permissionSchema>>;
 
 export default function RoleCreateForm() {
-    const t = useTranslations("forms");
+  const t = useTranslations("forms");
 
-    const [isPending, startTransition] = useTransition();
-    const rolesSchema = roleSchema(t);
+  const [isPending, startTransition] = useTransition();
+  const rolesSchema = roleSchema(t);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<RoleCreateFormValues>({
-        resolver: zodResolver(rolesSchema),
-        defaultValues: {
-            name: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RoleCreateFormValues>({
+    resolver: zodResolver(rolesSchema),
+    defaultValues: {
+      name: "",
+    },
+  });
 
-        },
+  const onSubmit = (data: RoleCreateFormValues) => {
+    startTransition(() => {
+      createRole(data);
     });
+    console.log(data);
+    // Handle form submission here
+  };
 
-    const onSubmit = (data: RoleCreateFormValues) => {
-        startTransition(() => {
-            createRole(data);
-        });
-        console.log(data);
-        // Handle form submission here
-    };
+  return (
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* <InputCollectionLabel title={"dashboard.permissions.title"} /> */}
+        <hr />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="col-span-1 md:col-span-2">
+            <Input
+              label={{ id: "name.label" }}
+              name="name"
+              register={register}
+              error={errors.name?.message}
+              placeholder={{ id: "name.placeholder" }}
+              startIcon={<Key size={18} />}
+            />
 
-    return (
-        <>
-
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                {/* <InputCollectionLabel title={"dashboard.permissions.title"} /> */}
-                <hr />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="col-span-1 md:col-span-2">
-                        <Input
-                            label={{ id: "name.label" }}
-                            name="name"
-                            register={register}
-                            error={errors.name?.message}
-                            placeholder={{ id: "name.placeholder" }}
-                            startIcon={<Key size={18} />}
-                        />
-
-                        <Input
-                            label={{ id: "code.label" }}
-                            name="code"
-                            register={register}
-                            error={errors.code?.message}
-                            placeholder={{ id: "code.placeholder" }}
-                            startIcon={<Key size={18} />}
-                        />
-                    </div>
-                </div>
-                <button
-                    type="submit"
-                    className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
-                >
-                    {t("submit")}
-                </button>
-            </form>
-        </>
-    );
-
+            <Input
+              label={{ id: "code.label" }}
+              name="code"
+              register={register}
+              error={errors.code?.message}
+              placeholder={{ id: "code.placeholder" }}
+              startIcon={<Key size={18} />}
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
+        >
+          {t("submit")}
+        </button>
+      </form>
+    </>
+  );
 }

@@ -1,5 +1,6 @@
 import { getCookie } from "@/utils/cookiesHandler";
 import endPoints from "./endpoints/dashboard";
+import { toast } from "sonner";
 
 // Type definitions for better type safety
 type EndpointKey = keyof typeof endPoints;
@@ -16,9 +17,16 @@ export class ApiError extends Error {
 
   constructor(message: string, status: number, data?: any) {
     super(message);
+
     this.name = "ApiError";
     this.status = status;
     this.data = data;
+    this.makeToast();
+  }
+  public makeToast() {
+    if (typeof window !== "undefined") {
+      toast.error(this.message);
+    }
   }
 }
 
@@ -69,12 +77,11 @@ async function getCsrfToken(): Promise<void> {
 
   const csrfUrl = baseUrl.replace(/\/$/, "") + "/sanctum/csrf-cookie";
 
-  console.log("Fetching CSRF Token:", csrfUrl);
-
   try {
     const response = await fetch(csrfUrl, {
       method: "GET",
       credentials: "include", // Ensure cookies are stored
+      cache: "default",
     });
 
     if (!response.ok) {
@@ -121,10 +128,11 @@ async function handleApiResponse<T>(response: Response): Promise<T> {
   // Handle error responses
   try {
     const errorData = await response.json();
+
     throw new ApiError(
       errorData.message || `API error: ${response.statusText}`,
       response.status,
-      errorData
+      errorData.errors
     );
   } catch (error) {
     // If error response isn't valid JSON
@@ -141,6 +149,7 @@ async function handleApiResponse<T>(response: Response): Promise<T> {
 async function fetchWithTimeout<TResponse>(
   url: string,
   method: HttpMethod,
+  tag: string,
   options: RequestOptions = {},
   body?: any
 ): Promise<TResponse> {
@@ -163,10 +172,14 @@ async function fetchWithTimeout<TResponse>(
   }
 
   // Prepare the request
+
   const fetchPromise = fetch(url, {
     method,
     credentials: "include",
     headers,
+    next: {
+      tags: [tag],
+    },
     body: body ? JSON.stringify(body) : undefined,
 
     ...fetchOptions,
@@ -193,20 +206,25 @@ async function fetchWithTimeout<TResponse>(
  * General GET request function with retries
  */
 export async function fetchApi<TResponse>(
-  endpoint: EndpointKey,
+  endpoint: EndpointKey | [EndpointKey, string],
   options: RequestOptions = {},
   retries = 1
 ): Promise<TResponse> {
+  let url: string = "";
   const { skipCsrf = false } = options;
   if (!skipCsrf) {
     await getCsrfToken();
   }
-
-  const url = await getValidApiUrl(endpoint);
+  if (Array.isArray(endpoint)) {
+    url = (await getValidApiUrl(endpoint[0])) + endpoint[1];
+    endpoint = endpoint[0];
+  } else {
+    url = await getValidApiUrl(endpoint);
+  }
   console.log("GET Request URL:", url);
 
   try {
-    return await fetchWithTimeout<TResponse>(url, "GET", options);
+    return await fetchWithTimeout<TResponse>(url, "GET", endpoint, options);
   } catch (error) {
     // Implement retry logic for specific errors (network issues, 5xx)
     if (
@@ -242,7 +260,7 @@ export async function fetchCUDApi<TResponse, TRequest = any>(
   const url = await getValidApiUrl(endpoint);
   console.log(`${method} Request:`, { url, body: body ? "(data)" : "(empty)" });
 
-  return fetchWithTimeout<TResponse>(url, method, options, body);
+  return fetchWithTimeout<TResponse>(url, method, endpoint, options, body);
 }
 
 /**

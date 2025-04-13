@@ -4,9 +4,11 @@ import { api } from "../../serverCore";
 export const CustomerService = {
   create: (data: Omit<IRequestCustomer, "id">) =>
     api.post<IResponseCustomer, Omit<IRequestCustomer, "id">>(
-      `CustomerCreate`,
+      `CustomerStore`,
       data
     ),
+  update: (data: IRequestCustomer) =>
+    api.post<IResponseCustomer, IRequestCustomer>(`CustomerUpdate`, data),
   // fetchCUDApi("login", "POST", data),
   //   logout: () => fetchCUDApi<ILogin>(`/users/${id}`, "POST"),
 };
