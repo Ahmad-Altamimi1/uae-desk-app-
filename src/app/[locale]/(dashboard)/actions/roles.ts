@@ -6,19 +6,19 @@ import { permissionSchema } from "../schema/permission";
 import { get } from "http";
 import { PermissionService } from "@/lib/api/services/dashboard/permission";
 import { createRoleCreateSchema } from "../schema/role";
+import { RolesService } from "@/lib/api/services/dashboard/roles";
 
 interface RoleState {
     success: boolean;
     error: string | null;
     data: any;
 }
-
 export async function createRoles(
     data: z.infer<Awaited<ReturnType<typeof createRoleCreateSchema>>>
 ): Promise<RoleState> {
     const t = await getTranslations();
-    const rolesSchema =  createRoleCreateSchema(t);
-    const parsed = createRoleCreateSchema.safeParse(data);
+    const rolesSchema = createRoleCreateSchema(t);
+    const parsed = rolesSchema.safeParse(data);
 
     if (!parsed.success) {
         return {
@@ -31,8 +31,7 @@ export async function createRoles(
     try {
         const locale = await getLocale();
         const response = await RolesService.create(parsed.data);
-        console.log("response",response);
-        
+        console.log("response", response);
 
         return {
             success: true,
@@ -47,3 +46,4 @@ export async function createRoles(
         };
     }
 }
+

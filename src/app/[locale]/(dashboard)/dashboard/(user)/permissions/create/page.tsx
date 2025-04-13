@@ -33,16 +33,16 @@ export default function PermissionCreateForm() {
 
     },
   });
-let response ;
+  let response;
   const onSubmit = (data: PermissionCreateFormValues) => {
-    startTransition(async() => {
-      response =  await(createPermission(data));
-     if (response.error) {
-      // Toaster(response?.error);
-      
-     }
-     console.log("responseresponseresponse",response);
-     
+    startTransition(async () => {
+      response = await (createPermission(data));
+      if (response.error) {
+        // Toaster(response?.error);
+
+      }
+      console.log("responseresponseresponse", response);
+
     });
     console.log(data);
     // Handle form submission here
@@ -66,17 +66,17 @@ let response ;
             />
           </div>
         </div>
-       <p>
-       {response?.error}
-       </p>
+        <p>
+          {response?.error}
+        </p>
         <button
           type="submit"
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
-      {isPending ?
-      <span> {t("loading")}</span>:
-      <span>{t("submit")}</span>
-    }    
+          {isPending ?
+            <span> {t("loading")}</span> :
+            <span>{t("submit")}</span>
+          }
         </button>
       </form>
     </>

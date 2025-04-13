@@ -1,6 +1,7 @@
 {
   "ADD": "Add",
   "submit": "Submit",
+
   "loading": "loading...",
   "RootLayout": {
     "title": "HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C Attendance",
@@ -47,7 +48,10 @@
       "description": "Welcome to the users page!",
       "name": "Name",
       "code": "Code",
-      "actions": "Actions"
+      "actions": "Actions",
+      "CreateRole": "Add New Role",
+      "CreateRoleDes": "Fill the following data to add new role",
+      "roleInformation": "Permissions"
     },
     "permissions": {
       "Add": "Add New Permission",
@@ -77,6 +81,8 @@
   "forms": {
     "services": "services",
     "submit": "Submit",
+    "submitRole": "Finish and Add Role ",
+
     "username": {
       "label": "Username",
       "placeholder": "Enter your username",
@@ -111,13 +117,13 @@
       "placeholder": "Enter your name",
       "helper": "We'll never share your name",
       "error": {
-        "required": "First Name is required",
-        "minLength": "First Name must be at least 3 characters",
-        "maxLength": "First Name must be less than 50 characters"
+        "required": " Name is required",
+        "minLength": "Name must be at least 3 characters",
+        "maxLength": "Name must be less than 50 characters"
       }
     },
     "code": {
-      "label": " code of role ",
+      "label": " Code of role ",
       "placeholder": "Enter your code",
       "helper": "We'll never share your code",
       "error": {
