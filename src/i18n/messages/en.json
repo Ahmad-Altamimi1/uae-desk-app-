@@ -22,7 +22,7 @@
     "description": "Welcome to your dashboard!",
     "customers": {
       "Add": "Add New Customer",
-      "CreateCustomer": "Create Customer",
+      "CreateCustomer": "Finish And Add Customer",
       "createSuccess": "Customer created successfully",
       "updateSuccess": "Customer updated successfully",
       "CreateCustomerDes": "Fill the following data to add new customer",
@@ -75,7 +75,9 @@
   },
 
   "forms": {
+    "AddButton": "Next To Upload Media",
     "submitting": "Submitting",
+    "Select_Document_Type": "Select Document Type",
     "services": "services",
     "submit": "Submit",
     "username": {

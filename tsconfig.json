@@ -25,7 +25,7 @@
       "@/api/*": ["./src/lib/api/*"],
       "@/entities/dashboard/*": ["./src/entities/dashboard/*"],
       "@/constants/*": ["./src/constants/*"],
-      "@/images/*": ["./images/*"],
+      "@/public/images/*": ["./public/images/*"],
       "@/app/schema/*": ["./src/app/schema/*"],
       "@/app/actions/*": ["./src/app/actions/*"]
     }

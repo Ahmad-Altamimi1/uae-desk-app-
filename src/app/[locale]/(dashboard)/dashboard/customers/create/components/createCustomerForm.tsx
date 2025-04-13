@@ -21,7 +21,9 @@ import {
 } from "@/constants";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
-// import { revalidateTag } from "next/cache";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import arrowRight from "@/public/images/dashboard/customers/arrow-right_linear.svg";
 interface CustomerFormProps {
   serviceOptions: ISelectOption[];
   branchOptions: ISelectOption[];
@@ -89,8 +91,8 @@ export const CustomerForm: FC<CustomerFormProps> = ({
         if (result.success) {
           toast.success(customerTranslate("createSuccess"));
 
-          reset();
-          router.back();
+          // reset();
+          router.push(`create/${result.data.id}`);
         } else {
           toast.error(result.error?.toString());
 
@@ -131,6 +133,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
               title={"dashboard.customers.CustomerInformation"}
               className="mb-6"
             />
+
             <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 label={{ id: "firstName.label" }}
@@ -249,6 +252,16 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                   render={({ field }) => <Checkbox {...field} />}
                 />
               </div> */}
+            <Button
+              className="bg-[#00713B] px-6  mt-6 text-base flex items-center gap- w-full py-6 cursor-pointer"
+              type={"submit"}
+              disabled={isPending}
+            >
+              <Image src={arrowRight} alt="Logo" width={24} height={24} />
+              <span className="hidden lg:inline text-white">
+                {t("AddButton")}
+              </span>
+            </Button>
           </div>
           <div id="rightSide">
             <InputCollectionLabel
@@ -415,13 +428,6 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                   </Button>
                 </div>
               </div> */}
-        <button
-          type="submit"
-          disabled={isPending}
-          className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
-        >
-          {isPending ? t("submitting") : t("submit")}
-        </button>
       </form>
     </>
   );

@@ -82,3 +82,8 @@ export interface IGetCustomer {
     selectedServices: number[];
   };
 }
+
+export interface IUploadMedia {
+  document_name: string;
+  media: File[];
+}

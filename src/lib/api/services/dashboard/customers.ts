@@ -1,4 +1,8 @@
-import { IResponseCustomer, IRequestCustomer } from "@/entities/dashboard";
+import {
+  IResponseCustomer,
+  IRequestCustomer,
+  IUploadMedia,
+} from "@/entities/dashboard";
 import { api } from "../../serverCore";
 
 export const CustomerService = {
@@ -9,6 +13,6 @@ export const CustomerService = {
     ),
   update: (data: IRequestCustomer) =>
     api.post<IResponseCustomer, IRequestCustomer>(`CustomerUpdate`, data),
-  // fetchCUDApi("login", "POST", data),
-  //   logout: () => fetchCUDApi<ILogin>(`/users/${id}`, "POST"),
+  uploadMedia: (data: IUploadMedia) =>
+    api.post<IResponseCustomer, IUploadMedia>(`CustomerMediaStore`, data),
 };

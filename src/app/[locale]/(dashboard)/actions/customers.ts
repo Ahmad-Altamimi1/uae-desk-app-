@@ -6,6 +6,7 @@ import { customerValidation } from "../schema/customers";
 import { tags } from "@/lib/api/endpoints/dashboard";
 import { revalidateTag } from "next/cache";
 import toSnakeCase from "@/utils/toSnackCase";
+import { ISelectOption } from "@/utils/type";
 
 interface CustomerState {
   success: boolean;
@@ -53,7 +54,8 @@ export async function createCustomer(
   if (!parsed.success) {
     return {
       success: false,
-      error: "Validation failed",
+      error: {},
+      message: "Validation failed",
       data: parsed.error.flatten().fieldErrors,
     };
   }
@@ -75,6 +77,8 @@ export async function createCustomer(
       return {
         success: false,
         error: error?.message,
+        data: {},
+        message: "",
         ...error,
       };
     }
@@ -101,7 +105,6 @@ export async function updateCustomer(
   try {
     const response = await CustomerService.update(toSnakeCase(parsed.data));
     revalidateTag(tags.getCustomers);
-    console.log("responseresponseresponseresponse", response);
 
     return {
       success: true,
@@ -114,6 +117,44 @@ export async function updateCustomer(
       return {
         success: false,
         error: error?.message,
+        ...error,
+      };
+    }
+  }
+}
+export async function handleFileUpload(
+  customerId: Promise<string>,
+  documentType: ISelectOption,
+  files: File[]
+): Promise<CustomerState> {
+  const data = {
+    id: Number(await customerId),
+    document_name: String(documentType.value),
+    media: files.map((file) => ({
+      file: file,
+      filename: file.name,
+      type: file.type,
+      size: file.size,
+    })),
+  };
+
+  try {
+    const response = await CustomerService.uploadMedia(data);
+    console.log("responseresponseresponse", response);
+
+    return {
+      success: true,
+      data: response,
+      message: "File uploaded successfully",
+      error: null,
+    };
+  } catch (error) {
+    if (typeof error === "object") {
+      return {
+        success: false,
+        data: {},
+        message: "",
+        error: (error as { message: string })?.message,
         ...error,
       };
     }
