@@ -1,4 +1,5 @@
 "use client";
+
 import { DragHandle } from "@/components/table/dragHandle";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@radix-ui/react-checkbox";
@@ -26,13 +27,11 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { TableCellViewer } from "@/components/table/TableCellViewer";
 import ActionCell from "@/components/table/actionCell";
-import { IResponseCustomer } from "@/entities/dashboard";
+import { IResponseUsersRoles } from '@/entities/dashboard/users'
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
-import ActionCustomerCell from "./actionCustomer";
+import { IResponseUsersPermissions } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-import { CustomerServices } from "./customerServices";
-// import ActionCustomerCell from "./ActionCustomer";
 // export const schema = z.object({
 //   id: z.number(),
 //   header: z.string(),
@@ -43,7 +42,7 @@ import { CustomerServices } from "./customerServices";
 //   reviewer: z.string(),
 // });
 
-export const columns: ColumnDef<IResponseCustomer>[] = [
+export const columns: ColumnDef<IResponseUsersPermissions>[] = [
   {
     id: "drag",
     header: () => null,
@@ -75,18 +74,6 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-
-  // {
-  //   accessorKey: "header",
-  //   header: <HeaderCell label="SL" />,
-
-  //   cell: ({ row }) => {
-
-  //     return <TableCellViewer item={row.original} />;
-  //   },
-  //   enableHiding: false,
-  // },
-
   {
     accessorKey: "header",
     header: <HeaderCell label="SL" />,
@@ -98,75 +85,33 @@ export const columns: ColumnDef<IResponseCustomer>[] = [
     ),
   },
 
-  {
-    accessorKey: "type",
-    header: <HeaderCell label="Application ID" />,
 
+
+  {
+
+
+    accessorKey: "name",
+    header: <HeaderCell label="permissions.name" />,
     cell: ({ row }) => (
+
       <div>
-        <RowCell label={row.original.customer_code} />
+        <RowCell label={row.original.name} />
       </div>
-    ),
-  },
 
-  {
-    accessorKey: "business_name",
-    header: <HeaderCell label="customers.businessName" />,
-    cell: ({ row }) => (
-      <div>
-        <RowCell label={row.original.business_name} />
-      </div>
-    ),
-  },
 
-  {
-    accessorKey: "branch_name",
-    header: <HeaderCell label="customers.branchName" />,
-    cell: ({ row }) => (
-      <div>
-        <RowCell label={row.original.branch} />
-      </div>
-    ),
-  },
-
-  {
-    accessorKey: "services",
-    header: <HeaderCell label="customers.services" />,
-    cell: ({ row }) => <CustomerServices services={row.original.services} />,
-  },
-
-  {
-    accessorKey: "email",
-    // header: "Email",
-    header: <HeaderCell label="customers.email" />,
-    cell: ({ row }) => (
-      <div>
-        <RowCell label={row.original.email} />
-      </div>
-    ),
-  },
-
-  {
-    accessorKey: "status",
-    header: <HeaderCell label="customers.status" />,
-
-    cell: ({ row }) => (
-      <div>
-        <StatusCell status={row.original.status} />
-      </div>
     ),
   },
 
   {
     accessorKey: "actions",
-    header: <HeaderCell label="customers.actions" />,
+    header: <HeaderCell label="permissions.actions" />,
     id: "actions",
-    // cell: () => <ActionCustomerCell />,
-    cell: ({ row }) => (
-      <ActionCustomerCell
-        id={row.original.id}
-        name={row.original.business_name}
-      />
-    ),
+    cell: () => (
+      <div className="p-3 flex items-center justify-center">
+        <ActionCell />
+      </div>
+    )
+    
   },
+
 ];

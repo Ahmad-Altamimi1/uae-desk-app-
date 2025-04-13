@@ -16,8 +16,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useRouter } from "@/i18n/navigation";
 
-const ActionCustomerCell = () => {
+interface ActionCustomerCellProps {
+  id: number;
+  name: string;
+}
+const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
+  const route = useRouter();
   const handleClick = (action: string) => {
     console.log(`${action} clicked`);
   };
@@ -26,7 +32,7 @@ const ActionCustomerCell = () => {
     <div className="flex gap-4">
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger >
+          <TooltipTrigger>
             <Button
               size="sm"
               variant="link"
@@ -100,7 +106,12 @@ const ActionCustomerCell = () => {
         </Tooltip>
       </TooltipProvider>
 
-      <ActionCell />
+      <ActionCell
+        id={id}
+        name={name}
+        editAction={() => route.push(`/dashboard/customers/${id}/edit`)}
+        deleteAction={() => handleClick("Delete Customer")}
+      />
     </div>
   );
 };

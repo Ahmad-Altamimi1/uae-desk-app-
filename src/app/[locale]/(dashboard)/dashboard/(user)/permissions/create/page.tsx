@@ -1,5 +1,3 @@
-
-
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,15 +27,13 @@ export default function PermissionCreateForm() {
     resolver: zodResolver(permissionsSchema),
     defaultValues: {
       name: "",
-
     },
   });
 
   const onSubmit = (data: PermissionCreateFormValues) => {
     startTransition(() => {
-     const response =  createPermission(data);
-     console.log("responseresponseresponse",response);
-     
+      const response = createPermission(data);
+      console.log("responseresponseresponse", response);
     });
     console.log(data);
     // Handle form submission here
@@ -45,7 +41,6 @@ export default function PermissionCreateForm() {
 
   return (
     <>
-
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* <InputCollectionLabel title={"dashboard.permissions.title"} /> */}
         <hr />

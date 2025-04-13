@@ -23,6 +23,8 @@
     "customers": {
       "Add": "Add New Customer",
       "CreateCustomer": "Create Customer",
+      "createSuccess": "Customer created successfully",
+      "updateSuccess": "Customer updated successfully",
       "CreateCustomerDes": "Fill the following data to add new customer",
       "CustomerInformation": "Customer Information",
       "FTAInformation": "FTA Information",
@@ -51,7 +53,7 @@
       "Add": "Add New Permission",
       "title": "Permissions",
       "description": "Welcome to the permissions page!",
-      "name":"Name of permission",
+      "name": "Name of permission",
       "actions": "Actions"
     },
     "updatePassword": {
@@ -73,6 +75,7 @@
   },
 
   "forms": {
+    "submitting": "Submitting",
     "services": "services",
     "submit": "Submit",
     "username": {
@@ -160,7 +163,8 @@
       "error": {
         "required": "Phone Number is required",
         "minLength": "Phone Number must be at least 3 characters",
-        "maxLength": "Phone Number must be less than 50 characters"
+        "maxLength": "Phone Number must be less than 10 characters",
+        "invalidFormat": "Phone Number must start with 052"
       }
     },
     "price": {
@@ -215,7 +219,7 @@
       }
     },
     "transactionRefrenceNumber": {
-      "label": "Transaction Reference Number",
+      "label": "Transaction/ Reference Number",
       "placeholder": "Enter transaction reference number",
       "helper": "Optional reference number for the transaction"
     },
@@ -288,13 +292,13 @@
       "label": "Status"
     },
     "taxId": {
-      "label": "Tax ID",
-      "placeholder": "Enter Tax ID",
-      "helper": "Optional Tax ID for tax purposes",
+      "label": "TRN",
+      "placeholder": "Enter TRN",
+      "helper": "Optional TRN for tax purposes",
       "error": {
-        "required": "Tax ID is required",
-        "minLength": "Tax ID must be at least 3 characters",
-        "maxLength": "Tax ID must be less than 50 characters"
+        "required": "TRN is required",
+        "minLength": "TRN must be at least 3 characters",
+        "maxLength": "TRN must be less than 50 characters"
       }
     }
   },
@@ -302,6 +306,5 @@
   "commonValidations": {
     "required": " this field is required",
     "unique": " this field must be unique"
-
   }
 }

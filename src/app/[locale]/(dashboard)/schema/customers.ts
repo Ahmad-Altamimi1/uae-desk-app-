@@ -1,21 +1,24 @@
-"use server";
 import { z } from "zod";
-export async function getCustomerSchemaServerData() {
+export const customerValidation = (t: (key: string) => string) => {
   return z.object({
-    serviceId: z.array(z.string()),
-    servicePrice: z.record(z.number()),
-    firstName: z.string().min(1),
-    lastName: z.string().min(1),
-    businessName: z.string().min(1),
-    phoneNumber: z.string().min(1),
-    secondNumber: z.string().optional(),
-    email: z.string().email(),
+    id: z.number().optional(),
+    firstName: z.string().min(1, { message: t("firstName.error.required") }),
+    lastName: z.string().min(1, { message: t("lastName.error.required") }),
+    businessName: z
+      .string()
+      .min(1, { message: t("businessName.error.required") }),
+    phoneNumber: z
+      .string()
+      .min(1, { message: t("phoneNumber.error.required") })
+      .max(10, { message: t("phoneNumber.error.maxLength") })
+      .regex(/^052/, { message: t("phoneNumber.error.invalidFormat") }),
+    email: z.string().email({ message: t("email.error.invalidEmail") }),
     address: z.string().optional(),
     status: z.boolean().optional(),
     taxId: z.string().optional(),
-    price: z.number(),
-    vatValue: z.number().optional(),
-    branchId: z.string(),
+    price: z.coerce.number().optional(),
+    vatValue: z.coerce.number().optional(),
+    branchId: z.number().min(1, { message: t("branchId.error.required") }),
     transactionRefrenceNumber: z.string().optional(),
     ftaRefrence: z.string().optional(),
     ftaPassword: z.string().optional(),
@@ -23,14 +26,20 @@ export async function getCustomerSchemaServerData() {
     paymentMethod: z.string().optional(),
     gmailUserName: z.string().optional(),
     gmailPassword: z.string().optional(),
+    serviceId: z.array(z.number()),
+    // servicePrice: z.record(z.number()).default({}),
     entries: z
       .array(
         z.object({
-          date: z.string(),
-          amount: z.number(),
+          date: z
+            .string()
+            .min(1, { message: t("entries.fields.date.error.required") }),
+          amount: z
+            .number()
+            .min(1, { message: t("entries.fields.amount.error.required") }),
           description: z.string().optional(),
         })
       )
       .optional(),
   });
-}
+};

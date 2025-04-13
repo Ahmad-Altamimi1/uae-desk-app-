@@ -7,8 +7,18 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
-const ActionCell = () => {
+interface ActionCellProps {
+  id: number;
+  name: string;
+  editAction: () => void;
+  deleteAction: () => void;
+}
+const ActionCell = ({
+  id,
+  name,
+  deleteAction,
+  editAction,
+}: ActionCellProps) => {
   return (
     <div className="flex gap-4">
       <TooltipProvider>
@@ -17,6 +27,7 @@ const ActionCell = () => {
             <Button
               size="sm"
               variant="link"
+              onClick={editAction}
               className="bg-[#00713a13] rounded-3xl flex items-center gap-2"
             >
               <IconEdit className="text-[#00713B]" />
@@ -34,7 +45,6 @@ const ActionCell = () => {
             <Button
               size="sm"
               variant="link"
-
               className="bg-red-100 rounded-3xl flex items-center gap-2"
             >
               <IconTrash className="text-red-500" />
