@@ -1,3 +1,4 @@
+import { CustomerStatus } from "@/types/enums";
 import { z } from "zod";
 export const customerValidation = (t: (key: string) => string) => {
   return z.object({
@@ -14,7 +15,7 @@ export const customerValidation = (t: (key: string) => string) => {
       .regex(/^052/, { message: t("phoneNumber.error.invalidFormat") }),
     email: z.string().email({ message: t("email.error.invalidEmail") }),
     address: z.string().optional(),
-    status: z.boolean().optional(),
+    status: z.nativeEnum(CustomerStatus).optional(),
     taxId: z.string().optional(),
     price: z.coerce.number().optional(),
     vatValue: z.coerce.number().optional(),

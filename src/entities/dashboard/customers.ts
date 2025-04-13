@@ -79,6 +79,6 @@ export interface IGetCustomer {
     status: boolean;
     services: IResponseServices[];
     branches: IResponseBranches[];
-    selectedServices: IResponseBranches[];
+    selectedServices: number[];
   };
 }

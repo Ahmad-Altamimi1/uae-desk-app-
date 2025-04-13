@@ -1,5 +1,5 @@
 "use client";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
@@ -10,15 +10,18 @@ import InputCollectionLabel from "@/components/form/inputCollectionLabel";
 import Input from "@/components/form/input";
 import { updateCustomer } from "../../../../../actions";
 import { customerValidation } from "../../../../../schema/customers";
-import { Checkbox } from "@/components/ui/checkbox";
 import CustomSelect from "@/components/form/select";
 import PageTitle from "@/components/ui/pageTitle";
 import { ISelectOption } from "@/utils/type";
-import { currency, paymentMethodOptions, VatValue } from "@/constants";
+import {
+  currency,
+  customerStatusOptions,
+  paymentMethodOptions,
+  VatValue,
+} from "@/constants";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
-import { IGetCustomer, IResponseCustomer } from "@/entities/dashboard";
-import { mapToSelectOptions } from "@/utils/mapToSelectOptions";
+import { IGetCustomer } from "@/entities/dashboard";
 interface UpdateCustomerFormProps {
   serviceOptions: ISelectOption[];
   branchOptions: ISelectOption[];
@@ -37,14 +40,6 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
   const router = useRouter();
   const validation = customerValidation(t);
   type UpdateCustomerFormValues = z.infer<typeof validation>;
-  console.log("data.services", data.services);
-
-  const SelectedServices = mapToSelectOptions(
-    data.services,
-    (b) => b.name,
-    (b) => b.id
-  );
-  console.log("SelectedServices", SelectedServices);
 
   const {
     register,
@@ -65,10 +60,10 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
       email: customer.email,
       branchId: customer.branch_id,
       price: 0,
-      serviceId: SelectedServices, //TODO
+      serviceId: data.selectedServices,
       //   servicePrice: {},
       address: customer.address,
-      status: !!customer.status, //TODO
+      status: Number(customer.status),
       taxId: customer.tax_id,
       vatValue: customer.vat_value,
       transactionRefrenceNumber: customer.transaction_refrence_number,
@@ -98,7 +93,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
         if (result.success) {
           toast.success(customerTranslate("updateSuccess"));
 
-          // router.back();
+          router.back();
         } else {
           toast.error(result.error?.toString());
 
@@ -125,7 +120,6 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
   const serviceValues = watch("serviceId");
   let totalPriceForServices: number = 0;
   let VatForServices: number = 0;
-  console.log("error", errors);
 
   return (
     <>
@@ -146,6 +140,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 i18nNamespace="forms"
                 name="firstName"
                 register={register}
+                disabled={isPending}
                 error={errors.firstName?.message}
                 placeholder={{ id: "firstName.placeholder" }}
                 startIcon={<User size={18} />}
@@ -154,6 +149,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "lastName.label" }}
                 name="lastName"
                 register={register}
+                disabled={isPending}
                 error={errors.lastName?.message}
                 placeholder={{ id: "lastName.placeholder" }}
                 startIcon={<User size={18} />}
@@ -162,6 +158,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "businessName.label" }}
                 name="businessName"
                 register={register}
+                disabled={isPending}
                 error={errors.businessName?.message}
                 placeholder={{ id: "businessName.placeholder" }}
                 startIcon={<Building size={18} />}
@@ -170,6 +167,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "email.label" }}
                 name="email"
                 register={register}
+                disabled={isPending}
                 error={errors.email?.message}
                 placeholder={{ id: "email.placeholder" }}
                 startIcon={<Mail size={18} />}
@@ -178,6 +176,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "phoneNumber.label" }}
                 name="phoneNumber"
                 register={register}
+                disabled={isPending}
                 error={errors.phoneNumber?.message}
                 placeholder={{ id: "phoneNumber.placeholder" }}
                 startIcon={<Phone size={18} />}
@@ -186,6 +185,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "address.label" }}
                 name="address"
                 register={register}
+                disabled={isPending}
                 error={errors.address?.message}
                 placeholder={{ id: "address.placeholder" }}
               />
@@ -200,6 +200,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "ftaUserName.label" }}
                 name="ftaUserName"
                 register={register}
+                disabled={isPending}
                 error={errors.ftaUserName?.message}
                 placeholder={{ id: "ftaUserName.placeholder" }}
               />
@@ -207,6 +208,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "ftaPassword.label" }}
                 name="ftaPassword"
                 register={register}
+                disabled={isPending}
                 error={errors.ftaPassword?.message}
                 placeholder={{ id: "ftaPassword.placeholder" }}
               />
@@ -214,6 +216,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "ftaRefrence.label" }}
                 name="ftaRefrence"
                 register={register}
+                disabled={isPending}
                 error={errors.ftaRefrence?.message}
                 placeholder={{ id: "ftaRefrence.placeholder" }}
               />
@@ -222,6 +225,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "gmailUserName.label" }}
                 name="gmailUserName"
                 register={register}
+                disabled={isPending}
                 error={errors.gmailUserName?.message}
                 placeholder={{ id: "gmailUserName.placeholder" }}
               />
@@ -229,6 +233,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "gmailPassword.label" }}
                 name="gmailPassword"
                 register={register}
+                disabled={isPending}
                 error={errors.gmailPassword?.message}
                 placeholder={{ id: "gmailPassword.placeholder" }}
               />
@@ -238,17 +243,16 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
               title={"dashboard.customers.status"}
               className="my-6"
             />
-            <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <div>
-                <label htmlFor="" className="text-sm">
-                  status
-                </label>
-                <Controller
-                  name="status"
-                  control={control}
-                  render={({ field }) => <Checkbox {...field} />}
-                />
-              </div>
+            <div className="space-y-4 grid grid-cols-1 md:grid-cols-1 gap-4 ">
+              <CustomSelect
+                // label={{ id: "status.label" }}
+                name="status"
+                control={control}
+                disabled={isPending}
+                error={errors.status?.message}
+                placeholder={{ id: "status.placeholder" }}
+                options={customerStatusOptions}
+              />
             </div>
           </div>
           <div id="rightSide">
@@ -259,16 +263,18 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
             <div className="fields border py-4 px-8 rounded-md">
               <div className="content space-y-4 grid grid-cols-1 md:grid-cols-1 gap-2 ">
                 <CustomSelect
-                  label={{ id: "branchId.label" }}
+                  // label={{ id: "branchId.label" }}
                   name="branchId"
+                  disabled={isPending}
                   error={errors.branchId?.message}
                   placeholder={{ id: "branchId.placeholder" }}
                   options={branchOptions}
                   control={control}
                 />
                 <CustomSelect
-                  label={{ id: "services" }}
+                  // label={{ id: "services" }}
                   name="serviceId"
+                  disabled={isPending}
                   control={control}
                   error={errors.serviceId?.message}
                   placeholder={{ id: "services" }}
@@ -328,9 +334,10 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
 
               <div className="content space-y-4 grid grid-cols-1 md:grid-cols-1 gap-2 ">
                 <CustomSelect
-                  label={{ id: "paymentMethod.label" }}
+                  // label={{ id: "paymentMethod.label" }}
                   name="paymentMethod"
                   control={control}
+                  disabled={isPending}
                   options={paymentMethodOptions}
                   error={errors.paymentMethod?.message}
                   placeholder={{ id: "paymentMethod.placeholder" }}
@@ -341,6 +348,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                   label={{ id: "entries.label" }}
                   name="entries"
                   register={register}
+disabled={isPending}
                   error={errors.entries?.message}
                   placeholder={{ id: "entries.placeholder" }}
                 /> */}
@@ -348,6 +356,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                   label={{ id: "transactionRefrenceNumber.label" }}
                   name="transactionRefrenceNumber"
                   register={register}
+                  disabled={isPending}
                   error={errors.transactionRefrenceNumber?.message}
                   placeholder={{ id: "transactionRefrenceNumber.placeholder" }}
                 />
@@ -355,6 +364,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                   label={{ id: "taxId.label" }}
                   name="taxId"
                   register={register}
+                  disabled={isPending}
                   error={errors.taxId?.message}
                   placeholder={{ id: "taxId.placeholder" }}
                 />
@@ -364,6 +374,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                 label={{ id: "vatValue.label" }}
                 name="vatValue"
                 register={register}
+disabled={isPending}
                 error={errors.vatValue?.message}
                 placeholder={{ id: "vatValue.placeholder" }}
                 type="number"

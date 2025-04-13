@@ -1,5 +1,5 @@
 "use client";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
@@ -10,13 +10,17 @@ import InputCollectionLabel from "@/components/form/inputCollectionLabel";
 import Input from "@/components/form/input";
 import { createCustomer } from "../../../../actions";
 import { customerValidation } from "../../../../schema/customers";
-import { Checkbox } from "@/components/ui/checkbox";
 import CustomSelect from "@/components/form/select";
 import PageTitle from "@/components/ui/pageTitle";
 import { ISelectOption } from "@/utils/type";
-import { currency, paymentMethodOptions, VatValue } from "@/constants";
+import {
+  currency,
+  customerStatusOptions,
+  paymentMethodOptions,
+  VatValue,
+} from "@/constants";
 import { toast } from "sonner";
-import { redirect, useRouter } from "@/i18n/navigation";
+import { useRouter } from "@/i18n/navigation";
 // import { revalidateTag } from "next/cache";
 interface CustomerFormProps {
   serviceOptions: ISelectOption[];
@@ -52,10 +56,10 @@ export const CustomerForm: FC<CustomerFormProps> = ({
       email: "",
       branchId: 0,
       price: 0,
-      serviceId: [], //TODO
+      serviceId: [],
       //   servicePrice: {},
       address: "",
-      status: false,
+      status: 0,
       taxId: "",
       vatValue: 0,
       transactionRefrenceNumber: "",
@@ -225,8 +229,17 @@ export const CustomerForm: FC<CustomerFormProps> = ({
               title={"dashboard.customers.status"}
               className="my-6"
             />
-            <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <div>
+            <div className="space-y-4 grid grid-cols-1 md:grid-cols-1 gap-4 ">
+              <CustomSelect
+                // label={{ id: "status.label" }}
+                name="status"
+                control={control}
+                error={errors.status?.message}
+                placeholder={{ id: "status.placeholder" }}
+                options={customerStatusOptions}
+              />
+            </div>
+            {/* <div>
                 <label htmlFor="" className="text-sm">
                   status
                 </label>
@@ -235,8 +248,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                   control={control}
                   render={({ field }) => <Checkbox {...field} />}
                 />
-              </div>
-            </div>
+              </div> */}
           </div>
           <div id="rightSide">
             <InputCollectionLabel
@@ -246,7 +258,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
             <div className="fields border py-4 px-8 rounded-md">
               <div className="content space-y-4 grid grid-cols-1 md:grid-cols-1 gap-2 ">
                 <CustomSelect
-                  label={{ id: "branchId.label" }}
+                  // label={{ id: "branchId.label" }}
                   name="branchId"
                   error={errors.branchId?.message}
                   placeholder={{ id: "branchId.placeholder" }}
@@ -254,7 +266,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                   control={control}
                 />
                 <CustomSelect
-                  label={{ id: "services" }}
+                  // label={{ id: "services" }}
                   name="serviceId"
                   control={control}
                   error={errors.serviceId?.message}
@@ -296,7 +308,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                     </div>
                   )}
                   {!!totalPriceForServices && (
-                    <div className="flex justify-between font-bold mt-2.5">
+                    <div className="flex justify-between font-bold mt-2.5 space-y-4 mb-2 pb-1 ">
                       <p className="text-primary">Total Price</p>
 
                       <div className=" flex gap-1">
@@ -315,7 +327,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
 
               <div className="content space-y-4 grid grid-cols-1 md:grid-cols-1 gap-2 ">
                 <CustomSelect
-                  label={{ id: "paymentMethod.label" }}
+                  // label={{ id: "paymentMethod.label" }}
                   name="paymentMethod"
                   control={control}
                   options={paymentMethodOptions}

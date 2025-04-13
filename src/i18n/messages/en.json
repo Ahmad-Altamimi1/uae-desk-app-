@@ -289,7 +289,12 @@
       }
     },
     "status": {
-      "label": "Status"
+      "label": "Status",
+      "placeholder": "Select status",
+      "helper": "The status of the entry",
+      "error": {
+        "required": "Status is required"
+      }
     },
     "taxId": {
       "label": "TRN",
