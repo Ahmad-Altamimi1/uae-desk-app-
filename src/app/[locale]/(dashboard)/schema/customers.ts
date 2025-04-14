@@ -27,7 +27,9 @@ export const customerValidation = (t: (key: string) => string) => {
     paymentMethod: z.string().optional(),
     gmailUserName: z.string().optional(),
     gmailPassword: z.string().optional(),
-    serviceId: z.array(z.number()),
+    serviceId: z
+      .array(z.number())
+      .min(1, { message: t("serviceId.error.required") }),
     // servicePrice: z.record(z.number()).default({}),
     entries: z
       .array(

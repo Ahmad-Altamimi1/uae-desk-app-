@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { handleFileUpload } from "@/app/[locale]/(dashboard)/actions";
 import { toast } from "sonner";
+import { useRouter } from "@/i18n/navigation";
 export type FileData = {
   file: File;
   previewUrl: string;
@@ -20,7 +21,9 @@ interface IProps {
 const UploadFiles = ({ params }: IProps) => {
   const [filesData, setFilesData] = useState<FileData[]>([]);
   const [documentType, setDocumentType] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const t = useTranslations();
+  const route = useRouter();
   const newCustomerId = params.then((res) => res.newCustomerId);
   return (
     <>
@@ -44,19 +47,36 @@ const UploadFiles = ({ params }: IProps) => {
         w-full md:w-[50%] lg:w-[40%] text-white
         "
         type={"submit"}
-        onClick={() =>
-          handleFileUpload(
-            newCustomerId,
-            documentType,
-            filesData.map((file) => file.file)
-          )
-            .then((res) => toast.success(res.message))
-            .catch((err) => toast.error(err.message))
-        }
+        disabled={filesData.length === 0 || documentType === ""}
+        onClick={async () => {
+          setIsSubmitting(true);
+          try {
+            await handleFileUpload(
+              newCustomerId,
+              documentType,
+              filesData.map((file) => file.file)
+            );
+            toast.success(t("dashboard.customers.UploadMediaSuccess"));
+            route.push(`/dashboard/customers`);
+          } catch (err) {
+            toast.error(err.message);
+          } finally {
+            setIsSubmitting(false);
+          }
+        }}
       >
-        <Image src="/plus.png" alt="Logo" width={24} height={24} />
+        {isSubmitting ? (
+          <div className="flex items-center justify-center space-x-2">
+            <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white"></div>
+            {/* <span>Loading...</span> */}
+          </div>
+        ) : (
+          <Image src="/plus.png" alt="Logo" width={24} height={24} />
+        )}
         <span className="hidden lg:inline">
-          {t("dashboard.customers.CreateCustomer")}
+          {isSubmitting
+            ? t("Submitting")
+            : t("dashboard.customers.CreateCustomer")}
         </span>
       </Button>
     </>

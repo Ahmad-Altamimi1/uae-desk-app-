@@ -70,7 +70,9 @@ export default function LoginPage() {
             <div className="relative">
               <input
                 type="email"
+                disabled={isPending}
                 name="email"
+                value={"superadmin@uaeicons.com"}
                 placeholder="Email Address"
                 className="w-full px-4 py-3 pr-10 pl-12 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
               />

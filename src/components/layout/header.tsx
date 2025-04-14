@@ -14,6 +14,12 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { IconLogout } from "@tabler/icons-react";
 import { getTranslations, getLocale } from "next-intl/server";
+import { AuthService } from "@/lib/api/services/dashboard";
+import { cookies } from "next/headers";
+import { toast } from "sonner";
+import { redirect } from "@/i18n/navigation";
+import { HandleLogOut } from "@/app/[locale]/(dashboard)/actions";
+import LogOut from "./logOut";
 
 const Header = async () => {
   const user = {
@@ -26,6 +32,7 @@ const Header = async () => {
     locale: locale,
     namespace: "dashboard.header",
   });
+
   return (
     <div className=" w-full flex items-center justify-center  fixed  top-5 z-[40]">
       <header className=" bg-white w-[90%] rounded-xl border py-6 shadow-sm  ">
@@ -125,14 +132,7 @@ const Header = async () => {
 
                 <DropdownMenuSeparator className="my-2" />
 
-                <DropdownMenuItem>
-                  <div className="flex items-center gap-2 text-left text-sm leading-tight text-red-500 ml-5">
-                    <IconLogout />
-                    <span className="truncate text-red-500 text-sm font-bold">
-                      Log out
-                    </span>
-                  </div>
-                </DropdownMenuItem>
+                <LogOut />
               </DropdownMenuContent>
             </DropdownMenu>
           </nav>

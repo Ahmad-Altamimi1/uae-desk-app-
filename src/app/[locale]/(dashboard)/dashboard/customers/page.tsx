@@ -17,7 +17,7 @@ const Page = async () => {
         description="dashboard.customers.description"
         image="/customer.png"
         addButton={{
-          title: "dashboard.customers.Add",
+          title: "dashboard.customers.AddNewCustomer",
           href: "customers/create",
         }}
       />

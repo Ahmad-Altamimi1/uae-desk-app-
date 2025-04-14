@@ -123,7 +123,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
   return (
     <>
       <PageTitle
-        title={"dashboard.customers.CreateCustomer"}
+        title={"dashboard.customers.AddNewCustomer"}
         description="dashboard.customers.CreateCustomerDes"
       />
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

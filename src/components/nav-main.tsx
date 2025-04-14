@@ -23,28 +23,31 @@ export function NavMain({
   }[];
 }) {
   const pathname = usePathname();
-const locale=useLocale();
+  const locale = useLocale();
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) => {
-            const fullUrl =  "/dashboard" + (item.url === "/" ? "" : item.url);
-            console.log('fullUrl', fullUrl);
-            
+            const fullUrl = "/dashboard" + (item.url === "/" ? "" : item.url);
+            console.log("fullUrl", fullUrl);
+
             const isActive =
-              pathname == "/"+locale+fullUrl ||
+              pathname == "/" + locale + fullUrl ||
               (pathname === "/dashboard" && item.url === "/");
 
-
             return (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild  className={cn(
-                  isActive && "bg-white text-primary",
-                )}>
+              <SidebarMenuItem
+                key={item.title}
+                className="hover:bg-white hover:text-primary rounded-md"
+              >
+                <SidebarMenuButton
+                  asChild
+                  className={cn(isActive && "bg-white  text-primary")}
+                >
                   <Link
                     href={fullUrl}
-                    className="flex items-center gap-2 w-full"
+                    className="flex items-center gap-2 w-full hover:text-primary"
                   >
                     {item.icon && <item.icon className="h-4 w-4" />}
                     <span>{item.title}</span>

@@ -53,6 +53,7 @@ export function LoginForm({
                   id="email"
                   name="email"
                   type="email"
+                  disabled={isPending}
                   placeholder="m@example.com"
                   value={"superadmin@uaeicons.com"}
                   readOnly
@@ -73,6 +74,7 @@ export function LoginForm({
                   id="password"
                   name="password"
                   type="password"
+                  disabled={isPending}
                   required
                   // value={"abc123"}
                   // readOnly
