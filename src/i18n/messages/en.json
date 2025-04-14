@@ -9,6 +9,12 @@
   "modal": {
     "open": "Open"
   },
+  "deleteModal": {
+    "title": "Delete Confirmation",
+    "description": "Are you sure you want to delete this item?",
+    "confirm": "Yes, Delete",
+    "cancel": "Cancel"
+  },
   "dashboard": {
     "SL": "SL",
     "Application ID": "Application ID",
@@ -158,6 +164,16 @@
       "label": "First Name",
       "placeholder": "Enter your first name",
       "helper": "We'll never share your first name",
+      "error": {
+        "required": "First Name is required",
+        "minLength": "First Name must be at least 3 characters",
+        "maxLength": "First Name must be less than 50 characters"
+      }
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter your last name",
+      "helper": "We'll never share your last name",
       "error": {
         "required": "First Name is required",
         "minLength": "First Name must be at least 3 characters",

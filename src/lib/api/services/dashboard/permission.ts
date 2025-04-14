@@ -7,6 +7,11 @@ export const PermissionService = {
       `PermissionStore`,
       data
     ),
+
+    destroy: (id: number) =>
+      api.post("PermissionDestroy", { id }), 
+  };
+
   // fetchCUDApi("login", "POST", data),
   //   logout: () => fetchCUDApi<ILogin>(`/users/${id}`, "POST"),
-};
+

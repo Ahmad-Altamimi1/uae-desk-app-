@@ -23,23 +23,38 @@ const endPoints = {
   CustomerUpdateCreator: "api/customers/updateCreator",
 
   /////////////
-  getRoles: "api/roles/index",
+  
+//permissions
   getPermissions: "api/permissions/index",
-
   PermissionStore: "api/permissions/store",
+  PermissionCreate: "api/permissions/create",
+  PermissionEdit: "api/permissions/edit",
+  PermissionUpdate: "api/permissions/update",
+  PermissionDestroy: "api/permissions/destroy",
 
+//roles
+  getRoles: "api/roles/index",
   RolesCreate: "api/roles/create",
   RolesStore: "api/roles/store",
+  RolesEdit: "api/roles/edit",
+  RolesUpdate: "api/roles/update",
+  RolesDestroy: "api/roles/destroy",
 
   //services
   getServices: "api/services/index",
   ServicesCreate: "api/services/create",
   ServicesStore: "api/services/store",
+  ServicesEdit: "api/services/edit",
+  ServicesUpdate: "api/services/update",
+  ServicesDestroy: "api/services/destroy",
 
   //branches
   getBranches: "api/branches/index",
   BranchesCreate: "api/branches/create",
   BranchesStore: "api/branches/store",
+  BranchesEdit: "api/branches/edit",
+  BranchesUpdate: "api/branches/update",
+  BranchesDestroy: "api/branches/destroy",
 
   //userActivity
   getLogs:"api/logs",

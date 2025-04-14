@@ -7,6 +7,7 @@ import ActionCell from "@/components/table/actionCell";
 import { HeaderCell } from "@/components/table/headerCell";
 import { IServicesData } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
+import { ServicesService } from "@/lib/api/services/dashboard/services";
 
 export const columns: ColumnDef<IServicesData>[] = [
   {
@@ -65,10 +66,16 @@ export const columns: ColumnDef<IServicesData>[] = [
     accessorKey: "actions",
     header: <HeaderCell label="services.actions" />,
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <div className="flex items-center justify-center">
-        <ActionCell />
+        <ActionCell
+          id={row.original.id}
+          name={row.original.name}
+          editAction={() => handleEdit(row.original.id)}
+          onDeleted={ServicesService.destroy(row.original.id)} 
+        />
       </div>
-    ),
+    )
+    
   },
 ];

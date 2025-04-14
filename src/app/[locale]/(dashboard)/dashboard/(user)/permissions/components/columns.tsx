@@ -32,6 +32,7 @@ import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
 import { IResponseUsersPermissions } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
+import { PermissionService } from "@/lib/api/services/dashboard";
 // export const schema = z.object({
 //   id: z.number(),
 //   header: z.string(),
@@ -104,11 +105,16 @@ export const columns: ColumnDef<IResponseUsersPermissions>[] = [
 
   {
     accessorKey: "actions",
-    header: <HeaderCell label="permissions.actions" />,
+    header: <HeaderCell label="services.actions" />,
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <div className="flex items-center justify-center">
-        <ActionCell />
+        <ActionCell
+          id={row.original.id}
+          name={row.original.name}
+          editAction={() => handleEdit(row.original.id)}
+          onDeleted={PermissionService.destroy(row.original.id)} 
+        />
       </div>
     )
     
