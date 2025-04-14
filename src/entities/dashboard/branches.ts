@@ -3,7 +3,7 @@ export interface IResponseBranches {
   status: "success" | "error";
   message: string;
 }
-interface IBranchesData {
+export interface IBranchesData {
   id: number;
   branch_name: string;
   location_id: number;
