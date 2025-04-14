@@ -13,8 +13,13 @@ interface IUpdateCustomerProps {
 }
 const UpdateCustomer = async ({ params }: IUpdateCustomerProps) => {
   const customerId = (await params).customerId;
-  const services = await api.get<IResponseCustomer[]>("getServices"); //TODO
-  const branches = await api.get<IResponseCustomer[]>("getBranches"); //TODO
+  const services = await api
+    .get<IResponseServices>("getServices")
+    .then((r) => r.data); //TODO
+  const branches = await api
+    .get<IResponseBranches>("getBranches")
+    .then((r) => r.data); //TODO
+
   const customer = await api.get<IGetCustomer>(["CustomerEdit", customerId]);
 
   const branchOptions = mapToSelectOptions(

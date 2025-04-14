@@ -21,8 +21,11 @@
     "description": "Welcome to your dashboard!",
     "customers": {
       "AddNewCustomer": "Add New Customer",
+      "ApplicationID": "Application ID",
       "UploadMediaSuccess": "Media uploaded successfully",
       "CreateCustomer": "Finish And Add Customer",
+      "updateCustomer": "Edit Customer",
+      "updateCustomerDes": "Edit Customer Information Easily",
       "createSuccess": "Customer created successfully",
       "updateSuccess": "Customer updated successfully",
       "CreateCustomerDes": "Fill the following data to add new customer",
@@ -40,11 +43,20 @@
       "actions": "Actions",
       "branchName": "Branch Name",
       "servicesModalTitle": "Services",
-      "servicesModalDescription": ""
+      "servicesModalDescription": "",
+
+      "tabs": {
+        "CustomerFTAInformation": "Customer & FTA Information",
+        "ServicesAndPaymentDetails": "Services And Payment Details",
+        "UploadedMedia": "Uploaded Media",
+        "ProcessTimeTracking": "Process Time Tracking"
+      },
+      "CurrentStatus": "Current Status"
     },
     "roles": {
       "Add": "Add New Roles",
       "title": "Roles",
+
       "description": "Welcome to the users page!",
       "name": "Name",
       "code": "Code",
@@ -73,7 +85,7 @@
       "Add": "Add New Service",
       "title": " Services",
       "name": "Services Name",
-      "description": "Welcome to the services page!",     
+      "description": "Welcome to the services page!",
       "actions": "Actions"
     },
     "branches": {
@@ -84,7 +96,7 @@
       "phoneNumber": "Phone Number",
       "email": "Email",
       "address": "Address",
-      "description": "Welcome to the branches page!",     
+      "description": "Welcome to the branches page!",
       "actions": "Actions"
     },
     "shifts": {
@@ -94,7 +106,7 @@
       "startTime": "Start Time",
       "endTime": "End Time",
       "status": "Status",
-      "description": "Welcome to the shifts page!",     
+      "description": "Welcome to the shifts page!",
       "actions": "Actions"
     },
     "attendance": {
@@ -107,7 +119,7 @@
       "is_minutes": "Is Minutes",
       "logout": "Logout Time",
       "status": "Status",
-      "description": "Welcome to the shifts page!",     
+      "description": "Welcome to the shifts page!",
       "actions": "Actions"
     },
     "updatePassword": {
@@ -154,6 +166,7 @@
         "invalidEmail": "Please enter a valid email address"
       }
     },
+
     "firstName": {
       "label": "First Name",
       "placeholder": "Enter your first name",
@@ -162,6 +175,16 @@
         "required": "First Name is required",
         "minLength": "First Name must be at least 3 characters",
         "maxLength": "First Name must be less than 50 characters"
+      }
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter your last name",
+      "helper": "We'll never share your last name",
+      "error": {
+        "required": "Last Name is required",
+        "minLength": "Last Name must be at least 3 characters",
+        "maxLength": "Last Name must be less than 50 characters"
       }
     },
     "name": {
