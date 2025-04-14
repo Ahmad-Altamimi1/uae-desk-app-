@@ -107,7 +107,7 @@ export const columns: ColumnDef<IResponseUsersPermissions>[] = [
     header: <HeaderCell label="permissions.actions" />,
     id: "actions",
     cell: () => (
-      <div className="p-3 flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <ActionCell />
       </div>
     )

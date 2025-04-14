@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { IconCircleCheckFilled, IconEye, IconLoader } from "@tabler/icons-react";
+import { IconCircleCheckFilled, IconLoader } from "@tabler/icons-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
@@ -30,10 +30,12 @@ import ActionCell from "@/components/table/actionCell";
 import { IResponseUsersRoles } from '@/entities/dashboard/users'
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
-import { IResponseLogs, IResponseUsersPermissions } from "@/entities/dashboard";
+import { IResponseBranches, IResponseServices, IResponseUsersPermissions } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
-import { Button } from "@/components/ui/button";
+import { IResponseShifts } from "@/entities/dashboard/shifts";
+import { Switch } from "@radix-ui/react-switch";
+import { StatusToggle } from "./statusToggle";
+import { IResponseAttendance } from "@/entities/dashboard/attendance";
 // export const schema = z.object({
 //   id: z.number(),
 //   header: z.string(),
@@ -43,16 +45,13 @@ import { Button } from "@/components/ui/button";
 //   limit: z.string(),
 //   reviewer: z.string(),
 // });
-const handleClick = (action: string) => {
-  console.log(`${action} clicked`);
-};
-export const columns: ColumnDef<IResponseLogs>[] = [
+
+export const columns: ColumnDef<IResponseAttendance>[] = [
   {
     id: "drag",
     header: () => null,
     cell: ({ row }) => <DragHandle id={row.original.id} />,
   },
-  
   {
     id: "select",
     header: ({ table }) => (
@@ -79,106 +78,111 @@ export const columns: ColumnDef<IResponseLogs>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-
-
-
-  // {
-  //   accessorKey: "header",
-  //   header: <HeaderCell label="SL" />,
-
-  //   cell: ({ row }) => (
-  //     <div>
-  //       <RowCell label={row.index + 1} />
-  //     </div>
-  //   ),
-  // },
-
   {
+    accessorKey: "header",
+    header: <HeaderCell label="SL" />,
 
-
-    accessorKey: "ID",
-    header: <HeaderCell label="userActivity.id" />,
     cell: ({ row }) => (
-
       <div>
-        <RowCell label={row.original.id} />
+        <RowCell label={row.index + 1} />
       </div>
-
-
     ),
   },
 
-  {
 
-
-    accessorKey: "logdate",
-    header: <HeaderCell label="userActivity.logdate" />,
-    cell: ({ row }) => (
-
-      <div>
-        <RowCell label={row.original.log_date} />
-      </div>
-
-
-    ),
-  },
-
-  {
-
-
-    accessorKey: "logtype",
-    header: <HeaderCell label="userActivity.logtype" />,
-    cell: ({ row }) => (
-
-      <div>
-        <RowCell label={row.original.log_type} />
-      </div>
-
-
-    ),
-  },
 
   {
 
 
     accessorKey: "user_name",
-    header: <HeaderCell label="userActivity.userId" />,
+    header: <HeaderCell label="attendance.user_name" />,
     cell: ({ row }) => (
 
       <div>
-        <RowCell label={row.original.user_name} />
+        <RowCell label={row.original.user.name} />
       </div>
 
 
     ),
   },
+  {
 
-  // {
-  //   accessorKey: "actions",
-  //   header: <HeaderCell label="userActivity.actions" />,
-  //   id: "actions",
-  //   cell: () => (
-  //     <div className="p-3 flex items-center justify-center">
-  //       <TooltipProvider>
-  //         <Tooltip>
-  //           <TooltipTrigger>
-  //             <Button
-  //               size="sm"
-  //               variant="link"
-  //               className="bg-gray-200 rounded-3xl flex items-center gap-2 cursor-pointer"
-  //               aria-label="View Customer"
-  //               onClick={() => handleClick("View Customer")}
-  //             >
-  //               <IconEye className="text-black" />
-  //             </Button>
-  //           </TooltipTrigger>
-  //           <TooltipContent className="text-black">
-  //             <p>View Customer</p>
-  //           </TooltipContent>
-  //         </Tooltip>
-  //       </TooltipProvider>      </div>
-  //   )
 
-  // },
+    accessorKey: "login",
+    header: <HeaderCell label="attendance.login" />,
+    cell: ({ row }) => (
+
+      <div>
+        <RowCell label={row.original.login_time} />
+      </div>
+
+
+    ),
+  },
+   
+   {
+
+
+    accessorKey: "logout",
+    header: <HeaderCell label="attendance.logout" />,
+    cell: ({ row }) => (
+
+      <div>
+        <RowCell label={row.original.logout_time} />
+      </div>
+
+
+    ),
+  },
+  {
+
+
+    accessorKey: "branchName",
+    header: <HeaderCell label="attendance.branchName" />,
+    cell: ({ row }) => (
+
+      <div>
+        <RowCell label={row.original.branch?.branch_name } />
+      </div>
+
+
+    ),
+  },
+  {
+    accessorKey: "is_late",
+    header: <HeaderCell label="attendance.is_late" />,
+    cell: ({ row }) => (
+      <div>
+        <RowCell label={row.original.is_late ? "Yes" : "No"} />
+      </div>
+    ),
+  },
+  
+
+  {
+
+
+    accessorKey: "is_minutes",
+    header: <HeaderCell label="attendance.is_minutes" />,
+    cell: ({ row }) => (
+
+      <div>
+        <RowCell label={row.original.is_minutes} />
+      </div>
+
+
+    ),
+  },
+  {
+    accessorKey: "actions",
+    header: <HeaderCell label="attendance.actions" />,
+    id: "actions",
+    cell: () => (
+      <div className="flex items-center justify-center">
+        <ActionCell />
+      </div>
+    )
+    
+  },
 
 ];

@@ -1,6 +1,7 @@
 {
   "ADD": "Add",
   "submit": "Submit",
+  "loading": "loading...",
   "RootLayout": {
     "title": "HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C Attendance",
     "description": "hhhhh"
@@ -8,11 +9,9 @@
   "modal": {
     "open": "Open"
   },
-
   "dashboard": {
     "SL": "SL",
     "Application ID": "Application ID",
-
     "header": {
       "title": "Dashboard",
       "description": "Welcome to your dashboard!",
@@ -44,17 +43,71 @@
       "servicesModalDescription": ""
     },
     "roles": {
+      "Add": "Add New Roles",
       "title": "Roles",
       "description": "Welcome to the users page!",
       "name": "Name",
       "code": "Code",
-      "actions": "Actions"
+      "actions": "Actions",
+      "CreateRole": "Add New Role",
+      "CreateRoleDes": "Fill the following data to add new role",
+      "roleInformation": "Permissions"
     },
     "permissions": {
       "Add": "Add New Permission",
       "title": "Permissions",
       "description": "Welcome to the permissions page!",
       "name": "Name of permission",
+      "actions": "Actions"
+    },
+    "userActivity": {
+      "title": "User Activity",
+      "description": "Welcome to the user activity page!",
+      "logtype": "Log Type",
+      "logdate": "Log Date",
+      "userId": "Done By",
+      "id": "ID",
+      "actions": "Actions"
+    },
+    "services": {
+      "Add": "Add New Service",
+      "title": " Services",
+      "name": "Services Name",
+      "description": "Welcome to the services page!",     
+      "actions": "Actions"
+    },
+    "branches": {
+      "Add": "Add New Branch",
+      "title": " Branches",
+      "name": "Branch Name",
+      "location": "Location",
+      "phoneNumber": "Phone Number",
+      "email": "Email",
+      "address": "Address",
+      "description": "Welcome to the branches page!",     
+      "actions": "Actions"
+    },
+    "shifts": {
+      "Add": "Add New Shift",
+      "title": " Shifts",
+      "name": "Shift Name",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "status": "Status",
+      "description": "Welcome to the shifts page!",     
+      "actions": "Actions"
+    },
+    "attendance": {
+      "title": " Attendance",
+      "name": "Name",
+      "user_name": "User Name",
+      "branchName": "Branch Name",
+      "login": "login Time",
+      "is_late": "Is Late",
+      "is_minutes": "Is Minutes",
+      "logout": "Logout Time",
+      "status": "Status",
+      "description": "Welcome to the shifts page!",     
       "actions": "Actions"
     },
     "updatePassword": {
@@ -74,7 +127,6 @@
       "save": "Save"
     }
   },
-
   "forms": {
     "AddButton": "Next To Upload Media",
 
@@ -82,6 +134,7 @@
     "Select_Document_Type": "Select Document Type",
     "services": "services",
     "submit": "Submit",
+    "submitRole": "Finish and Add Role ",
     "username": {
       "label": "Username",
       "placeholder": "Enter your username",
@@ -116,20 +169,19 @@
       "placeholder": "Enter your name",
       "helper": "We'll never share your name",
       "error": {
-        "required": "First Name is required",
-        "minLength": "First Name must be at least 3 characters",
-        "maxLength": "First Name must be less than 50 characters"
+        "required": " Name is required",
+        "minLength": "Name must be at least 3 characters",
+        "maxLength": "Name must be less than 50 characters"
       }
     },
-
-    "lastName": {
-      "label": "Last Name",
-      "placeholder": "Enter your last name",
-      "helper": "We'll never share your last name",
+    "code": {
+      "label": " Code of role ",
+      "placeholder": "Enter your code",
+      "helper": "We'll never share your code",
       "error": {
-        "required": "Last Name is required",
-        "minLength": "Last Name must be at least 3 characters",
-        "maxLength": "Last Name must be less than 50 characters"
+        "required": "code is required",
+        "minLength": "code must be at least 3 characters",
+        "maxLength": "code must be less than 50 characters"
       }
     },
     "businessName": {
@@ -181,7 +233,6 @@
         "maxLength": "Price must be less than 50 characters"
       }
     },
-
     "password": {
       "label": "Password",
       "placeholder": "Enter your password",
@@ -265,7 +316,6 @@
         "required": "Services are required"
       }
     },
-
     "entries": {
       "label": "Entries",
       "placeholder": "Entries",
@@ -287,7 +337,6 @@
             "required": "Amount is required"
           }
         },
-
         "description": {
           "label": "Description",
           "placeholder": "Enter description",
@@ -314,7 +363,6 @@
       }
     }
   },
-
   "commonValidations": {
     "required": " this field is required",
     "unique": " this field must be unique"

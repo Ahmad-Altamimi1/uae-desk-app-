@@ -6,25 +6,25 @@ import { api } from "@/lib/api/serverCore";
 import { cookies } from "next/headers";
 import ToolBarModal from "@/components/table/toolBarModal";
 import PermissionCreateForm from "../permissions/create/page";
+import RoleCreateForm from "./create/page";
+import ToolBar2 from "@/components/table/toolBar2";
 
 const Page = async () => {
   // const data = await routes.customers.getAll();
   const data = await api.get("getRoles");
   return <>
-    <ToolBarModal
-      title="dashboard.permissions.title"
-      description="dashboard.permissions.description"
-      image="/customer.png"
-      addButton={{
-        title: "dashboard.permissions.Add",
-        // href: "permissions/create",
-      }}
-    >
-
-      <PermissionCreateForm />
-    </ToolBarModal>
+   
 
 
+    <ToolBar2
+     title="dashboard.roles.title"
+     description="dashboard.roles.description"
+     image="/customer.png"
+     addButton={{
+       title: "dashboard.roles.Add",
+       href: "roles/create",
+     }}
+      />
 
     <DataTable columns={columns} data={data} />;
   </>

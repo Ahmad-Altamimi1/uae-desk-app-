@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { IconCircleCheckFilled, IconEye, IconLoader } from "@tabler/icons-react";
+import { IconCircleCheckFilled, IconLoader } from "@tabler/icons-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
@@ -30,10 +30,8 @@ import ActionCell from "@/components/table/actionCell";
 import { IResponseUsersRoles } from '@/entities/dashboard/users'
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
-import { IResponseLogs, IResponseUsersPermissions } from "@/entities/dashboard";
+import { IResponseBranches, IResponseServices, IResponseUsersPermissions } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
-import { Button } from "@/components/ui/button";
 // export const schema = z.object({
 //   id: z.number(),
 //   header: z.string(),
@@ -43,16 +41,13 @@ import { Button } from "@/components/ui/button";
 //   limit: z.string(),
 //   reviewer: z.string(),
 // });
-const handleClick = (action: string) => {
-  console.log(`${action} clicked`);
-};
-export const columns: ColumnDef<IResponseLogs>[] = [
+
+export const columns: ColumnDef<IResponseBranches>[] = [
   {
     id: "drag",
     header: () => null,
     cell: ({ row }) => <DragHandle id={row.original.id} />,
   },
-  
   {
     id: "select",
     header: ({ table }) => (
@@ -79,106 +74,96 @@ export const columns: ColumnDef<IResponseLogs>[] = [
     enableSorting: false,
     enableHiding: false,
   },
+  {
+    accessorKey: "header",
+    header: <HeaderCell label="SL" />,
+
+    cell: ({ row }) => (
+      <div>
+        <RowCell label={row.index + 1} />
+      </div>
+    ),
+  },
 
 
-
-  // {
-  //   accessorKey: "header",
-  //   header: <HeaderCell label="SL" />,
-
-  //   cell: ({ row }) => (
-  //     <div>
-  //       <RowCell label={row.index + 1} />
-  //     </div>
-  //   ),
-  // },
 
   {
 
 
-    accessorKey: "ID",
-    header: <HeaderCell label="userActivity.id" />,
+    accessorKey: "name",
+    header: <HeaderCell label="branches.name" />,
     cell: ({ row }) => (
 
       <div>
-        <RowCell label={row.original.id} />
+        <RowCell label={row.original.branch_name} />
       </div>
 
 
     ),
   },
-
   {
 
 
-    accessorKey: "logdate",
-    header: <HeaderCell label="userActivity.logdate" />,
+    accessorKey: "location",
+    header: <HeaderCell label="branches.location" />,
     cell: ({ row }) => (
 
       <div>
-        <RowCell label={row.original.log_date} />
+        <RowCell label={row.original.location_id} />
+      </div>
+
+
+    ),
+  },  {
+
+
+    accessorKey: "address",
+    header: <HeaderCell label="branches.address" />,
+    cell: ({ row }) => (
+
+      <div>
+        <RowCell label={row.original.address} />
+      </div>
+
+
+    ),
+  },  {
+
+
+    accessorKey: "phoneNumber",
+    header: <HeaderCell label="branches.phoneNumber" />,
+    cell: ({ row }) => (
+
+      <div>
+        <RowCell label={row.original.phone_number} />
+      </div>
+
+
+    ),
+  },  {
+
+
+    accessorKey: "email",
+    header: <HeaderCell label="branches.email" />,
+    cell: ({ row }) => (
+
+      <div>
+        <RowCell label={row.original.email} />
       </div>
 
 
     ),
   },
-
   {
-
-
-    accessorKey: "logtype",
-    header: <HeaderCell label="userActivity.logtype" />,
-    cell: ({ row }) => (
-
-      <div>
-        <RowCell label={row.original.log_type} />
+    accessorKey: "actions",
+    header: <HeaderCell label="branches.actions" />,
+    id: "actions",
+    cell: () => (
+      <div className="flex items-center justify-center">
+        <ActionCell />
       </div>
-
-
-    ),
+    )
+    
   },
-
-  {
-
-
-    accessorKey: "user_name",
-    header: <HeaderCell label="userActivity.userId" />,
-    cell: ({ row }) => (
-
-      <div>
-        <RowCell label={row.original.user_name} />
-      </div>
-
-
-    ),
-  },
-
-  // {
-  //   accessorKey: "actions",
-  //   header: <HeaderCell label="userActivity.actions" />,
-  //   id: "actions",
-  //   cell: () => (
-  //     <div className="p-3 flex items-center justify-center">
-  //       <TooltipProvider>
-  //         <Tooltip>
-  //           <TooltipTrigger>
-  //             <Button
-  //               size="sm"
-  //               variant="link"
-  //               className="bg-gray-200 rounded-3xl flex items-center gap-2 cursor-pointer"
-  //               aria-label="View Customer"
-  //               onClick={() => handleClick("View Customer")}
-  //             >
-  //               <IconEye className="text-black" />
-  //             </Button>
-  //           </TooltipTrigger>
-  //           <TooltipContent className="text-black">
-  //             <p>View Customer</p>
-  //           </TooltipContent>
-  //         </Tooltip>
-  //       </TooltipProvider>      </div>
-  //   )
-
-  // },
 
 ];

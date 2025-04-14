@@ -3,22 +3,24 @@ import React from "react";
 import { columns } from "./components/columns";
 import { api } from "@/lib/api/serverCore";
 import ToolBar2 from "@/components/table/toolBar2";
-import { IRequestUsersPermissions } from "@/entities/dashboard";
+import { IRequestLogs, IRequestUsersPermissions } from "@/entities/dashboard";
+import { log } from "console";
 
 const Page = async () => {
-  const data = await api.get<IRequestUsersPermissions[]>("getPermissions");
+  const data = await api.get<IRequestLogs[]>("getLogs");
+  log("data from apiww",data, "data from api");
   return (
     <>
       <ToolBar2
-        title="dashboard.permissions.title"
-        description="dashboard.permissions.description"
+        title="dashboard.userActivity.title"
+        description="dashboard.userActivity.description"
         image="/customer.png"
-        addButton={{
-          title: "",
-          href: "",
-        }}
+        // addButton={{
+        //   title: "",
+        //   href: "",
+        // }}
       />
-      <DataTable columns={columns} data={data} />;
+      <DataTable columns={columns} data={data.logs} />;
     </>
   );
 };
