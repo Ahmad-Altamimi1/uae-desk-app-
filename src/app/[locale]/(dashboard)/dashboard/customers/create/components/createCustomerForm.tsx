@@ -295,7 +295,11 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                         service.otherValues?.price?.value
                       );
 
-                      VatForServices = totalPriceForServices * VatValue;
+                      VatForServices = VatForServices = Number(
+                        (
+                          Number(service.otherValues?.price?.value) * VatValue
+                        ).toFixed(2)
+                      );
                       return (
                         <div key={index} className="flex justify-between">
                           <p>{service.label}</p>
