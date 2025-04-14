@@ -3,16 +3,12 @@ import React from "react";
 import { columns } from "./components/columns";
 import { api } from "@/lib/api/serverCore";
 import ToolBarModal from "@/components/table/toolBarModal";
-import { IRequestServices } from "@/entities/dashboard";
+import { IResponseServices } from "@/entities/dashboard";
 
 const Page = async () => {
-  const response = await api.get<{
-    success: boolean;
-    message: string;
-    data: IRequestServices[];
-  }>("getServices");
-
-  const data = response?.data ?? [];
+  const response = await api
+    .get<IResponseServices>("getServices")
+    .then((r) => r.data);
 
   return (
     <>
@@ -25,7 +21,7 @@ const Page = async () => {
           href: "permissions/create",
         }}
       />
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={response} />
     </>
   );
 };
