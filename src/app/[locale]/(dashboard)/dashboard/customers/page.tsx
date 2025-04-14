@@ -1,8 +1,6 @@
 import { DataTable } from "@/components/table/dataTable";
 import React from "react";
 import { columns } from "./components/columns";
-// import data from "../data.json";
-
 import { api } from "@/lib/api/serverCore";
 import { IResponseCustomer } from "@/entities/dashboard";
 import ToolBar2 from "@/components/table/toolBar2";
