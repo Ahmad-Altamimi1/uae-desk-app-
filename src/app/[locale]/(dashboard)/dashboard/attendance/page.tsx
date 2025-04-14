@@ -3,8 +3,7 @@ import React from "react";
 import { columns } from "./components/columns";
 import { api } from "@/lib/api/serverCore";
 import ToolBar2 from "@/components/table/toolBar2";
-import { IResponseBranches } from "@/entities/dashboard";
-import { IResponseShifts } from "@/entities/dashboard/shifts";
+
 import { IResponseAttendance } from "@/entities/dashboard/attendance";
 
 const Page = async () => {

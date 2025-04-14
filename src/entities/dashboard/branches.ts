@@ -1,4 +1,9 @@
 export interface IResponseBranches {
+  data: IBranchesData[];
+  status: "success" | "error";
+  message: string;
+}
+interface IBranchesData {
   id: number;
   branch_name: string;
   location_id: number;
@@ -10,7 +15,6 @@ export interface IResponseBranches {
   latitude: string;
   longitude: string;
 }
-
 
 export interface IRequestBranches {
   id: number;
