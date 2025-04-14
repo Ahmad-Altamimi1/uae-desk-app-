@@ -79,6 +79,11 @@ export interface IGetCustomer {
     status: boolean;
     services: IResponseServices[];
     branches: IResponseBranches[];
-    selectedServices: IResponseBranches[];
+    selectedServices: number[];
   };
+}
+
+export interface IUploadMedia {
+  document_name: string;
+  media: File[];
 }

@@ -4,9 +4,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/form/input";
 import { z } from "zod";
-import { formSchema } from "../components/utils/validation";
+import { customerValidation } from "../components/utils/validation";
 
-type FormData = z.infer<typeof formSchema>;
+type FormData = z.infer<typeof customerValidation>;
 
 const MyForm = () => {
   const {
@@ -14,7 +14,7 @@ const MyForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(customerValidation),
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {

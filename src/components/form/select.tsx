@@ -26,7 +26,7 @@ export interface SelectOption {
 
 interface SelectProps
   extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "placeholder"> {
-  label: TranslatableText;
+  label?: TranslatableText;
   options: SelectOption[];
   error?: string | FieldError;
   helperText?: TranslatableText;
@@ -82,7 +82,7 @@ const CustomSelect = forwardRef<any, SelectProps>(
       return error.message;
     };
 
-    const translatedLabel = translateText(label);
+    const translatedLabel = label && translateText(label);
     const errorMessage = getErrorMessage(error);
     const translatedHelperText = translateText(helperText);
     const translatedPlaceholder = translateText(placeholder);
@@ -104,7 +104,7 @@ const CustomSelect = forwardRef<any, SelectProps>(
         paddingRight: endIcon ? "2.5rem" : "0.75rem",
         borderRadius: "0.375rem",
         minHeight: "2.5rem",
-        backgroundColor: "white",
+        backgroundColor: "#F6F6F6",
       }),
       valueContainer: (provided: any) => ({
         ...provided,
