@@ -1,7 +1,5 @@
 import React from "react";
 import {
-  IconEdit,
-  IconTrash,
   IconEye,
   IconPhoto,
   IconFileInvoice,

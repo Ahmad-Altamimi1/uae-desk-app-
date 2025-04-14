@@ -21,7 +21,8 @@
     "title": "Dashboard",
     "description": "Welcome to your dashboard!",
     "customers": {
-      "Add": "Add New Customer",
+      "AddNewCustomer": "Add New Customer",
+      "UploadMediaSuccess": "Media uploaded successfully",
       "CreateCustomer": "Finish And Add Customer",
       "createSuccess": "Customer created successfully",
       "updateSuccess": "Customer updated successfully",
@@ -76,6 +77,7 @@
 
   "forms": {
     "AddButton": "Next To Upload Media",
+
     "submitting": "Submitting",
     "Select_Document_Type": "Select Document Type",
     "services": "services",
@@ -258,7 +260,10 @@
     "serviceId": {
       "label": "Services",
       "placeholder": "Select services",
-      "helper": "List of selected services"
+      "helper": "List of selected services",
+      "error": {
+        "required": "Services are required"
+      }
     },
 
     "entries": {

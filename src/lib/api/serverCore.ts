@@ -161,17 +161,19 @@ async function fetchWithTimeout<TResponse>(
 
   // Set up headers
   const headers = new Headers(fetchOptions.headers);
-  if (!headers.has("Content-Type") && body) {
+  const isFormData = body instanceof FormData;
+
+  if (!headers.has("Content-Type") && body && !(body instanceof FormData)) {
     headers.set("Content-Type", "application/json");
   }
 
-  // Add bearer token
   const token = await getCookie("token");
+
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
   }
 
-  // Prepare the request
+  await getCsrfToken();
 
   const fetchPromise = fetch(url, {
     method,
@@ -180,12 +182,11 @@ async function fetchWithTimeout<TResponse>(
     next: {
       tags: [tag],
     },
-    body: body ? JSON.stringify(body) : undefined,
+    body: isFormData ? body : body ? JSON.stringify(body) : undefined,
 
     ...fetchOptions,
   });
 
-  // Race the fetch against a timeout
   try {
     const response = await Promise.race([
       fetchPromise,

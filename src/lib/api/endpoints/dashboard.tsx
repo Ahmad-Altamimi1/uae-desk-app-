@@ -1,5 +1,6 @@
 const endPoints = {
   login: "api/login",
+  logout: "api/logout",
   getCustomers: "api/customers/index",
   CustomerCreate: "api/customers/create",
   CustomerStore: "api/customers/store",

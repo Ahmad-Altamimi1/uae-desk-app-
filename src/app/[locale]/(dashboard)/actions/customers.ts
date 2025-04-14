@@ -127,20 +127,22 @@ export async function handleFileUpload(
   documentType: ISelectOption,
   files: File[]
 ): Promise<CustomerState> {
-  const data = {
-    id: Number(await customerId),
-    document_name: String(documentType.value),
-    media: files.map((file) => ({
-      file: file,
-      filename: file.name,
-      type: file.type,
-      size: file.size,
-    })),
-  };
+  const formData = new FormData();
+
+  // Append your data to the FormData
+  const id = await customerId;
+  formData.append("id", id);
+  formData.append("document_name", documentType.value);
+
+  // Append each file with the name 'media[]'
+  for (let i = 0; i < files.length; i++) {
+    formData.append("media[]", files[i]);
+  }
+
+  console.log("Sending files:", files);
 
   try {
-    const response = await CustomerService.uploadMedia(data);
-    console.log("responseresponseresponse", response);
+    const response = await CustomerService.uploadMedia(formData);
 
     return {
       success: true,
@@ -153,7 +155,7 @@ export async function handleFileUpload(
       return {
         success: false,
         data: {},
-        message: "",
+        message: (error as { message: string })?.message,
         error: (error as { message: string })?.message,
         ...error,
       };

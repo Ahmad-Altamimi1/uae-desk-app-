@@ -47,7 +47,6 @@ export async function handleLogin(prevState: LoginState, formData: FormData) {
   try {
     const loginResponse = await AuthService.login(rawFormData);
     const cookieStore = await cookies();
-    console.log("loginResponseloginResponse", loginResponse);
 
     cookieStore.set("token", loginResponse.access_token);
 
@@ -67,3 +66,15 @@ export async function handleLogin(prevState: LoginState, formData: FormData) {
     });
   }
 }
+export const HandleLogOut = async () => {
+  const locale = await getLocale();
+  const response = await AuthService.logout();
+  console.log("responseresponse", response);
+
+  (await cookies()).delete("token");
+  // toast.success("Logout successfully");
+  redirect({
+    href: "/login",
+    locale: locale,
+  });
+};
