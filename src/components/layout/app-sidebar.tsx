@@ -95,31 +95,22 @@ const data = {
       url: "/attendances",
       icon: IconChecklist,
     },
+  
     // {
-    //   title: "Invoices",
+    //   title: "Settings",
     //   url: "#",
-    //   icon: IconUsers,
+    //   icon: IconSettings,
     // },
     // {
-    //   title: "Contacts",
+    //   title: "Website Settings",
     //   url: "#",
-    //   icon: IconUsers,
+    //   icon: IconWorldCog,
     // },
-    {
-      title: "Settings",
-      url: "#",
-      icon: IconSettings,
-    },
-    {
-      title: "Website Settings",
-      url: "#",
-      icon: IconWorldCog,
-    },
-    {
-      title: "File Manager",
-      url: "#",
-      icon: IconFolderPlus,
-    },
+    // {
+    //   title: "File Manager",
+    //   url: "#",
+    //   icon: IconFolderPlus,
+    // },
   ],
   navClouds: [
     {
