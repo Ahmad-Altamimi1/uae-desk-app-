@@ -130,7 +130,7 @@ async function handleApiResponse<T>(response: Response): Promise<T> {
     const errorData = await response.json();
 
     throw new ApiError(
-      errorData.message || `API error: ${response.statusText}`,
+      errorData.message || `API error: ${response.statusText} `,
       response.status,
       errorData.errors
     );
@@ -172,8 +172,8 @@ async function fetchWithTimeout<TResponse>(
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
   }
-console.log('url', url)
-  console.log('methodmethod', method);
+  console.log("url", url);
+  console.log("methodmethod", method);
 
   await getCsrfToken();
 

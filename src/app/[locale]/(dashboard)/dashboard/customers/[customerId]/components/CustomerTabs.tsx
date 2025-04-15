@@ -10,6 +10,7 @@ import { ISelectOption } from "@/utils/type";
 import { useTranslations } from "next-intl";
 
 import UploadMediaFromModal from "./UploadMediaFromModal";
+import ProcessTimeTracking from "./ProcessTimeTracking";
 
 interface CustomerTabsProps {
   data: ICustomerData;
@@ -100,7 +101,6 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
           {
             component: <CustomerFTAInformation customer={data.customer} />,
             name: "dashboard.customers.tabs.CustomerFTAInformation",
-            tag: "CustomerAndFTAInformation",
           },
           {
             component: (
@@ -117,7 +117,9 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
             name: "dashboard.customers.tabs.UploadedMedia",
           },
           {
-            component: <div>ProcessTimeTracking</div>,
+            component: (
+              <ProcessTimeTracking processTime={data.processTime.original} />
+            ),
             name: "dashboard.customers.tabs.ProcessTimeTracking",
           },
         ]}
