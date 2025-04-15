@@ -11,6 +11,8 @@ interface ToolBarModalProps {
   addButton: {
     title: string;
   };
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
 }
 
@@ -20,6 +22,8 @@ const ToolBarModal = ({
   image,
   addButton,
   children,
+  open,
+  setOpen,
 }: ToolBarModalProps) => {
   const { title: buttonTitle } = addButton;
   const t = useTranslations();
@@ -40,15 +44,15 @@ const ToolBarModal = ({
         </div>
       </div>
       <Modal
+        open={open}
+        setOpen={setOpen}
         title={title}
         description={description}
         triggerButton={
-          <>
-            <Button className="bg-[#00713B] px-6 py-3 text-base flex items-center gap-2">
-              <Image src="/plus.png" alt="Logo" width={24} height={24} />
-              <span className="hidden lg:inline">{t(title)}</span>
-            </Button>
-          </>
+          <Button className="bg-[#00713B] px-6 py-3 text-base flex items-center gap-2">
+            <Image src="/plus.png" alt="Logo" width={24} height={24} />
+            <span className="hidden lg:inline">{t(title)}</span>
+          </Button>
         }
       >
         {children}

@@ -5,15 +5,17 @@ import { useTranslations } from "next-intl";
 import { z } from "zod";
 import Input from "@/components/form/input";
 import { Key } from "lucide-react";
-import { useTransition } from "react";
+import { SetStateAction, useState, useTransition } from "react";
 import { permissionSchema } from "@/app/[locale]/(dashboard)/schema/permission";
 import { createPermission } from "@/app/[locale]/(dashboard)/actions/permissions";
+import ToolBarModal from "@/components/table/toolBarModal";
+import { toast } from "sonner";
 
 type PermissionCreateFormValues = z.infer<ReturnType<typeof permissionSchema>>;
 
 export default function PermissionCreateForm() {
   const t = useTranslations();
-
+  const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const permissionsSchema = permissionSchema(t);
 
@@ -30,20 +32,28 @@ export default function PermissionCreateForm() {
   let response;
   const onSubmit = (data: PermissionCreateFormValues) => {
     startTransition(async () => {
-      response = await (createPermission(data));
+      response = await createPermission(data);
       if (response.error) {
-        // Toaster(response?.error);
-
+        toast.error(response?.error);
+      } else {
+        toast.success(response?.message);
       }
-      console.log("responseresponseresponse", response);
-
+      setOpen(false);
     });
-    console.log(data);
-    // Handle form submission here
   };
 
   return (
-    <>
+    <ToolBarModal
+      title="dashboard.permissions.title"
+      description="dashboard.permissions.description"
+      image="/customer.png"
+      addButton={{
+        title: "dashboard.permissions.Add",
+        // href: "permissions/create",
+      }}
+      open={open}
+      setOpen={setOpen}
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* <InputCollectionLabel title={"dashboard.permissions.title"} /> */}
         <hr />
@@ -59,19 +69,18 @@ export default function PermissionCreateForm() {
             />
           </div>
         </div>
-        <p>
-          {response?.error}
-        </p>
+        <p>{response?.error}</p>
         <button
           type="submit"
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
-          {isPending ?
-            <span> {t("loading")}</span> :
+          {isPending ? (
+            <span> {t("loading")}</span>
+          ) : (
             <span>{t("submit")}</span>
-          }
+          )}
         </button>
       </form>
-    </>
+    </ToolBarModal>
   );
 }

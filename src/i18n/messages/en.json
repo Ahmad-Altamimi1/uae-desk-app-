@@ -139,8 +139,8 @@
       "newPassword": "New Password",
       "confirmPassword": "Confirm Password",
       "update": "Update",
-      "placeholder": "Enter your old password",
-      "placeholderNew": "Enter your new password"
+      "placeholder": " old password",
+      "placeholderNew": " new password"
     },
     "modal": {
       "title": "Modal Title",
@@ -159,7 +159,7 @@
     "submitRole": "Finish and Add Role ",
     "username": {
       "label": "Username",
-      "placeholder": "Enter your username",
+      "placeholder": " username",
       "helper": "Choose a unique username",
       "error": {
         "required": "Username is required",
@@ -169,7 +169,7 @@
     },
     "email": {
       "label": "Email",
-      "placeholder": "Enter your email",
+      "placeholder": " email",
       "helper": "We'll never share your email",
       "error": {
         "required": "Email is required",
@@ -178,7 +178,7 @@
     },
     "firstName ": {
       "label": "First Name ",
-      "placeholder": "Enter your first name",
+      "placeholder": " first name",
       "helper": "We'll never share your first name",
       "error": {
         "required": "First Name is required",
@@ -188,25 +188,23 @@
     },
     "startTime": {
       "label": "start Time",
-      "placeholder": "Enter your startTime",
+      "placeholder": " startTime",
       "helper": "We'll never share your startTime",
       "error": {
         "required": "startTime is required"
-      
       }
     },
     "endTime": {
       "label": "endTime",
-      "placeholder": "Enter your endTime",
+      "placeholder": " endTime",
       "helper": "We'll never share your endTime",
       "error": {
         "required": "endTime is required"
-      
       }
     },
     "lastName": {
       "label": "Last Name",
-      "placeholder": "Enter your last name",
+      "placeholder": " last name",
       "helper": "We'll never share your last name",
       "error": {
         "required": "Last Name is required",
@@ -214,9 +212,19 @@
         "maxLength": "Last Name must be less than 50 characters"
       }
     },
+    "firstName": {
+      "label": "First Name",
+      "placeholder": " first name",
+      "helper": "We'll never share your first name",
+      "error": {
+        "required": "First Name is required",
+        "minLength": "First Name must be at least 3 characters",
+        "maxLength": "First Name must be less than 50 characters"
+      }
+    },
     "name": {
       "label": " Name of Permission",
-      "placeholder": "Enter your name",
+      "placeholder": " name",
       "helper": "We'll never share your name",
       "error": {
         "required": " Name is required",
@@ -226,7 +234,7 @@
     },
     "code": {
       "label": " Code of role ",
-      "placeholder": "Enter your code",
+      "placeholder": " code",
       "helper": "We'll never share your code",
       "error": {
         "required": "code is required",
@@ -236,7 +244,7 @@
     },
     "businessName": {
       "label": "Business Name",
-      "placeholder": "Enter your business name",
+      "placeholder": " business name",
       "helper": "We'll never share your business name",
       "error": {
         "required": "Business Name is required",
@@ -246,7 +254,7 @@
     },
     "servicePrice": {
       "label": "Service Price",
-      "placeholder": "Enter your service price",
+      "placeholder": " service price",
       "helper": "We'll never share your service price",
       "error": {
         "required": "Service Price is required",
@@ -256,7 +264,7 @@
     },
     "address": {
       "label": "Address",
-      "placeholder": "Enter your address",
+      "placeholder": " address",
       "helper": "We'll never share your address",
       "error": {
         "required": "Address is required"
@@ -264,7 +272,7 @@
     },
     "phoneNumber": {
       "label": "Phone Number",
-      "placeholder": "Enter your phone number",
+      "placeholder": " phone number",
       "helper": "We'll never share your phone number",
       "error": {
         "required": "Phone Number is required",
@@ -275,7 +283,7 @@
     },
     "latitude": {
       "label": "latitude",
-      "placeholder": "Enter your latitude",
+      "placeholder": " latitude",
       "helper": "We'll never share your latitude",
       "error": {
         "required": "latitude is required",
@@ -286,7 +294,7 @@
     },
     "longitude": {
       "label": "longitude",
-      "placeholder": "Enter your longitude",
+      "placeholder": " longitude",
       "helper": "We'll never share your longitude",
       "error": {
         "required": "longitude is required",
@@ -298,7 +306,7 @@
 
     "location_id": {
       "label": "location",
-      "placeholder": "Enter your location",
+      "placeholder": " location",
       "helper": "We'll never share your location",
       "error": {
         "required": "location is required",
@@ -309,7 +317,7 @@
     },
     "price": {
       "label": "Price",
-      "placeholder": "Enter your price",
+      "placeholder": " price",
       "helper": "We'll never share your price",
       "error": {
         "required": "Price is required",
@@ -319,7 +327,7 @@
     },
     "password": {
       "label": "Password",
-      "placeholder": "Enter your password",
+      "placeholder": " password",
       "helper": "Password must be at least 8 characters",
       "error": {
         "required": "Password is required",
