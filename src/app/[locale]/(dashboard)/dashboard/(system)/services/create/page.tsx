@@ -8,29 +8,31 @@ import { Key } from "lucide-react";
 import { useTransition } from "react";
 import { permissionSchema } from "@/app/[locale]/(dashboard)/schema/permission";
 import { createPermission } from "@/app/[locale]/(dashboard)/actions/permissions";
+import { serviceSchema } from "@/app/[locale]/(dashboard)/schema/services";
+import { createServices } from "@/app/[locale]/(dashboard)/actions/services";
 
-type PermissionCreateFormValues = z.infer<ReturnType<typeof permissionSchema>>;
+type ServiceCreateFormValues = z.infer<ReturnType<typeof serviceSchema>>;
 
-export default function PermissionCreateForm() {
+export default function ServiceCreateForm() {
   const t = useTranslations();
 
   const [isPending, startTransition] = useTransition();
-  const permissionsSchema = permissionSchema(t);
+  const servicesSchema = serviceSchema(t);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PermissionCreateFormValues>({
-    resolver: zodResolver(permissionsSchema),
+  } = useForm<ServiceCreateFormValues>({
+    resolver: zodResolver(servicesSchema),
     defaultValues: {
       name: "",
     },
   });
   let response;
-  const onSubmit = (data: PermissionCreateFormValues) => {
+  const onSubmit = (data: ServiceCreateFormValues) => {
     startTransition(async () => {
-      response = await (createPermission(data));
+      response = await (createServices(data));
       if (response.error) {
         // Toaster(response?.error);
 

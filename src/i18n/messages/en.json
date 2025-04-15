@@ -104,6 +104,8 @@
       "phoneNumber": "Phone Number",
       "email": "Email",
       "address": "Address",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
       "description": "Welcome to the branches page!",
       "actions": "Actions"
     },
@@ -174,9 +176,8 @@
         "invalidEmail": "Please enter a valid email address"
       }
     },
-
-    "firstName": {
-      "label": "First Name",
+    "firstName ": {
+      "label": "First Name ",
       "placeholder": "Enter your first name",
       "helper": "We'll never share your first name",
       "error": {
@@ -185,12 +186,29 @@
         "maxLength": "First Name must be less than 50 characters"
       }
     },
+    "startTime": {
+      "label": "start Time",
+      "placeholder": "Enter your startTime",
+      "helper": "We'll never share your startTime",
+      "error": {
+        "required": "startTime is required"
+      
+      }
+    },
+    "endTime": {
+      "label": "endTime",
+      "placeholder": "Enter your endTime",
+      "helper": "We'll never share your endTime",
+      "error": {
+        "required": "endTime is required"
+      
+      }
+    },
     "lastName": {
       "label": "Last Name",
       "placeholder": "Enter your last name",
       "helper": "We'll never share your last name",
       "error": {
-
         "required": "Last Name is required",
         "minLength": "Last Name must be at least 3 characters",
         "maxLength": "Last Name must be less than 50 characters"
@@ -253,6 +271,40 @@
         "minLength": "Phone Number must be at least 3 characters",
         "maxLength": "Phone Number must be less than 10 characters",
         "invalidFormat": "Phone Number must start with 052"
+      }
+    },
+    "latitude": {
+      "label": "latitude",
+      "placeholder": "Enter your latitude",
+      "helper": "We'll never share your latitude",
+      "error": {
+        "required": "latitude is required",
+        "minLength": "latitude must be at least 3 characters",
+        "maxLength": "latitude must be less than 10 characters",
+        "invalidFormat": "latitude must start with 052"
+      }
+    },
+    "longitude": {
+      "label": "longitude",
+      "placeholder": "Enter your longitude",
+      "helper": "We'll never share your longitude",
+      "error": {
+        "required": "longitude is required",
+        "minLength": "longitude must be at least 3 characters",
+        "maxLength": "longitude must be less than 10 characters",
+        "invalidFormat": "longitude must start with 052"
+      }
+    },
+
+    "location_id": {
+      "label": "location",
+      "placeholder": "Enter your location",
+      "helper": "We'll never share your location",
+      "error": {
+        "required": "location is required",
+        "minLength": "location must be at least 3 characters",
+        "maxLength": "location must be less than 10 characters",
+        "invalidFormat": "location must start with 052"
       }
     },
     "price": {

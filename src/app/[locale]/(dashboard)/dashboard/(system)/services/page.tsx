@@ -4,6 +4,7 @@ import { columns } from "./components/columns";
 import { api } from "@/lib/api/serverCore";
 import ToolBarModal from "@/components/table/toolBarModal";
 import { IResponseServices } from "@/entities/dashboard";
+import ServiceCreateForm from "./create/page";
 
 const Page = async () => {
   const response = await api
@@ -12,17 +13,23 @@ const Page = async () => {
 
   return (
     <>
-      <ToolBarModal
-        title="dashboard.services.title"
-        description="dashboard.services.description"
-        image="/customer.png"
-        addButton={{
-          title: "dashboard.services.Add",
-          href: "permissions/create",
-        }}
-      />
-      <DataTable columns={columns} data={response} />
-    </>
+    <ToolBarModal
+      title="dashboard.services.title"
+      description="dashboard.services.description"
+      image="/customer.png"
+      addButton={{
+        title: "dashboard.services.Add",
+        // href: "services/create",
+      }}
+    >
+
+      <ServiceCreateForm />
+    </ToolBarModal>
+
+
+    <DataTable columns={columns} data={response} />;
+  </>
+
   );
 };
 

@@ -92,25 +92,25 @@ const data = {
     },
     {
       title: "Attendances",
-      url: "/attendances",
+      url: "/attendance",
       icon: IconChecklist,
     },
   
-    // {
-    //   title: "Settings",
-    //   url: "#",
-    //   icon: IconSettings,
-    // },
-    // {
-    //   title: "Website Settings",
-    //   url: "#",
-    //   icon: IconWorldCog,
-    // },
-    // {
-    //   title: "File Manager",
-    //   url: "#",
-    //   icon: IconFolderPlus,
-    // },
+    {
+      title: "Settings",
+      url: "#",
+      icon: IconSettings,
+    },
+    {
+      title: "Website Settings",
+      url: "#",
+      icon: IconWorldCog,
+    },
+    {
+      title: "File Manager",
+      url: "#",
+      icon: IconFolderPlus,
+    },
   ],
   navClouds: [
     {

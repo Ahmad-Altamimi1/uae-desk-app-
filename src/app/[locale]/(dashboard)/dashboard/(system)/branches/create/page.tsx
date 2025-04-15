@@ -8,31 +8,40 @@ import { Key } from "lucide-react";
 import { useTransition } from "react";
 import { permissionSchema } from "@/app/[locale]/(dashboard)/schema/permission";
 import { createPermission } from "@/app/[locale]/(dashboard)/actions/permissions";
+import { branchesSchema } from "@/app/[locale]/(dashboard)/schema/branches";
+import { createBranches } from "@/app/[locale]/(dashboard)/actions/branches";
+import { toast } from "sonner";
 
-type PermissionCreateFormValues = z.infer<ReturnType<typeof permissionSchema>>;
+type BranchCreateFormValues = z.infer<ReturnType<typeof branchesSchema>>;
 
-export default function PermissionCreateForm() {
+export default function BranchesCreateForm() {
   const t = useTranslations();
 
   const [isPending, startTransition] = useTransition();
-  const permissionsSchema = permissionSchema(t);
+  const branchSchema = branchesSchema(t);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PermissionCreateFormValues>({
-    resolver: zodResolver(permissionsSchema),
+  } = useForm<BranchCreateFormValues>({
+    resolver: zodResolver(branchSchema),
     defaultValues: {
-      name: "",
+      branch_name: "",
+      location_id: 0,
+      address: "",
+      phone_number: "",
+      email: "",
+      latitude: "",
+      longitude: "",
     },
   });
   let response;
-  const onSubmit = (data: PermissionCreateFormValues) => {
+  const onSubmit = (data: BranchCreateFormValues) => {
     startTransition(async () => {
-      response = await (createPermission(data));
+      response = await (createBranches(data));
       if (response.error) {
-        // Toaster(response?.error);
+        toast(response?.error);
 
       }
       console.log("responseresponseresponse", response);
@@ -51,10 +60,65 @@ export default function PermissionCreateForm() {
           <div className="col-span-1 md:col-span-2">
             <Input
               label={{ id: "name.label" }}
-              name="name"
+              name="branch_name"
               register={register}
-              error={errors.name?.message}
+              error={errors.branch_name?.message}
               placeholder={{ id: "name.placeholder" }}
+              startIcon={<Key size={18} />}
+            />
+
+            <Input
+              label={{ id: "location_id.label" }}
+              name="location_id"
+              type="number"
+              register={register}
+              error={errors.location_id?.message}
+              placeholder={{ id: "location.placeholder" }}
+              startIcon={<Key size={18} />}
+            />
+
+            <Input
+              label={{ id: "address.label" }}
+              name="address"
+              register={register}
+              error={errors.address?.message}
+              placeholder={{ id: "address.placeholder" }}
+              startIcon={<Key size={18} />}
+            />
+
+            <Input
+              label={{ id: "phoneNumber.label" }}
+              name="phone_number"
+              register={register}
+              error={errors.phone_number?.message}
+              placeholder={{ id: "phoneNumber.placeholder" }}
+              startIcon={<Key size={18} />}
+            />
+
+            <Input
+              label={{ id: "email.label" }}
+              name="email"
+              register={register}
+              error={errors.email?.message}
+              placeholder={{ id: "email.placeholder" }}
+              startIcon={<Key size={18} />}
+            />
+
+            <Input
+              label={{ id: "latitude.label" }}
+              name="latitude"
+              register={register}
+              error={errors.latitude?.message}
+              placeholder={{ id: "latitude.placeholder" }}
+              startIcon={<Key size={18} />}
+            />
+
+            <Input
+              label={{ id: "longitude.label" }}
+              name="longitude"
+              register={register}
+              error={errors.longitude?.message}
+              placeholder={{ id: "longitude.placeholder" }}
               startIcon={<Key size={18} />}
             />
           </div>

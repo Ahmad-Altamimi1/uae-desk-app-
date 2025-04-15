@@ -64,9 +64,14 @@ const endPoints = {
   getShifts: "api/shifts/index",
   ShiftsCreate: "api/shifts/create",
   ShiftsStore: "api/shifts/store",
+  ShiftsEdit:"api/shifts/edit",
+  ShiftsUpdate:"api/shifts/update",
+  ShiftsDestroy: "api/shifts/destroy",
 
   //attendance
   getAttendance: "api/attendances/index",
+
+  //location
 };
 
 export const tags: Record<keyof typeof endPoints, keyof typeof endPoints> =
