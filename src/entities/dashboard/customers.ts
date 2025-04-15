@@ -1,5 +1,5 @@
-import { IResponseBranches } from "./branches";
-import { IResponseServices } from "./services";
+import { IBranchesData } from "./branches";
+import { IServicesData } from "./services";
 
 export interface IResponseCustomer {
   id: number;
@@ -35,6 +35,18 @@ export interface IResponseCustomer {
   submitted_for_verification_at: string | null;
   expert_submitted_at: string | null;
   supervisor_approved_at: string | null;
+  branch: IBranchesData;
+  services: IServicesData[];
+  media: IMediaData[];
+}
+export interface IMediaData {
+  id: number;
+  customer_id: number;
+  document_name: string;
+  file_type: string;
+  file_path: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface IRequestCustomer {
@@ -74,15 +86,16 @@ export interface IRequestCustomer {
 }
 
 export interface IGetCustomer {
-  data: {
-    customer: IResponseCustomer;
-    status: boolean;
-    services: IResponseServices[];
-    branches: IResponseBranches[];
-    selectedServices: number[];
-  };
+  data: ICustomerData;
 }
 
+export interface ICustomerData {
+  customer: IResponseCustomer;
+  status: boolean;
+  services: IServicesData[];
+  branches: IBranchesData[];
+  selectedServices: number[];
+}
 export interface IUploadMedia {
   document_name: string;
   media: File[];

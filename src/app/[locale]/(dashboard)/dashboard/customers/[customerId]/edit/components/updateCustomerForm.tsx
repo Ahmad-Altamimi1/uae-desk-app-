@@ -1,5 +1,5 @@
 "use client";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
@@ -45,8 +45,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
     register,
     handleSubmit,
     setError,
-    reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     control,
     watch,
   } = useForm<UpdateCustomerFormValues>({
@@ -61,7 +60,6 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
       branchId: customer.branch_id,
       price: 0,
       serviceId: data.selectedServices,
-      //   servicePrice: {},
       address: customer.address,
       status: Number(customer.status),
       taxId: customer.tax_id,
@@ -77,14 +75,14 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
     },
   });
 
-  const {
-    fields: entriesFields,
-    append: appendEntry,
-    remove: removeEntry,
-  } = useFieldArray({
-    control,
-    name: "entries",
-  });
+  // const {
+  //   fields: entriesFields,
+  //   append: appendEntry,
+  //   remove: removeEntry,
+  // } = useFieldArray({
+  //   control,
+  //   name: "entries",
+  // });
 
   const onSubmit = async (data: UpdateCustomerFormValues) => {
     startTransition(async () => {
@@ -124,8 +122,8 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
   return (
     <>
       <PageTitle
-        title={"dashboard.customers.CreateCustomer"}
-        description="dashboard.customers.CreateCustomerDes"
+        title={"dashboard.customers.updateCustomer"}
+        description="dashboard.customers.updateCustomerDes"
       />
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="content space-y-4 grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -289,7 +287,11 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                         service.otherValues?.price?.value
                       );
 
-                      VatForServices = totalPriceForServices * VatValue;
+                      VatForServices = VatForServices = Number(
+                        (
+                          Number(service.otherValues?.price?.value) * VatValue
+                        ).toFixed(2)
+                      );
                       return (
                         <div key={index} className="flex justify-between">
                           <p>{service.label}</p>

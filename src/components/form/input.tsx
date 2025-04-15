@@ -28,7 +28,7 @@ interface InputProps
   fullWidth?: boolean;
   register?: any; // For react-hook-form support
   name?: string; // For react-hook-form support
-  updateInput?: boolean;
+  viewInput?: boolean;
   placeholder?: TranslatableText;
   i18nNamespace?: string;
 }
@@ -46,7 +46,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       className = "",
       register,
       name,
-      updateInput = false,
+      viewInput = false,
       placeholder,
       i18nNamespace = "forms", // Default namespace for form-related translations
       ...props
@@ -93,7 +93,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={cn(fullWidth && "w-full")}>
-        {/* {!updateInput && (
+        {/* {!viewInput && (
           <label className="block text-sm font-medium text-gray-500 mb-2">
             {translatedLabel}
           </label>
@@ -101,7 +101,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <div className="relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
             {startIcon && startIcon}
-            {updateInput && (
+            {viewInput && (
               <span className={cn(startIcon ? "md:pl-2" : "")}>
                 {translatedLabel}
               </span>
@@ -115,11 +115,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
           <input
             ref={ref}
+            readOnly={viewInput}
+            disabled={viewInput}
             className={cn(
               "w-full px-4 py-2.5 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-200",
-              !updateInput && "bg-[#F6F6F6]",
+              !viewInput && "bg-[#F6F6F6]",
               startIcon ? "md:pl-10" : "",
-              translatedLabel && updateInput ? "md:pl-50" : "",
+              translatedLabel && viewInput ? "md:pl-[50%]" : "",
               endIcon ? "md:pr-10" : "",
               errorMessage ? "border-red-500 focus:ring-red-500" : "",
               className
