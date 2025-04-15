@@ -18,31 +18,13 @@ const Page = async () => {
   const shifts = response?.data ?? [];
 
   return (
-    <>
-      {/* <ToolBar2
-        title="dashboard.shifts.title"
-        description="dashboard.shifts.description"
-        image="/customer.png"
-        addButton={{
-            title: "dashboard.shifts.Add",
-            href: "shifts/create",
-          }}
-      />
-      <DataTable columns={columns} data={shifts} /> */}
-      <ToolBarModal
-      title="dashboard.shifts.title"
-      description="dashboard.shifts.description"
-      image="/customer.png"
-      addButton={{
-        title: "dashboard.shifts.Add",
-        // href: "services/create",
-      }}
-    >
-
+    <div>
       <ShiftsCreateForm />
-    </ToolBarModal>
-    <DataTable columns={columns} data={shifts} /> 
-    </>
+      <DataTable columns={columns} data={shifts} />
+
+    </div>
+
+
   );
 };
 

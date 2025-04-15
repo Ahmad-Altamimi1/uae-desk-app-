@@ -16,6 +16,7 @@ interface BranchesState {
     success: boolean;
     error: string | null;
     data: any;
+    message:string,
 }
 export async function createBranches(
     data: z.infer<Awaited<ReturnType<typeof branchesSchema>>>
@@ -29,6 +30,7 @@ export async function createBranches(
         return {
             success: false,
             error: "Validation failed",
+            message:"Validation failed",
             data: parsed.error.flatten().fieldErrors,
         };
     }
@@ -42,14 +44,42 @@ export async function createBranches(
             success: true,
             data: response,
             error: null,
+            message:response.message
         };
     } catch (error) {
-        
         return {
             success: false,
             error: (error as Error).message,
-            data: error,
+            data: {},
+            message:(error as Error).message
+        };
+    }
+
+
+   
+}
+
+export async function deleteBranches(
+    id: number
+): Promise<BranchesState> {
+
+
+
+    try {
+        const response = await BranchesService.destroy(id)
+
+        return {
+            success: true,
+            data: response,
+            error: null,
+            message: response.message
+        };
+    } catch (error) {
+        return {
+            success: false,
+            error: (error as Error).message,
+            data: {},
+            message: (error as Error).message
         };
     }
 }
-

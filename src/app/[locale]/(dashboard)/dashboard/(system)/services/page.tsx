@@ -12,23 +12,10 @@ const Page = async () => {
     .then((r) => r.data);
 
   return (
-    <>
-    <ToolBarModal
-      title="dashboard.services.title"
-      description="dashboard.services.description"
-      image="/customer.png"
-      addButton={{
-        title: "dashboard.services.Add",
-        // href: "services/create",
-      }}
-    >
-
+    <div>
       <ServiceCreateForm />
-    </ToolBarModal>
-
-
-    <DataTable columns={columns} data={response} />;
-  </>
+      <DataTable columns={columns} data={response} />;
+    </div>
 
   );
 };

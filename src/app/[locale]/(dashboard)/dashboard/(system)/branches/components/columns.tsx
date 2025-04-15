@@ -4,14 +4,6 @@ import { DragHandle } from "@/components/table/dragHandle";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@radix-ui/react-checkbox";
 
-//TODO
-// import {
-//   Select,
-//   SelectTrigger,
-//   SelectValue,
-//   SelectContent,
-//   SelectItem,
-// } from "@radix-ui/react-select";
 import {
   Select,
   SelectContent,
@@ -30,19 +22,12 @@ import ActionCell from "@/components/table/actionCell";
 import { IResponseUsersRoles } from '@/entities/dashboard/users'
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
-import { IResponseBranches, IResponseServices, IResponseUsersPermissions } from "@/entities/dashboard";
+import { IBranchesData, IResponseBranches, IResponseServices, IResponseUsersPermissions } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-// export const schema = z.object({
-//   id: z.number(),
-//   header: z.string(),
-//   type: z.string(),
-//   status: z.string(),
-//   target: z.string(),
-//   limit: z.string(),
-//   reviewer: z.string(),
-// });
+import { BranchesService } from "@/lib/api/services/dashboard/branches";
+import { deleteBranches } from "@/app/[locale]/(dashboard)/actions/branches";
 
-export const columns: ColumnDef<IResponseBranches>[] = [
+export const columns: ColumnDef<IBranchesData>[] = [
   {
     id: "drag",
     header: () => null,
@@ -158,9 +143,14 @@ export const columns: ColumnDef<IResponseBranches>[] = [
     accessorKey: "actions",
     header: <HeaderCell label="branches.actions" />,
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <div className="flex items-center justify-center">
-        <ActionCell />
+        <ActionCell
+          id={row.original.id}
+          name={row.original.branch_name}
+          editAction={() => handleEdit(row.original.id)}
+          onDeleted={async () => await deleteBranches(row.original.id)}
+        />
       </div>
     )
     

@@ -28,3 +28,12 @@ export interface IRequestBranches {
   latitude: string;
   longitude: string;
 }
+
+export interface ILocation {
+  id: number;
+  name: string;
+  latitude:string;
+  longitude:string;
+  gau_code:string;
+}
+

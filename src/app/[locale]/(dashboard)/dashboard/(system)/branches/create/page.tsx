@@ -4,28 +4,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import Input from "@/components/form/input";
-import { Key } from "lucide-react";
-import { useTransition } from "react";
-import { permissionSchema } from "@/app/[locale]/(dashboard)/schema/permission";
-import { createPermission } from "@/app/[locale]/(dashboard)/actions/permissions";
+import { GitBranch, Globe2, Key, Mail, MapPin, Phone, User } from "lucide-react";
+import { useState, useTransition } from "react";
 import { branchesSchema } from "@/app/[locale]/(dashboard)/schema/branches";
 import { createBranches } from "@/app/[locale]/(dashboard)/actions/branches";
 import { toast } from "sonner";
+import ToolBarModal from "@/components/table/toolBarModal";
+import CustomSelect from "@/components/form/select";
+import { ISelectOption } from "@/utils/type";
+
+interface BranchesCreateFormProps {
+  locations: ISelectOption[]
+}
 
 type BranchCreateFormValues = z.infer<ReturnType<typeof branchesSchema>>;
 
-export default function BranchesCreateForm() {
+export default function BranchesCreateForm({ locations }: BranchesCreateFormProps) {
   const t = useTranslations();
-
+  const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const branchSchema = branchesSchema(t);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    control,
+    formState: { errors ,isValid,isDirty},
   } = useForm<BranchCreateFormValues>({
-    resolver: zodResolver(branchSchema),
+    // resolver: zodResolver(branchSchema),
     defaultValues: {
       branch_name: "",
       location_id: 0,
@@ -37,105 +43,117 @@ export default function BranchesCreateForm() {
     },
   });
   let response;
-  const onSubmit = (data: BranchCreateFormValues) => {
+
+  const onSubmit = async (data: BranchCreateFormValues) => {
+    console.log("datadatadatadata",data);
+    
     startTransition(async () => {
-      response = await (createBranches(data));
-      if (response.error) {
-        toast(response?.error);
-
-      }
-      console.log("responseresponseresponse", response);
-
-    });
+          response = await (createBranches(data));
+          console.log("responseresponse",response);
+          
+          if (response.success) {
+            toast.success(response.message)
+          }
+          if (response.error) {
+            toast(response?.error);
+    
+          }
+        
+          setOpen(false)
+    
+        });
+   
     console.log(data);
-    // Handle form submission here
   };
 
   return (
-    <>
+    <ToolBarModal
+      title="dashboard.branches.title"
+      description="dashboard.branches.description"
+      image="/customer.png"
+      addButton={{
+        title: "dashboard.branches.Add",
+      }}
+      open={open}
+      setOpen={setOpen}
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        {/* <InputCollectionLabel title={"dashboard.permissions.title"} /> */}
         <hr />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="col-span-1 md:col-span-2">
-            <Input
-              label={{ id: "name.label" }}
-              name="branch_name"
-              register={register}
-              error={errors.branch_name?.message}
-              placeholder={{ id: "name.placeholder" }}
-              startIcon={<Key size={18} />}
-            />
+        <div className="grid grid-cols-1 gap-5">
+          <Input
+            label={{ id: "name.label" }}
+            name="branch_name"
+            register={register}
+            error={errors.branch_name?.message}
+            placeholder={{ id: "name.placeholder" }}
+            startIcon={<GitBranch size={18} />}
+          />
 
-            <Input
-              label={{ id: "location_id.label" }}
-              name="location_id"
-              type="number"
-              register={register}
-              error={errors.location_id?.message}
-              placeholder={{ id: "location.placeholder" }}
-              startIcon={<Key size={18} />}
-            />
+          {/* // select of location */}
 
-            <Input
-              label={{ id: "address.label" }}
-              name="address"
-              register={register}
-              error={errors.address?.message}
-              placeholder={{ id: "address.placeholder" }}
-              startIcon={<Key size={18} />}
-            />
+          <CustomSelect
+            label={{ id: "locationId.label" }}
+            name="location_id"
+            control={control}
+            error={errors.location_id?.message}
+            placeholder={{ id: "locationId.placeholder" }}
+            startIcon={<MapPin size={18} />}
+            options={locations}
+          />
+          <Input
+            label={{ id: "address.label" }}
+            name="address"
+            register={register}
+            error={errors.address?.message}
+            placeholder={{ id: "address.placeholder" }}
+            startIcon={<MapPin size={18} />}
+          />
 
-            <Input
-              label={{ id: "phoneNumber.label" }}
-              name="phone_number"
-              register={register}
-              error={errors.phone_number?.message}
-              placeholder={{ id: "phoneNumber.placeholder" }}
-              startIcon={<Key size={18} />}
-            />
+          <Input
+            label={{ id: "phoneNumber.label" }}
+            name="phone_number"
+            register={register}
+            error={errors.phone_number?.message}
+            placeholder={{ id: "phoneNumber.placeholder" }}
+            startIcon={<Phone size={18} />}
+          />
 
-            <Input
-              label={{ id: "email.label" }}
-              name="email"
-              register={register}
-              error={errors.email?.message}
-              placeholder={{ id: "email.placeholder" }}
-              startIcon={<Key size={18} />}
-            />
+          <Input
+            label={{ id: "email.label" }}
+            name="email"
+            register={register}
+            error={errors.email?.message}
+            placeholder={{ id: "email.placeholder" }}
+            startIcon={<Mail size={18} />}
+          />
 
-            <Input
-              label={{ id: "latitude.label" }}
-              name="latitude"
-              register={register}
-              error={errors.latitude?.message}
-              placeholder={{ id: "latitude.placeholder" }}
-              startIcon={<Key size={18} />}
-            />
+          <Input
+            label={{ id: "latitude.label" }}
+            name="latitude"
+            register={register}
+            error={errors.latitude?.message}
+            placeholder={{ id: "latitude.placeholder" }}
+            startIcon={<Globe2 size={18} />}
+          />
 
-            <Input
-              label={{ id: "longitude.label" }}
-              name="longitude"
-              register={register}
-              error={errors.longitude?.message}
-              placeholder={{ id: "longitude.placeholder" }}
-              startIcon={<Key size={18} />}
-            />
-          </div>
+          <Input
+            label={{ id: "longitude.label" }}
+            name="longitude"
+            register={register}
+            error={errors.longitude?.message}
+            placeholder={{ id: "longitude.placeholder" }}
+            startIcon={<Globe2 size={18} />}
+          />
         </div>
-        <p>
-          {response?.error}
-        </p>
+
         <button
           type="submit"
+          // disabled={isValid }
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
-          {isPending ?
-            <span> {t("loading")}</span> :
-            <span>{t("submit")}</span>
-          }
+          {isPending ? <span>{t("loading")}</span> : <span>{t("submit")}</span>}
         </button>
       </form>
-    </>
+    </ToolBarModal>
   );
 }
