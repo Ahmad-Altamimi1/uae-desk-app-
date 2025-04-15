@@ -21,10 +21,11 @@ const endPoints = {
   CustomerAddTaxId: "api/customers/{customer}/add-tax-id",
   CustomerEditStatus: "api/customers/edit-status",
   CustomerUpdateCreator: "api/customers/updateCreator",
+  CustomerInvoices: "api/customers/invoices/",
 
   /////////////
-  
-//permissions
+
+  //permissions
   getPermissions: "api/permissions/index",
   PermissionStore: "api/permissions/store",
   PermissionCreate: "api/permissions/create",
@@ -32,7 +33,7 @@ const endPoints = {
   PermissionUpdate: "api/permissions/update",
   PermissionDestroy: "api/permissions/destroy",
 
-//roles
+  //roles
   getRoles: "api/roles/index",
   RolesCreate: "api/roles/create",
   RolesStore: "api/roles/store",
@@ -64,8 +65,8 @@ const endPoints = {
   getShifts: "api/shifts/index",
   ShiftsCreate: "api/shifts/create",
   ShiftsStore: "api/shifts/store",
-  ShiftsEdit:"api/shifts/edit",
-  ShiftsUpdate:"api/shifts/update",
+  ShiftsEdit: "api/shifts/edit",
+  ShiftsUpdate: "api/shifts/update",
   ShiftsDestroy: "api/shifts/destroy",
 
   //attendance

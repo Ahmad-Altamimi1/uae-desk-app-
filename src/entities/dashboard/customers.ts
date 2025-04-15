@@ -95,8 +95,24 @@ export interface ICustomerData {
   services: IServicesData[];
   branches: IBranchesData[];
   selectedServices: number[];
+  processTime: ProcessTimeResponse;
 }
 export interface IUploadMedia {
   document_name: string;
   media: File[];
+}
+export interface ProcessTimeOriginal {
+  dataEntry: ProcessTime;
+  expertVerification: ProcessTime;
+  supervisorApproval: ProcessTime;
+  totalVerification: Date;
+}
+export interface ProcessTime {
+  start: Date;
+  end: Date;
+  total: Date;
+}
+interface ProcessTimeResponse {
+  headers: Record<string, string>;
+  original: ProcessTimeOriginal;
 }
