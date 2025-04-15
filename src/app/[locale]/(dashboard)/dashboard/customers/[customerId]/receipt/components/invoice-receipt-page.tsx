@@ -54,7 +54,7 @@ export default function InvoiceReceiptPage({ data }: { data: InvoiceDetails }) {
 
       <div className="invoice-container">
         {view === "both" && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 invoice-print-area">
+          <div className="grid grid-cols-1 lg:grid-cols-1 gap-1 invoice-print-area">
             <Invoice data={data} />
             <Receipt data={data} />
           </div>
