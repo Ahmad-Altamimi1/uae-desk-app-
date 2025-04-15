@@ -107,7 +107,7 @@ export default function Invoice({ data }: InvoiceProps) {
               >
                 <div>{service.name}</div>
                 <div className="text-right text-[#7E7E7E]">
-                  {Number(service?.price || 0).toFixed(0)}{" "}
+                  {Number(service?.price || 0)}{" "}
                   <span className="text-xs">AED</span>
                 </div>
               </div>
@@ -131,7 +131,7 @@ export default function Invoice({ data }: InvoiceProps) {
             <div className="flex justify-between px-4 py-2 bg-[#e8811918] font-semibold text-gray-500 mt-2">
               <span>Total Verification Time</span>
               <span className="text-orange-600 text-[16px] font-bold">
-                {totalAmount.toFixed(0)}{" "}
+                {totalAmount}{" "}
                 <span className="text-gray-500">AED</span>
               </span>
             </div>

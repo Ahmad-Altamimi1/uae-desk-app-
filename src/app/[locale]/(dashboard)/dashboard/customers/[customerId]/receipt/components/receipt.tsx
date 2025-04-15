@@ -105,7 +105,7 @@ export default function Receipt({ data }: ReceiptProps) {
               <div>                  {index + 1}. {service.name}
               </div>
               <div className="text-right text-[#7E7E7E]">
-                AED {service.price.toFixed(2)}
+                AED {service.price}
                 {/* <span className="text-xs">AED</span> */}
               </div>
             </div>
@@ -129,14 +129,14 @@ export default function Receipt({ data }: ReceiptProps) {
           <div className="flex justify-between px-4 py-2 bg-[#e8811918] font-semibold text-gray-500 mt-2">
             <span>VAT (%)</span>
             <span className="text-orange-600 text-[16px] font-bold">
-            AED {Number(vatAmount)?.toFixed(2)}
+            AED {Number(vatAmount)}
             {/* <span className="text-gray-500">AED</span> */}
             </span>
           </div>
           <div className="flex justify-between px-4 py-2 bg-[#e8811918] font-semibold text-gray-500 mt-2">
             <span>Total Paid</span>
             <span className="text-orange-600 text-[16px] font-bold">
-            AED {Number(total_amount).toFixed(2)}
+            AED {Number(total_amount)}
             {/* <span className="text-gray-500">AED</span> */}
             </span>
           </div>
