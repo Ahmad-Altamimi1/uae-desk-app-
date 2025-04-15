@@ -1,15 +1,15 @@
 "use server";
 import { z } from "zod";
-import { getLocale, getTranslations } from "next-intl/server";
-import { CustomerService } from "@/api/services/dashboard"; // update as needed
+import { getTranslations } from "next-intl/server";
 import { permissionSchema } from "../schema/permission";
-import { get } from "http";
 import { PermissionService } from "@/lib/api/services/dashboard/permission";
 
 interface PermissionState {
   success: boolean;
   error: string | null;
-  data: any;
+  data: {
+    name: string[] | undefined;
+  };
 }
 
 export async function createPermission(
@@ -28,9 +28,7 @@ export async function createPermission(
   }
 
   try {
-    const locale = await getLocale();
     const response = await PermissionService.create(parsed.data);
-    console.log("response", response);
 
     return {
       success: true,

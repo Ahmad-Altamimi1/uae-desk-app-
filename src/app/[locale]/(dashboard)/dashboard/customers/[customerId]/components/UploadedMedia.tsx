@@ -9,6 +9,7 @@ import Image from "next/image";
 import NoMediaImage from "@/public/images/dashboard/customers/noMediaFound(en).svg";
 import { deleteMedia } from "@/app/[locale]/(dashboard)/actions";
 import { toast } from "sonner";
+import { ConfirmDeleteDialog } from "@/components/common/ConfirmDeleteDialog";
 
 interface IUploadedMediaProps {
   media: IMediaData[];
@@ -24,7 +25,48 @@ const UploadedMedia = ({
   const [selectedMedia, setSelectedMedia] = useState<IMediaData | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  const handleDelete = (mediaId: number) => {
+  const ConfirmDelete = (item: IMediaData) => {
+    ConfirmDeleteDialog({
+      title: "Delete Media",
+      message: "Are You Sure To Delete This Media",
+      itemName: item.document_name,
+      html: (
+        <div
+          key={item.id}
+          className="flex flex-col md:flex-row  bg-white overflow-hidden"
+        >
+          <div className="w-full md:w-24 h-28 bg-gray-50 flex items-center justify-center p-4">
+            {renderFilePreview(item)}
+          </div>
+          <div className="flex-1 p-4 flex flex-col justify-between">
+            <div>
+              <h3 className="text-lg font-medium truncate">
+                {item.document_name}
+              </h3>
+              <div className="grid grid-cols-2 gap-x-1 gap-y-2 mt-2">
+                <div>
+                  <p className="text-sm text-muted-foreground">
+                    Document Type:
+                  </p>
+                  <p className="text-sm font-medium text-primary">
+                    {getDocumentType(item.file_type)}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Added Date:</p>
+                  <p className="text-sm font-medium">
+                    {formatDate(item.created_at)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+      onDelete: () => handleDelete(item.id),
+    });
+  };
+  const handleDelete = async (mediaId: number) => {
     startTransition(async () => {
       await deleteMedia(mediaId).then((res) => {
         if (res.success) {
@@ -35,6 +77,7 @@ const UploadedMedia = ({
       });
     });
   };
+
   const getDocumentType = (fileType: string): string => {
     if (
       fileType.trim() == "image/" ||
@@ -212,25 +255,31 @@ const UploadedMedia = ({
                         </div>
                       </div>
                     </div>
-                    <div className="flex gap-2 mt-4">
-                      <div
-                        className="flex items-center gap-2"
+                    <div className="flex gap-6 mt-4">
+                      <Button
+                        variant={"ghost"}
+                        className="group flex items-center gap-2 cursor-pointer hover:bg-[#e88119] hover:text-white "
                         onClick={() => handleDownloadClick(item)}
                       >
-                        <div className="bg-[#E880191A] rounded-full p-2 ">
-                          <Download className="h-4 w-4 text-[#E88019]" />
+                        <div className="bg-[#E880191A] rounded-full p-2 group-hover:bg-transparent">
+                          <Download className="h-4 w-4 text-[#E88019] group-hover:text-white" />
                         </div>
-                        <span className="text-amber-500">Download</span>
-                      </div>
-                      <div
-                        className="flex items-center gap-2"
-                        onClick={() => handleDelete(item.id)}
+                        <span className="text-amber-500 group-hover:text-white">
+                          Download
+                        </span>
+                      </Button>
+                      <Button
+                        variant={"ghost"}
+                        className="group flex items-center gap-2 cursor-pointe hover:bg-red-500 cursor-pointer hover:text-white "
+                        onClick={() => ConfirmDelete(item)}
                       >
-                        <div className="bg-[#EE030312] rounded-full p-2 ">
-                          <Trash2 className="h-4 w-4 text-red-500 " />
+                        <div className="bg-[#EE030312] rounded-full p-2 group-hover:bg-transparent ">
+                          <Trash2 className="h-4 w-4 text-red-500 group-hover:text-white " />
                         </div>
-                        <span className="text-red-500">Delete</span>
-                      </div>
+                        <span className="text-red-500  group-hover:text-white">
+                          Delete
+                        </span>
+                      </Button>
                     </div>
                   </div>
                 </div>

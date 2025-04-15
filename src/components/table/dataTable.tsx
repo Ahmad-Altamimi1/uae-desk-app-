@@ -132,7 +132,7 @@ export function DataTable<TResponse>({
   }
 
   return (
-    <>
+    <div>
       <ToolBar table={table} />
       <Tabs
         defaultValue="outline"
@@ -290,7 +290,7 @@ export function DataTable<TResponse>({
           <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
         </TabsContent>
       </Tabs>
-    </>
+    </div>
   );
 }
 function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
