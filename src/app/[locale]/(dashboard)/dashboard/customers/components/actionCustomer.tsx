@@ -36,7 +36,7 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
               variant="link"
               className="bg-gray-200 rounded-3xl flex items-center gap-2 cursor-pointer"
               aria-label="View Customer"
-              onClick={() => handleClick("View Customer")}
+              onClick={() => route.push(`/dashboard/customers/${id}`)}
             >
               <IconEye className="text-black" />
             </Button>
