@@ -54,6 +54,7 @@
 
   --primary: rgba(0, 113, 59, 1);
   --primary-foreground: oklch(0.86 0.0293 153.41); /* Light text on green */
+  --primary-hover: oklch(0.86 0.0293 153.41); /* Light text on green hover */
 
   --secondary: oklch(0.97 0 0);
   --light: oklch(0.9 0.1228 153.41);
@@ -141,23 +142,18 @@
   opacity: 0;
 }
 
-
 .swal-title {
   color: black;
-  font-size: 25px; 
+  font-size: 25px;
   font-weight: 600;
   text-align: left;
-
 }
 
 .swal-description {
   font-size: 15px;
   color: #555454;
-  text-align: left; 
-
+  text-align: left;
 }
-
-
 
 .swal-close-btn {
   color: red !important;
@@ -169,5 +165,26 @@
 }
 
 .rounded-modal {
-  border-radius: 1.5rem !important; 
+  border-radius: 1.5rem !important;
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .invoice-print-area,
+  .invoice-print-area * {
+    visibility: visible;
+  }
+
+  /* .invoice-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  } */
+
+  .print-btn-container {
+    display: none !important;
+  }
 }

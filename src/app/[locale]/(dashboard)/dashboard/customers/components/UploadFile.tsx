@@ -187,7 +187,7 @@ export function MyDropzone({ filesData, setFilesData }: IProps) {
                   key={index}
                   className="flex flex-col md:flex-row border rounded-lg shadow-sm bg-white overflow-hidden"
                 >
-                  <div className="w-full md:w-64 h-48 bg-gray-50 flex items-center justify-center p-4">
+                  <div className="w-full md:w-64 h-48  flex items-center justify-center p-4">
                     {renderFilePreview(fileData)}
                   </div>
                   <div className="flex-1 p-4 flex flex-col justify-between">
