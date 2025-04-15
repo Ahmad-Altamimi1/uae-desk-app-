@@ -50,7 +50,9 @@
       "branchName": "Branch Name",
       "servicesModalTitle": "Services",
       "servicesModalDescription": "",
-
+      "UploadNewMedia": "Upload New Media",
+      "UploadMedia": "Upload Media",
+      "UploadNewMediaDescription": "Select Document Type And Upload File",
       "tabs": {
         "CustomerFTAInformation": "Customer & FTA Information",
         "ServicesAndPaymentDetails": "Services And Payment Details",

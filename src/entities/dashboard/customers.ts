@@ -37,6 +37,16 @@ export interface IResponseCustomer {
   supervisor_approved_at: string | null;
   branch: IBranchesData;
   services: IServicesData[];
+  media: IMediaData[];
+}
+export interface IMediaData {
+  id: number;
+  customer_id: number;
+  document_name: string;
+  file_type: string;
+  file_path: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface IRequestCustomer {

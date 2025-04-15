@@ -15,10 +15,14 @@ export const CustomerService = {
     api.post<IResponseCustomer, IRequestCustomer>(`CustomerUpdate`, data),
   uploadMedia: (data: IUploadMedia) =>
     api.post<IResponseCustomer, IUploadMedia>(`CustomerMediaStore`, data),
-
-
   destroy: (id: number) =>
     api.post("CustomerDestroy", { id }), 
+
+  deleteMedia: (id: number) =>
+    api.delete<void, { id: number }>(`deleteCustomerMediaDelete`, {
+      id,
+    }),
+
 };
 
 

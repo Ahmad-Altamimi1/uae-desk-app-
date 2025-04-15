@@ -14,7 +14,7 @@ const endPoints = {
   CustomerFtaDocumentUpload: "api/customers/upload/fta-docuemnt",
   CustomerFtaDocumentUpdate: "api/customers/update/fta-docuemnt",
   CustomerMedia: "api/customers/media",
-  deleteCustomerMediaDelete: "api/customers/media/delete",
+  deleteCustomerMediaDelete: "api/customers/media/delete/",
   CustomerSubmitVerification: "api/customers/submit-verification",
   CustomerSubmitReview: "api/customers/{customer}/submit-review",
   CustomerRequestDocument: "api/customers/{customer}/request-document",
@@ -57,10 +57,10 @@ const endPoints = {
   BranchesDestroy: "api/branches/destroy",
 
   //userActivity
-  getLogs:"api/logs",
-  getLogsById:"api/logs/{id}",
+  getLogs: "api/logs",
+  getLogsById: "api/logs/{id}",
 
-//shifts
+  //shifts
   getShifts: "api/shifts/index",
   ShiftsCreate: "api/shifts/create",
   ShiftsStore: "api/shifts/store",

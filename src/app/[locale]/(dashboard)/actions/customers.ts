@@ -139,15 +139,38 @@ export async function handleFileUpload(
     formData.append("media[]", files[i]);
   }
 
-  console.log("Sending files:", files);
-
   try {
     const response = await CustomerService.uploadMedia(formData);
+    revalidateTag(tags.CustomerShow);
 
     return {
       success: true,
       data: response,
       message: "File uploaded successfully",
+      error: null,
+    };
+  } catch (error) {
+    if (typeof error === "object") {
+      return {
+        success: false,
+        data: {},
+        message: (error as { message: string })?.message,
+        error: (error as { message: string })?.message,
+        ...error,
+      };
+    }
+  }
+}
+
+export async function deleteMedia(id: number): Promise<CustomerState> {
+  try {
+    const response = await CustomerService.deleteMedia(id);
+    revalidateTag(tags.CustomerShow);
+
+    return {
+      success: true,
+      data: response,
+      message: "File deleted successfully",
       error: null,
     };
   } catch (error) {

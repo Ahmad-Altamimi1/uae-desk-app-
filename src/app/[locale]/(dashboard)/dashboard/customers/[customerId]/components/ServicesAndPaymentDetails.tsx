@@ -16,10 +16,9 @@ interface IServicesAndPaymentDetailsProps {
 const ServicesAndPaymentDetails = ({
   customer,
   selectedServices,
-
   serviceOptions,
 }: IServicesAndPaymentDetailsProps) => {
-  const { register, control } = useForm({
+  const { register } = useForm({
     defaultValues: {
       id: customer.id,
       branchId: customer.branch_id,
@@ -31,7 +30,7 @@ const ServicesAndPaymentDetails = ({
       branchInput: customer.branch?.branch_name,
     },
   });
-  console.log("customer.branch?.branch_name", customer.branch?.branch_name);
+  console.log("customer", customer);
 
   const serviceValues = selectedServices;
   let totalPriceForServices: number = 0;
@@ -76,58 +75,58 @@ const ServicesAndPaymentDetails = ({
             placeholder={{ id: "taxId.placeholder" }}
           />
         </div>
-        <div className="mt-4">
-          <div className="flex justify-between">
-            <p>{"service"}</p>
-            <div className=" flex gap-1">
-              <p>{"price"}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div className="mt-4 ">
+            <div className="flex justify-between font-medium text-xl text-muted-foreground mb-3">
+              <p>{"Service"}</p>
+              <p>{"Price"}</p>
             </div>
-          </div>
-          {serviceOptions
-            ?.filter((s) => serviceValues?.includes(Number(s.value)))
-            .map((service, index) => {
-              totalPriceForServices += Number(
-                service.otherValues?.price?.value
-              );
+            {serviceOptions
+              ?.filter((s) => serviceValues?.includes(Number(s.value)))
+              .map((service, index) => {
+                totalPriceForServices += Number(
+                  service.otherValues?.price?.value
+                );
 
-              VatForServices = Number(
-                (Number(service.otherValues?.price?.value) * VatValue).toFixed(
-                  2
-                )
-              );
-              return (
-                <div key={index} className="flex justify-between">
-                  <p>{service.label}</p>
-                  <div className=" flex gap-1">
-                    <p>{service.otherValues?.price?.value}</p>
-                    <span className="text-muted-foreground">{currency}</span>
+                VatForServices = Number(
+                  (
+                    Number(service.otherValues?.price?.value) * VatValue
+                  ).toFixed(2)
+                );
+                return (
+                  <div key={index} className="flex justify-between mb-2 ">
+                    <p>{service.label}</p>
+                    <div className=" flex gap-1">
+                      <p>{service.otherValues?.price?.value}</p>
+                      <span className="text-muted-foreground">{currency}</span>
+                    </div>
                   </div>
+                );
+              })}
+            {!!totalPriceForServices && (
+              <div className="flex justify-between ">
+                <p className="">{`VAT  (${VatValue * 100}%)`}</p>
+
+                <div className=" flex gap-1">
+                  <p className=""> {VatForServices}</p>
+                  <span className="text-muted-foreground">{currency}</span>
                 </div>
-              );
-            })}
-          {!!totalPriceForServices && (
-            <div className="flex justify-between ">
-              <p className="">VAT</p>
-
-              <div className=" flex gap-1">
-                <p className=""> {VatForServices}</p>
-                <span className="text-muted-foreground">{currency}</span>
               </div>
-            </div>
-          )}
-          {!!totalPriceForServices && (
-            <div className="flex justify-between font-bold mt-2.5">
-              <p className="text-primary">Total Price</p>
+            )}
+            {!!totalPriceForServices && (
+              <div className="flex justify-between font-bold mt-2.5 border-t-2 pt-2">
+                <p className="text-primary">Total Price</p>
 
-              <div className=" flex gap-1">
-                <p className="text-primary">
-                  {" "}
-                  {totalPriceForServices + VatForServices}
-                </p>
-                <span className="text-muted-foreground">{currency}</span>
+                <div className=" flex gap-1">
+                  <p className="text-primary">
+                    {" "}
+                    {totalPriceForServices + VatForServices}
+                  </p>
+                  <span className="text-muted-foreground">{currency}</span>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
         <div className="content space-y-4 grid grid-cols-1 md:grid-cols-1 gap-2 "></div>
       </div>
