@@ -5,6 +5,8 @@ import { api } from "@/lib/api/serverCore";
 import ToolBar2 from "@/components/table/toolBar2";
 import { IResponseBranches } from "@/entities/dashboard";
 import { IResponseShifts } from "@/entities/dashboard/shifts";
+import ToolBarModal from "@/components/table/toolBarModal";
+import ShiftsCreateForm from "./create/page";
 
 const Page = async () => {
   const response = await api.get<{
@@ -17,7 +19,7 @@ const Page = async () => {
 
   return (
     <>
-      <ToolBar2
+      {/* <ToolBar2
         title="dashboard.shifts.title"
         description="dashboard.shifts.description"
         image="/customer.png"
@@ -26,7 +28,20 @@ const Page = async () => {
             href: "shifts/create",
           }}
       />
-      <DataTable columns={columns} data={shifts} />
+      <DataTable columns={columns} data={shifts} /> */}
+      <ToolBarModal
+      title="dashboard.shifts.title"
+      description="dashboard.shifts.description"
+      image="/customer.png"
+      addButton={{
+        title: "dashboard.shifts.Add",
+        // href: "services/create",
+      }}
+    >
+
+      <ShiftsCreateForm />
+    </ToolBarModal>
+    <DataTable columns={columns} data={shifts} /> 
     </>
   );
 };
