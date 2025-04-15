@@ -8,6 +8,7 @@ import { HeaderCell } from "@/components/table/headerCell";
 import { IServicesData } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
 import { ServicesService } from "@/lib/api/services/dashboard/services";
+import { deleteServices } from "@/app/[locale]/(dashboard)/actions/services";
 
 export const columns: ColumnDef<IServicesData>[] = [
   {
@@ -72,10 +73,10 @@ export const columns: ColumnDef<IServicesData>[] = [
           id={row.original.id}
           name={row.original.name}
           editAction={() => handleEdit(row.original.id)}
-          onDeleted={ServicesService.destroy(row.original.id)} 
+          onDeleted={async () => await deleteServices(row.original.id)}
         />
       </div>
     )
-    
-  },
+  }
+  
 ];

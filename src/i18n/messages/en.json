@@ -270,6 +270,14 @@
         "required": "Address is required"
       }
     },
+    "locationId":{
+      "label": "location",
+      "placeholder": " location",
+      "helper": "We'll never share your address",
+      "error": {
+        "required": "Address is required"
+      }
+    },
     "phoneNumber": {
       "label": "Phone Number",
       "placeholder": " phone number",

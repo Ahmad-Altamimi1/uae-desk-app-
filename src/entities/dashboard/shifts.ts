@@ -1,5 +1,5 @@
 
-export interface IResponseShifts{
+export interface IShiftsData{
     id: number;
     name: number;
     start_time: string;
@@ -8,7 +8,11 @@ export interface IResponseShifts{
    
    
 }
-
+export interface IResponseShifts {
+  data: IShiftsData[];
+  status: "success" | "error";
+  message: string;
+}
 export interface IRequestShifts{
     id: number;
     name: number;

@@ -55,6 +55,8 @@ const endPoints = {
   BranchesEdit: "api/branches/edit",
   BranchesUpdate: "api/branches/update",
   BranchesDestroy: "api/branches/destroy",
+  
+  getLocations:"api/branches/create",
 
   //userActivity
   getLogs: "api/logs",

@@ -12,6 +12,8 @@ interface ShiftsState {
   success: boolean;
   error: string | null;
   data: any;
+  message:string,
+
 }
 
 export async function createShifts(
@@ -25,6 +27,7 @@ export async function createShifts(
     return {
       success: false,
       error: "Validation failed",
+      message:"Validation failed",
       data: parsed.error.flatten().fieldErrors,
     };
   }
@@ -38,12 +41,38 @@ export async function createShifts(
       success: true,
       data: response,
       error: null,
-    };
-  } catch (error) {
-    return {
+      message:response.message
+  };
+} catch (error) {
+  return {
       success: false,
       error: (error as Error).message,
       data: {},
-    };
+      message:(error as Error).message
+  };
   }
+}
+export async function deleteShifts(
+    id: number
+): Promise<ShiftsState> {
+
+
+
+    try {
+        const response = await ShiftsService.destroy(id)
+
+        return {
+            success: true,
+            data: response,
+            error: null,
+            message: response.message
+        };
+    } catch (error) {
+        return {
+            success: false,
+            error: (error as Error).message,
+            data: {},
+            message: (error as Error).message
+        };
+    }
 }

@@ -32,9 +32,11 @@ import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
 import { IResponseBranches, IResponseServices, IResponseUsersPermissions } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-import { IResponseShifts } from "@/entities/dashboard/shifts";
+import { IResponseShifts, IShiftsData } from "@/entities/dashboard/shifts";
 import { Switch } from "@radix-ui/react-switch";
 import { StatusToggle } from "./statusToggle";
+import { ShiftsService } from "@/lib/api/services/dashboard/shifts";
+import { deleteShifts } from "../../../actions/shifts";
 // export const schema = z.object({
 //   id: z.number(),
 //   header: z.string(),
@@ -45,7 +47,7 @@ import { StatusToggle } from "./statusToggle";
 //   reviewer: z.string(),
 // });
 
-export const columns: ColumnDef<IResponseShifts>[] = [
+export const columns: ColumnDef<IShiftsData>[] = [
   {
     id: "drag",
     header: () => null,
@@ -148,14 +150,19 @@ export const columns: ColumnDef<IResponseShifts>[] = [
       );
     },
   },
-  
+
   {
     accessorKey: "actions",
     header: <HeaderCell label="shifts.actions" />,
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <div className="flex items-center justify-center">
-        <ActionCell  />
+        <ActionCell
+          id={row.original.id}
+          name={row.original.name}
+          editAction={() => handleEdit(row.original.id)}
+          onDeleted={async () => await deleteShifts(row.original.id)}
+        />
       </div>
     )
     
