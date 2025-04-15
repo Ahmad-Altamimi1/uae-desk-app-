@@ -172,6 +172,8 @@ async function fetchWithTimeout<TResponse>(
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
   }
+console.log('url', url)
+  console.log('methodmethod', method);
 
   await getCsrfToken();
 
@@ -257,6 +259,7 @@ export async function fetchCUDApi<TResponse, TRequest = any>(
   if (!skipCsrf) {
     await getCsrfToken();
   }
+  await getCsrfToken();
 
   const url = await getValidApiUrl(endpoint);
   console.log(`${method} Request:`, { url, body: body ? "(data)" : "(empty)" });

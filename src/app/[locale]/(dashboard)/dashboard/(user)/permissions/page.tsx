@@ -25,6 +25,8 @@ const Page = async () => {
 
       <PermissionCreateForm/>
     </ToolBarModal>
+
+    
     <DataTable columns={columns} data={data} />;
   </>
 };

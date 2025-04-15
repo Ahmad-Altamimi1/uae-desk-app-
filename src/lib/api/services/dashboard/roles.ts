@@ -7,6 +7,9 @@ export const RolesService = {
       `RolesStore`,
       data
     ),
+
+    destroy: (id: number) =>
+      api.post("RolesDestroy", { id }), 
   // fetchCUDApi("login", "POST", data),
   //   logout: () => fetchCUDApi<ILogin>(`/users/${id}`, "POST"),
 };

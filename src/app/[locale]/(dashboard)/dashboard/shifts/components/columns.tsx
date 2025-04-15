@@ -155,7 +155,7 @@ export const columns: ColumnDef<IResponseShifts>[] = [
     id: "actions",
     cell: () => (
       <div className="flex items-center justify-center">
-        <ActionCell />
+        <ActionCell  />
       </div>
     )
     

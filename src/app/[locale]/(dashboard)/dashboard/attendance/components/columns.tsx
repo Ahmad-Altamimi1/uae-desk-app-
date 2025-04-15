@@ -177,12 +177,18 @@ export const columns: ColumnDef<IResponseAttendance>[] = [
     accessorKey: "actions",
     header: <HeaderCell label="attendance.actions" />,
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <div className="flex items-center justify-center">
-        <ActionCell />
+        <ActionCell
+          id={row.original.id}
+          name={row.original.name}
+          editAction={() => handleEdit(row.original.id)}
+          onDeleted={Atte.destroy(row.original.id)} 
+        />
       </div>
     )
     
   },
+
 
 ];

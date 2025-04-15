@@ -31,6 +31,7 @@ import { IResponseUsersRoles } from '@/entities/dashboard/users'
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
 import { RowCell } from "@/components/table/rowCell";
+import { RolesService } from "@/lib/api/services/dashboard/roles";
 // export const schema = z.object({
 //   id: z.number(),
 //   header: z.string(),
@@ -115,11 +116,16 @@ export const columns: ColumnDef<IResponseUsersRoles>[] = [
 
   {
     accessorKey: "actions",
-    header: <HeaderCell label="permissions.actions" />,
+    header: <HeaderCell label="roles.actions" />,
     id: "actions",
-    cell: () => (
+    cell: ({ row }) => (
       <div className="flex items-center justify-center">
-        <ActionCell />
+        <ActionCell
+          id={row.original.id}
+          name={row.original.name}
+          editAction={() => handleEdit(row.original.id)}
+          onDeleted={RolesService.destroy(row.original.id)} 
+        />
       </div>
     )
     

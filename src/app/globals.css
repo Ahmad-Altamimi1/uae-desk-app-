@@ -140,3 +140,34 @@
 .ReactModal__Overlay--before-close {
   opacity: 0;
 }
+
+
+.swal-title {
+  color: black;
+  font-size: 25px; 
+  font-weight: 600;
+  text-align: left;
+
+}
+
+.swal-description {
+  font-size: 15px;
+  color: #555454;
+  text-align: left; 
+
+}
+
+
+
+.swal-close-btn {
+  color: red !important;
+}
+
+.swal-popup-left .swal2-close {
+  right: auto !important;
+  left: 1rem !important;
+}
+
+.rounded-modal {
+  border-radius: 1.5rem !important; 
+}
