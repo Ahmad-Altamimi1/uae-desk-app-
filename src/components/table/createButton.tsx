@@ -24,7 +24,7 @@ const CreateButton = async ({
   return (
     <Comp {...(href ? { href } : {})}>
       <Button
-        className="bg-[#00713B] px-6 py-3 text-base flex items-center gap-2 cursor-pointer"
+        className="bg-primary px-6 py-3 text-base flex items-center gap-2 cursor-pointer"
         type={type}
       >
         <Image src="/plus.png" alt="Logo" width={24} height={24} />

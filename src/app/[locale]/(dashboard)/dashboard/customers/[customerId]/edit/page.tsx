@@ -1,7 +1,6 @@
 import {
   IGetCustomer,
   IResponseBranches,
-  IResponseCustomer,
   IResponseServices,
 } from "@/entities/dashboard";
 import { api } from "@/lib/api/serverCore";

@@ -9,24 +9,26 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useTranslations } from "next-intl";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { useEffect } from "react";
 
 interface Props {
   title: string;
   description?: string;
   children: React.ReactNode;
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  close?: () => void;
+  confirm?: () => void;
   triggerButton?: React.ReactNode | string;
+  isOpen?: boolean;
 }
 
-export function Modal({
+export function ModalParentTrigger({
   title,
   description,
   children,
-  open = false,
-  setOpen,
+  close,
+  confirm,
   triggerButton = "modal.open",
+  isOpen,
 }: Props) {
   const t = useTranslations();
   const titleTranslate = title ? t(title) : t("dashboard.modal.title");
@@ -36,6 +38,10 @@ export function Modal({
   const triggerButtonTranslate =
     typeof triggerButton == "string" ? t(triggerButton) : triggerButton;
 
+  const [open, setOpen] = React.useState(false);
+  useEffect(() => {
+    setOpen(!!isOpen);
+  }, [isOpen]);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>

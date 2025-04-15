@@ -121,7 +121,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               "w-full px-4 py-2.5 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-200",
               !viewInput && "bg-[#F6F6F6]",
               startIcon ? "md:pl-10" : "",
-              translatedLabel && viewInput ? "md:pl-50" : "",
+              translatedLabel && viewInput ? "md:pl-[50%]" : "",
               endIcon ? "md:pr-10" : "",
               errorMessage ? "border-red-500 focus:ring-red-500" : "",
               className

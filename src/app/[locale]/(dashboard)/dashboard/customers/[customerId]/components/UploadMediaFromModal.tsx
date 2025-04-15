@@ -1,7 +1,5 @@
 "use client";
-import PageTitle from "@/components/ui/pageTitle";
 import React, { useState } from "react";
-import { MyDropzone } from "../../components/UploadFile";
 import CustomSelect from "@/components/form/select";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -9,6 +7,8 @@ import { useTranslations } from "next-intl";
 import { handleFileUpload } from "@/app/[locale]/(dashboard)/actions";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
+import { DropMediaModal } from "./modalDrobFile";
+import { Modal } from "@/components/modal/modal";
 import { documentTypeOptions } from "@/constants/documentTypes";
 export type FileData = {
   file: File;
@@ -17,33 +17,44 @@ export type FileData = {
   addedDate: Date;
 };
 interface IProps {
-  params: Promise<{ newCustomerId: string }>;
   customerId: number;
 }
-const UploadFiles = ({ params, customerId }: IProps) => {
+const UploadMediaFromModal = ({ customerId }: IProps) => {
   const [filesData, setFilesData] = useState<FileData[]>([]);
   const [documentType, setDocumentType] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const t = useTranslations();
   const route = useRouter();
-  const newCustomerId = params
-    ? params.then((res) => res.newCustomerId)
-    : customerId;
+  const newCustomerId = customerId;
   return (
-    <>
-      <PageTitle
-        title={"dashboard.customers.CreateCustomer"}
-        description="dashboard.customers.CreateCustomerDes"
-      />
+    <Modal
+      title={"dashboard.customers.UploadNewMedia"}
+      description={"dashboard.customers.UploadNewMediaDescription"}
+      open={isOpenModal}
+      setOpen={setIsOpenModal}
+      triggerButton={
+        <Button
+          className="bg-primary px-6 py-3 text-base flex items-center gap-2 cursor-pointer"
+          type={"button"}
+        >
+          <Image src="/plus.png" alt="Logo" width={24} height={24} />
+          <span className="hidden lg:inline">
+            {t("dashboard.customers.UploadNewMedia")}
+          </span>
+        </Button>
+      }
+    >
       <CustomSelect
         options={documentTypeOptions}
         placeholder={{ id: "Select_Document_Type" }}
         onChange={(value) => setDocumentType(value)}
       />
-      <MyDropzone filesData={filesData} setFilesData={setFilesData} />
+      <DropMediaModal setFilesData={setFilesData} />
       <Button
-        className="bg-[#00713B] px-6 py-3 text-base flex items-center gap-2 cursor-pointer 
-        w-full md:w-[50%] lg:w-[40%] text-white
+        className="bg-primary px-6 py-3 text-base flex items-center gap-2 cursor-pointer 
+           text-white
         "
         type={"submit"}
         disabled={filesData.length === 0 || documentType === ""}
@@ -56,7 +67,7 @@ const UploadFiles = ({ params, customerId }: IProps) => {
               filesData.map((file) => file.file)
             );
             toast.success(t("dashboard.customers.UploadMediaSuccess"));
-            route.push(`/dashboard/customers`);
+            setIsOpenModal(false);
           } catch (err) {
             toast.error(err.message);
           } finally {
@@ -67,19 +78,17 @@ const UploadFiles = ({ params, customerId }: IProps) => {
         {isSubmitting ? (
           <div className="flex items-center justify-center space-x-2">
             <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-white"></div>
-            {/* <span>Loading...</span> */}
+            <span>Loading...</span>
           </div>
         ) : (
           <Image src="/plus.png" alt="Logo" width={24} height={24} />
         )}
         <span className="hidden lg:inline">
-          {isSubmitting
-            ? t("Submitting")
-            : t("dashboard.customers.CreateCustomer")}
+          {!isSubmitting && t("dashboard.customers.UploadNewMedia")}
         </span>
       </Button>
-    </>
+    </Modal>
   );
 };
 
-export default UploadFiles;
+export default UploadMediaFromModal;
