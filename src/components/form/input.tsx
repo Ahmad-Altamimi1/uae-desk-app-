@@ -31,6 +31,7 @@ interface InputProps
   viewInput?: boolean;
   placeholder?: TranslatableText;
   i18nNamespace?: string;
+  showLabel?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -48,6 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       name,
       viewInput = false,
       placeholder,
+      showLabel = false,
       i18nNamespace = "forms", // Default namespace for form-related translations
       ...props
     },
@@ -93,11 +95,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className={cn(fullWidth && "w-full")}>
-        {/* {!viewInput && (
+        {showLabel && (
           <label className="block text-sm font-medium text-gray-500 mb-2">
             {translatedLabel}
           </label>
-        )} */}
+        )}
         <div className="relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
             {startIcon && startIcon}

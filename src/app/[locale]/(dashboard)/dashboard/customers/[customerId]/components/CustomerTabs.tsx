@@ -137,6 +137,13 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
             ),
             name: "dashboard.customers.tabs.fat",
           },
+          {
+            component: (
+              <ProcessTimeTracking processTime={data.processTime.original }
+              />
+            ),
+            name: "dashboard.customers.tabs.ProcessTimeTracking",
+          },
         ]}
       />
     </>
