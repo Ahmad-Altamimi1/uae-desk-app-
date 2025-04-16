@@ -30,7 +30,6 @@
         "Passport": {
           "title": "Passport",
           "description": "Add New Passport",
-
           "passport_number": {
             "label": "Passport Number",
             "placeholder": "Passport Number"
@@ -47,6 +46,410 @@
             "label": "Passport Holder Name",
             "placeholder": "Passport Holder Name"
           }
+        },
+        "EmiratesId": {
+          "title": "Emirates Id",
+          "description": "Add New EmiratesId",
+          "emirates_id_number": {
+            "label": "Emirates Id number",
+            "placeholder": "Emirates Id number"
+          },
+          "emirates_id_expiry": {
+            "label": "Emirates Id expiry",
+            "placeholder": "Emirates Id expiry"
+          },
+          "emirates_id_first_name": {
+            "label": "Emirates Id first name",
+            "placeholder": "Emirates Id first name"
+          },
+          "emirates_id_last_name": {
+            "label": "Emirates Id last name",
+            "placeholder": "Emirates Id last name"
+          },
+          "emirates_id_dob": {
+            "label": "Emirates Id dob",
+            "placeholder": "Emirates Id dob"
+          },
+          "emirates_id_nationality": {
+            "label": "Emirates Id nationality",
+            "placeholder": "Emirates Id nationality"
+          }
+        },
+        "TaxCertificate": {
+          "title": "Tax Certificate",
+          "description": "Add New Tax",
+          "tax_certificate_number": {
+            "label": "tax certificate Number",
+            "placeholder": "tax certificate Number"
+          },
+          "tax_certificate_expiry": {
+            "label": "tax certificate expiry",
+            "placeholder": "tax certificate expiry"
+          },
+          "tax_registration_date": {
+            "label": "tax certificate date",
+            "placeholder": "tax certificate date"
+          },
+          "tax_authority_name": {
+            "label": "tax certificate name",
+            "placeholder": "tax certificate name"
+          }
+        },
+        "TradeLicense": {
+          "title": "Trade License",
+          "description": "Trade License",
+          "trade_license_number": {
+            "label": "Trade License Number",
+            "placeholder": "Enter trade license number"
+          },
+          "trade_license_expiry": {
+            "label": "Trade License Expiry",
+            "placeholder": "Select expiry date"
+          },
+          "trade_license_issuance_date": {
+            "label": "Issuance Date",
+            "placeholder": "Enter issuance date"
+          },
+          "trade_license_issuing_authority": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority"
+          }
+        },
+        "ChamberCertificate": {
+          "title": "Chamber Certificate",
+          "description": "Chamber Certificate",
+          "chamber_certificate_number": {
+            "label": "Chamber Certificate Number",
+            "placeholder": "Enter chamber certificate number"
+          },
+          "chamber_certificate_expiry": {
+            "label": "Chamber Certificate Expiry",
+            "placeholder": "Select expiry date"
+          },
+          "chamber_certificate_issuance_date": {
+            "label": "Issuance Date",
+            "placeholder": "Enter issuance date"
+          },
+          "chamber_certificate_issuing_authority": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority"
+          }
+        },
+        "CommercialRegister": {
+          "title": "Commercial Register",
+          "description": "Commercial Register",
+          "commercial_register_number": {
+            "label": "Commercial Register Number",
+            "placeholder": "Enter commercial register number"
+          },
+          "commercial_register_expiry": {
+            "label": "Commercial Register Expiry",
+            "placeholder": "Select expiry date"
+          },
+          "commercial_register_issuance_date": {
+            "label": "Issuance Date",
+            "placeholder": "Enter issuance date"
+          },
+          "commercial_register_issuing_authority": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority"
+          }
+        },
+        "PartnershipAgreement": {
+          "title": "Partnership Agreement",
+          "description": "Partnership Agreement",
+          "partnership_agreement_number": {
+            "label": "Agreement Number",
+            "placeholder": "Enter agreement number"
+          },
+          "partnership_agreement_date": {
+            "label": "Agreement Date",
+            "placeholder": "Select agreement date"
+          },
+          "partnership_agreement_expiry": {
+            "label": "Agreement Expiry",
+            "placeholder": "Select expiry date"
+          },
+          "partnership_agreement_authority": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority"
+          }
+        },
+        "CorporateTaxCertificate": {
+          "title": "Corporate Tax Certificate",
+          "description": "Corporate Tax Certificate",
+          "corporate_tax_certificate_number": {
+            "label": "Certificate Number",
+            "placeholder": "Enter certificate number"
+          },
+          "corporate_tax_certificate_date": {
+            "label": "Certificate Issuance Date",
+            "placeholder": "Select issuance date"
+          },
+          "corporate_tax_certificate_expiry": {
+            "label": "Certificate Expiry Date",
+            "placeholder": "Select expiry date"
+          },
+          "corporate_tax_certificate_authority": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority"
+          }
+        },
+        "VatCertificate": {
+          "title": "Vat Certificate",
+          "description": "Vat Certificate",
+          "vat_certificate_number": {
+            "label": "Certificate Number",
+            "placeholder": "Enter VAT certificate number"
+          },
+          "vat_certificate_date": {
+            "label": "Certificate Issuance Date",
+            "placeholder": "Select issuance date"
+          },
+          "vat_certificate_expiry": {
+            "label": "Certificate Expiry Date",
+            "placeholder": "Select expiry date"
+          },
+          "vat_certificate_authority": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority"
+          }
+        },
+        "IncorporationCertificate": {
+          "title": "Vat Certificate",
+          "description": "Vat Certificate",
+          "incorporation_certificate_number": {
+            "label": "Certificate Number",
+            "placeholder": "Enter incorporation certificate number"
+          },
+          "incorporation_certificate_date": {
+            "label": "Certificate Issuance Date",
+            "placeholder": "Select issuance date"
+          },
+          "incorporation_certificate_expiry": {
+            "label": "Certificate Expiry Date",
+            "placeholder": "Select expiry date"
+          },
+          "incorporation_certificate_authority": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority"
+          }
+        },
+        "UAENationalID": {
+          "title": "UAE National ID",
+          "description": "UAE National ID",
+          "uae_national_id_number": {
+            "label": "National ID Number",
+            "placeholder": "Enter National ID number"
+          },
+          "uae_national_id_expiry": {
+            "label": "National ID Expiry Date",
+            "placeholder": "Select expiry date"
+          },
+          "uae_national_id_issuance": {
+            "label": "National ID Issuance Date",
+            "placeholder": "Enter issuance date"
+          },
+          "uae_national_id_holder_name": {
+            "label": "Cardholder's Name",
+            "placeholder": "Enter cardholder's name"
+          }
+        },
+        "PowerOfAttorney": {
+          "title": "Power Of Attorney",
+          "description": "Power Of Attorney",
+          "poa_number": {
+            "label": "Power of Attorney Number",
+            "placeholder": "Enter Power of Attorney number"
+          },
+          "poa_expiry": {
+            "label": "Power of Attorney Expiry Date",
+            "placeholder": "Select expiry date"
+          },
+          "poa_issuance_date": {
+            "label": "Power of Attorney Issuance Date",
+            "placeholder": "Enter issuance date"
+          },
+          "poa_holder_name": {
+            "label": "Attorney's Name",
+            "placeholder": "Enter attorney's name"
+          },
+          "poa_purpose": {
+            "label": "Purpose of Power of Attorney",
+            "placeholder": "Describe the purpose of the Power of Attorney"
+          }
+        },
+        "BankStatement": {
+          "title": "Bank Statement",
+          "description": "Bank Statement",
+          "bank_name": {
+            "label": "Bank Name",
+            "placeholder": "Enter bank name"
+          },
+          "account_number": {
+            "label": "Account Number",
+            "placeholder": "Enter account number"
+          },
+          "statement_period_start": {
+            "label": "Statement Start Date",
+            "placeholder": "Select start date"
+          },
+          "statement_period_end": {
+            "label": "Statement End Date",
+            "placeholder": "Select end date"
+          },
+          "statement_summary": {
+            "label": "Statement Summary",
+            "placeholder": "Provide a summary of the bank statement"
+          },
+          "available_balance": {
+            "label": "Available Balance (AED)",
+            "placeholder": "Enter available balance"
+          },
+          "currency": {
+            "label": "Currency",
+            "placeholder": "Enter currency (e.g., AED, USD)"
+          }
+        },
+        "Lease": {
+          "title": "Lease Agreement",
+          "description": "Lease Agreement",
+          "lease_agreement_number": {
+            "label": "Lease Agreement Number",
+            "placeholder": "Enter lease agreement number"
+          },
+          "lease_expiry_date": {
+            "label": "Lease Expiry Date"
+          },
+          "lease_start_date": {
+            "label": "Lease Start Date"
+          },
+          "property_address": {
+            "label": "Property Address",
+            "placeholder": "Enter property address"
+          },
+          "landlord_name": {
+            "label": "Landlord's Name",
+            "placeholder": "Enter landlord's name"
+          },
+          "monthly_rent": {
+            "label": "Monthly Rent (AED)",
+            "placeholder": "Enter monthly rent amount"
+          },
+          "lease_purpose": {
+            "label": "Purpose of Lease",
+            "placeholder": "Describe the purpose of the lease"
+          }
+        },
+        "Trademark": {
+          "title": "Trademark",
+          "description": "Trademark",
+          "trademark_certificate_number": {
+            "label": "Trademark Certificate Number",
+            "placeholder": "Enter trademark certificate number"
+          },
+          "trademark_expiry_date": {
+            "label": "Trademark Expiry Date"
+          },
+          "trademark_registration_date": {
+            "label": "Trademark Registration Date"
+          },
+          "trademark_authority_name": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority name"
+          },
+          "trademark_description": {
+            "label": "Trademark Description",
+            "placeholder": "Provide a description of the trademark"
+          },
+          "trademark_classification": {
+            "label": "Trademark Classification",
+            "placeholder": "Enter classification (e.g., goods, services)"
+          }
+        },
+        "Memorandum": {
+          "title": "Memo randum",
+          "description": "Memo randum",
+          "memorandum_reference_number": {
+            "label": "Reference Number",
+            "placeholder": "Enter memorandum reference number"
+          },
+          "memorandum_issue_date": {
+            "label": "Issue Date"
+          },
+          "memorandum_expiry_date": {
+            "label": "Expiry Date"
+          },
+          "memorandum_authority_name": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority name"
+          },
+          "memorandum_details": {
+            "label": "Memorandum Details",
+            "placeholder": "Provide details about the memorandum"
+          },
+          "memorandum_signatories": {
+            "label": "Signatories",
+            "placeholder": "List the signatories of the memorandum"
+          }
+        },
+        "Shareholder": {
+          "title": "Share holder",
+          "description": "Share holder",
+          "shareholder_agreement_number": {
+            "label": "Agreement Number",
+            "placeholder": "Enter agreement number"
+          },
+          "shareholder_agreement_issue_date": {
+            "label": "Issue Date"
+          },
+          "shareholder_agreement_expiry_date": {
+            "label": "Expiry Date"
+          },
+          "shareholder_agreement_authority": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority name"
+          },
+          "shareholder_agreement_details": {
+            "label": "Agreement Details",
+            "placeholder": "Provide details about the shareholder agreement"
+          },
+          "shareholder_agreement_parties": {
+            "label": "Parties Involved",
+            "placeholder": "List the parties involved in the shareholder agreement"
+          }
+        },
+        "FinancialStatement":{
+          "title": "Financial Statement",
+          "description": "Financial Statement",
+          
+            "financial_statement_year": {
+              "label": "Financial Year",
+              "placeholder": "Enter financial year"
+            },
+            "financial_statement_issuer": {
+              "label": "Issuing Authority",
+              "placeholder": "Enter issuing authority name"
+            },
+            "financial_statement_issue_date": {
+              "label": "Issue Date"
+            },
+            "financial_statement_expiry_date": {
+              "label": "Expiry Date (if applicable)"
+            },
+            "financial_statement_details": {
+              "label": "Statement Summary",
+              "placeholder": "Provide a summary of the audited financial statement"
+            },
+            "auditor_name": {
+              "label": "Auditor Name",
+              "placeholder": "Enter auditor's name"
+            },
+            "auditor_license_number": {
+              "label": "Auditor License Number",
+              "placeholder": "Enter auditor's license number"
+            }
+          
         }
       },
       "AddNewCustomer": "Add New Customer",
@@ -83,16 +486,15 @@
         "ExpertActions": "Expert Actions",
         "UploadedMedia": "Uploaded Media",
         "ProcessTimeTracking": "Process Time Tracking",
-        "fat":"FTA Document",
-        "fatTitle":"FTA Document",
-        "fatDES":"FAT Description"
+        "fat": "FTA Document",
+        "fatTitle": "FTA Document",
+        "fatDES": "FAT Description"
       },
       "CurrentStatus": "Current Status"
     },
     "roles": {
       "Add": "Add New Roles",
       "title": "Roles",
-
       "description": "Welcome to the users page!",
       "name": "Name",
       "code": "Code",
@@ -175,12 +577,10 @@
       "description": "This is a modal description",
       "close": "Close",
       "save": "Save"
-      
     }
   },
   "forms": {
     "AddButton": "Next To Upload Media",
-
     "submitting": "Submitting",
     "Select_Document_Type": "Select Document Type",
     "services": "services",
@@ -340,7 +740,6 @@
         "invalidFormat": "longitude must start with 052"
       }
     },
-
     "location_id": {
       "label": "location",
       "placeholder": " location",
