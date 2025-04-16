@@ -45,7 +45,7 @@ const endPoints = {
   getServices: "api/services/index",
   ServicesCreate: "api/services/create",
   ServicesStore: "api/services/store",
-  ServicesEdit: "api/services/edit",
+  ServicesEdit: "api/services/edit/",
   ServicesUpdate: "api/services/update",
   ServicesDestroy: "api/services/destroy",
 

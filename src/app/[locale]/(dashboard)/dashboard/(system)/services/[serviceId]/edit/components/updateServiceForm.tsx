@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
-import { FC, useTransition } from "react";
+import { FC, useState, useTransition } from "react";
 import { User, Mail, Building, Phone } from "lucide-react";
 
 import InputCollectionLabel from "@/components/form/inputCollectionLabel";
@@ -24,20 +24,23 @@ import { useRouter } from "@/i18n/navigation";
 import { IGetCustomer, IServicesData } from "@/entities/dashboard";
 import { serviceSchema } from "@/app/[locale]/(dashboard)/schema/services";
 import { updateService } from "@/app/[locale]/(dashboard)/actions/services";
+import ToolBarModal from "@/components/table/toolBarModal";
 
 
 interface UpdateServiceFormProps {
-   
-    data: IServicesData[];
+
+    service: IServicesData;
 }
 
 export const UpdateServiceForm: FC<UpdateServiceFormProps> = ({
-    
-    data,
+
+    service,
 }) => {
     const t = useTranslations("forms");
     const serviceTranslate = useTranslations("dashboard.services");
     const [isPending, startTransition] = useTransition();
+    const [open, setOpen] = useState(true);
+
     const router = useRouter();
     const validation = serviceSchema(t);
     type UpdateServiceFormValues = z.infer<typeof validation>;
@@ -101,8 +104,17 @@ export const UpdateServiceForm: FC<UpdateServiceFormProps> = ({
 
 
     return (
-        <>
-            <PageTitle
+        <ToolBarModal
+            title="dashboard.services.title"
+            description="dashboard.services.description"
+            image="/customer.png"
+            addButton={{
+                title: "dashboard.services.Add",
+                // href: "permissions/create",
+            }}
+            open={open}
+            setOpen={setOpen}
+        >            <PageTitle
                 title={"dashboard.services.updateService"}
                 description="dashboard.services.updateServiceDes"
             />
@@ -136,6 +148,6 @@ export const UpdateServiceForm: FC<UpdateServiceFormProps> = ({
                     {isPending ? t("submitting") : t("submit")}
                 </button>
             </form>
-        </>
+        </ToolBarModal>
     );
 };

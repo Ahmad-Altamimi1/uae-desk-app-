@@ -3,6 +3,11 @@ export interface IResponseServices {
   status: "success" | "error";
   message: string;
 }
+export interface IResponseSingleServices {
+  data: IServicesData;
+  status: "success" | "error";
+  message: string;
+}
 export interface IServicesData {
   id: number;
   name: string;

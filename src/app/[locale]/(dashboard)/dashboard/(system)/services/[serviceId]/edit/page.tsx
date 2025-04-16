@@ -1,7 +1,5 @@
 import {
-  IGetCustomer,
-  IResponseBranches,
-  IResponseServices,
+  IResponseSingleServices,
 } from "@/entities/dashboard";
 import { api } from "@/lib/api/serverCore";
 import React from "react";
@@ -12,16 +10,10 @@ interface IUpdateServiceProps {
 }
 const updateService = async ({ params }: IUpdateServiceProps) => {
   const serviceId = (await params).serviceId;
-  console.log("serviceIdserviceIdserviceId",serviceId);
-  
-
-  const service = await api.get<IResponseServices>("ServicesEdit");
+  const service = await api.get<IResponseSingleServices>(["ServicesEdit", serviceId]);
 
   return (
-    <UpdateServiceForm
-     
-      data={service.data}
-    />
+    <UpdateServiceForm service={service.data} />
   );
 };
 

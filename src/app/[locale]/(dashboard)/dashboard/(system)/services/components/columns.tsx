@@ -9,6 +9,7 @@ import { IServicesData } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
 import { deleteServices } from "@/app/[locale]/(dashboard)/actions/services";
 import { toast } from "sonner";
+import ServiceAction from "./action";
 
 export const columns: ColumnDef<IServicesData>[] = [
   {
@@ -68,20 +69,7 @@ export const columns: ColumnDef<IServicesData>[] = [
     header: <HeaderCell label="services.actions" />,
     id: "actions",
     cell: ({ row }) => (
-      <div className="flex items-center justify-center">
-        <ActionCell
-          id={row.original.id}
-          name={row.original.name}
-          editAction={() => handleEdit(row.original.id)}
-          onDeleted={async () =>
-            await deleteServices(row.original.id).then((r) => {
-              if (r.error) {
-                throw new Error("Error in delete");
-              }
-            })
-          }
-        />
-      </div>
+    <ServiceAction id={row.original.id} name={row.original.name}/>
     ),
   },
 ];
