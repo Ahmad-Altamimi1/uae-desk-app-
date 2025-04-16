@@ -17,9 +17,11 @@ import FtaDocument from "./tabs/fatDocument";
 interface CustomerTabsProps {
   data: ICustomerData;
   serviceOptions: ISelectOption[];
+  allServiceOptions: ISelectOption[];
+  
 }
 
-const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
+const CustomerTabs = ({ data, serviceOptions, allServiceOptions }: CustomerTabsProps) => {
   const t = useTranslations("dashboard.customers");
   const [activeHeader, setActiveHeader] = useState(0);
   const defaultContent = () => {
@@ -112,7 +114,7 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
               <ExpertActions
                 customer={data.customer}
                 selectedServices={data.selectedServices}
-                serviceOptions={serviceOptions}
+                serviceOptions={allServiceOptions}
               />
             ),
             name: "dashboard.customers.tabs.ExpertActions",
