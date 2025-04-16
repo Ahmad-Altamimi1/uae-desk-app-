@@ -26,6 +26,29 @@
     "title": "Dashboard",
     "description": "Welcome to your dashboard!",
     "customers": {
+      "Services": {
+        "Passport": {
+          "title": "Passport",
+          "description": "Add New Passport",
+
+          "passport_number": {
+            "label": "Passport Number",
+            "placeholder": "Passport Number"
+          },
+          "passport_expiry": {
+            "label": "Passport Expiry",
+            "placeholder": "Passport Expiry"
+          },
+          "passport_issuing_country": {
+            "label": "Passport Issuing Country",
+            "placeholder": "Passport Issuing Country"
+          },
+          "passport_holder_name": {
+            "label": "Passport Holder Name",
+            "placeholder": "Passport Holder Name"
+          }
+        }
+      },
       "AddNewCustomer": "Add New Customer",
       "ApplicationID": "Application ID",
       "UploadMediaSuccess": "Media uploaded successfully",

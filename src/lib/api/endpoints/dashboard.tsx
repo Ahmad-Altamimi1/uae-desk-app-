@@ -22,6 +22,7 @@ const endPoints = {
   CustomerEditStatus: "api/customers/edit-status",
   CustomerUpdateCreator: "api/customers/updateCreator",
   CustomerInvoices: "api/customers/invoices/",
+  groupedMedia: "api/customers/groupedMedia/",
 
   /////////////
 
