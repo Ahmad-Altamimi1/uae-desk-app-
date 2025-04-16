@@ -91,7 +91,7 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
         if (result.success) {
           toast.success(customerTranslate("updateSuccess"));
 
-          router.back();
+          router.push("/dashboard/customers");
         } else {
           toast.error(result.error?.toString());
 
@@ -287,11 +287,6 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                         service.otherValues?.price?.value
                       );
 
-                      VatForServices = VatForServices = Number(
-                        (
-                          Number(service.otherValues?.price?.value) * VatValue
-                        ).toFixed(2)
-                      );
                       return (
                         <div key={index} className="flex justify-between">
                           <p>{service.label}</p>
@@ -309,7 +304,10 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                       <p className="">VAT</p>
 
                       <div className=" flex gap-1">
-                        <p className=""> {VatForServices}</p>
+                        <p className="">
+                          {" "}
+                          {Number((totalPriceForServices * VatValue).toFixed())}
+                        </p>
                         <span className="text-muted-foreground">
                           {currency}
                         </span>
@@ -321,6 +319,13 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
                       <p className="text-primary">Total Price</p>
 
                       <div className=" flex gap-1">
+                        <p className="text-primary">
+                          {" "}
+                          {Number(totalPriceForServices) +
+                            Number(
+                              (totalPriceForServices * VatValue).toFixed()
+                            )}
+                        </p>{" "}
                         <p className="text-primary">
                           {" "}
                           {totalPriceForServices + VatForServices}

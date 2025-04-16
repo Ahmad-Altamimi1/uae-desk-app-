@@ -20,7 +20,21 @@ interface CustomerTabsProps {
 const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
   const t = useTranslations("dashboard.customers");
   const [activeHeader, setActiveHeader] = useState(0);
-
+  const defaultContent = () => {
+    return (
+      <div className="flex items-center justify-between ">
+        <div className="flex flex-col items-center gap-4">
+          <h2 className="text-[25px] font-bold text-gray-800">
+            {data.customer.business_name}
+          </h2>
+          <div className="flex items-center gap-2">
+            <p className="text-sm text-gray-500">{t("ApplicationID")}:</p>
+            <span>{data.customer.invoice_number}</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
   // Custom headers for each tab
   const headerContents = [
     () => (
@@ -47,19 +61,7 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
         </div>
       </div>
     ),
-    () => (
-      <div className="flex items-center ">
-        <div className="flex flex-col items-center gap-4">
-          <h2 className="text-[25px] font-bold text-gray-800">
-            {data.customer.business_name}
-          </h2>
-          <div className="flex items-center gap-2">
-            <p className="text-sm text-gray-500">{t("ApplicationID")}:</p>
-            <span>{data.customer.invoice_number}</span>
-          </div>
-        </div>
-      </div>
-    ),
+    defaultContent,
     () => (
       <div className="flex items-center justify-between ">
         <div className="flex flex-col items-center gap-4">
@@ -76,24 +78,13 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
         </div>
       </div>
     ),
-    () => (
-      <div className="flex items-center justify-between ">
-        <div className="flex flex-col items-center gap-4">
-          <h2 className="text-[25px] font-bold text-gray-800">
-            {data.customer.business_name}
-          </h2>
-          <div className="flex items-center gap-2">
-            <p className="text-sm text-gray-500">{t("ApplicationID")}:</p>
-            <span>{data.customer.invoice_number}</span>
-          </div>
-        </div>
-      </div>
-    ),
+    defaultContent,
+    defaultContent,
   ];
 
   return (
     <>
-      <div className="mb-4">{headerContents[activeHeader]()}</div>
+      <div className="mb-4">{headerContents[activeHeader]?.()}</div>
 
       <TabsComponent
         setActiveHeader={setActiveHeader}
@@ -113,7 +104,22 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
             name: "dashboard.customers.tabs.ServicesAndPaymentDetails",
           },
           {
-            component: <UploadedMedia media={data.customer.media} />,
+            component: (
+              <ServicesAndPaymentDetails
+                customer={data.customer}
+                selectedServices={data.selectedServices}
+                serviceOptions={serviceOptions}
+              />
+            ),
+            name: "dashboard.customers.tabs.ExpertActions",
+          },
+          {
+            component: (
+              <UploadedMedia
+                media={data.customer.media}
+                customer={data.customer}
+              />
+            ),
             name: "dashboard.customers.tabs.UploadedMedia",
           },
           {

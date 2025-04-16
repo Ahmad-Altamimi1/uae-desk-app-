@@ -1,30 +1,59 @@
 "use client";
 
-import type { IMediaData } from "@/entities/dashboard";
-import { Download, Eye, Trash2 } from "lucide-react";
+import type { IMediaData, IResponseCustomer } from "@/entities/dashboard";
+import {
+  CheckCircle,
+  Clock,
+  Download,
+  Eye,
+  Trash2,
+  XCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useTransition } from "react";
 import { BASE_URL } from "@/constants";
 import Image from "next/image";
 import NoMediaImage from "@/public/images/dashboard/customers/noMediaFound(en).svg";
-import { deleteMedia } from "@/app/[locale]/(dashboard)/actions";
+import {
+  deleteMedia,
+  submitVerification,
+} from "@/app/[locale]/(dashboard)/actions";
 import { toast } from "sonner";
 import { ConfirmDeleteDialog } from "@/components/common/ConfirmDeleteDialog";
+import { CustomerService } from "@/lib/api/services/dashboard";
+import { useParams } from "next/navigation";
+import { spawn } from "child_process";
+import StatusBadge from "./statusBadg";
 
 interface IUploadedMediaProps {
   media: IMediaData[];
   onDownload?: (media: IMediaData) => void;
   onDelete?: (mediaId: number) => void;
+  customer: IResponseCustomer;
 }
 
 const UploadedMedia = ({
   media,
   onDownload,
   onDelete,
+  customer,
 }: IUploadedMediaProps) => {
   const [selectedMedia, setSelectedMedia] = useState<IMediaData | null>(null);
   const [isPending, startTransition] = useTransition();
-
+  const [iSubmitVerification, startSubmitVerificationTransition] =
+    useTransition();
+  const { customerId } = useParams();
+  const { status } = customer;
+  const handelSubmitVerification = () => {
+    startSubmitVerificationTransition(async () => {
+      const response = await submitVerification(Number(customerId));
+      if (response.success) {
+        toast.success("Verification submitted successfully");
+      } else {
+        toast.error(response.message || "unknown error");
+      }
+    });
+  };
   const ConfirmDelete = (item: IMediaData) => {
     ConfirmDeleteDialog({
       title: "Delete Media",
@@ -139,6 +168,7 @@ const UploadedMedia = ({
         });
     }
   };
+
   const renderFilePreview = (item: IMediaData) => {
     const fileType = item.file_type;
 
@@ -217,7 +247,7 @@ const UploadedMedia = ({
   return (
     <>
       <div>
-        {media.length > 0 ? (
+        {media.length > 0 && status == 0 ? (
           <div className="mt-6 space-y-4">
             <p className="font-semibold text-sm text-muted-foreground">
               Uploaded Files:
@@ -285,7 +315,26 @@ const UploadedMedia = ({
                 </div>
               ))}
             </div>
+            <div className="flex flex-col items-center mt-4">
+              <div>
+                <Button
+                  variant="default"
+                  onClick={handelSubmitVerification}
+                  disabled={!customer.transaction_refrence_number}
+                  className="w-full md:w-auto"
+                >
+                  Submit Verification
+                </Button>
+                {!customer.transaction_refrence_number && (
+                  <p className="mt-2 text-sm text-red-600">
+                    You must complete the payment first.
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
+        ) : media.length > 0 && status != 0 ? (
+          <StatusBadge status={status} />
         ) : (
           <div className="mt-6 space-y-4 w-full h-full flex items-center justify-center">
             <Image

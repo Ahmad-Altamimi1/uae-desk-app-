@@ -38,6 +38,7 @@
       "CustomerInformation": "Customer Information",
       "FTAInformation": "FTA Information",
       "ServicesAndPaymentDetails": "Services And Payment Details",
+      "ExpertActions": "Expert Actions",
       "title": "Customers",
       "description": "All Customers On system ",
       "firstName": "First Name",
@@ -56,6 +57,7 @@
       "tabs": {
         "CustomerFTAInformation": "Customer & FTA Information",
         "ServicesAndPaymentDetails": "Services And Payment Details",
+        "ExpertActions": "Expert Actions",
         "UploadedMedia": "Uploaded Media",
         "ProcessTimeTracking": "Process Time Tracking"
       },
@@ -270,7 +272,7 @@
         "required": "Address is required"
       }
     },
-    "locationId":{
+    "locationId": {
       "label": "location",
       "placeholder": " location",
       "helper": "We'll never share your address",
@@ -465,6 +467,7 @@
   },
   "commonValidations": {
     "required": " this field is required",
-    "unique": " this field must be unique"
+    "unique": " this field must be unique",
+    "minLength": " must be at least 3 characters"
   }
 }

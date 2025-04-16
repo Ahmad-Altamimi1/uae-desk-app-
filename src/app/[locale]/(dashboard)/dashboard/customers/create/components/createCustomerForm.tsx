@@ -295,11 +295,6 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                         service.otherValues?.price?.value
                       );
 
-                      VatForServices = VatForServices = Number(
-                        (
-                          Number(service.otherValues?.price?.value) * VatValue
-                        ).toFixed(2)
-                      );
                       return (
                         <div key={index} className="flex justify-between">
                           <p>{service.label}</p>
@@ -317,7 +312,10 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                       <p className="">VAT</p>
 
                       <div className=" flex gap-1">
-                        <p className=""> {VatForServices}</p>
+                        <p className="">
+                          {" "}
+                          {Number((totalPriceForServices * VatValue).toFixed())}
+                        </p>
                         <span className="text-muted-foreground">
                           {currency}
                         </span>
@@ -331,7 +329,10 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                       <div className=" flex gap-1">
                         <p className="text-primary">
                           {" "}
-                          {totalPriceForServices + VatForServices}
+                          {Number(totalPriceForServices) +
+                            Number(
+                              (totalPriceForServices * VatValue).toFixed()
+                            )}
                         </p>
                         <span className="text-muted-foreground">
                           {currency}
