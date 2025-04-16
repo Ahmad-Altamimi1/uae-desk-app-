@@ -1,16 +1,17 @@
 "use client";
 import TabsComponent from "@/components/Tabs";
 import React, { useState } from "react";
-import CustomerFTAInformation from "./CustomerFTAInformation";
+import CustomerFTAInformation from "./tabs/CustomerFTAInformation";
 import { ICustomerData } from "@/entities/dashboard";
 import { StatusCell } from "@/components/table/statusCell";
-import ServicesAndPaymentDetails from "./ServicesAndPaymentDetails";
-import UploadedMedia from "./UploadedMedia";
+import ServicesAndPaymentDetails from "./tabs/ServicesAndPaymentDetails";
+import UploadedMedia from "./tabs/UploadedMedia";
 import { ISelectOption } from "@/utils/type";
 import { useTranslations } from "next-intl";
 
 import UploadMediaFromModal from "./UploadMediaFromModal";
-import ProcessTimeTracking from "./ProcessTimeTracking";
+import ProcessTimeTracking from "./tabs/ProcessTimeTracking";
+import ExpertActions from "./tabs/ExpertActions";
 
 interface CustomerTabsProps {
   data: ICustomerData;
@@ -105,7 +106,7 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
           },
           {
             component: (
-              <ServicesAndPaymentDetails
+              <ExpertActions
                 customer={data.customer}
                 selectedServices={data.selectedServices}
                 serviceOptions={serviceOptions}
@@ -121,6 +122,12 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
               />
             ),
             name: "dashboard.customers.tabs.UploadedMedia",
+          },
+          {
+            component: (
+              <ProcessTimeTracking processTime={data.processTime.original} />
+            ),
+            name: "dashboard.customers.tabs.ProcessTimeTracking",
           },
           {
             component: (

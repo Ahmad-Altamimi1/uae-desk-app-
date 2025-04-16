@@ -23,7 +23,7 @@ import { ConfirmDeleteDialog } from "@/components/common/ConfirmDeleteDialog";
 import { CustomerService } from "@/lib/api/services/dashboard";
 import { useParams } from "next/navigation";
 import { spawn } from "child_process";
-import StatusBadge from "./statusBadg";
+import StatusBadge from "../statusBadg";
 
 interface IUploadedMediaProps {
   media: IMediaData[];
