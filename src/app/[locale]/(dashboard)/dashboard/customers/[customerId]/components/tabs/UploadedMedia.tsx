@@ -1,14 +1,7 @@
 "use client";
 
 import type { IMediaData, IResponseCustomer } from "@/entities/dashboard";
-import {
-  CheckCircle,
-  Clock,
-  Download,
-  Eye,
-  Trash2,
-  XCircle,
-} from "lucide-react";
+import { Download, Eye, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useTransition } from "react";
 import { BASE_URL } from "@/constants";
@@ -20,9 +13,7 @@ import {
 } from "@/app/[locale]/(dashboard)/actions";
 import { toast } from "sonner";
 import { ConfirmDeleteDialog } from "@/components/common/ConfirmDeleteDialog";
-import { CustomerService } from "@/lib/api/services/dashboard";
 import { useParams } from "next/navigation";
-import { spawn } from "child_process";
 import StatusBadge from "../statusBadg";
 
 interface IUploadedMediaProps {

@@ -129,12 +129,6 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
             ),
             name: "dashboard.customers.tabs.ProcessTimeTracking",
           },
-          {
-            component: (
-              <ProcessTimeTracking processTime={data.processTime.original} />
-            ),
-            name: "dashboard.customers.tabs.ProcessTimeTracking",
-          },
         ]}
       />
     </>
