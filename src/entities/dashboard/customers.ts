@@ -11,7 +11,7 @@ export interface IResponseCustomer {
   second_number: string;
   email: string;
   address: string;
-  status: string;
+  status: number;
   created_by: string;
   customer_code: string;
   invoice_number: string;
