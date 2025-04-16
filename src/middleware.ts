@@ -8,6 +8,17 @@ export default async function middleware(req: NextRequest) {
   intlMiddleware(req);
 
   const { pathname } = req.nextUrl;
+  if (pathname === "/") {
+    return NextResponse.redirect(
+      `http://localhost:3000/${req.nextUrl.locale || "en"}/dashboard` //TODO
+    );
+  }
+  if (pathname === `/${req.nextUrl.locale || "en"}`) {
+    return NextResponse.redirect(
+      `http://localhost:3000/${req.nextUrl.locale || "en"}/dashboard` //TODO
+    );
+  }
+
   const isProtectedRoute = /^\/(ar|en)\/dashboard(\/.*)?$/.test(pathname);
   const isLoginRoutes = /^\/(ar|en)\/login$/.test(pathname);
   const token = req.cookies.get("token")?.value;

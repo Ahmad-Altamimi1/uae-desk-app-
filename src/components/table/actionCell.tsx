@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ConfirmDeleteDialog } from "../common/ConfirmDeleteDialog";
+import { useRouter } from "@/i18n/navigation";
 
 interface ActionCellProps {
   id: number;
@@ -19,12 +20,18 @@ interface ActionCellProps {
 }
 
 const ActionCell = ({ id, name, editAction, onDeleted }: ActionCellProps) => {
+  const router = useRouter();
   const handleDeleteClick = () => {
     ConfirmDeleteDialog({
       title: "Delete Confirmation",
       message: "Are you sure you want to delete",
       itemName: name,
-      onDelete: () => onDeleted?.() ?? Promise.resolve(),
+      onDelete: async () => {
+        if (onDeleted) {
+          await onDeleted();
+        }
+        // router.refresh();
+      },
     });
   };
 

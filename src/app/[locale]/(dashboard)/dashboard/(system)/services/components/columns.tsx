@@ -7,8 +7,8 @@ import ActionCell from "@/components/table/actionCell";
 import { HeaderCell } from "@/components/table/headerCell";
 import { IServicesData } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-import { ServicesService } from "@/lib/api/services/dashboard/services";
 import { deleteServices } from "@/app/[locale]/(dashboard)/actions/services";
+import { toast } from "sonner";
 
 export const columns: ColumnDef<IServicesData>[] = [
   {
@@ -73,10 +73,15 @@ export const columns: ColumnDef<IServicesData>[] = [
           id={row.original.id}
           name={row.original.name}
           editAction={() => handleEdit(row.original.id)}
-          onDeleted={async () => await deleteServices(row.original.id)}
+          onDeleted={async () =>
+            await deleteServices(row.original.id).then((r) => {
+              if (r.error) {
+                throw new Error("Error in delete");
+              }
+            })
+          }
         />
       </div>
-    )
-  }
-  
+    ),
+  },
 ];

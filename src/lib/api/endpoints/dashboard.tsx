@@ -15,7 +15,7 @@ const endPoints = {
   CustomerFtaDocumentUpdate: "api/customers/update/fta-docuemnt",
   CustomerMedia: "api/customers/media",
   deleteCustomerMediaDelete: "api/customers/media/delete/",
-  CustomerSubmitVerification: "api/customers/submit-verification",
+  CustomerSubmitVerification: "api/customers/submitVerification",
   CustomerSubmitReview: "api/customers/{customer}/submit-review",
   CustomerRequestDocument: "api/customers/{customer}/request-document",
   CustomerAddTaxId: "api/customers/{customer}/add-tax-id",
@@ -56,8 +56,8 @@ const endPoints = {
   BranchesEdit: "api/branches/edit",
   BranchesUpdate: "api/branches/update",
   BranchesDestroy: "api/branches/destroy",
-  
-  getLocations:"api/branches/create",
+
+  getLocations: "api/branches/create",
 
   //userActivity
   getLogs: "api/logs",
@@ -70,6 +70,7 @@ const endPoints = {
   ShiftsEdit: "api/shifts/edit",
   ShiftsUpdate: "api/shifts/update",
   ShiftsDestroy: "api/shifts/destroy",
+  updateStatus: "api/shifts/updateStatus",
 
   //attendance
   getAttendance: "api/attendances/index",

@@ -3,15 +3,12 @@ import { api } from "../../serverCore";
 
 export const ShiftsService = {
   create: (data: Omit<IRequestShifts, "id">) =>
-    api.post<IResponseShifts, Omit<IRequestShifts, "id">>(
-      `ShiftsStore`,
-      data
-    ),
+    api.post<IResponseShifts, Omit<IRequestShifts, "id">>(`ShiftsStore`, data),
 
-    destroy: (id: number) =>
-      api.post("ShiftsDestroy", { id }), 
-  };
+  destroy: (id: number) => api.post("ShiftsDestroy", { id }),
+  updateStatus: (id: number, status: boolean) =>
+    api.post("updateStatus", { id, status }),
+};
 
-  // fetchCUDApi("login", "POST", data),
-  //   logout: () => fetchCUDApi<ILogin>(`/users/${id}`, "POST"),
-
+// fetchCUDApi("login", "POST", data),
+//   logout: () => fetchCUDApi<ILogin>(`/users/${id}`, "POST"),

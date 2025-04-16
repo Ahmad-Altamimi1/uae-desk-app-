@@ -1,8 +1,7 @@
 // components/StatusToggle.tsx
 "use client";
 
-import { Switch } from "@/components/ui/switch"
-
+import { Switch } from "@/components/ui/switch";
 
 type StatusToggleProps = {
   id: number;
@@ -18,10 +17,8 @@ export const StatusToggle = ({ id, isActive, onChange }: StatusToggleProps) => {
 
   return (
     <Switch
-      checked={isActive}
-      onCheckedChange={handleChange}
-      
+      onCheckedChange={(e) => handleChange(e)}
+      defaultChecked={isActive}
     />
   );
 };
-
