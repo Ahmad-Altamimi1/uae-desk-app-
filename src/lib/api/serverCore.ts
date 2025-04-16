@@ -1,6 +1,7 @@
 import { getCookie } from "@/utils/cookiesHandler";
 import endPoints from "./endpoints/dashboard";
 import { toast } from "sonner";
+import { log } from "util";
 
 // Type definitions for better type safety
 type EndpointKey = keyof typeof endPoints;
@@ -159,7 +160,9 @@ async function fetchWithTimeout<TResponse>(
     ...fetchOptions
   } = options;
 
-  // Set up headers
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+
   const headers = new Headers(fetchOptions.headers);
   const isFormData = body instanceof FormData;
 
@@ -168,39 +171,37 @@ async function fetchWithTimeout<TResponse>(
   }
 
   const token = await getCookie("token");
-
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
   }
-  console.log("url", url);
-  console.log("methodmethod", method);
 
-  await getCsrfToken();
-
-  const fetchPromise = fetch(url, {
+  const fetchOptionsWithTimeout: RequestInit = {
+    ...fetchOptions,
     method,
     credentials: "include",
     headers,
+    signal: controller.signal,
+    body: isFormData ? body : body ? JSON.stringify(body) : undefined,
     next: {
       tags: [tag],
     },
-    body: isFormData ? body : body ? JSON.stringify(body) : undefined,
-
-    ...fetchOptions,
-  });
+  };
 
   try {
-    const response = await Promise.race([
-      fetchPromise,
-      createTimeoutPromise(timeout),
-    ]);
-
-    return handleApiResponse<TResponse>(response);
+    const response = await fetch(url, fetchOptionsWithTimeout);
+    clearTimeout(timer);
+    return await handleApiResponse<TResponse>(response);
   } catch (error) {
-    console.error(`${method} request to ${url} failed:`, error);
+    clearTimeout(timer);
+
+    if (error.name === "AbortError") {
+      throw new ApiError(`Request to ${url} timed out after ${timeout}ms`, 408);
+    }
+
     if (error instanceof ApiError) {
       throw error;
     }
+
     throw new ApiError(`Request failed: ${error.message}`, 500);
   }
 }

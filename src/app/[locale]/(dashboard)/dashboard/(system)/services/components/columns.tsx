@@ -69,7 +69,7 @@ export const columns: ColumnDef<IServicesData>[] = [
     header: <HeaderCell label="services.actions" />,
     id: "actions",
     cell: ({ row }) => (
-    <ServiceAction id={row.original.id} name={row.original.name}/>
+      <ServiceAction id={row.original.id} name={row.original.name} />
     ),
   },
 ];
