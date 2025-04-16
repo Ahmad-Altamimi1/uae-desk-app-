@@ -524,7 +524,8 @@
       "title": " Services",
       "name": "Services Name",
       "description": "Welcome to the services page!",
-      "actions": "Actions"
+      "actions": "Actions",
+      "updateSuccess": "Service updated successfully"
     },
     "branches": {
       "Add": "Add New Branch",

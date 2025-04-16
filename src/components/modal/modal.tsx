@@ -34,16 +34,21 @@ export function Modal({
     ? t(description)
     : "";
   const triggerButtonTranslate =
-    typeof triggerButton == "string" ? t(triggerButton) : triggerButton;
+    typeof triggerButton == "string"
+      ? triggerButton
+        ? t(triggerButton)
+        : triggerButton
+      : triggerButton;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
-        {typeof triggerButton == "string" ? (
-          <Button variant="outline">{triggerButtonTranslate}</Button>
-        ) : (
-          triggerButtonTranslate
-        )}
+        {triggerButton &&
+          (typeof triggerButton == "string" ? (
+            <Button variant="outline">{triggerButtonTranslate}</Button>
+          ) : (
+            triggerButtonTranslate
+          ))}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
