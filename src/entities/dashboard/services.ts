@@ -12,3 +12,4 @@ export interface IRequestServices {
   id: number;
   name: string;
 }
+

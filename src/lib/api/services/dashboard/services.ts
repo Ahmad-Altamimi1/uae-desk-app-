@@ -8,6 +8,9 @@ export const ServicesService = {
   
     destroy: (id: number) =>
       api.post("ServicesDestroy", { id }), 
+
+    update: (id: number) =>
+      api.post("ServicesUpdate", { id }), 
   };
 
 
