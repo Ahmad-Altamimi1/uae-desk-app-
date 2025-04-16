@@ -67,3 +67,28 @@ export async function deleteServices(id: number): Promise<ServiceState> {
     };
   }
 }
+
+export async function updateService(
+    id: number
+): Promise<ServiceState> {
+
+
+
+    try {
+        const response = await ServicesService.destroy(id)
+
+        return {
+            success: true,
+            data: response,
+            error: null,
+            message: response.message
+        };
+    } catch (error) {
+        return {
+            success: false,
+            error: (error as Error).message,
+            data: {},
+            message: (error as Error).message
+        };
+    }
+}
