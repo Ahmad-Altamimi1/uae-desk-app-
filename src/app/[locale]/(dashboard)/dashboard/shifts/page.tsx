@@ -7,9 +7,7 @@ import ShiftsCreateForm from "./create/page";
 
 const Page = async () => {
   const response = await api.get<IResponseShifts>("getShifts");
-
   const shifts = response?.data ?? [];
-
   return (
     <div>
       <ShiftsCreateForm />

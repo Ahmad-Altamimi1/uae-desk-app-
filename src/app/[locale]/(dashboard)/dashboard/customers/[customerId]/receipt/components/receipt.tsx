@@ -37,8 +37,19 @@ export default function Receipt({ data }: ReceiptProps) {
       </div>
       <Card className="p-6 shadow-md bg-white invoice-print-area print:shadow-none">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="header-left">
-            <h4 className="font-bold text-gray-800 mb-2">
+          <div className="header-center flex flex-col items-center">
+            <div className="relative w-70 h-70 mb-[-20%] mt-[-20%]">
+              <Image
+                src="/Group 8.png"
+                alt="Company Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+
+          <div className="header-left ml-20 text-[#7E7E7E] mt-3">
+            <h4 className="font-bold text-[#000000] mb-2">
               Customer Information
             </h4>
             <p className="text-sm mb-1">
@@ -58,22 +69,9 @@ export default function Receipt({ data }: ReceiptProps) {
             </p>
           </div>
 
-          <div className="header-center flex flex-col items-center">
-            <div className="relative w-24 h-24 mb-2">
-              <Image
-                src="/company-logo.png"
-                alt="Company Logo"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <p className="text-sm text-center mb-1">{companyAddress}</p>
-            <p className="text-sm text-center mb-1">Phone: {companyPhone}</p>
-            <p className="text-sm text-center mb-1">Email: {companyEmail}</p>
-          </div>
+          <div className="header-right   text-[#7E7E7E] ml-20 mt-3">
+            <h2 className="font-bold text-[#000000] mb-2">Receipt</h2>
 
-          <div className="header-right">
-            <h2 className="font-bold text-xl text-primary mb-2">Receipt</h2>
             <p className="text-sm mb-1">
               <strong>Receipt Number:</strong> {invoiceNumber}
             </p>
@@ -89,53 +87,61 @@ export default function Receipt({ data }: ReceiptProps) {
           </div>
         </div>
 
-        <h3 className="font-bold text-lg text-primary border-b border-red-200 pb-2 mb-4">
+
+
+        <h3 className="font-bold text-lg text-green-700 mb-2 font-montserrat">
           Payment Details
         </h3>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Description</TableHead>
-              <TableHead className="text-right">Amount (AED)</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {services.map((service: any, index: number) => (
-              <TableRow key={index}>
-                <TableCell>
-                  {index + 1}. {service.name}
-                </TableCell>
-                <TableCell className="text-right">
-                  AED {service.price.toFixed(2)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <div className="bg-[#F5F9F6] rounded-md overflow-hidden mb-4">
+          <div className="grid grid-cols-2 px-4 py-2 bg-[#00713a0b] text-sm font-semibold text-gray-600 border-gray-300 font-montserrat">
+            <div>Description</div>
+            <div className="text-right">Amount ( AED )</div>
+          </div>
+          {services?.map((service: any, index: number) => (
+            <div
+              key={index}
+              className="grid grid-cols-2 px-4 py-2 text-sm text-gray-800 border-b border-gray-100 font-montserrat"
+            >
+              <div>                  {index + 1}. {service.name}
+              </div>
+              <div className="text-right text-[#7E7E7E]">
+                AED {service.price}
+                {/* <span className="text-xs">AED</span> */}
+              </div>
+            </div>
+          ))}
+        </div>
 
-        <h3 className="font-bold text-lg text-primary border-b border-red-200 pb-2 my-4">
+
+
+        <h3 className="font-bold text-lg text-green-700 mb-2 font-montserrat">
           Total Paid
         </h3>
-        <Table>
-          <TableBody>
-            <TableRow>
-              <TableCell className="font-medium">Base Amount</TableCell>
-              <TableCell className="text-right">AED {customer.price}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-medium">VAT (%)</TableCell>
-              <TableCell className="text-right">
-                AED {Number(vatAmount)?.toFixed(2)}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="font-medium">Total Paid</TableCell>
-              <TableCell className="text-right font-bold">
-                AED {Number(total_amount).toFixed(2)}
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+
+        <div className="rounded-md overflow-hidden font-montserrat">
+          <div className="flex justify-between px-4 py-2 bg-[#e8811918] font-semibold text-sm text-gray-500">
+            <span>Base Amount</span>
+            <span className="text-gray-500 font-semibold">
+              <span className="text-black text-[16px] font-bold">
+                AED {customer.price}                </span>
+            </span>
+          </div>
+          <div className="flex justify-between px-4 py-2 bg-[#e8811918] font-semibold text-gray-500 mt-2">
+            <span>VAT (%)</span>
+            <span className="text-orange-600 text-[16px] font-bold">
+            AED {Number(vatAmount)}
+            {/* <span className="text-gray-500">AED</span> */}
+            </span>
+          </div>
+          <div className="flex justify-between px-4 py-2 bg-[#e8811918] font-semibold text-gray-500 mt-2">
+            <span>Total Paid</span>
+            <span className="text-orange-600 text-[16px] font-bold">
+            AED {Number(total_amount)}
+            {/* <span className="text-gray-500">AED</span> */}
+            </span>
+          </div>
+        </div>
+       
 
         <div className="signed-by grid grid-cols-2 gap-8 my-8">
           <div className="signature-box border-t-2 border-gray-300 pt-2 text-center">

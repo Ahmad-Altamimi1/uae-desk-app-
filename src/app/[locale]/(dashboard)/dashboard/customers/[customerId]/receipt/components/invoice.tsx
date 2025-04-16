@@ -32,20 +32,30 @@ export default function Invoice({ data }: InvoiceProps) {
   const totalAmount = Number(customer?.price) + vat_amount;
 
   return (
-    <div className=" min-h-screen  p-4 md:p-8">
-      <div className=" mx-auto">
+    <div className="min-h-screen p-4 md:p-8">
+      <div className="mx-auto">
         <div className="print-btn-container flex justify-center mb-8 print:hidden">
           <PrintButton title="Print Invoice" />
         </div>
         <Card className="p-6 shadow-md bg-white print:shadow-none invoice-print-area">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div className="header-left">
-              <h4 className="font-bold text-gray-800 mb-2">
+            <div className="header-center flex flex-col items-center">
+              <div className="relative w-70 h-70 mb-[-20%] mt-[-20%]">
+                <Image
+                  src="/Group 8.png"
+                  alt="Company Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+
+            <div className="header-left ml-20 text-[#7E7E7E] mt-3">
+              <h4 className="font-bold text-[#000000] mb-2">
                 Customer Information
               </h4>
               <p className="text-sm mb-1">
-                <strong>Name:</strong> {customer.first_name}{" "}
-                {customer.last_name}
+                <strong>Name:</strong> {customer.first_name} {customer.last_name}
               </p>
               <p className="text-sm mb-1">
                 <strong>Business:</strong> {customer.business_name}
@@ -61,24 +71,8 @@ export default function Invoice({ data }: InvoiceProps) {
               </p>
             </div>
 
-            <div className="header-center flex flex-col items-center">
-              <div className="relative w-24 h-24 mb-2">
-                <Image
-                  src="/company-logo.png"
-                  alt="Company Logo"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <p className="text-sm text-center mb-1">{company_address}</p>
-              <p className="text-sm text-center mb-1">Phone: {company_phone}</p>
-              <p className="text-sm text-center mb-1">Email: {company_email}</p>
-            </div>
-
-            <div className="header-right">
-              <h2 className="font-bold text-xl text-green-700 mb-2">
-                Tax Invoice
-              </h2>
+            <div className="header-right text-[#7E7E7E] ml-20 mt-3">
+              <h2 className="font-bold text-[#000000] mb-2">Tax Invoice</h2>
               <p className="text-sm mb-1">
                 <strong>Invoice Number:</strong> {invoice_number}
               </p>
@@ -97,78 +91,84 @@ export default function Invoice({ data }: InvoiceProps) {
             </div>
           </div>
 
-          <h3 className="font-bold text-lg text-green-700 border-b border-green-200 pb-2 mb-4">
+          <h3 className="font-bold text-lg text-green-700 mb-2 font-montserrat">
             Service
           </h3>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Service Name</TableHead>
-                <TableHead className="text-right">Price (AED)</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {services?.map((service: any, index: number) => (
-                <TableRow key={index}>
-                  <TableCell>
-                    {index + 1}. {service.name}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    AED {Number(service?.price || 0).toFixed(2)}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
 
-          <h3 className="font-bold text-lg text-green-700 border-b border-green-200 pb-2 my-4">
+          <div className="bg-[#F5F9F6] rounded-md overflow-hidden mb-4">
+            <div className="grid grid-cols-2 px-4 py-2 bg-[#00713a0b] text-sm font-semibold text-gray-600 border-gray-300 font-montserrat">
+              <div>Service</div>
+              <div className="text-right">Amount ( Price )</div>
+            </div>
+            {services?.map((service: any, index: number) => (
+              <div
+                key={index}
+                className="grid grid-cols-2 px-4 py-2 text-sm text-gray-800 border-b border-gray-100 font-montserrat"
+              >
+                <div>{service.name}</div>
+                <div className="text-right text-[#7E7E7E]">
+                  {Number(service?.price || 0)}{" "}
+                  <span className="text-xs">AED</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h3 className="font-bold text-lg text-green-700 mb-2 font-montserrat">
             Total Summary
           </h3>
-          <Table>
-            <TableBody>
-              <TableRow>
-                <TableCell className="font-medium">
-                  VAT ({customer.vat_value}%)
-                </TableCell>
-                <TableCell className="text-right">
-                  AED {Number(vat_amount).toFixed(2)}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="font-medium">Total Amount</TableCell>
-                <TableCell className="text-right font-bold">
-                  AED {totalAmount.toFixed(2)}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
 
-          <div className="signed-by grid grid-cols-2 gap-8 my-8">
-            <div className="signature-box border-t-2 border-gray-300 pt-2 text-center">
-              Customer Signature
+          <div className="rounded-md overflow-hidden font-montserrat">
+            <div className="flex justify-between px-4 py-2 bg-[#e8811918] font-semibold text-sm text-gray-500">
+              <span>VAT %</span>
+              <span className="text-gray-500 font-semibold">
+                <span className="text-black text-[16px] font-bold">
+                  {customer.vat_value}
+                </span>
+                % AED
+              </span>
             </div>
-            <div className="signature-box border-t-2 border-gray-300 pt-2 text-center">
-              Authorized Signature
+            <div className="flex justify-between px-4 py-2 bg-[#e8811918] font-semibold text-gray-500 mt-2">
+              <span>Total Verification Time</span>
+              <span className="text-orange-600 text-[16px] font-bold">
+                {totalAmount}{" "}
+                <span className="text-gray-500">AED</span>
+              </span>
             </div>
           </div>
 
+          {/* Footer with bank details and signatures side by side */}
           <div className="footer mt-8 pt-4 border-t border-gray-200">
-            <div className="bank-details mb-4 text-sm">
-              <strong>Bank Details:</strong>
-              <br />
-              Account Holder Name: Holistic Legacy Accounting SPS LLC
-              <br />
-              Bank Name: Abu Dhabi Islamic Bank (ADIB)
-              <br />
-              Account No: 19326413
-              <br />
-              IBAN: AE720500000000019326413
-              <br />
-              Swift Code: ABDIAEAD
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+              {/* Bank Details */}
+              <div className="bank-details text-sm">
+                <strong>Bank Details:</strong>
+                <br />
+                Account Holder Name: Holistic Legacy Accounting SPS LLC
+                <br />
+                Bank Name: Abu Dhabi Islamic Bank (ADIB)
+                <br />
+                Account No: 19326413
+                <br />
+                IBAN: AE720500000000019326413
+                <br />
+                Swift Code: ABDIAEAD
+              </div>
+
+              {/* Signatures */}
+              <div className="signed-by grid grid-cols-2 gap-8 my-8">
+                <div className="signature-box border-t-2 border-gray-300 pt-2 text-center">
+                  Customer Signature
+                </div>
+                <div className="signature-box border-t-2 border-gray-300 pt-2 text-center">
+                  Authorized Signature
+                </div>
+              </div>
             </div>
+
             <div className="text-center text-xs text-gray-500">
-              &copy; {new Date().getFullYear()} HOLISTIC LEGACY ACCOUNTING S.P.S
-              L.L.C All Rights Reserved.
+              &copy; {new Date().getFullYear()} HOLISTIC LEGACY ACCOUNTING S.P.S L.L.C All Rights
+              Reserved.
             </div>
           </div>
         </Card>
