@@ -185,3 +185,25 @@ export async function deleteMedia(id: number): Promise<CustomerState> {
     }
   }
 }
+export async function submitVerification(id: number): Promise<CustomerState> {
+  try {
+    const response = await CustomerService.submitVerification(id);
+
+    return {
+      success: true,
+      data: response,
+      message: "File deleted successfully",
+      error: null,
+    };
+  } catch (error) {
+    if (typeof error === "object") {
+      return {
+        success: false,
+        data: {},
+        message: (error as { message: string })?.message,
+        error: (error as { message: string })?.message,
+        ...error,
+      };
+    }
+  }
+}

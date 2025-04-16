@@ -1,51 +1,15 @@
 "use client";
 
 import { DragHandle } from "@/components/table/dragHandle";
-import { Input } from "@/components/ui/input";
 import { Checkbox } from "@radix-ui/react-checkbox";
-
-//TODO
-// import {
-//   Select,
-//   SelectTrigger,
-//   SelectValue,
-//   SelectContent,
-//   SelectItem,
-// } from "@radix-ui/react-select";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { IconCircleCheckFilled, IconLoader } from "@tabler/icons-react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { toast } from "sonner";
-import { z } from "zod";
-import { TableCellViewer } from "@/components/table/TableCellViewer";
 import ActionCell from "@/components/table/actionCell";
-import { IResponseUsersRoles } from '@/entities/dashboard/users'
 import { HeaderCell } from "@/components/table/headerCell";
-import { StatusCell } from "@/components/table/statusCell";
-import { IResponseBranches, IResponseServices, IResponseUsersPermissions } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-import { IResponseShifts, IShiftsData } from "@/entities/dashboard/shifts";
-import { Switch } from "@radix-ui/react-switch";
+import { IShiftsData } from "@/entities/dashboard/shifts";
 import { StatusToggle } from "./statusToggle";
-import { ShiftsService } from "@/lib/api/services/dashboard/shifts";
-import { deleteShifts } from "../../../actions/shifts";
-// export const schema = z.object({
-//   id: z.number(),
-//   header: z.string(),
-//   type: z.string(),
-//   status: z.string(),
-//   target: z.string(),
-//   limit: z.string(),
-//   reviewer: z.string(),
-// });
+import { deleteShifts, handleUpdateStatus } from "../../../actions/shifts";
+import { toast } from "sonner";
 
 export const columns: ColumnDef<IShiftsData>[] = [
   {
@@ -90,47 +54,31 @@ export const columns: ColumnDef<IShiftsData>[] = [
     ),
   },
 
-
-
   {
-
-
     accessorKey: "name",
     header: <HeaderCell label="shifts.name" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.name} />
       </div>
-
-
     ),
   },
   {
-
-
     accessorKey: "startTime",
     header: <HeaderCell label="shifts.startTime" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.start_time} />
       </div>
-
-
     ),
-  },  {
-
-
+  },
+  {
     accessorKey: "endTime",
     header: <HeaderCell label="shifts.endTime" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.end_time} />
       </div>
-
-
     ),
   },
 
@@ -142,9 +90,16 @@ export const columns: ColumnDef<IShiftsData>[] = [
       return (
         <StatusToggle
           id={id}
-          isActive={is_active}
-          onChange={(id, newValue) => {
-            console.log("New status for", id, newValue);
+          isActive={!!is_active}
+          onChange={async (id, newValue) => {
+            await handleUpdateStatus(id, newValue).then((res) => {
+              if (res.success) {
+                toast.success(res.message);
+              } else {
+                toast.error(res.error);
+                throw new Error();
+              }
+            });
           }}
         />
       );
@@ -164,8 +119,6 @@ export const columns: ColumnDef<IShiftsData>[] = [
           onDeleted={async () => await deleteShifts(row.original.id)}
         />
       </div>
-    )
-    
+    ),
   },
-
 ];

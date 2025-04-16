@@ -54,14 +54,14 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
               size="sm"
               variant="link"
               className="bg-[#E88019] rounded-3xl flex items-center gap-2 cursor-pointer"
-              aria-label="Edit Customer Photo"
-              onClick={() => handleClick("Edit Customer Photo")}
+              aria-label="Uploaded File"
+              // onClick={() => route.push(`/dashboard/customers/create/${id}`)} //TODO
             >
               <IconPhoto className="text-white" />
             </Button>
           </TooltipTrigger>
           <TooltipContent className="text-[#E88019]">
-            <p>Edit Customer Photo</p>
+            <p>Uploaded Files</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
