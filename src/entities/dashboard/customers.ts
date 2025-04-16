@@ -38,6 +38,8 @@ export interface IResponseCustomer {
   branch: IBranchesData;
   services: IServicesData[];
   media: IMediaData[];
+  ftamedia: IFtaData[];
+
 }
 export interface IMediaData {
   id: number;
@@ -48,7 +50,16 @@ export interface IMediaData {
   created_at: string;
   updated_at: string;
 }
-
+export interface IFtaData {
+  id: number;
+  customer_id: number;
+  document_name: string;
+  file_path: string;
+  start_date:string;
+  expire_date:string;
+  created_at: string;
+  updated_at: string;
+}
 export interface IRequestCustomer {
   id: number;
   first_name: string;

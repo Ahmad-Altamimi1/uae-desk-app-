@@ -59,7 +59,10 @@
         "ServicesAndPaymentDetails": "Services And Payment Details",
         "ExpertActions": "Expert Actions",
         "UploadedMedia": "Uploaded Media",
-        "ProcessTimeTracking": "Process Time Tracking"
+        "ProcessTimeTracking": "Process Time Tracking",
+        "fat":"FTA Document",
+        "fatTitle":"FTA Document",
+        "fatDES":"FAT Description"
       },
       "CurrentStatus": "Current Status"
     },
@@ -149,6 +152,7 @@
       "description": "This is a modal description",
       "close": "Close",
       "save": "Save"
+      
     }
   },
   "forms": {
