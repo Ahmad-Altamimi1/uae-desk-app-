@@ -12,13 +12,16 @@ import { useTranslations } from "next-intl";
 import UploadMediaFromModal from "./UploadMediaFromModal";
 import ProcessTimeTracking from "./tabs/ProcessTimeTracking";
 import ExpertActions from "./tabs/ExpertActions";
+import FtaDocument from "./tabs/fatDocument";
 
 interface CustomerTabsProps {
   data: ICustomerData;
   serviceOptions: ISelectOption[];
+  allServiceOptions: ISelectOption[];
+  
 }
 
-const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
+const CustomerTabs = ({ data, serviceOptions, allServiceOptions }: CustomerTabsProps) => {
   const t = useTranslations("dashboard.customers");
   const [activeHeader, setActiveHeader] = useState(0);
   const defaultContent = () => {
@@ -81,6 +84,8 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
     ),
     defaultContent,
     defaultContent,
+    defaultContent,
+
   ];
 
   return (
@@ -109,7 +114,7 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
               <ExpertActions
                 customer={data.customer}
                 selectedServices={data.selectedServices}
-                serviceOptions={serviceOptions}
+                serviceOptions={allServiceOptions}
               />
             ),
             name: "dashboard.customers.tabs.ExpertActions",
@@ -123,9 +128,21 @@ const CustomerTabs = ({ data, serviceOptions }: CustomerTabsProps) => {
             ),
             name: "dashboard.customers.tabs.UploadedMedia",
           },
+         
           {
             component: (
-              <ProcessTimeTracking processTime={data.processTime.original} />
+              <FtaDocument
+              ftaDocument={data.customer.ftamedia}
+
+                customer={data.customer}
+              />
+            ),
+            name: "dashboard.customers.tabs.fat",
+          },
+          {
+            component: (
+              <ProcessTimeTracking processTime={data.processTime.original }
+              />
             ),
             name: "dashboard.customers.tabs.ProcessTimeTracking",
           },

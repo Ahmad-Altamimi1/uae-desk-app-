@@ -29,10 +29,10 @@ export function Modal({
   triggerButton = "modal.open",
 }: Props) {
   const t = useTranslations();
-  const titleTranslate = title ? t(title) : t("dashboard.modal.title");
+  const titleTranslate = title ? t(title) : "";
   const descriptionTranslate = description
     ? t(description)
-    : t("dashboard.modal.description");
+    : "";
   const triggerButtonTranslate =
     typeof triggerButton == "string"
       ? triggerButton
