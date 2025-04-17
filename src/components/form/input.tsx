@@ -3,7 +3,7 @@
 import type React from "react";
 import { forwardRef, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import type { FieldError } from "react-hook-form";
+import type { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 import { cn } from "@/lib/utils";
 
 // Translation message type
@@ -20,7 +20,7 @@ type TranslatableText = string | TranslationMessage;
 interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "placeholder"> {
   label: TranslatableText;
-  error?: string | FieldError;
+  error?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   helperText?: TranslatableText;
   startIcon?: ReactNode;
   endIcon?: ReactNode;

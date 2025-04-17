@@ -18,10 +18,13 @@ interface CustomerTabsProps {
   data: ICustomerData;
   serviceOptions: ISelectOption[];
   allServiceOptions: ISelectOption[];
-  
 }
 
-const CustomerTabs = ({ data, serviceOptions, allServiceOptions }: CustomerTabsProps) => {
+const CustomerTabs = ({
+  data,
+  serviceOptions,
+  allServiceOptions,
+}: CustomerTabsProps) => {
   const t = useTranslations("dashboard.customers");
   const [activeHeader, setActiveHeader] = useState(0);
   const defaultContent = () => {
@@ -66,6 +69,7 @@ const CustomerTabs = ({ data, serviceOptions, allServiceOptions }: CustomerTabsP
       </div>
     ),
     defaultContent,
+    defaultContent,
     () => (
       <div className="flex items-center justify-between ">
         <div className="flex flex-col items-center gap-4">
@@ -82,10 +86,9 @@ const CustomerTabs = ({ data, serviceOptions, allServiceOptions }: CustomerTabsP
         </div>
       </div>
     ),
-    defaultContent,
-    defaultContent,
-    defaultContent,
 
+    defaultContent,
+    defaultContent,
   ];
 
   return (
@@ -128,12 +131,11 @@ const CustomerTabs = ({ data, serviceOptions, allServiceOptions }: CustomerTabsP
             ),
             name: "dashboard.customers.tabs.UploadedMedia",
           },
-         
+
           {
             component: (
               <FtaDocument
-              ftaDocument={data.customer.ftamedia}
-
+                ftaDocument={data.customer.ftamedia}
                 customer={data.customer}
               />
             ),
@@ -141,8 +143,7 @@ const CustomerTabs = ({ data, serviceOptions, allServiceOptions }: CustomerTabsP
           },
           {
             component: (
-              <ProcessTimeTracking processTime={data.processTime.original }
-              />
+              <ProcessTimeTracking processTime={data.processTime.original} />
             ),
             name: "dashboard.customers.tabs.ProcessTimeTracking",
           },

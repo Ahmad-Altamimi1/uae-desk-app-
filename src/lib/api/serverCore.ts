@@ -169,6 +169,9 @@ async function fetchWithTimeout<TResponse>(
   if (!headers.has("Content-Type") && body && !(body instanceof FormData)) {
     headers.set("Content-Type", "application/json");
   }
+  console.log("requesturl", url);
+  console.log("method", method);
+  console.log("body", body);
 
   const token = await getCookie("token");
   if (token) {

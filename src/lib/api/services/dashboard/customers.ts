@@ -2,8 +2,10 @@ import {
   IResponseCustomer,
   IRequestCustomer,
   IUploadMedia,
+  RequestDocument,
 } from "@/entities/dashboard";
 import { api } from "../../serverCore";
+import { serviceFormsFieldName } from "@/app/[locale]/(dashboard)/dashboard/customers/[customerId]/createservices/components/servicesForms/serviceFormsFieldsName";
 
 export const CustomerService = {
   create: (data: Omit<IRequestCustomer, "id">) =>
@@ -23,4 +25,8 @@ export const CustomerService = {
     api.delete<void, { id: number }>(`deleteCustomerMediaDelete`, {
       id,
     }),
+  saveDocumentDetails: (data: typeof serviceFormsFieldName, id: number) =>
+    api.post("saveDocumentDetails", { ...data, id }),
+  requestDocument: (data: RequestDocument, id: number) =>
+    api.post("CustomerRequestDocument", { ...data, id }),
 };

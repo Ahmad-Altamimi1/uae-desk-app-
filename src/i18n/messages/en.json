@@ -26,6 +26,54 @@
     "title": "Dashboard",
     "description": "Welcome to your dashboard!",
     "customers": {
+      "createServices": {
+        "Request_for_Document": "Request for Document",
+        "Request_for_Document_Desc": "Please fill in the details for the service request.",
+        "document_type": {
+          "label": "Document Type",
+          "placeholder": "Enter document type",
+          "error": {
+            "required": "Document Type is required"
+          }
+        },
+        "document_details": {
+          "label": "Document ",
+          "placeholder": "Enter document ",
+          "error": {
+            "required": " Document is required"
+          }
+        },
+        "headerInputs": {
+          "profile_name_en": {
+            "label": "Profile Name (English)",
+            "placeholder": "Profile Name (English)",
+            "error": {
+              "required": "Profile Name (English) is required"
+            }
+          },
+          "profile_name_ar": {
+            "label": "Profile Name (Arabic)",
+            "placeholder": "Profile Name (Arabic)",
+            "error": {
+              "required": "Profile Name (Arabic) is required"
+            }
+          },
+          "preferred_language": {
+            "label": "Preferred Language",
+            "placeholder": "Select preferred language",
+            "error": {
+              "required": "Preferred Language is required"
+            }
+          },
+          "communication_channel": {
+            "label": "Communication Channel",
+            "placeholder": "Select communication channel",
+            "error": {
+              "required": "Communication Channel is required"
+            }
+          }
+        }
+      },
       "Services": {
         "Passport": {
           "title": "Passport",
@@ -422,6 +470,7 @@
         "FinancialStatement": {
           "title": "Financial Statement",
           "description": "Financial Statement",
+
           "financial_statement_year": {
             "label": "Financial Year",
             "placeholder": "Enter financial year"
