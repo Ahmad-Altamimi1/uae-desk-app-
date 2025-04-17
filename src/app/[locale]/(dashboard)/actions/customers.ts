@@ -7,6 +7,8 @@ import { tags } from "@/lib/api/endpoints/dashboard";
 import { revalidateTag } from "next/cache";
 import toSnakeCase from "@/utils/toSnackCase";
 import { ISelectOption } from "@/utils/type";
+import { serviceFormsFieldName } from "../dashboard/customers/[customerId]/createservices/components/servicesForms/serviceFormsFieldsName";
+import { RequestDocument } from "@/entities/dashboard";
 
 interface CustomerState {
   success: boolean;
@@ -193,6 +195,57 @@ export async function submitVerification(id: number): Promise<CustomerState> {
       success: true,
       data: response,
       message: "File deleted successfully",
+      error: null,
+    };
+  } catch (error) {
+    if (typeof error === "object") {
+      return {
+        success: false,
+        data: {},
+        message: (error as { message: string })?.message,
+        error: (error as { message: string })?.message,
+        ...error,
+      };
+    }
+  }
+}
+
+export async function saveDocumentDetailsAction(
+  data: typeof serviceFormsFieldName,
+  id: number
+): Promise<CustomerState> {
+  try {
+    const response = await CustomerService.saveDocumentDetails(data, id);
+
+    return {
+      success: true,
+      data: response,
+      message: response.message,
+      error: null,
+    };
+  } catch (error) {
+    if (typeof error === "object") {
+      return {
+        success: false,
+        data: {},
+        message: (error as { message: string })?.message,
+        error: (error as { message: string })?.message,
+        ...error,
+      };
+    }
+  }
+}
+export async function RequestDocumentAction(
+  data: RequestDocument,
+  id: number
+): Promise<CustomerState> {
+  try {
+    const response = await CustomerService.requestDocument(data, id);
+
+    return {
+      success: true,
+      data: response,
+      message: response.message,
       error: null,
     };
   } catch (error) {
