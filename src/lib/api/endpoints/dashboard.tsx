@@ -24,7 +24,9 @@ const endPoints = {
   CustomerInvoices: "api/customers/invoices/",
   groupedMedia: "api/customers/groupedMedia/",
 
-  /////////////
+  //// home dashboard 
+  getHome: "api/dashboard",
+
 
   //permissions
   getPermissions: "api/permissions/index",
