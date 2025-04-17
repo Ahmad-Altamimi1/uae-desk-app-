@@ -17,12 +17,14 @@ const endPoints = {
   deleteCustomerMediaDelete: "api/customers/media/delete/",
   CustomerSubmitVerification: "api/customers/submitVerification",
   CustomerSubmitReview: "api/customers/{customer}/submit-review",
-  CustomerRequestDocument: "api/customers/{customer}/request-document",
+  CustomerRequestDocument: "api/customers/requestDocument",
   CustomerAddTaxId: "api/customers/{customer}/add-tax-id",
   CustomerEditStatus: "api/customers/edit-status",
   CustomerUpdateCreator: "api/customers/updateCreator",
   CustomerInvoices: "api/customers/invoices/",
   groupedMedia: "api/customers/groupedMedia/",
+  saveDocumentDetails: "api/customers/savedocumentdetails",
+  servicesDetails: "api/customers/servicesDetails/",
 
   /////////////
 

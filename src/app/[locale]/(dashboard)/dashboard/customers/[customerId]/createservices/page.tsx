@@ -1,8 +1,10 @@
 import React, { FC } from "react";
 import { api } from "@/lib/api/serverCore";
 import { GroupedMediaResponse } from "@/entities/dashboard";
-import { documentComponentsMap } from "./documentComponentsMap";
-import { DocumentType } from "@/types/enums";
+import PdfViewer from "./components/pdfViewer";
+import ServiceForms from "./components/serviceForms";
+import { serviceFormsFieldName } from "./components/servicesForms/serviceFormsFieldsName";
+
 interface CustomerViewProps {
   params: Promise<{ customerId: string }>;
 }
@@ -11,23 +13,22 @@ const CreateServices: FC<CustomerViewProps> = async ({ params }) => {
     "groupedMedia",
     (await params).customerId,
   ]);
-  console.log("Object.entries(data)", Object.entries(data.groupedMedia));
+  const servicesDetails = await api.get<{
+    servicesDetails: typeof serviceFormsFieldName;
+  }>(["servicesDetails", (await params).customerId]);
+  const groupedMediaArray = Object.entries(data.groupedMedia);
 
   return (
     <div className="grid grid-cols-2">
-      <div className="services space-y-4">
-        {Object.entries(data.groupedMedia).map(([key, value]) => {
-          const Component = documentComponentsMap[key as DocumentType];
-
-          console.log("ComponentComponentComponent", key);
-
-          return value.map((_, index) => <Component key={`${key}-${index}`} />);
-        })}
-      </div>
-      <iframe
-        src={`https://docs.google.com/gview?url=${`https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf`}&embedded=true`}
-        style={{ height: "600px" }}
+      <ServiceForms
+        groupedMediaArray={groupedMediaArray}
+        servicesDetails={servicesDetails.servicesDetails}
       />
+      <div className="flex flex-col overflow-hidden">
+        {groupedMediaArray.map(([key, value]) => (
+          <PdfViewer key={key} data={value} />
+        ))}
+      </div>
     </div>
   );
 };

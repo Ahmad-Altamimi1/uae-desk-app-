@@ -10,7 +10,7 @@ import CorporateTaxCertificate from "./servicesForms/invoice";
 import VatCertificate from "./servicesForms/vatCertificate";
 import IncorporationCertificate from "./servicesForms/incorporation";
 import UAENationalID from "./servicesForms/uaeNational";
-import PowerOfAttorney from "./servicesForms/powe";
+import PowerOfAttorney from "./servicesForms/powerOfAttorney";
 import BankStatementDetails from "./servicesForms/bank";
 import LeaseAgreementDetails from "./servicesForms/leaseAgreement";
 import TrademarkCertificateDetails from "./servicesForms/tradeMark";

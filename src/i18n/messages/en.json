@@ -26,6 +26,54 @@
     "title": "Dashboard",
     "description": "Welcome to your dashboard!",
     "customers": {
+      "createServices": {
+        "Request_for_Document": "Request for Document",
+        "Request_for_Document_Desc": "Please fill in the details for the service request.",
+        "document_type": {
+          "label": "Document Type",
+          "placeholder": "Enter document type",
+          "error": {
+            "required": "Document Type is required"
+          }
+        },
+        "document_details": {
+          "label": "Document ",
+          "placeholder": "Enter document ",
+          "error": {
+            "required": " Document is required"
+          }
+        },
+        "headerInputs": {
+          "profile_name_en": {
+            "label": "Profile Name (English)",
+            "placeholder": "Profile Name (English)",
+            "error": {
+              "required": "Profile Name (English) is required"
+            }
+          },
+          "profile_name_ar": {
+            "label": "Profile Name (Arabic)",
+            "placeholder": "Profile Name (Arabic)",
+            "error": {
+              "required": "Profile Name (Arabic) is required"
+            }
+          },
+          "preferred_language": {
+            "label": "Preferred Language",
+            "placeholder": "Select preferred language",
+            "error": {
+              "required": "Preferred Language is required"
+            }
+          },
+          "communication_channel": {
+            "label": "Communication Channel",
+            "placeholder": "Select communication channel",
+            "error": {
+              "required": "Communication Channel is required"
+            }
+          }
+        }
+      },
       "Services": {
         "Passport": {
           "title": "Passport",
@@ -419,37 +467,36 @@
             "placeholder": "List the parties involved in the shareholder agreement"
           }
         },
-        "FinancialStatement":{
+        "FinancialStatement": {
           "title": "Financial Statement",
           "description": "Financial Statement",
-          
-            "financial_statement_year": {
-              "label": "Financial Year",
-              "placeholder": "Enter financial year"
-            },
-            "financial_statement_issuer": {
-              "label": "Issuing Authority",
-              "placeholder": "Enter issuing authority name"
-            },
-            "financial_statement_issue_date": {
-              "label": "Issue Date"
-            },
-            "financial_statement_expiry_date": {
-              "label": "Expiry Date (if applicable)"
-            },
-            "financial_statement_details": {
-              "label": "Statement Summary",
-              "placeholder": "Provide a summary of the audited financial statement"
-            },
-            "auditor_name": {
-              "label": "Auditor Name",
-              "placeholder": "Enter auditor's name"
-            },
-            "auditor_license_number": {
-              "label": "Auditor License Number",
-              "placeholder": "Enter auditor's license number"
-            }
-          
+
+          "financial_statement_year": {
+            "label": "Financial Year",
+            "placeholder": "Enter financial year"
+          },
+          "financial_statement_issuer": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority name"
+          },
+          "financial_statement_issue_date": {
+            "label": "Issue Date"
+          },
+          "financial_statement_expiry_date": {
+            "label": "Expiry Date (if applicable)"
+          },
+          "financial_statement_details": {
+            "label": "Statement Summary",
+            "placeholder": "Provide a summary of the audited financial statement"
+          },
+          "auditor_name": {
+            "label": "Auditor Name",
+            "placeholder": "Enter auditor's name"
+          },
+          "auditor_license_number": {
+            "label": "Auditor License Number",
+            "placeholder": "Enter auditor's license number"
+          }
         }
       },
       "AddNewCustomer": "Add New Customer",
