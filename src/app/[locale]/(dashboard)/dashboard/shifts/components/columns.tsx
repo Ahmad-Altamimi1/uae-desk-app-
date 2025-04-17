@@ -10,6 +10,8 @@ import { IShiftsData } from "@/entities/dashboard/shifts";
 import { StatusToggle } from "./statusToggle";
 import { deleteShifts, handleUpdateStatus } from "../../../actions/shifts";
 import { toast } from "sonner";
+import ShiftAction from "./action";
+
 
 export const columns: ColumnDef<IShiftsData>[] = [
   {
@@ -106,19 +108,13 @@ export const columns: ColumnDef<IShiftsData>[] = [
     },
   },
 
-  {
+  
+   {
     accessorKey: "actions",
     header: <HeaderCell label="shifts.actions" />,
     id: "actions",
     cell: ({ row }) => (
-      <div className="flex items-center justify-center">
-        <ActionCell
-          id={row.original.id}
-          name={row.original.name}
-          editAction={() => handleEdit(row.original.id)}
-          onDeleted={async () => await deleteShifts(row.original.id)}
-        />
-      </div>
+      <ShiftAction id={row.original.id} name={row.original.name} />
     ),
   },
 ];

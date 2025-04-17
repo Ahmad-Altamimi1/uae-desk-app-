@@ -26,6 +26,7 @@ import { IBranchesData, IResponseBranches, IResponseServices, IResponseUsersPerm
 import { RowCell } from "@/components/table/rowCell";
 import { BranchesService } from "@/lib/api/services/dashboard/branches";
 import { deleteBranches } from "@/app/[locale]/(dashboard)/actions/branches";
+import BranchAction from "./action";
 
 export const columns: ColumnDef<IBranchesData>[] = [
   {
@@ -139,21 +140,14 @@ export const columns: ColumnDef<IBranchesData>[] = [
 
     ),
   },
+
   {
     accessorKey: "actions",
     header: <HeaderCell label="branches.actions" />,
     id: "actions",
     cell: ({ row }) => (
-      <div className="flex items-center justify-center">
-        <ActionCell
-          id={row.original.id}
-          name={row.original.branch_name}
-          editAction={() => handleEdit(row.original.id)}
-          onDeleted={async () => await deleteBranches(row.original.id)}
-        />
-      </div>
-    )
-    
+      <BranchAction id={row.original.id} name={row.original.branch_name} />
+    ),
   },
 
 ];

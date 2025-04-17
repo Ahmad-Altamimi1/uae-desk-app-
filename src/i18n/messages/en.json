@@ -595,7 +595,8 @@
       "endTime": "End Time",
       "status": "Status",
       "description": "Welcome to the shifts page!",
-      "actions": "Actions"
+      "actions": "Actions",
+      "updateSuccess": "Service updated successfully"
     },
     "attendance": {
       "title": " Attendance",
@@ -942,6 +943,7 @@
   "commonValidations": {
     "required": " this field is required",
     "unique": " this field must be unique",
-    "minLength": " must be at least 3 characters"
+    "minLength": " must be at least 3 characters",
+    "endDateAfterStartDate": "must be end date after start date"
   }
 }

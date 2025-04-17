@@ -7,7 +7,12 @@ export const BranchesService = {
       api.post<IResponseBranches, Omit<IRequestBranches, "id">>("BranchesStore", data),
   
     destroy: (id: number) =>
-      api.post("BranchesDestroy", { id }), 
+      api.post("BranchesDestroy", { id }),
+
+  update: (data: IRequestBranches) =>
+    api.post<IResponseBranches, IRequestBranches>("BranchesUpdate", data),
+
+
   };
 
 

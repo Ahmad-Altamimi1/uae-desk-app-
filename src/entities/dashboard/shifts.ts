@@ -1,7 +1,7 @@
 
 export interface IShiftsData{
     id: number;
-    name: number;
+    name: string;
     start_time: string;
     end_time: string;
     is_active: string;
@@ -15,7 +15,7 @@ export interface IResponseShifts {
 }
 export interface IRequestShifts{
     id: number;
-    name: number;
+    name: string;
     start_time: string;
     end_time: string;
     is_active: string;

@@ -177,6 +177,8 @@ async function fetchWithTimeout<TResponse>(
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
   }
+console.log("methood",url);
+  console.log("body",body);
 
   const fetchOptionsWithTimeout: RequestInit = {
     ...fetchOptions,

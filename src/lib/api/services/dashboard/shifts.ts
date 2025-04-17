@@ -6,8 +6,14 @@ export const ShiftsService = {
     api.post<IResponseShifts, Omit<IRequestShifts, "id">>(`ShiftsStore`, data),
 
   destroy: (id: number) => api.post("ShiftsDestroy", { id }),
+
+  
   updateStatus: (id: number, status: boolean) =>
     api.post("updateStatus", { id, status }),
+
+ update: (data: IRequestShifts) =>
+   api.post<IResponseShifts, IRequestShifts>("ShiftsUpdate", data),
+
 };
 
 // fetchCUDApi("login", "POST", data),
