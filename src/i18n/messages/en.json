@@ -419,37 +419,35 @@
             "placeholder": "List the parties involved in the shareholder agreement"
           }
         },
-        "FinancialStatement":{
+        "FinancialStatement": {
           "title": "Financial Statement",
           "description": "Financial Statement",
-          
-            "financial_statement_year": {
-              "label": "Financial Year",
-              "placeholder": "Enter financial year"
-            },
-            "financial_statement_issuer": {
-              "label": "Issuing Authority",
-              "placeholder": "Enter issuing authority name"
-            },
-            "financial_statement_issue_date": {
-              "label": "Issue Date"
-            },
-            "financial_statement_expiry_date": {
-              "label": "Expiry Date (if applicable)"
-            },
-            "financial_statement_details": {
-              "label": "Statement Summary",
-              "placeholder": "Provide a summary of the audited financial statement"
-            },
-            "auditor_name": {
-              "label": "Auditor Name",
-              "placeholder": "Enter auditor's name"
-            },
-            "auditor_license_number": {
-              "label": "Auditor License Number",
-              "placeholder": "Enter auditor's license number"
-            }
-          
+          "financial_statement_year": {
+            "label": "Financial Year",
+            "placeholder": "Enter financial year"
+          },
+          "financial_statement_issuer": {
+            "label": "Issuing Authority",
+            "placeholder": "Enter issuing authority name"
+          },
+          "financial_statement_issue_date": {
+            "label": "Issue Date"
+          },
+          "financial_statement_expiry_date": {
+            "label": "Expiry Date (if applicable)"
+          },
+          "financial_statement_details": {
+            "label": "Statement Summary",
+            "placeholder": "Provide a summary of the audited financial statement"
+          },
+          "auditor_name": {
+            "label": "Auditor Name",
+            "placeholder": "Enter auditor's name"
+          },
+          "auditor_license_number": {
+            "label": "Auditor License Number",
+            "placeholder": "Enter auditor's license number"
+          }
         }
       },
       "AddNewCustomer": "Add New Customer",
@@ -548,7 +546,8 @@
       "endTime": "End Time",
       "status": "Status",
       "description": "Welcome to the shifts page!",
-      "actions": "Actions"
+      "actions": "Actions",
+      "updateSuccess": "Service updated successfully"
     },
     "attendance": {
       "title": " Attendance",
@@ -895,6 +894,7 @@
   "commonValidations": {
     "required": " this field is required",
     "unique": " this field must be unique",
-    "minLength": " must be at least 3 characters"
+    "minLength": " must be at least 3 characters",
+    "endDateAfterStartDate": "must be end date after start date"
   }
 }

@@ -25,7 +25,7 @@ export default function ShiftsCreateForm() {
   const {
     register,
     handleSubmit,
-    control,
+    reset,
     formState: { errors },
   } = useForm<ShiftCreateFormValues>({
     resolver: zodResolver(shiftsSchema(t)),
@@ -52,7 +52,7 @@ export default function ShiftsCreateForm() {
               }
             
               setOpen(false)
-        
+        reset()
             });
   };
 
