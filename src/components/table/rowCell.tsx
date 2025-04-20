@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 interface RowCellProps {
@@ -7,11 +6,14 @@ interface RowCellProps {
 }
 
 export const RowCell = ({ label, className }: RowCellProps) => {
-
   return (
-    <div className={cn("flex items-center justify-center min-w-[100px] text-center", className)}>
+    <div
+      className={cn(
+        "flex items-center justify-center min-w-[100px] text-center",
+        className
+      )}
+    >
       {label}
-      
     </div>
   );
 };

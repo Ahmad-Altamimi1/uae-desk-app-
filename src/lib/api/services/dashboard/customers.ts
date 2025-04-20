@@ -6,10 +6,11 @@ import {
 } from "@/entities/dashboard";
 import { api } from "../../serverCore";
 import { serviceFormsFieldName } from "@/app/[locale]/(dashboard)/dashboard/customers/[customerId]/createservices/components/servicesForms/serviceFormsFieldsName";
+import { IResponse } from "@/lib/type";
 
 export const CustomerService = {
   create: (data: Omit<IRequestCustomer, "id">) =>
-    api.post<IResponseCustomer, Omit<IRequestCustomer, "id">>(
+    api.post<IResponse<{ id: number }>, Omit<IRequestCustomer, "id">>(
       `CustomerStore`,
       data
     ),

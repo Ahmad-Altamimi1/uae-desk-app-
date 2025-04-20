@@ -31,14 +31,14 @@ export const customerValidation = (t: (key: string) => string) => {
       .array(z.number())
       .min(1, { message: t("serviceId.error.required") }),
     // servicePrice: z.record(z.number()).default({}),
-    entries: z
+    upcoming_payments: z
       .array(
         z.object({
           date: z
             .string()
             .min(1, { message: t("entries.fields.date.error.required") }),
           amount: z
-            .number()
+            .string()
             .min(1, { message: t("entries.fields.amount.error.required") }),
           description: z.string().optional(),
         })

@@ -39,6 +39,8 @@ export interface IResponseCustomer {
   branch: IBranchesData;
   services: IServicesData[];
   media: IMediaData[];
+  upcoming_payments: UpcomingPayments[];
+
   ftamedia: IFtaData[];
 }
 export interface IMediaData {
@@ -93,9 +95,15 @@ export interface IRequestCustomer {
   gmail_password: string;
   submitted_for_verification_at: string | null;
   expert_submitted_at: string | null;
+  upcoming_payments: UpcomingPayments[];
   supervisor_approved_at: string | null;
 }
 
+export interface UpcomingPayments {
+  date: string;
+  description: string;
+  amount: string;
+}
 export interface IGetCustomer {
   data: ICustomerData;
 }

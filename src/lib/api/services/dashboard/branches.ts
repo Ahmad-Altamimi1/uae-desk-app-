@@ -1,22 +1,16 @@
+import { IResponse } from "./../../../type";
 import { IRequestBranches, IResponseBranches } from "@/entities/dashboard";
 import { api } from "../../serverCore";
 
-
 export const BranchesService = {
-    create: (data: Omit<IRequestBranches, "id">) =>
-      api.post<IResponseBranches, Omit<IRequestBranches, "id">>("BranchesStore", data),
-  
-    destroy: (id: number) =>
-      api.post("BranchesDestroy", { id }),
+  create: (data: Omit<IRequestBranches, "id">) =>
+    api.post<IResponseBranches, Omit<IRequestBranches, "id">>(
+      "BranchesStore",
+      data
+    ),
 
-  update: (data: IRequestBranches) =>
-    api.post<IResponseBranches, IRequestBranches>("BranchesUpdate", data),
+  destroy: (id: number) => api.post<IResponse>("BranchesDestroy", { id }),
+};
 
-
-  };
-
-
-
-  // fetchCUDApi("login", "POST", data),
-  //   logout: () => fetchCUDApi<ILogin>(`/users/${id}`, "POST"),
-
+// fetchCUDApi("login", "POST", data),
+//   logout: () => fetchCUDApi<ILogin>(`/users/${id}`, "POST"),

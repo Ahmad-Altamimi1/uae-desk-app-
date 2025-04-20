@@ -1,10 +1,9 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import Input from "@/components/form/input";
-import { GitBranch, Globe2, Key, Mail, MapPin, Phone, User } from "lucide-react";
+import { GitBranch, Globe2, Mail, MapPin, Phone } from "lucide-react";
 import { useState, useTransition } from "react";
 import { branchesSchema } from "@/app/[locale]/(dashboard)/schema/branches";
 import { createBranches } from "@/app/[locale]/(dashboard)/actions/branches";
@@ -12,14 +11,17 @@ import { toast } from "sonner";
 import ToolBarModal from "@/components/table/toolBarModal";
 import CustomSelect from "@/components/form/select";
 import { ISelectOption } from "@/utils/type";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface BranchesCreateFormProps {
-  locations: ISelectOption[]
+  locations: ISelectOption[];
 }
 
 type BranchCreateFormValues = z.infer<ReturnType<typeof branchesSchema>>;
 
-export default function BranchesCreateForm({ locations }: BranchesCreateFormProps) {
+export default function BranchesCreateForm({
+  locations,
+}: BranchesCreateFormProps) {
   const t = useTranslations();
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -29,9 +31,9 @@ export default function BranchesCreateForm({ locations }: BranchesCreateFormProp
     register,
     handleSubmit,
     control,
-    formState: { errors ,isValid,isDirty},
+    formState: { errors },
   } = useForm<BranchCreateFormValues>({
-    // resolver: zodResolver(branchSchema),
+    resolver: zodResolver(branchSchema),
     defaultValues: {
       branch_name: "",
       location_id: 0,
@@ -45,25 +47,19 @@ export default function BranchesCreateForm({ locations }: BranchesCreateFormProp
   let response;
 
   const onSubmit = async (data: BranchCreateFormValues) => {
-    console.log("datadatadatadata",data);
-    
+    if (!open) return null;
     startTransition(async () => {
-          response = await (createBranches(data));
-          console.log("responseresponse",response);
-          
-          if (response.success) {
-            toast.success(response.message)
-          }
-          if (response.error) {
-            toast(response?.error);
-    
-          }
-        
-          setOpen(false)
-    
-        });
-   
-    console.log(data);
+      response = await createBranches(data);
+
+      if (response.success) {
+        toast.success(response.message);
+      }
+      if (response.error) {
+        toast(response?.error);
+      }
+
+      setOpen(false);
+    });
   };
 
   return (

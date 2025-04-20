@@ -1,20 +1,16 @@
-
-
-import { number, z } from "zod";
+import { z } from "zod";
 export function branchesSchema(t: (key: string) => string) {
   return z.object({
-    id: z.number().optional(),
-    branch_name: z.string().nonempty({ message: t("commonValidations.required") }),
-    location_id: z.number().min(1, { message: t("forms.locationId.error.required") }),
-    address: z.string().optional(),
-    phone_number: z.string().optional(),
-    email: z.string().optional(),
-    latitude: z.string().optional(),
-    longitude: z.string().optional(),
+    branch_name: z
+      .string({ message: t("commonValidations.required") })
+      .nonempty({ message: t("commonValidations.required") }),
+    location_id: z
+      .number({ message: t("commonValidations.required") })
+      .min(1, { message: t("commonValidations.required") }),
+    address: z.string({ message: t("commonValidations.required") }),
+    phone_number: z.string({ message: t("commonValidations.required") }),
+    email: z.string({ message: t("commonValidations.required") }),
+    latitude: z.string({ message: t("commonValidations.required") }),
+    longitude: z.string({ message: t("commonValidations.required") }),
   });
 }
-
-
-
-
-

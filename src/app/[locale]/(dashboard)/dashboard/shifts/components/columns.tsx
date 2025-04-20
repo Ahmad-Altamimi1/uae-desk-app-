@@ -47,18 +47,18 @@ export const columns: ColumnDef<IShiftsData>[] = [
   },
   {
     accessorKey: "header",
-    header: <HeaderCell label="SL" />,
+    header: () => <HeaderCell label="SL" />,
 
     cell: ({ row }) => (
       <div>
-        <RowCell label={row.index + 1} />
+        <RowCell label={String(row.index + 1)} />
       </div>
     ),
   },
 
   {
     accessorKey: "name",
-    header: <HeaderCell label="shifts.name" />,
+    header: () => <HeaderCell label="shifts.name" />,
     cell: ({ row }) => (
       <div>
         <RowCell label={row.original.name} />
@@ -67,7 +67,7 @@ export const columns: ColumnDef<IShiftsData>[] = [
   },
   {
     accessorKey: "startTime",
-    header: <HeaderCell label="shifts.startTime" />,
+    header: () => <HeaderCell label="shifts.startTime" />,
     cell: ({ row }) => (
       <div>
         <RowCell label={row.original.start_time} />
@@ -76,7 +76,7 @@ export const columns: ColumnDef<IShiftsData>[] = [
   },
   {
     accessorKey: "endTime",
-    header: <HeaderCell label="shifts.endTime" />,
+    header: () => <HeaderCell label="shifts.endTime" />,
     cell: ({ row }) => (
       <div>
         <RowCell label={row.original.end_time} />
@@ -86,7 +86,7 @@ export const columns: ColumnDef<IShiftsData>[] = [
 
   {
     accessorKey: "status",
-    header: <HeaderCell label="shifts.status" />,
+    header: () => <HeaderCell label="shifts.status" />,
     cell: ({ row }) => {
       const { id, is_active } = row.original;
       return (
@@ -111,7 +111,7 @@ export const columns: ColumnDef<IShiftsData>[] = [
   
    {
     accessorKey: "actions",
-    header: <HeaderCell label="shifts.actions" />,
+    header: () => <HeaderCell label="shifts.actions" />,
     id: "actions",
     cell: ({ row }) => (
       <ShiftAction id={row.original.id} name={row.original.name} />

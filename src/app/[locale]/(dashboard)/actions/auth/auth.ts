@@ -51,7 +51,6 @@ export async function handleLogin(prevState: LoginState, formData: FormData) {
     cookieStore.set("token", loginResponse.access_token);
 
     isOk = true;
-    // return { success: true, data: loginResponse, error: null };
   } catch (error) {
     return {
       success: false,
@@ -69,10 +68,9 @@ export async function handleLogin(prevState: LoginState, formData: FormData) {
 export const HandleLogOut = async () => {
   const locale = await getLocale();
   const response = await AuthService.logout();
-  console.log("responseresponse", response);
-
+  if (response.success) {
+  }
   (await cookies()).delete("token");
-  // toast.success("Logout successfully");
   redirect({
     href: "/login",
     locale: locale,

@@ -3,8 +3,10 @@ export interface ILoginRequest {
   password: string;
 }
 export interface ILoginResponse {
-  user: {
-    access_token: string;
-  };
+  access_token: string;
   password: string;
+}
+export interface ILogoutResponse {
+  success: boolean;
+  message: string;
 }

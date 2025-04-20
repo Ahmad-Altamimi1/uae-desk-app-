@@ -1,8 +1,4 @@
-import {
-  IResponseBranches,
-  IResponseCustomer,
-  IResponseServices,
-} from "@/entities/dashboard";
+import { IResponseBranches, IResponseServices } from "@/entities/dashboard";
 import { api } from "@/lib/api/serverCore";
 import React from "react";
 import { CustomerForm } from "./components/createCustomerForm";

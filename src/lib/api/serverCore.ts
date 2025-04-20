@@ -1,7 +1,6 @@
 import { getCookie } from "@/utils/cookiesHandler";
 import endPoints from "./endpoints/dashboard";
 import { toast } from "sonner";
-import { log } from "util";
 
 // Type definitions for better type safety
 type EndpointKey = keyof typeof endPoints;
@@ -116,7 +115,10 @@ function createTimeoutPromise(ms: number): Promise<never> {
 /**
  * Process API response with proper error handling
  */
-async function handleApiResponse<T>(response: Response): Promise<T> {
+async function handleApiResponse<T>(
+  response: Response,
+  url: string
+): Promise<T> {
   if (response.ok) {
     // For 204 No Content responses
     if (response.status === 204) {
@@ -131,14 +133,17 @@ async function handleApiResponse<T>(response: Response): Promise<T> {
     const errorData = await response.json();
 
     throw new ApiError(
-      errorData.message || `API error: ${response.statusText} `,
+      errorData.message || `API error: ${response.statusText} , URL :${url}`,
       response.status,
       errorData.errors
     );
   } catch (error) {
     // If error response isn't valid JSON
     if (!(error instanceof ApiError)) {
-      throw new ApiError(`API error: ${response.statusText}`, response.status);
+      throw new ApiError(
+        `API error: ${response.statusText} URL :${url}`,
+        response.status
+      );
     }
     throw error;
   }
@@ -195,7 +200,7 @@ console.log("methood",url);
   try {
     const response = await fetch(url, fetchOptionsWithTimeout);
     clearTimeout(timer);
-    return await handleApiResponse<TResponse>(response);
+    return await handleApiResponse<TResponse>(response, url);
   } catch (error) {
     clearTimeout(timer);
 

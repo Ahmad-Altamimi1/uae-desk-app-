@@ -16,7 +16,7 @@ interface Props {
   description?: string;
   children: React.ReactNode;
   open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean | number>>;
   triggerButton?: React.ReactNode | string;
 }
 
@@ -30,9 +30,7 @@ export function Modal({
 }: Props) {
   const t = useTranslations();
   const titleTranslate = title ? t(title) : "";
-  const descriptionTranslate = description
-    ? t(description)
-    : "";
+  const descriptionTranslate = description ? t(description) : "";
   const triggerButtonTranslate =
     typeof triggerButton == "string"
       ? triggerButton

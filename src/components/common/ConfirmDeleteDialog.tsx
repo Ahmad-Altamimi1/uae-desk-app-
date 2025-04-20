@@ -41,13 +41,13 @@ export const ConfirmDeleteDialog = ({
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        onDelete()
-          .then(() => {
-            Swal.fire("Deleted!", `${itemName} has been deleted.`, "success");
-          })
-          .catch(() => {
-            Swal.fire("Error!", "Failed to delete the item.", "error");
-          });
+        if (onDelete) {
+          onDelete();
+        } else {
+          Swal.fire("Deleted!", `${itemName} has been deleted.`, "success");
+        }
+      } else {
+        Swal.fire("Error!", "Failed to delete the item.", "error");
       }
     });
   };

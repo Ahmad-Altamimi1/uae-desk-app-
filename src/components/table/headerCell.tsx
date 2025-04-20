@@ -1,19 +1,17 @@
 import { cn } from "@/lib/utils";
-import { useLocale } from "next-globe-gen";
 import { useTranslations } from "next-intl";
 
 interface HeaderCellProps {
   label: string;
   className?: string;
 }
-export const HeaderCell = ({ label ,className}: HeaderCellProps) => {
+export const HeaderCell = ({ label, className }: HeaderCellProps) => {
   // const isSorted = column.getIsSorted();
   // const isMultiSorted = column.getIsMultiSorted();
   // const isResizing = column.getIsResizing();
   // const isSelected = column.getIsSelected();
   // const locale = useLocale();
   const t = useTranslations("dashboard");
-  
 
   return (
     // <div
@@ -21,10 +19,9 @@ export const HeaderCell = ({ label ,className}: HeaderCellProps) => {
     //     isSorted ? "bg-blue-100" : ""
     //   } ${isResizing ? "bg-gray-200" : ""}`}
     // >
-    <div className={cn(
-      "flex items-center justify-center  text-center",
-      className
-    )}>
+    <div
+      className={cn("flex items-center justify-center  text-center", className)}
+    >
       {t(label)}
       {/* {isSorted && <span>{isMultiSorted ? "🔼" : "🔽"}</span>} */}
     </div>

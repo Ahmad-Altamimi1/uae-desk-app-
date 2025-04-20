@@ -14,14 +14,16 @@ interface ServiceActionProps {
 
 const ServiceAction: React.FC<ServiceActionProps> = React.memo(
   ({ id, name }) => {
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [itemForUpdate, setItemForUpdate] = useState<number | boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [service, setService] = useState<IServicesData | null>(null);
+    let x = 0;
+    console.log("count", ++x);
 
-    const handleEdit = useCallback(async () => {
+    const handleEdit = useCallback(async (id: number) => {
       try {
         setIsLoading(true);
-        setIsModalOpen(true);
+        setItemForUpdate(id);
 
         const response = await api.get<IResponseSingleServices>([
           "ServicesEdit",
@@ -32,13 +34,13 @@ const ServiceAction: React.FC<ServiceActionProps> = React.memo(
       } catch (error) {
         console.error("Error fetching service details:", error);
         toast.error("Failed to load service details");
-        setIsModalOpen(false);
+        setItemForUpdate(false);
       } finally {
         setIsLoading(false);
       }
-    }, [id]);
+    }, []);
 
-    const handleDelete = useCallback(async () => {
+    const handleDelete = useCallback(async (id: number) => {
       try {
         const result = await deleteServices(id);
         if (result.error) {
@@ -51,12 +53,6 @@ const ServiceAction: React.FC<ServiceActionProps> = React.memo(
         toast.error("Failed to delete service");
         return false;
       }
-    }, [id]);
-
-    const handleCloseModal = useCallback(() => {
-      setIsModalOpen(false);
-      // Reset service state after modal closes with a short delay
-      setTimeout(() => setService(null), 300);
     }, []);
 
     return (
@@ -65,29 +61,29 @@ const ServiceAction: React.FC<ServiceActionProps> = React.memo(
           <ActionCell
             id={id}
             name={name}
-            editAction={handleEdit}
-            onDeleted={handleDelete}
+            editAction={() => {
+              handleEdit(id);
+            }}
+            onDeleted={() => {
+              handleDelete(id);
+            }}
           />
         </div>
 
-        {isModalOpen && (
+        {itemForUpdate && (
           <Modal
             title="dashboard.services.title"
             description="dashboard.services.description"
-            open={isModalOpen}
+            open={!!itemForUpdate}
             triggerButton=""
-            setOpen={setIsModalOpen}
+            setOpen={setItemForUpdate}
           >
             {isLoading ? (
               <div className="flex justify-center items-center p-8">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
               </div>
-            ) : service ? (
-              <UpdateServiceForm
-                open={isModalOpen}
-                setOpen={handleCloseModal}
-                service={service}
-              />
+            ) : service && itemForUpdate == id ? (
+              <UpdateServiceForm setOpen={setItemForUpdate} service={service} />
             ) : (
               <div className="text-center p-4 text-red-500">
                 Failed to load service data

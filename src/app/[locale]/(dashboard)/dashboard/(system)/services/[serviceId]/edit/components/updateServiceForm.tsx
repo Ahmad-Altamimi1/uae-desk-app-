@@ -7,20 +7,17 @@ import { Dispatch, FC, SetStateAction, useState, useTransition } from "react";
 
 import Input from "@/components/form/input";
 import { toast } from "sonner";
-import { useRouter } from "@/i18n/navigation";
 import { IServicesData } from "@/entities/dashboard";
 import { serviceSchema } from "@/app/[locale]/(dashboard)/schema/services";
 import { updateService } from "@/app/[locale]/(dashboard)/actions/services";
 
 interface UpdateServiceFormProps {
   service: IServicesData;
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean | number>>;
+  setOpen?: Dispatch<SetStateAction<boolean | number>>;
 }
 
 export const UpdateServiceForm: FC<UpdateServiceFormProps> = ({
   service,
-  open,
   setOpen,
 }) => {
   const t = useTranslations("forms");
@@ -28,9 +25,7 @@ export const UpdateServiceForm: FC<UpdateServiceFormProps> = ({
   const serviceTranslate = useTranslations("dashboard.services");
   const [isPending, startTransition] = useTransition();
   const [] = useState(true);
-  console.log("service", service);
 
-  const router = useRouter();
   const validation = serviceSchema(translationForValidation);
   type UpdateServiceFormValues = z.infer<typeof validation>;
 
@@ -39,8 +34,6 @@ export const UpdateServiceForm: FC<UpdateServiceFormProps> = ({
     handleSubmit,
     setError,
     formState: { errors },
-    control,
-    watch,
   } = useForm<UpdateServiceFormValues>({
     resolver: zodResolver(validation),
     defaultValues: {
@@ -49,25 +42,14 @@ export const UpdateServiceForm: FC<UpdateServiceFormProps> = ({
     },
   });
 
-  // const {
-  //   fields: entriesFields,
-  //   append: appendEntry,
-  //   remove: removeEntry,
-  // } = useFieldArray({
-  //   control,
-  //   name: "entries",
-  // });
-
   const onSubmit = async (data: UpdateServiceFormValues) => {
-    console.log("datadatadata", data);
-
     startTransition(async () => {
       try {
         const result = await updateService(data as UpdateServiceFormValues);
         if (result.success) {
           toast.success(serviceTranslate("updateSuccess"));
 
-          setOpen(false);
+          setOpen?.(false);
         } else {
           toast.error(result.error?.toString());
 

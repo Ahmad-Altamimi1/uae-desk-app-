@@ -27,10 +27,14 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { TableCellViewer } from "@/components/table/TableCellViewer";
 import ActionCell from "@/components/table/actionCell";
-import { IResponseUsersRoles } from '@/entities/dashboard/users'
+import { IResponseUsersRoles } from "@/entities/dashboard/users";
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
-import { IResponseBranches, IResponseServices, IResponseUsersPermissions } from "@/entities/dashboard";
+import {
+  IResponseBranches,
+  IResponseServices,
+  IResponseUsersPermissions,
+} from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
 import { IResponseShifts } from "@/entities/dashboard/shifts";
 import { Switch } from "@radix-ui/react-switch";
@@ -80,102 +84,74 @@ export const columns: ColumnDef<IResponseAttendance>[] = [
   },
   {
     accessorKey: "header",
-    header: <HeaderCell label="SL" />,
+    header: () => <HeaderCell label="SL" />,
 
     cell: ({ row }) => (
       <div>
-        <RowCell label={row.index + 1} />
+        <RowCell label={String(row.index + 1)} />
       </div>
     ),
   },
 
-
-
   {
-
-
     accessorKey: "user_name",
-    header: <HeaderCell label="attendance.user_name" />,
+    header: () => <HeaderCell label="attendance.user_name" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.user.name} />
       </div>
-
-
     ),
   },
   {
-
-
     accessorKey: "login",
-    header: <HeaderCell label="attendance.login" />,
+    header: () => <HeaderCell label="attendance.login" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.login_time} />
       </div>
-
-
     ),
   },
-   
-   {
 
-
+  {
     accessorKey: "logout",
-    header: <HeaderCell label="attendance.logout" />,
+    header: () => <HeaderCell label="attendance.logout" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.logout_time} />
       </div>
-
-
     ),
   },
   {
-
-
     accessorKey: "branchName",
-    header: <HeaderCell label="attendance.branchName" />,
+    header: () => <HeaderCell label="attendance.branchName" />,
     cell: ({ row }) => (
-
       <div>
-        <RowCell label={row.original.branch?.branch_name } />
+        <RowCell label={row.original.branch?.branch_name} />
       </div>
-
-
     ),
   },
   {
     accessorKey: "is_late",
-    header: <HeaderCell label="attendance.is_late" />,
+    header: () => <HeaderCell label="attendance.is_late" />,
     cell: ({ row }) => (
       <div>
         <RowCell label={row.original.is_late ? "Yes" : "No"} />
       </div>
     ),
   },
-  
 
   {
-
-
     accessorKey: "is_minutes",
-    header: <HeaderCell label="attendance.is_minutes" />,
+    header: () => <HeaderCell label="attendance.is_minutes" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.is_minutes} />
       </div>
-
-
     ),
   },
   // {
   //   accessorKey: "actions",
-  //   header: <HeaderCell label="attendance.actions" />,
+  //   header: ()=> <HeaderCell label="attendance.actions" />,
   //   id: "actions",
   //   cell: ({ row }) => (
   //     <div className="flex items-center justify-center">
@@ -183,12 +159,10 @@ export const columns: ColumnDef<IResponseAttendance>[] = [
   //         id={row.original.id}
   //         name={row.original.name}
   //         editAction={() => handleEdit(row.original.id)}
-  //         onDeleted={Atte.destroy(row.original.id)} 
+  //         onDeleted={Atte.destroy(row.original.id)}
   //       />
   //     </div>
   //   )
-    
+
   // },
-
-
 ];

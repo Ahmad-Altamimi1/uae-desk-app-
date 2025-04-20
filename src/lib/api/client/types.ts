@@ -3,30 +3,30 @@ import { CustomersRoute } from ".";
 
 export type GenericListResponse<T> = {
   data: T;
-  // value: {
-  //   pageNumber: number;
-  //   pageSize: number;
-  //   totalRecords: number;
-  //   totalPages: number;
-  //   data: T;
-  // };
-  // isSuccess: boolean;
-  // isFailure: boolean;
-  // error: {
-  //   code: string;
-  //   message: string;
-  // };
+  value: {
+    pageNumber: number;
+    pageSize: number;
+    totalRecords: number;
+    totalPages: number;
+    data: T;
+  };
+  isSuccess: boolean;
+  isFailure: boolean;
+  error: {
+    code: string;
+    message: string;
+  };
 };
 
 export type GenericResponse<T> = {
   message: T;
-  // value: T;
-  // isSuccess: boolean;
-  // isFailure: boolean;
-  // error: {
-  //   code: string;
-  //   message: string;
-  // };
+  value: T;
+  isSuccess: boolean;
+  isFailure: boolean;
+  error: {
+    code: string;
+    message: string;
+  };
 };
 
 export type ListPayload = {
