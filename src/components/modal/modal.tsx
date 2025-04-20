@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import React, { Dispatch, SetStateAction } from "react";
 
@@ -18,6 +19,7 @@ interface Props {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   triggerButton?: React.ReactNode | string;
+  size?: "default" | "md" | "lg"
 }
 
 export function Modal({
@@ -26,6 +28,7 @@ export function Modal({
   children,
   open = false,
   setOpen,
+  size = "default",
   triggerButton = "modal.open",
 }: Props) {
   const t = useTranslations();
@@ -41,24 +44,33 @@ export function Modal({
       : triggerButton;
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
-        {triggerButton &&
-          (typeof triggerButton == "string" ? (
-            <Button variant="outline">{triggerButtonTranslate}</Button>
-          ) : (
-            triggerButtonTranslate
-          ))}
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>{titleTranslate}</DialogTitle>
-          <DialogDescription>{descriptionTranslate}</DialogDescription>
-        </DialogHeader>
-        <div className="flex items-center space-x-2">
-          <div className="grid flex-1 gap-2">{children}</div>
-        </div>
-        {/* <DialogFooter className="sm:justify-start">
+    <div className="mt-5">
+      <Dialog open={open} onOpenChange={setOpen}  >
+        <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
+          {triggerButton &&
+            (typeof triggerButton == "string" ? (
+              <Button variant="outline">{triggerButtonTranslate}</Button>
+            ) : (
+              triggerButtonTranslate
+            ))}
+        </DialogTrigger>
+        <DialogContent
+          className={cn(
+            size === "default" && "sm:max-w-md",
+            size === "md" && "!w-[50vw]",
+            size === "lg" && "w-[90%] max-w-5xl"
+            
+            // "overflow-y-scroll"
+          )}
+        >
+          <DialogHeader>
+            <DialogTitle>{titleTranslate}</DialogTitle>
+            <DialogDescription>{descriptionTranslate}</DialogDescription>
+          </DialogHeader>
+          <div className="flex items-center space-x-2">
+            <div className="grid flex-1 gap-2">{children}</div>
+          </div>
+          {/* <DialogFooter className="sm:justify-start">
           <div onClick={() => {
             // e.preventDefault()
             console.log('close')
@@ -87,7 +99,8 @@ export function Modal({
           </div>
 
         </DialogFooter> */}
-      </DialogContent>
-    </Dialog>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }
