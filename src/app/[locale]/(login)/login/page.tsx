@@ -4,6 +4,7 @@ import { FiMail } from "react-icons/fi";
 import Password from "../../../../components/form/password";
 import { useActionState } from "react";
 import { handleLogin } from "../../(dashboard)/actions";
+import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
   interface LoginState {
@@ -90,7 +91,7 @@ export default function LoginPage() {
               </label>
             </div>
 
-            <button
+            <Button
               type="submit"
               className="w-full bg-[#00713B] text-white py-3 rounded-xl hover:bg-green-800 transition"
             >
@@ -102,7 +103,7 @@ export default function LoginPage() {
               ) : (
                 <span>Login</span>
               )}
-            </button>
+            </Button>
           </form>
           {formState.error && <p className="text-red-500">{formState.error}</p>}
           <p className="text-xs text-center mt-10 text-gray-500">

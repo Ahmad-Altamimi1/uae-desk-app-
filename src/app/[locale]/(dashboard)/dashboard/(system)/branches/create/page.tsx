@@ -12,6 +12,7 @@ import ToolBarModal from "@/components/table/toolBarModal";
 import CustomSelect from "@/components/form/select";
 import { ISelectOption } from "@/utils/type";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
 
 interface BranchesCreateFormProps {
   locations: ISelectOption[];
@@ -40,8 +41,8 @@ export default function BranchesCreateForm({
       address: "",
       phone_number: "",
       email: "",
-      latitude: "",
-      longitude: "",
+      latitude: 0,
+      longitude: 0,
     },
   });
   let response;
@@ -126,6 +127,7 @@ export default function BranchesCreateForm({
           <Input
             label={{ id: "latitude.label" }}
             name="latitude"
+            type="number"
             register={register}
             error={errors.latitude?.message}
             placeholder={{ id: "latitude.placeholder" }}
@@ -136,19 +138,20 @@ export default function BranchesCreateForm({
             label={{ id: "longitude.label" }}
             name="longitude"
             register={register}
+            type="number"
             error={errors.longitude?.message}
             placeholder={{ id: "longitude.placeholder" }}
             startIcon={<Globe2 size={18} />}
           />
         </div>
 
-        <button
+        <Button
           type="submit"
           // disabled={isValid }
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
           {isPending ? <span>{t("loading")}</span> : <span>{t("submit")}</span>}
-        </button>
+        </Button>
       </form>
     </ToolBarModal>
   );

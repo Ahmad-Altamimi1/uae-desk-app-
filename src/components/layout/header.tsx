@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { SidebarTrigger } from "../ui/sidebar";
 import { FiBell, FiSettings } from "react-icons/fi";
-import ResetPassword from "@/app/[locale]/(dashboard)/dashboard/(profile)/resetPassword";
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import {
   DropdownMenu,
@@ -9,16 +8,8 @@ import {
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuGroup,
-  DropdownMenuItem,
 } from "@radix-ui/react-dropdown-menu";
-import { IconLogout } from "@tabler/icons-react";
 import { getTranslations, getLocale } from "next-intl/server";
-import { AuthService } from "@/lib/api/services/dashboard";
-import { cookies } from "next/headers";
-import { toast } from "sonner";
-import { redirect } from "@/i18n/navigation";
-import { HandleLogOut } from "@/app/[locale]/(dashboard)/actions";
 import LogOut from "./logOut";
 
 const Header = async () => {
@@ -34,7 +25,7 @@ const Header = async () => {
   });
 
   return (
-    <div className=" w-full flex items-center justify-center  fixed  top-5 z-[40]">
+    <div className=" w-full flex items-center justify-center  absolute  top-5 z-[40]">
       <header className=" bg-white w-[90%] rounded-xl border py-6 shadow-sm  ">
         <div className="flex items-center justify-between px-4">
           <div className="flex items-center space-x-2">
@@ -122,13 +113,13 @@ const Header = async () => {
                   </div>
                 </DropdownMenuLabel>
 
-                <DropdownMenuSeparator className="my-2" />
+                {/* <DropdownMenuSeparator className="my-2" />
 
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
                     <ResetPassword />
                   </DropdownMenuItem>
-                </DropdownMenuGroup>
+                </DropdownMenuGroup> */}
 
                 <DropdownMenuSeparator className="my-2" />
 

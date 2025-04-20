@@ -1,36 +1,11 @@
 "use client";
 
 import { DragHandle } from "@/components/table/dragHandle";
-import { Input } from "@/components/ui/input";
 import { Checkbox } from "@radix-ui/react-checkbox";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { IconCircleCheckFilled, IconLoader } from "@tabler/icons-react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { toast } from "sonner";
-import { z } from "zod";
-import { TableCellViewer } from "@/components/table/TableCellViewer";
-import ActionCell from "@/components/table/actionCell";
-import { IResponseUsersRoles } from "@/entities/dashboard/users";
 import { HeaderCell } from "@/components/table/headerCell";
-import { StatusCell } from "@/components/table/statusCell";
-import {
-  IBranchesData,
-  IResponseBranches,
-  IResponseServices,
-  IResponseUsersPermissions,
-} from "@/entities/dashboard";
+import { IBranchesData } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-import { BranchesService } from "@/lib/api/services/dashboard/branches";
-import { deleteBranches } from "@/app/[locale]/(dashboard)/actions/branches";
 import BranchAction from "./action";
 
 export const columns: ColumnDef<IBranchesData>[] = [

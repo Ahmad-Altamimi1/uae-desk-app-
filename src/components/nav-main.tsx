@@ -43,14 +43,21 @@ export function NavMain({
               >
                 <SidebarMenuButton
                   asChild
-                  className={cn(isActive && "bg-white  text-primary")}
+                  className={cn(
+                    isActive && "bg-white text-primary",
+                    "transition-all duration-300 ease-in-out transform hover:bg-white hover:text-primary hover:scale-105"
+                  )}
                 >
                   <Link
                     href={fullUrl}
                     className="flex items-center gap-2 w-full hover:text-primary"
                   >
-                    {item.icon && <item.icon className="h-4 w-4" />}
-                    <span>{item.title}</span>
+                    {item.icon && (
+                      <item.icon className="h-4 w-4 transition-transform duration-300 ease-in-out hover:rotate-12" />
+                    )}
+                    <span className="transition-opacity duration-300 ease-in-out hover:opacity-80">
+                      {item.title}
+                    </span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

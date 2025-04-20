@@ -19,7 +19,8 @@ interface Props {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean | number>>;
   triggerButton?: React.ReactNode | string;
-  size?: "default" | "md" | "lg"
+  size?: "default" | "md" | "lg";
+  className?: string;
 }
 
 export function Modal({
@@ -30,6 +31,7 @@ export function Modal({
   setOpen,
   size = "default",
   triggerButton = "modal.open",
+  className,
 }: Props) {
   const t = useTranslations();
   const titleTranslate = title ? t(title) : "";
@@ -42,8 +44,8 @@ export function Modal({
       : triggerButton;
 
   return (
-    <div className="mt-5">
-      <Dialog open={open} onOpenChange={setOpen}  >
+    <div className={cn(className ? className : "mt-5")}>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
           {triggerButton &&
             (typeof triggerButton == "string" ? (
@@ -57,7 +59,7 @@ export function Modal({
             size === "default" && "sm:max-w-md",
             size === "md" && "!w-[50vw]",
             size === "lg" && "w-[90%] max-w-5xl"
-            
+
             // "overflow-y-scroll"
           )}
         >

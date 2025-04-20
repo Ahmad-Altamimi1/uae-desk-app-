@@ -1,5 +1,12 @@
 "use server";
-import { ICustomerData } from "@/entities/dashboard/customers";
+import {
+  addTaxIdRequest,
+  CustomerSubmitReviewRequest,
+  ICustomerData,
+  storeFtaMedia,
+  storeFtaMediaRequest,
+  updateFtaMediaRequest,
+} from "@/entities/dashboard/customers";
 import { z } from "zod";
 import { getTranslations } from "next-intl/server";
 import { CustomerService } from "@/api/services/dashboard";
@@ -171,7 +178,7 @@ export async function submitVerification(id: number): Promise<CustomerState> {
 
 export async function saveDocumentDetailsAction(
   data: typeof serviceFormsFieldName,
-  id: number
+  id: string
 ): Promise<CustomerState> {
   try {
     const response = await CustomerService.saveDocumentDetails(data, id);
@@ -198,6 +205,94 @@ export async function RequestDocumentAction(
 ): Promise<CustomerState> {
   try {
     const response = await CustomerService.requestDocument(data, id);
+
+    return {
+      success: true,
+      data: response,
+      message: response.message,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
+  }
+}
+export async function storeFtaMediaAction(
+  data: storeFtaMediaRequest
+): Promise<CustomerState> {
+  try {
+    const response = await CustomerService.storeFtaMedia(data);
+
+    return {
+      success: true,
+      data: response,
+      message: response.message,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
+  }
+}
+export async function addTaxIdAction(
+  data: addTaxIdRequest
+): Promise<CustomerState> {
+  try {
+    const response = await CustomerService.addTaxId(data);
+
+    return {
+      success: true,
+      data: response,
+      message: response.message,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
+  }
+}
+export async function submitReviewAction(
+  data: CustomerSubmitReviewRequest
+): Promise<CustomerState> {
+  try {
+    const response = await CustomerService.submitReview(data);
+
+    return {
+      success: true,
+      data: response,
+      message: response.message,
+      error: null,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
+  }
+}
+export async function updateFtaMediaAction(
+  data: updateFtaMediaRequest
+): Promise<CustomerState> {
+  try {
+    const response = await CustomerService.updateFtaMedia(data);
 
     return {
       success: true,

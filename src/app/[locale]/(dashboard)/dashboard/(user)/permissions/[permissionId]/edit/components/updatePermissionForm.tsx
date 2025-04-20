@@ -8,8 +8,7 @@ import { User, Mail, Building, Phone } from "lucide-react";
 
 import InputCollectionLabel from "@/components/form/inputCollectionLabel";
 import Input from "@/components/form/input";
-import { updateCustomer } from "../../../../../actions";
-import { customerValidation } from "../../../../../schema/customers";
+
 import CustomSelect from "@/components/form/select";
 import PageTitle from "@/components/ui/pageTitle";
 import { ISelectOption } from "@/utils/type";
@@ -22,6 +21,8 @@ import {
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
 import { IGetCustomer } from "@/entities/dashboard";
+import { Button } from "@/components/ui/button";
+import { customerValidation } from "@/app/[locale]/(dashboard)/schema/customers";
 
 interface UpdateCustomerFormProps {
   serviceOptions: ISelectOption[];
@@ -430,13 +431,13 @@ disabled={isPending}
                   </Button>
                 </div>
               </div> */}
-        <button
+        <Button
           type="submit"
           disabled={isPending}
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
           {isPending ? t("submitting") : t("submit")}
-        </button>
+        </Button>
       </form>
     </>
   );

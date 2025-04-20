@@ -49,13 +49,12 @@ const ServiceForms = ({
     resolver: zodResolver(schema),
     defaultValues: servicesDetails,
   });
-  console.log("servicesDetails", servicesDetails);
 
   const onSubmit = (data: typeof serviceFormsFieldName) => {
     startTransition(async () => {
       const response = await saveDocumentDetailsAction(
         data,
-        Number(customerId)
+        String(customerId)
       );
 
       if (response.success) {
@@ -65,7 +64,10 @@ const ServiceForms = ({
         toast.error(response?.error);
       }
       // reset();
-      router.push(`dashboard/customers/${id}`);
+      router.push({
+        pathname: "/customerView/[customerId]",
+        params: { customerId: String(customerId) },
+      });
     });
     // router.push("services");
   };
@@ -124,7 +126,9 @@ const ServiceForms = ({
 
           return value.map((_, index) => <Component key={`${key}-${index}`} />);
         })}
-        <Button type="submit">{isPending ? "loading..." : "submit"}</Button>
+        <Button type="submit" disabled={!formState.isDirty || isPending}>
+          {isPending ? "loading..." : "submit"}
+        </Button>
       </form>
     </FormProvider>
   );

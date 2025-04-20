@@ -85,6 +85,7 @@ export async function updateBranch(
       error: (error as Error).message,
       data: {},
       message: (error as Error).message,
+      ...error,
     };
   }
 }

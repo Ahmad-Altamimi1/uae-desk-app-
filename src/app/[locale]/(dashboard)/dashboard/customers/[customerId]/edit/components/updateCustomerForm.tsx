@@ -467,13 +467,13 @@ disabled={isPending}
           </div>
         </div>
 
-        <button
+        <Button
           type="submit"
           disabled={isPending}
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
           {isPending ? t("submitting") : t("submit")}
-        </button>
+        </Button>
       </form>
     </>
   );

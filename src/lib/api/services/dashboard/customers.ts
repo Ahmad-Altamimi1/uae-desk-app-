@@ -3,6 +3,10 @@ import {
   IRequestCustomer,
   IUploadMedia,
   RequestDocument,
+  storeFtaMediaRequest,
+  addTaxIdRequest,
+  CustomerSubmitReviewRequest,
+  updateFtaMediaRequest,
 } from "@/entities/dashboard";
 import { api } from "../../serverCore";
 import { serviceFormsFieldName } from "@/app/[locale]/(dashboard)/dashboard/customers/[customerId]/createservices/components/servicesForms/serviceFormsFieldsName";
@@ -26,8 +30,15 @@ export const CustomerService = {
     api.delete<void, { id: number }>(`deleteCustomerMediaDelete`, {
       id,
     }),
-  saveDocumentDetails: (data: typeof serviceFormsFieldName, id: number) =>
+  saveDocumentDetails: (data: typeof serviceFormsFieldName, id: string) =>
     api.post("saveDocumentDetails", { ...data, id }),
   requestDocument: (data: RequestDocument, id: number) =>
     api.post("CustomerRequestDocument", { ...data, id }),
+  storeFtaMedia: (data: storeFtaMediaRequest) =>
+    api.post("storeFtaMedia", data),
+  updateFtaMedia: (data: updateFtaMediaRequest) =>
+    api.post("CustomerFtaDocumentUpdate", data),
+  addTaxId: (data: addTaxIdRequest) => api.post("addTaxId", data),
+  submitReview: (data: CustomerSubmitReviewRequest) =>
+    api.post("CustomerSubmitReview", data),
 };

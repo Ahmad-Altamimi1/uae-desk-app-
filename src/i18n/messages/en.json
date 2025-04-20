@@ -26,9 +26,110 @@
     "title": "Dashboard",
     "description": "Welcome to your dashboard!",
     "customers": {
-      "createServices": {
-        "Request_for_Document": "Request for Document",
+      "portal": {
+        "title": "Customer Portal",
+        "description": "Welcome to the customer portal!",
+        "email": {
+          "label": "Portal Email / Username",
+          "placeholder": "Enter Portal Email / Username",
+          "error": {
+            "required": "Portal Email / Username is required",
+            "invalidFormat": "Please enter a valid Portal Email / Username address"
+          }
+        },
+        "password": {
+          "label": "Portal Password",
+          "placeholder": "Enter Portal Password",
+          "error": {
+            "required": "Portal Password is required",
+            "minLength": "Portal Password must be at least 8 characters",
+            "pattern": "Portal Password must include uppercase, lowercase, number, and special character"
+          }
+        },
+        "emailAddress": {
+          "label": "Email Address",
+          "placeholder": "Enter Email Address",
+          "error": {
+            "required": "Email Address is required",
+            "invalidFormat": "Please enter a valid Email Address"
+          }
+        },
+        "emailPassword": {
+          "label": "Email Password",
+          "placeholder": "Enter Email Password",
+          "error": {
+            "required": "Email Password is required",
+            "minLength": "Email Password must be at least 8 characters",
+            "pattern": "Email Password must include uppercase, lowercase, number, and special character"
+          }
+        }
+      },
+      "TRN": {
+        "title": "TRN",
+        "description": "Tax Registration Number",
+        "tax": {
+          "label": "Tax Registration Number",
+          "placeholder": "Enter TRN",
+          "error": {
+            "required": "TRN is required",
+            "invalidFormat": "TRN must be 15 digits long"
+          }
+        }
+      },
+      "uploadFTA": {
+        "title": "Upload FTA Document",
+        "description": "Upload FTA Document",
+        "documentFile": {
+          "label": "Document File",
+          "placeholder": "Select Document File",
+          "error": {
+            "required": "Document File is required",
+            "invalidFormat": "Invalid file format. Please upload a valid document."
+          }
+        }
+      },
+      "editFTA": {
+        "title": "Edit FTA Document",
+        "description": "Edit the details of the selected FTA document",
+        "documentFile": {
+          "label": "Document File",
+          "placeholder": "Select Document File",
+          "error": {
+            "required": "Document File is required",
+            "invalidFormat": "Invalid file format. Please upload a valid document."
+          }
+        }
+      },
+      "Request_for_Documents": {
+        "title": "Request for Documents",
+        "description": "Request for Documents",
         "Request_for_Document_Desc": "Please fill in the details for the service request.",
+        "Request_for_Document_Success": "Request for Document created successfully",
+        "Request_for_Document_Error": "Error creating Request for Document",
+        "documentName": {
+          "label": "Document Name",
+          "placeholder": "Enter document name",
+          "error": {
+            "required": "Document Name is required"
+          }
+        },
+        "startDate": {
+          "label": "Start Date",
+          "placeholder": "Select start date",
+          "error": {
+            "required": "Start Date is required"
+          }
+        },
+        "expiry_date": {
+          "label": "Expiry Date",
+          "placeholder": "Select expiry date",
+          "error": {
+            "required": "Expiry Date is required"
+          }
+        }
+      },
+
+      "createServices": {
         "document_type": {
           "label": "Document Type",
           "placeholder": "Enter document type",
@@ -968,6 +1069,9 @@
     "required": " this field is required",
     "unique": " this field must be unique",
     "minLength": " must be at least 3 characters",
-    "endDateAfterStartDate": "must be end date after start date"
+    "endDateAfterStartDate": "must be end date after start date",
+    "invalidPhoneNumber": "Phone Number must start with 052",
+    "phoneNumberLength": "Phone Number must be 10 characters",
+    "invalidEmail": "Please enter a valid email address"
   }
 }

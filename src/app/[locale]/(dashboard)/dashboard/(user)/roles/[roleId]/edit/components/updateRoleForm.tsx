@@ -4,34 +4,27 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import { FC, useTransition } from "react";
-import { User, Mail, Building, Phone } from "lucide-react";
+import { User } from "lucide-react";
 
 import InputCollectionLabel from "@/components/form/inputCollectionLabel";
 import Input from "@/components/form/input";
-import { updateCustomer } from "../../../../../actions";
-import CustomSelect from "@/components/form/select";
 import PageTitle from "@/components/ui/pageTitle";
-import { ISelectOption } from "@/utils/type";
-import {
-  currency,
-  customerStatusOptions,
-  paymentMethodOptions,
-  VatValue,
-} from "@/constants";
+
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
-import { IGetCustomer } from "@/entities/dashboard";
 import { createRoleCreateSchema } from "@/app/[locale]/(dashboard)/schema/role";
 import { IGetRole } from "@/entities/dashboard/roles";
+import { Button } from "@/components/ui/button";
+import { updateCustomer } from "@/app/[locale]/(dashboard)/actions";
 interface UpdateRoleFormProps {
-//   serviceOptions: ISelectOption[];
-//   branchOptions: ISelectOption[];
+  //   serviceOptions: ISelectOption[];
+  //   branchOptions: ISelectOption[];
   data: IGetRole["data"];
 }
 
 export const UpdateRoleForm: FC<UpdateRoleFormProps> = ({
-//   branchOptions,
-//   serviceOptions,
+  //   branchOptions,
+  //   serviceOptions,
   data,
 }) => {
   const role = data.role;
@@ -52,11 +45,11 @@ export const UpdateRoleForm: FC<UpdateRoleFormProps> = ({
   } = useForm<UpdateRoleFormValues>({
     resolver: zodResolver(validation),
     defaultValues: {
-    //   id: role.id,
+      //   id: role.id,
       name: role.name,
       code: role.code,
-    
-    //   entries: [],
+
+      //   entries: [],
     },
   });
 
@@ -101,7 +94,6 @@ export const UpdateRoleForm: FC<UpdateRoleFormProps> = ({
     });
   };
 
-
   return (
     <>
       <PageTitle
@@ -135,22 +127,17 @@ export const UpdateRoleForm: FC<UpdateRoleFormProps> = ({
                 placeholder={{ id: "code.placeholder" }}
                 startIcon={<User size={18} />}
               />
-         
             </div>
-           
-
-            
           </div>
-       
         </div>
-        
-        <button
+
+        <Button
           type="submit"
           disabled={isPending}
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
           {isPending ? t("submitting") : t("submit")}
-        </button>
+        </Button>
       </form>
     </>
   );

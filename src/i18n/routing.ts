@@ -9,5 +9,6 @@ export const routing = defineRouting({
     "/login": "/login",
     "/mediaCustomer/[newCustomerId]":
       "/dashboard/customers/create/[newCustomerId]",
+    "/customerView/[customerId]": "/dashboard/customers/[customerId]",
   },
 });

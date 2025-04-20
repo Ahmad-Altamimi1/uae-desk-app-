@@ -7,12 +7,7 @@ import {
 } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../../globals.css";
-import { SiteHeader } from "@/components/site-header";
-import {
-  SidebarProvider,
-  SidebarInset,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -80,7 +75,7 @@ export default async function RootLayout({ children, params }: Props) {
         <SidebarInset>
           <div className="flex flex-1 flex-col">
             <div className="@container/main flex flex-1 flex-col gap-2">
-              <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-32 md:px-10">
+              <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-32 px-4 lg:px-6">
                 {children}
               </div>
             </div>
