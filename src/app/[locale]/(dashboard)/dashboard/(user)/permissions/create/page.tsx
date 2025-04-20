@@ -10,6 +10,7 @@ import { permissionSchema } from "@/app/[locale]/(dashboard)/schema/permission";
 import { createPermission } from "@/app/[locale]/(dashboard)/actions/permissions";
 import ToolBarModal from "@/components/table/toolBarModal";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 type PermissionCreateFormValues = z.infer<ReturnType<typeof permissionSchema>>;
 
@@ -70,7 +71,7 @@ export default function PermissionCreateForm() {
           </div>
         </div>
         <p>{response?.error}</p>
-        <button
+        <Button
           type="submit"
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
@@ -79,7 +80,7 @@ export default function PermissionCreateForm() {
           ) : (
             <span>{t("submit")}</span>
           )}
-        </button>
+        </Button>
       </form>
     </ToolBarModal>
   );

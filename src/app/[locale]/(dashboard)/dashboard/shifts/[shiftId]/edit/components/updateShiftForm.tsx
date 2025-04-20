@@ -3,20 +3,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
-import { Dispatch, FC, SetStateAction, useState, useTransition } from "react";
+import { Dispatch, FC, SetStateAction, useTransition } from "react";
 
 import Input from "@/components/form/input";
 import { toast } from "sonner";
-import { useRouter } from "@/i18n/navigation";
-// import { IShiftsData } from "@/entities/dashboard/shift";
-import { serviceSchema } from "@/app/[locale]/(dashboard)/schema/services";
-import { updateService } from "@/app/[locale]/(dashboard)/actions/services";
-// import { shiftsSchema } from "../schema/shifts";
-import { endianness } from "os";
+
 import { IShiftsData } from "@/entities/dashboard/shifts";
 import { shiftsSchema } from "@/app/[locale]/(dashboard)/schema/shifts";
 import { updateShift } from "@/app/[locale]/(dashboard)/actions/shifts";
-
+import { Button } from "@/components/ui/button";
 
 interface UpdateShiftFormProps {
   shift: IShiftsData;
@@ -26,17 +21,12 @@ interface UpdateShiftFormProps {
 
 export const UpdateShiftForm: FC<UpdateShiftFormProps> = ({
   shift,
-  open,
   setOpen,
 }) => {
   const t = useTranslations("forms");
   const translationForValidation = useTranslations("");
   const shiftTranslate = useTranslations("dashboard.shifts");
   const [isPending, startTransition] = useTransition();
-  const [] = useState(true);
-  //   console.log("service", service);
-
-  const router = useRouter();
   const validation = shiftsSchema(translationForValidation);
   type UpdateShiftFormValues = z.infer<typeof validation>;
 
@@ -45,8 +35,6 @@ export const UpdateShiftForm: FC<UpdateShiftFormProps> = ({
     handleSubmit,
     setError,
     formState: { errors },
-    control,
-    watch,
   } = useForm<UpdateShiftFormValues>({
     resolver: zodResolver(validation),
     defaultValues: {
@@ -57,18 +45,7 @@ export const UpdateShiftForm: FC<UpdateShiftFormProps> = ({
     },
   });
 
-  // const {
-  //   fields: entriesFields,
-  //   append: appendEntry,
-  //   remove: removeEntry,
-  // } = useFieldArray({
-  //   control,
-  //   name: "entries",
-  // });
-
   const onSubmit = async (data: UpdateShiftFormValues) => {
-    console.log("datadatadata", data);
-
     startTransition(async () => {
       try {
         const result = await updateShift(data as UpdateShiftFormValues);
@@ -76,8 +53,7 @@ export const UpdateShiftForm: FC<UpdateShiftFormProps> = ({
           toast.success(shiftTranslate("updateSuccess"));
 
           setOpen?.(false);
-        }
-        else {
+        } else {
           toast.error(result.error?.toString());
 
           if (result.data && typeof result.data === "object") {
@@ -118,6 +94,7 @@ export const UpdateShiftForm: FC<UpdateShiftFormProps> = ({
           name="start_time"
           register={register}
           disabled={isPending}
+          type="time"
           error={errors.start_time?.message}
           placeholder={{ id: "start_time.placeholder" }}
         />
@@ -126,20 +103,20 @@ export const UpdateShiftForm: FC<UpdateShiftFormProps> = ({
           label={{ id: "end_time.label" }}
           name="end_time"
           register={register}
+          type="time"
           disabled={isPending}
           error={errors.end_time?.message}
           placeholder={{ id: "end_time.placeholder" }}
         />
-
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={isPending}
         className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
       >
         {isPending ? t("submitting") : t("submit")}
-      </button>
+      </Button>
     </form>
   );
 };

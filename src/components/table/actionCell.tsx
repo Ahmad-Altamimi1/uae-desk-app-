@@ -42,7 +42,7 @@ const ActionCell = ({ id, name, editAction, onDeleted }: ActionCellProps) => {
               size="sm"
               variant="link"
               onClick={editAction}
-              className="bg-[#00713a13] rounded-3xl flex items-center gap-2"
+              className="bg-[#00713a13] rounded-3xl flex items-center gap-2 cursor-pointer"
             >
               <IconEdit className="text-[#00713B]" />
             </Button>
@@ -59,7 +59,7 @@ const ActionCell = ({ id, name, editAction, onDeleted }: ActionCellProps) => {
             <Button
               size="sm"
               variant="link"
-              className="bg-red-100 rounded-3xl flex items-center gap-2"
+              className="bg-red-100 rounded-3xl flex items-center gap-2 cursor-pointer"
               onClick={handleDeleteClick}
             >
               <IconTrash className="text-red-500" />

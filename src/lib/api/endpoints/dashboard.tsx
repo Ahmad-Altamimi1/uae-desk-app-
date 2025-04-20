@@ -16,7 +16,7 @@ const endPoints = {
   CustomerMedia: "api/customers/media",
   deleteCustomerMediaDelete: "api/customers/media/delete/",
   CustomerSubmitVerification: "api/customers/submitVerification",
-  CustomerSubmitReview: "api/customers/{customer}/submit-review",
+  CustomerSubmitReview: "api/customers/submit-review",
   CustomerRequestDocument: "api/customers/requestDocument",
   CustomerAddTaxId: "api/customers/{customer}/add-tax-id",
   CustomerEditStatus: "api/customers/edit-status",
@@ -25,10 +25,11 @@ const endPoints = {
   groupedMedia: "api/customers/groupedMedia/",
   saveDocumentDetails: "api/customers/savedocumentdetails",
   servicesDetails: "api/customers/servicesDetails/",
+  storeFtaMedia: "api/customers/storeFtaMedia",
+  addTaxId: "api/customers/add_tax_id",
 
-  //// home dashboard 
+  //// home dashboard
   getHome: "api/dashboard",
-
 
   //permissions
   getPermissions: "api/permissions/index",
@@ -79,7 +80,6 @@ const endPoints = {
 
   //attendance
   getAttendance: "api/attendances/index",
-
 };
 
 export const tags: Record<keyof typeof endPoints, keyof typeof endPoints> =

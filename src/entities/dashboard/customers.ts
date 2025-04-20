@@ -140,3 +140,30 @@ export interface RequestDocument {
   document_type: DocumentType[keyof DocumentType];
   document_details: string;
 }
+export interface storeFtaMediaRequest {
+  document_name: string;
+  fta_document: string;
+  start_date: string;
+  expire_date: string;
+  send_invoice: boolean;
+  send_email: boolean;
+  customerId: number;
+}
+export interface updateFtaMediaRequest {
+  id: number;
+  document_name: string;
+  start_date: string;
+  expire_date: string;
+}
+export interface addTaxIdRequest {
+  tax_id: string;
+  customerId: number;
+  send_email: boolean;
+}
+export interface CustomerSubmitReviewRequest {
+  fta_user_name: string;
+  fta_password: string;
+  gmail_user_name: string;
+  gmail_password: string;
+  customerId: number;
+}

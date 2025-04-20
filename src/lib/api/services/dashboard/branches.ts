@@ -10,6 +10,9 @@ export const BranchesService = {
     ),
 
   destroy: (id: number) => api.post<IResponse>("BranchesDestroy", { id }),
+
+  update: (data: IRequestBranches) =>
+    api.post<IResponseBranches, IRequestBranches>("BranchesUpdate", data),
 };
 
 // fetchCUDApi("login", "POST", data),

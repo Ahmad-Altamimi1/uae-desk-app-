@@ -5,13 +5,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import Input from "@/components/form/input";
-import Checkbox from "@/components/form/checkbox";
 import { Clock, Key } from "lucide-react";
 import { useTransition, useState } from "react";
 import { shiftsSchema } from "../../../schema/shifts";
 import { createShifts } from "@/app/[locale]/(dashboard)/actions/shifts";
 import ToolBarModal from "@/components/table/toolBarModal";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 type ShiftCreateFormValues = z.infer<ReturnType<typeof shiftsSchema>>;
 
@@ -20,7 +20,6 @@ export default function ShiftsCreateForm() {
   const [open, setOpen] = useState(false);
 
   const [isPending, startTransition] = useTransition();
-  // const [response, setResponse] = useState<any>(null);
 
   const {
     register,
@@ -39,21 +38,20 @@ export default function ShiftsCreateForm() {
   let response;
 
   const onSubmit = (data: ShiftCreateFormValues) => {
-     startTransition(async () => {
-              response = await (createShifts(data));
-              console.log("responseresponse",response);
-              
-              if (response.success) {
-                toast.success(response.message)
-              }
-              if (response.error) {
-                toast(response?.error);
-        
-              }
-            
-              setOpen(false)
-        reset()
-            });
+    startTransition(async () => {
+      response = await createShifts(data);
+      console.log("responseresponse", response);
+
+      if (response.success) {
+        toast.success(response.message);
+      }
+      if (response.error) {
+        toast(response?.error);
+      }
+
+      setOpen(false);
+      reset();
+    });
   };
 
   return (
@@ -63,11 +61,10 @@ export default function ShiftsCreateForm() {
       image="/customer.png"
       addButton={{
         title: "dashboard.shifts.Add",
-        // href: "permissions/create",
       }}
       open={open}
       setOpen={setOpen}
-    > 
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <hr className="my-2" />
 
@@ -85,18 +82,20 @@ export default function ShiftsCreateForm() {
             label={{ id: "startTime.label" }}
             name="start_time"
             register={register}
+            type="time"
             error={errors.start_time?.message}
             placeholder={{ id: "startTime.placeholder" }}
-            startIcon={<Clock size={18} />}
+            // startIcon={<Clock size={18} />}
           />
 
           <Input
             label={{ id: "endTime.label" }}
             name="end_time"
+            type="time"
             register={register}
             error={errors.end_time?.message}
             placeholder={{ id: "endTime.placeholder" }}
-            startIcon={<Clock size={18} />}
+            // endIcon={<Clock size={18} />}
           />
         </div>
 
@@ -104,14 +103,13 @@ export default function ShiftsCreateForm() {
           <p className="text-red-500 text-sm">{response.error}</p>
         )}
 
-        <button
+        <Button
           type="submit"
           className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
         >
           {isPending ? <span>{t("loading")}</span> : <span>{t("submit")}</span>}
-        </button>
+        </Button>
       </form>
     </ToolBarModal>
-
   );
 }

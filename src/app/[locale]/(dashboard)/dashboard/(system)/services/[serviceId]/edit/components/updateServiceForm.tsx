@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { IServicesData } from "@/entities/dashboard";
 import { serviceSchema } from "@/app/[locale]/(dashboard)/schema/services";
 import { updateService } from "@/app/[locale]/(dashboard)/actions/services";
+import { Button } from "@/components/ui/button";
 
 interface UpdateServiceFormProps {
   service: IServicesData;
@@ -87,13 +88,13 @@ export const UpdateServiceForm: FC<UpdateServiceFormProps> = ({
         />
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={isPending}
         className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
       >
         {isPending ? t("submitting") : t("submit")}
-      </button>
+      </Button>
     </form>
   );
 };

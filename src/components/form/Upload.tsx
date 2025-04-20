@@ -15,47 +15,55 @@ interface TranslationMessage {
 // Type for text that can be a string or a translation message
 type TranslatableText = string | TranslationMessage;
 
-// Textarea component props
-interface TextareaProps
-  extends Omit<
-    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    "placeholder"
-  > {
+// Upload component props
+interface UploadProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "placeholder"> {
   label: TranslatableText;
   error?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   helperText?: TranslatableText;
-  placeholder?: TranslatableText;
-  i18nNamespace?: string;
-  showLabel?: boolean;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
+  variant?: "default" | "filled" | "outlined";
+  fullWidth?: boolean;
   register?: any; // For react-hook-form support
   name?: string; // For react-hook-form support
+  i18nNamespace?: string;
+  showLabel?: boolean;
 }
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+const Upload = forwardRef<HTMLInputElement, UploadProps>(
   (
     {
       label,
       error,
       helperText,
-      placeholder,
-      showLabel = false,
-      i18nNamespace = "forms",
+      startIcon,
+      endIcon,
+      variant = "default",
+      fullWidth = false,
       className = "",
       register,
       name,
+      showLabel = false,
+      i18nNamespace = "forms", // Default namespace for form-related translations
       ...props
     },
     ref
   ) => {
+    // Get the translation function for the specified namespace
     const t = useTranslations(i18nNamespace);
 
+    // Support for react-hook-form without having to spread register
+    const inputProps = register && name ? register(name) : props;
+
+    // Helper function to handle translation of text or translation key objects
     const translateText = (
       text: TranslatableText | undefined
     ): string | undefined => {
       if (!text) return undefined;
 
       if (typeof text === "string") {
-        return t(text);
+        return text;
       }
 
       return t(text.id, text.values || {}, {
@@ -78,27 +86,39 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const translatedLabel = translateText(label);
     const errorMessage = getErrorMessage(error);
     const translatedHelperText = translateText(helperText);
-    const translatedPlaceholder = translateText(placeholder);
-
-    const inputProps = register && name ? register(name) : props;
 
     return (
-      <div className={cn("w-full")}>
+      <div className={cn(fullWidth && "w-full")}>
         {showLabel && (
           <label className="block text-sm font-medium text-gray-500 mb-2">
             {translatedLabel}
           </label>
         )}
-        <textarea
-          ref={ref}
-          placeholder={translatedPlaceholder as string}
-          className={cn(
-            "w-full px-4 py-2.5 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-200",
-            errorMessage ? "border-red-500 focus:ring-red-500" : "",
-            className
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+            {startIcon && startIcon}
+          </div>
+
+          <input
+            ref={ref}
+            type="file"
+            className={cn(
+              "w-full px-4 py-2.5 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-200",
+              startIcon ? "md:pl-10" : "",
+              endIcon ? "md:pr-10" : "",
+              errorMessage ? "border-red-500 focus:ring-red-500" : "",
+              className
+            )}
+            {...props}
+            {...inputProps}
+          />
+
+          {endIcon && (
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500">
+              {endIcon}
+            </div>
           )}
-          {...inputProps}
-        />
+        </div>
         {errorMessage && (
           <p className="mt-1 text-sm text-red-600">{errorMessage}</p>
         )}
@@ -110,6 +130,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   }
 );
 
-Textarea.displayName = "Textarea";
+Upload.displayName = "Upload";
 
-export { Textarea };
+export default Upload;

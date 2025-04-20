@@ -4,53 +4,33 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
-import {
-  Dispatch,
-  FC,
-  SetStateAction,
-  use,
-  useEffect,
-  useState,
-  useTransition
-} from "react";
+import { Dispatch, FC, SetStateAction, useTransition } from "react";
 
 import Input from "@/components/form/input";
 import { toast } from "sonner";
-import { useRouter } from "@/i18n/navigation";
 import { updateBranch as UpdateBranch } from "@/app/[locale]/(dashboard)/actions/branches";
-import { IBranchesData, ILocation, IResponseSingleBranche } from "@/entities/dashboard";
+import { IBranchesData, ILocation } from "@/entities/dashboard";
 import { branchesSchema } from "@/app/[locale]/(dashboard)/schema/branches";
 import CustomSelect from "@/components/form/select";
 import { GitBranch, Globe2, Mail, MapPin, Phone } from "lucide-react";
-import { ISelectOption } from "@/utils/type";
-import { api } from "@/lib/api/serverCore";
 import { mapToSelectOptions } from "@/utils/mapToSelectOptions";
-import { useParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 interface UpdateBranchFormProps {
   open?: boolean;
   setOpen?: Dispatch<SetStateAction<boolean | number>>;
   branch: IBranchesData | null;
-  locations:ILocation[]
-
+  locations: ILocation[];
 }
 export const UpdateBranchForm: FC<UpdateBranchFormProps> = ({
-  open,
   setOpen,
   branch,
-  locations
+  locations,
 }) => {
-
-
-
-
-
   const t = useTranslations("forms");
   const translationForValidation = useTranslations("");
-  const branchTranslate = useTranslations("dashboard.branches");
   const [isPending, startTransition] = useTransition();
 
-  const router = useRouter();
   const validation = branchesSchema(translationForValidation);
   type UpdateBranchFormValues = z.infer<typeof validation>;
 
@@ -60,7 +40,6 @@ export const UpdateBranchForm: FC<UpdateBranchFormProps> = ({
     setError,
     formState: { errors },
     control,
-    reset,
   } = useForm<UpdateBranchFormValues>({
     resolver: zodResolver(validation),
     defaultValues: {
@@ -75,51 +54,20 @@ export const UpdateBranchForm: FC<UpdateBranchFormProps> = ({
     },
   });
 
+  const locationOptions = mapToSelectOptions(
+    locations,
+    (e) => e.name,
+    (e) => e.id
+  );
 
-
-  // console.log("locationOptions", locationOptions);
-
-
-  const locationOptions = (mapToSelectOptions(locations, (e) => e.name, (e) => e.id));
-
-
-
-
-  // useEffect(() => {
-  //   const fetchBranches = async () => {
-  //     if (!branchId) return null
-  //     try {
-  //       const branch = await api.get<IResponseSingleBranche>([
-  //         "BranchesEdit",
-  //         String(branchId),
-  //       ]);
-
-  //       if (branch?.data) {
-  //         setBranch(branch.data);
-
-  //         reset({
-  //           email: branch.data.email,
-  //           address: branch.data.address,
-  //           location_id: branch.data.location_id,
-  //           longitude: branch.data.longitude,
-  //           phone_number: branch.data.phone_number,
-  //           latitude: branch.data.latitude,
-  //           branch_name: branch.data.branch_name,
-
-
-  //         })
-  //       }
-  //     } catch (error) {
-  //       console.error("Failed to fetch branches locations:", error);
-  //     }
-  //   };
-
-  //   fetchBranches();
-  // }, []);
   const onSubmit = async (data: UpdateBranchFormValues) => {
+    console.log("data", data);
+
     startTransition(async () => {
       try {
         const result = await UpdateBranch(data);
+        console.log("result", result);
+
         if (result.success) {
           // toast.success(branchTranslate("updateSuccess"));
           toast.success(result.message);
@@ -214,13 +162,13 @@ export const UpdateBranchForm: FC<UpdateBranchFormProps> = ({
         />
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={isPending}
         className="w-full px-4 py-2 bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out rounded-2xl"
       >
         {isPending ? t("submitting") : t("submit")}
-      </button>
+      </Button>
     </form>
   );
 };
