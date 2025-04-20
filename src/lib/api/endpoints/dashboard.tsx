@@ -26,7 +26,9 @@ const endPoints = {
   saveDocumentDetails: "api/customers/savedocumentdetails",
   servicesDetails: "api/customers/servicesDetails/",
 
-  /////////////
+  //// home dashboard 
+  getHome: "api/dashboard",
+
 
   //permissions
   getPermissions: "api/permissions/index",
@@ -56,7 +58,7 @@ const endPoints = {
   getBranches: "api/branches/index",
   BranchesCreate: "api/branches/create",
   BranchesStore: "api/branches/store",
-  BranchesEdit: "api/branches/edit",
+  BranchesEdit: "api/branches/edit/",
   BranchesUpdate: "api/branches/update",
   BranchesDestroy: "api/branches/destroy",
 
@@ -70,7 +72,7 @@ const endPoints = {
   getShifts: "api/shifts/index",
   ShiftsCreate: "api/shifts/create",
   ShiftsStore: "api/shifts/store",
-  ShiftsEdit: "api/shifts/edit",
+  ShiftsEdit: "api/shifts/edit/",
   ShiftsUpdate: "api/shifts/update",
   ShiftsDestroy: "api/shifts/destroy",
   updateStatus: "api/shifts/updateStatus",
@@ -78,7 +80,6 @@ const endPoints = {
   //attendance
   getAttendance: "api/attendances/index",
 
-  //location
 };
 
 export const tags: Record<keyof typeof endPoints, keyof typeof endPoints> =

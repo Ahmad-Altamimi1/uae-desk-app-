@@ -1,19 +1,21 @@
-import { AppSidebar } from "@/components/layout/app-sidebar";
+import React from "react";
+import { SectionCards } from "@/components/section-cards"; 
+import { api } from "@/lib/api/serverCore";  
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-// import { DataTable } from "@/components/data-table";
-import { SectionCards } from "@/components/section-cards";
-import { SiteHeader } from "@/components/site-header";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+// import { IHomeDashboardResponse } from "@/entities/dashboard"; 
 
-// import data from "./data.json";
+const Page = async () => {
+  const data = await api.get("getHome"); 
 
-export default function Page() {
   return (
-    <>
-      <SectionCards />
-      <div className="px-4 lg:px-6">
+    <div className="mt-3">
+      <SectionCards data={data} /> 
+      <div className="px-4 lg:px-6 mt-5">
         <ChartAreaInteractive />
-      </div>{" "}
-    </>
+
+      </div>
+    </div>
   );
-}
+};
+
+export default Page;
