@@ -1,11 +1,10 @@
 import { NextIntlClientProvider, Locale, hasLocale } from "next-intl";
-import { Toaster } from "@/components/ui/sonner";
 import {
   getMessages,
   setRequestLocale,
   getTranslations,
 } from "next-intl/server";
-import { Geist, Geist_Mono } from "next/font/google";
+// Removed unused imports for fonts
 import "../../globals.css";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
@@ -13,19 +12,12 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Header from "@/components/layout/header";
 import { AppSidebar } from "@/components/layout/app-sidebar";
+import { Toaster } from "@/components/ui/sonner";
 type Props = {
   children: ReactNode;
   params: Promise<{ locale: Locale }>;
 };
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Removed unused font declarations
 
 export async function generateMetadata(props: Omit<Props, "children">) {
   const { locale } = await props.params;
