@@ -1,4 +1,5 @@
 "use server";
+import { ICustomerData } from "@/entities/dashboard/customers";
 import { z } from "zod";
 import { getTranslations } from "next-intl/server";
 import { CustomerService } from "@/api/services/dashboard";
@@ -9,43 +10,12 @@ import toSnakeCase from "@/utils/toSnackCase";
 import { ISelectOption } from "@/utils/type";
 import { serviceFormsFieldName } from "../dashboard/customers/[customerId]/createservices/components/servicesForms/serviceFormsFieldsName";
 import { RequestDocument } from "@/entities/dashboard";
+import { IResponse } from "@/lib/type";
 
-interface CustomerState {
-  success: boolean;
-  error: Record<string, [] | string> | null;
-  data: Record<string, any>;
-  message: string | null;
+export interface CustomerState extends IResponse<{ id: number }> {
+  errors?: Record<keyof ICustomerData, string>;
+  id?: number;
 }
-
-const transformCustomerData = (
-  parsedData: z.infer<ReturnType<typeof customerValidation>>
-) => {
-  return {
-    service_id: parsedData?.serviceId,
-    service_price: parsedData?.price,
-    first_name: parsedData?.firstName,
-    last_name: parsedData?.lastName,
-    business_name: parsedData?.businessName,
-    phone_number: parsedData?.phoneNumber,
-    second_number: "",
-    email: parsedData?.email,
-    address: parsedData?.address,
-    status: parsedData?.status,
-    tax_id: parsedData?.taxId,
-    price: parsedData?.price,
-    vat_value: parsedData?.vatValue,
-    branch_id: parsedData?.branchId,
-    transaction_refrence_number: parsedData?.transactionRefrenceNumber,
-    fta_refrence: parsedData?.ftaRefrence,
-    fta_password: parsedData?.ftaPassword,
-    fta_user_name: parsedData?.ftaUserName,
-    payment_method: parsedData?.paymentMethod,
-    gmail_user_name: parsedData?.gmailUserName,
-    gmail_password: parsedData?.gmailPassword,
-    entries: parsedData?.entries,
-  };
-};
-
 export async function createCustomer(
   data: z.infer<Awaited<ReturnType<typeof customerValidation>>>
 ): Promise<CustomerState> {
@@ -56,13 +26,11 @@ export async function createCustomer(
   if (!parsed.success) {
     return {
       success: false,
-      error: {},
-      message: "Validation failed",
+      error: "Validation failed",
       data: parsed.error.flatten().fieldErrors,
+      message: "Validation failed",
     };
   }
-
-  const backendData = transformCustomerData(parsed.data);
 
   try {
     const response = await CustomerService.create(toSnakeCase(parsed.data));
@@ -75,15 +43,13 @@ export async function createCustomer(
       error: null,
     };
   } catch (error) {
-    if (typeof error === "object") {
-      return {
-        success: false,
-        error: error?.message,
-        data: {},
-        message: "",
-        ...error,
-      };
-    }
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
   }
 }
 
@@ -99,10 +65,9 @@ export async function updateCustomer(
       success: false,
       error: "Validation failed",
       data: parsed.error.flatten().fieldErrors,
+      message: "Validation failed",
     };
   }
-
-  const backendData = transformCustomerData(parsed.data);
 
   try {
     const response = await CustomerService.update(toSnakeCase(parsed.data));
@@ -115,13 +80,13 @@ export async function updateCustomer(
       error: null,
     };
   } catch (error) {
-    if (typeof error === "object") {
-      return {
-        success: false,
-        error: error?.message,
-        ...error,
-      };
-    }
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
   }
 }
 export async function handleFileUpload(
@@ -152,15 +117,13 @@ export async function handleFileUpload(
       error: null,
     };
   } catch (error) {
-    if (typeof error === "object") {
-      return {
-        success: false,
-        data: {},
-        message: (error as { message: string })?.message,
-        error: (error as { message: string })?.message,
-        ...error,
-      };
-    }
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
   }
 }
 
@@ -176,15 +139,13 @@ export async function deleteMedia(id: number): Promise<CustomerState> {
       error: null,
     };
   } catch (error) {
-    if (typeof error === "object") {
-      return {
-        success: false,
-        data: {},
-        message: (error as { message: string })?.message,
-        error: (error as { message: string })?.message,
-        ...error,
-      };
-    }
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
   }
 }
 export async function submitVerification(id: number): Promise<CustomerState> {
@@ -198,15 +159,13 @@ export async function submitVerification(id: number): Promise<CustomerState> {
       error: null,
     };
   } catch (error) {
-    if (typeof error === "object") {
-      return {
-        success: false,
-        data: {},
-        message: (error as { message: string })?.message,
-        error: (error as { message: string })?.message,
-        ...error,
-      };
-    }
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
   }
 }
 
@@ -224,15 +183,13 @@ export async function saveDocumentDetailsAction(
       error: null,
     };
   } catch (error) {
-    if (typeof error === "object") {
-      return {
-        success: false,
-        data: {},
-        message: (error as { message: string })?.message,
-        error: (error as { message: string })?.message,
-        ...error,
-      };
-    }
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
   }
 }
 export async function RequestDocumentAction(
@@ -249,14 +206,12 @@ export async function RequestDocumentAction(
       error: null,
     };
   } catch (error) {
-    if (typeof error === "object") {
-      return {
-        success: false,
-        data: {},
-        message: (error as { message: string })?.message,
-        error: (error as { message: string })?.message,
-        ...error,
-      };
-    }
+    return {
+      success: false,
+      error: error?.message,
+      data: {},
+      message: "",
+      ...error,
+    };
   }
 }

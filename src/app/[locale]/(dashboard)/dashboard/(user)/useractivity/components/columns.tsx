@@ -19,7 +19,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { IconCircleCheckFilled, IconEye, IconLoader } from "@tabler/icons-react";
+import {
+  IconCircleCheckFilled,
+  IconEye,
+  IconLoader,
+} from "@tabler/icons-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
@@ -27,12 +31,17 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { TableCellViewer } from "@/components/table/TableCellViewer";
 import ActionCell from "@/components/table/actionCell";
-import { IResponseUsersRoles } from '@/entities/dashboard/users'
+import { IResponseUsersRoles } from "@/entities/dashboard/users";
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
 import { IResponseLogs, IResponseUsersPermissions } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
 import { Button } from "@/components/ui/button";
 // export const schema = z.object({
 //   id: z.number(),
@@ -52,7 +61,7 @@ export const columns: ColumnDef<IResponseLogs>[] = [
     header: () => null,
     cell: ({ row }) => <DragHandle id={row.original.id} />,
   },
-  
+
   {
     id: "select",
     header: ({ table }) => (
@@ -80,82 +89,60 @@ export const columns: ColumnDef<IResponseLogs>[] = [
     enableHiding: false,
   },
 
-
-
   // {
   //   accessorKey: "header",
-  //   header: <HeaderCell label="SL" />,
+  //   header: ()=> <HeaderCell label="SL" />,
 
   //   cell: ({ row }) => (
   //     <div>
-  //       <RowCell label={row.index + 1} />
+  //       <RowCell label={String(row.index + 1)} />
   //     </div>
   //   ),
   // },
 
   {
-
-
     accessorKey: "ID",
-    header: <HeaderCell label="userActivity.id" />,
+    header: () => <HeaderCell label="userActivity.id" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.id} />
       </div>
-
-
     ),
   },
 
   {
-
-
     accessorKey: "logdate",
-    header: <HeaderCell label="userActivity.logdate" />,
+    header: () => <HeaderCell label="userActivity.logdate" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.log_date} />
       </div>
-
-
     ),
   },
 
   {
-
-
     accessorKey: "logtype",
-    header: <HeaderCell label="userActivity.logtype" />,
+    header: () => <HeaderCell label="userActivity.logtype" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.log_type} />
       </div>
-
-
     ),
   },
 
   {
-
-
     accessorKey: "user_name",
-    header: <HeaderCell label="userActivity.userId" />,
+    header: () => <HeaderCell label="userActivity.userId" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.user_name} />
       </div>
-
-
     ),
   },
 
   // {
   //   accessorKey: "actions",
-  //   header: <HeaderCell label="userActivity.actions" />,
+  //   header: ()=> <HeaderCell label="userActivity.actions" />,
   //   id: "actions",
   //   cell: () => (
   //     <div className="p-3 flex items-center justify-center">
@@ -180,5 +167,4 @@ export const columns: ColumnDef<IResponseLogs>[] = [
   //   )
 
   // },
-
 ];

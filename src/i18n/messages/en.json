@@ -937,6 +937,30 @@
         "minLength": "TRN must be at least 3 characters",
         "maxLength": "TRN must be less than 50 characters"
       }
+    },
+    "date": {
+      "label": "Date",
+      "placeholder": "Enter date",
+      "helper": "The date of the entry",
+      "error": {
+        "required": "Date is required"
+      }
+    },
+    "amount": {
+      "label": "Amount",
+      "placeholder": "Enter amount",
+      "helper": "The amount of the entry",
+      "error": {
+        "required": "Amount is required"
+      }
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Enter description",
+      "helper": "Optional description for this entry",
+      "error": {
+        "required": "Description is required"
+      }
     }
   },
   "commonValidations": {

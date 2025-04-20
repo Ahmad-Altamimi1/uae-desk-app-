@@ -30,7 +30,13 @@ const CustomerView = async ({ params }: CustomerViewProps) => {
     (b) => ({ price: { value: b.price || 23 } })
   );
   const t = await getTranslations("dashboard.customers");
-  return <CustomerTabs data={data} serviceOptions={serviceOptions} allServiceOptions={allServiceOptions} />;
+  return (
+    <CustomerTabs
+      data={data}
+      serviceOptions={serviceOptions}
+      allServiceOptions={allServiceOptions}
+    />
+  );
 };
 
 export default CustomerView;

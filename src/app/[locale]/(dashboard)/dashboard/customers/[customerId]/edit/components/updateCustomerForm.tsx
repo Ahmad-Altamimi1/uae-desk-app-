@@ -1,10 +1,10 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import { FC, useTransition } from "react";
-import { User, Mail, Building, Phone } from "lucide-react";
+import { User, Mail, Building, Phone, Plus, Trash2 } from "lucide-react";
 
 import InputCollectionLabel from "@/components/form/inputCollectionLabel";
 import Input from "@/components/form/input";
@@ -22,6 +22,9 @@ import {
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
 import { IGetCustomer } from "@/entities/dashboard";
+import { Textarea } from "@/components/form/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 interface UpdateCustomerFormProps {
   serviceOptions: ISelectOption[];
   branchOptions: ISelectOption[];
@@ -71,18 +74,18 @@ export const UpdateCustomerForm: FC<UpdateCustomerFormProps> = ({
       paymentMethod: customer.payment_method,
       gmailUserName: customer.gmail_user_name,
       gmailPassword: customer.gmail_password,
-      entries: [],
+      upcoming_payments: customer.upcoming_payments,
     },
   });
 
-  // const {
-  //   fields: entriesFields,
-  //   append: appendEntry,
-  //   remove: removeEntry,
-  // } = useFieldArray({
-  //   control,
-  //   name: "entries",
-  // });
+  const {
+    fields: upcomingPaymentsFields,
+    append: appendUpcomingPayment,
+    remove: removeUpcomingPayment,
+  } = useFieldArray({
+    control,
+    name: "upcoming_payments",
+  });
 
   const onSubmit = async (data: UpdateCustomerFormValues) => {
     startTransition(async () => {
@@ -388,52 +391,82 @@ disabled={isPending}
                 defaultValue={0}
               /> */}
             </div>
+            <div className="space-y-6 mt-5">
+              {upcomingPaymentsFields.map((field, index) => (
+                <Card
+                  key={field.id}
+                  className="overflow-hidden border-slate-200 shadow-sm"
+                >
+                  <CardContent className="p-0">
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-lg font-medium">
+                          Upcoming Payment #{index + 1}
+                        </h3>
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          onClick={() => removeUpcomingPayment(index)}
+                          className="h-8 w-8"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          <span className="sr-only">
+                            Remove Upcoming Payment
+                          </span>
+                        </Button>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-2 gap-1">
+                          <Input
+                            label={{ id: "date.label" }}
+                            name={`upcoming_payments[${index}].date`}
+                            type="date"
+                            register={register}
+                            error={errors.taxId?.message}
+                            placeholder={{ id: "date.placeholder" }}
+                          />
+                          <Input
+                            label={{ id: "amount.label" }}
+                            name={`upcoming_payments[${index}].amount`}
+                            type="number"
+                            register={register}
+                            error={errors.taxId?.message}
+                            placeholder={{ id: "amount.placeholder" }}
+                          />
+                        </div>
+                        <Textarea
+                          label={{ id: "description.label" }}
+                          name={`upcoming_payments[${index}].description`}
+                          register={register}
+                          error={errors.taxId?.message}
+                          placeholder={{ id: "description.placeholder" }}
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full border-dashed border-slate-300 hover:border-slate-400 flex items-center justify-center gap-2 h-16"
+                onClick={() =>
+                  appendUpcomingPayment({
+                    amount: "0",
+                    date: "",
+                    description: "",
+                  })
+                }
+              >
+                <Plus className="h-4 w-4" />
+                <span>Add Upcoming Payment</span>
+              </Button>
+            </div>
           </div>
         </div>
-        {/* <div className="space-y-6">
-                {entriesFields.map((field, index) => (
-                  <Card
-                    key={field.id}
-                    className="overflow-hidden border-slate-200 shadow-sm"
-                  >
-                    <CardContent className="p-0">
-                      <div className="p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-lg font-medium">
-                            Service #{index + 1}
-                          </h3>
-                          <Button
-                            type="button"
-                            variant="destructive"
-                            size="icon"
-                            onClick={() => removeEntry(index)}
-                            className="h-8 w-8"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                            <span className="sr-only">Remove service</span>
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
 
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full border-dashed border-slate-300 hover:border-slate-400 flex items-center justify-center gap-2 h-16"
-                  onClick={() => appendEntry({ service: "", servicePrice: "" })}
-                >
-                  <Plus className="h-4 w-4" />
-                  <span>Add Service</span>
-                </Button>
-
-                <div className="flex justify-end">
-                  <Button type="submit" className="px-8">
-                    Save Services
-                  </Button>
-                </div>
-              </div> */}
         <button
           type="submit"
           disabled={isPending}

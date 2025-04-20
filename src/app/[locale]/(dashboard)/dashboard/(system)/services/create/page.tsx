@@ -57,13 +57,11 @@ export default function ServiceCreateForm() {
       image="/customer.png"
       addButton={{
         title: "dashboard.services.Add",
-        // href: "permissions/create",
       }}
       open={open}
       setOpen={setOpen}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        {/* <InputCollectionLabel title={"dashboard.permissions.title"} /> */}
         <hr />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="col-span-1 md:col-span-2">
@@ -77,7 +75,6 @@ export default function ServiceCreateForm() {
             />
           </div>
         </div>
-        <p>{response?.error}</p>
         <Button
           type="submit"
           disabled={isPending || !isValid}

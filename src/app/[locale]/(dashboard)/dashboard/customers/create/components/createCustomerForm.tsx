@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import { FC, useTransition } from "react";
-import { User, Mail, Building, Phone } from "lucide-react";
+import { User, Mail, Building, Phone, Plus, Trash2 } from "lucide-react";
 
 import InputCollectionLabel from "@/components/form/inputCollectionLabel";
 import Input from "@/components/form/input";
@@ -13,17 +13,14 @@ import { customerValidation } from "../../../../schema/customers";
 import CustomSelect from "@/components/form/select";
 import PageTitle from "@/components/ui/pageTitle";
 import { ISelectOption } from "@/utils/type";
-import {
-  currency,
-  customerStatusOptions,
-  paymentMethodOptions,
-  VatValue,
-} from "@/constants";
+import { currency, paymentMethodOptions, VatValue } from "@/constants";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import arrowRight from "@/public/images/dashboard/customers/arrow-right_linear.svg";
+import { Card, CardContent } from "@/components/ui/card";
+import { Textarea } from "@/components/form/textarea";
 interface CustomerFormProps {
   serviceOptions: ISelectOption[];
   branchOptions: ISelectOption[];
@@ -44,8 +41,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
     register,
     handleSubmit,
     setError,
-    reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     control,
     watch,
   } = useForm<CustomerFormValues>({
@@ -59,7 +55,6 @@ export const CustomerForm: FC<CustomerFormProps> = ({
       branchId: 0,
       price: 0,
       serviceId: [],
-      //   servicePrice: {},
       address: "",
       status: 0,
       taxId: "",
@@ -71,17 +66,17 @@ export const CustomerForm: FC<CustomerFormProps> = ({
       paymentMethod: "",
       gmailUserName: "",
       gmailPassword: "",
-      entries: [],
+      upcoming_payments: [],
     },
   });
 
   const {
-    fields: entriesFields,
-    append: appendEntry,
-    remove: removeEntry,
+    fields: upcomingPaymentsFields,
+    append: appendUpcomingPayment,
+    remove: removeUpcomingPayment,
   } = useFieldArray({
     control,
-    name: "entries",
+    name: "upcoming_payments",
   });
 
   const onSubmit = async (data: CustomerFormValues) => {
@@ -92,7 +87,12 @@ export const CustomerForm: FC<CustomerFormProps> = ({
           toast.success(customerTranslate("createSuccess"));
 
           // reset();
-          router.push(`create/${result.data.id}`);
+          if (result.data?.id) {
+            router.push({
+              pathname: `/mediaCustomer/[newCustomerId]`,
+              params: { newCustomerId: result.data?.id },
+            });
+          }
         } else {
           toast.error(result.error?.toString());
 
@@ -118,7 +118,6 @@ export const CustomerForm: FC<CustomerFormProps> = ({
   };
   const serviceValues = watch("serviceId");
   let totalPriceForServices: number = 0;
-  let VatForServices: number = 0;
 
   return (
     <>
@@ -228,7 +227,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
               />
             </div>
 
-            <InputCollectionLabel
+            {/* <InputCollectionLabel
               title={"dashboard.customers.status"}
               className="my-6"
             />
@@ -241,7 +240,7 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                 placeholder={{ id: "status.placeholder" }}
                 options={customerStatusOptions}
               />
-            </div>
+            </div> */}
             {/* <div>
                 <label htmlFor="" className="text-sm">
                   status
@@ -387,52 +386,81 @@ export const CustomerForm: FC<CustomerFormProps> = ({
                 defaultValue={0}
               /> */}
             </div>
+            <div className="space-y-6 mt-5">
+              {upcomingPaymentsFields.map((field, index) => (
+                <Card
+                  key={field.id}
+                  className="overflow-hidden border-slate-200 shadow-sm"
+                >
+                  <CardContent className="p-0">
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-lg font-medium">
+                          Upcoming Payment #{index + 1}
+                        </h3>
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          onClick={() => removeUpcomingPayment(index)}
+                          className="h-8 w-8"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          <span className="sr-only">
+                            Remove Upcoming Payment
+                          </span>
+                        </Button>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-2 gap-1">
+                          <Input
+                            label={{ id: "date.label" }}
+                            name={`upcoming_payments[${index}].date`}
+                            type="date"
+                            register={register}
+                            error={errors.taxId?.message}
+                            placeholder={{ id: "date.placeholder" }}
+                          />
+                          <Input
+                            label={{ id: "amount.label" }}
+                            name={`upcoming_payments[${index}].amount`}
+                            type="number"
+                            register={register}
+                            error={errors.taxId?.message}
+                            placeholder={{ id: "amount.placeholder" }}
+                          />
+                        </div>
+                        <Textarea
+                          label={{ id: "description.label" }}
+                          name={`upcoming_payments[${index}].description`}
+                          register={register}
+                          error={errors.taxId?.message}
+                          placeholder={{ id: "description.placeholder" }}
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full border-dashed border-slate-300 hover:border-slate-400 flex items-center justify-center gap-2 h-16"
+                onClick={() =>
+                  appendUpcomingPayment({
+                    amount: "0",
+                    date: "",
+                    description: "",
+                  })
+                }
+              >
+                <Plus className="h-4 w-4" />
+                <span>Add Upcoming Payment</span>
+              </Button>
+            </div>
           </div>
         </div>
-        {/* <div className="space-y-6">
-                {entriesFields.map((field, index) => (
-                  <Card
-                    key={field.id}
-                    className="overflow-hidden border-slate-200 shadow-sm"
-                  >
-                    <CardContent className="p-0">
-                      <div className="p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-lg font-medium">
-                            Service #{index + 1}
-                          </h3>
-                          <Button
-                            type="button"
-                            variant="destructive"
-                            size="icon"
-                            onClick={() => removeEntry(index)}
-                            className="h-8 w-8"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                            <span className="sr-only">Remove service</span>
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full border-dashed border-slate-300 hover:border-slate-400 flex items-center justify-center gap-2 h-16"
-                  onClick={() => appendEntry({ service: "", servicePrice: "" })}
-                >
-                  <Plus className="h-4 w-4" />
-                  <span>Add Service</span>
-                </Button>
-
-                <div className="flex justify-end">
-                  <Button type="submit" className="px-8">
-                    Save Services
-                  </Button>
-                </div>
-              </div> */}
       </form>
     </>
   );

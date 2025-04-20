@@ -3,12 +3,9 @@
 import { DragHandle } from "@/components/table/dragHandle";
 import { Checkbox } from "@radix-ui/react-checkbox";
 import { ColumnDef } from "@tanstack/react-table";
-import ActionCell from "@/components/table/actionCell";
 import { HeaderCell } from "@/components/table/headerCell";
 import { IServicesData } from "@/entities/dashboard";
 import { RowCell } from "@/components/table/rowCell";
-import { deleteServices } from "@/app/[locale]/(dashboard)/actions/services";
-import { toast } from "sonner";
 import ServiceAction from "./action";
 
 export const columns: ColumnDef<IServicesData>[] = [
@@ -45,18 +42,18 @@ export const columns: ColumnDef<IServicesData>[] = [
   },
   {
     accessorKey: "header",
-    header: <HeaderCell label="SL" />,
+    header: () => <HeaderCell label="SL" />,
 
     cell: ({ row }) => (
       <div>
-        <RowCell label={row.index + 1} />
+        <RowCell label={String(row.index + 1)} />
       </div>
     ),
   },
 
   {
     accessorKey: "name",
-    header: <HeaderCell label="services.name" />,
+    header: () => <HeaderCell label="services.name" />,
     cell: ({ row }) => (
       <div>
         <RowCell label={row.original.name} />
@@ -66,7 +63,7 @@ export const columns: ColumnDef<IServicesData>[] = [
 
   {
     accessorKey: "actions",
-    header: <HeaderCell label="services.actions" />,
+    header: () => <HeaderCell label="services.actions" />,
     id: "actions",
     cell: ({ row }) => (
       <ServiceAction id={row.original.id} name={row.original.name} />

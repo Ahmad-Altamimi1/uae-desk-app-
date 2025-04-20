@@ -28,9 +28,9 @@ const ServicesAndPaymentDetails = ({
       transactionRefrenceNumber: customer.transaction_refrence_number,
       paymentMethod: customer.payment_method,
       branchInput: customer.branch?.branch_name,
+      upcoming_payments: customer.upcoming_payments,
     },
   });
-  console.log("customer", customer);
 
   const serviceValues = selectedServices;
   let totalPriceForServices: number = 0;

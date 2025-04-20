@@ -27,7 +27,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { TableCellViewer } from "@/components/table/TableCellViewer";
 import ActionCell from "@/components/table/actionCell";
-import { IResponseUsersRoles } from '@/entities/dashboard/users'
+import { IResponseUsersRoles } from "@/entities/dashboard/users";
 import { HeaderCell } from "@/components/table/headerCell";
 import { StatusCell } from "@/components/table/statusCell";
 import { RowCell } from "@/components/table/rowCell";
@@ -76,47 +76,37 @@ export const columns: ColumnDef<IResponseUsersRoles>[] = [
   },
   {
     accessorKey: "header",
-    header: <HeaderCell label="SL" />,
+    header: () => <HeaderCell label="SL" />,
 
     cell: ({ row }) => (
       <div>
-        <RowCell label={row.index + 1} />
+        <RowCell label={String(row.index + 1)} />
       </div>
     ),
   },
 
   {
-
-
     accessorKey: "name",
-    header: <HeaderCell label="roles.name" />,
+    header: () => <HeaderCell label="roles.name" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.name} />
       </div>
-
-
     ),
   },
   {
-
-
     accessorKey: "code",
-    header: <HeaderCell label="roles.code" />,
+    header: () => <HeaderCell label="roles.code" />,
     cell: ({ row }) => (
-
       <div>
         <RowCell label={row.original.code} />
       </div>
-
-
     ),
   },
 
   {
     accessorKey: "actions",
-    header: <HeaderCell label="roles.actions" />,
+    header: () => <HeaderCell label="roles.actions" />,
     id: "actions",
     cell: ({ row }) => (
       <div className="flex items-center justify-center">
@@ -124,11 +114,9 @@ export const columns: ColumnDef<IResponseUsersRoles>[] = [
           id={row.original.id}
           name={row.original.name}
           editAction={() => handleEdit(row.original.id)}
-          onDeleted={RolesService.destroy(row.original.id)} 
+          onDeleted={RolesService.destroy(row.original.id)}
         />
       </div>
-    )
-    
+    ),
   },
-
 ];

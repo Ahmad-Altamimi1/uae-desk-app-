@@ -43,18 +43,18 @@ export const columns: ColumnDef<IResponseUsersPermissions>[] = [
   },
   {
     accessorKey: "header",
-    header: <HeaderCell label="SL" />,
+    header: () => <HeaderCell label="SL" />,
 
     cell: ({ row }) => (
       <div>
-        <RowCell label={row.index + 1} />
+        <RowCell label={String(row.index + 1)} />
       </div>
     ),
   },
 
   {
     accessorKey: "name",
-    header: <HeaderCell label="permissions.name" />,
+    header: () => <HeaderCell label="permissions.name" />,
     cell: ({ row }) => (
       <div>
         <RowCell label={row.original.name} />
@@ -64,7 +64,7 @@ export const columns: ColumnDef<IResponseUsersPermissions>[] = [
 
   {
     accessorKey: "actions",
-    header: <HeaderCell label="services.actions" />,
+    header: () => <HeaderCell label="services.actions" />,
     id: "actions",
     cell: ({ row }) => (
       <div className="flex items-center justify-center">
