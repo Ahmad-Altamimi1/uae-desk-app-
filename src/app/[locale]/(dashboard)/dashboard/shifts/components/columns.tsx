@@ -11,6 +11,8 @@ import { StatusToggle } from "./statusToggle";
 import { deleteShifts, handleUpdateStatus } from "../../../actions/shifts";
 import { toast } from "sonner";
 import ShiftAction from "./action";
+import { useHasRole } from "@/hooks/hasRole";
+import { RoleTypesOptions } from "@/constants";
 
 
 export const columns: ColumnDef<IShiftsData>[] = [
@@ -88,6 +90,10 @@ export const columns: ColumnDef<IShiftsData>[] = [
     accessorKey: "status",
     header: () => <HeaderCell label="shifts.status" />,
     cell: ({ row }) => {
+      const hasRole=useHasRole( )
+      if(!(hasRole(RoleTypesOptions.admin) || hasRole(RoleTypesOptions["super-admin"]))){
+return null
+      }
       const { id, is_active } = row.original;
       return (
         <StatusToggle

@@ -15,6 +15,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useRouter } from "@/i18n/navigation";
+import {  useHasPermission } from "@/hooks/useHasPermission";
 
 interface ActionCustomerCellProps {
   id: number;
@@ -25,9 +26,11 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
   const handleClick = (action: string) => {
     console.log(`${action} clicked`);
   };
+  const hasPermission=useHasPermission()
 
   return (
     <div className="flex gap-4">
+      {hasPermission("customers-view") &&
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
@@ -36,7 +39,10 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
               variant="link"
               className="bg-gray-200 rounded-3xl flex items-center gap-2 cursor-pointer"
               aria-label="View Customer"
-              onClick={() => route.push(`/dashboard/customers/${id}`)}
+              onClick={() => route.push({
+                pathname:"/customerView/[customerId]",
+                params:{customerId:id}
+              })}
             >
               <IconEye className="text-black" />
             </Button>
@@ -46,6 +52,8 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+}
+      {hasPermission("customers-upload-media") &&
 
       <TooltipProvider>
         <Tooltip>
@@ -65,6 +73,8 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+}
+      {hasPermission("customers-invoice") &&
 
       <TooltipProvider>
         <Tooltip>
@@ -84,8 +94,8 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-
-      <TooltipProvider>
+}
+      {/* <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
             <Button
@@ -102,13 +112,14 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
             <p>View User Account</p>
           </TooltipContent>
         </Tooltip>
-      </TooltipProvider>
+      </TooltipProvider> */}
+      {/* TODO: Add user account button when user account is created */}
 
       <ActionCell
         id={id}
         name={name}
-        editAction={() => route.push(`/dashboard/customers/${id}/edit`)}
-        deleteAction={() => handleClick("Delete Customer")}
+        onDelete={{Action:() => handleClick("Delete Customer"),permission:"customers-delete"}}//TODO
+        edit={{ permission:"customers-edit",Action: () => route.push(`/dashboard/customers/${id}/edit`)}}
       />
     </div>
   );

@@ -25,16 +25,10 @@ const Header = async () => {
   });
 
   return (
-    <div className=" w-full flex items-center justify-center  absolute  top-5 z-[40]">
-      <header className=" bg-white w-[90%] rounded-xl border py-6 shadow-sm  ">
+    <div className="  flex items-center justify-end mr-3  absolute right-0  top-1 z-[40]">
+      <header className=" bg-white  rounded-xl border py-6 shadow-sm  ">
         <div className="flex items-center justify-between px-4">
-          <div className="flex items-center space-x-2">
-            <Image src="/group 8.png" alt="Logo" width={136} height={58} />
-
-            <div className="bg-[#00713a1e] p-1 py-5 w-[35px] h-[60px] rounded-xl ">
-              <SidebarTrigger />
-            </div>
-          </div>
+     <div></div>
 
           <nav className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
@@ -50,7 +44,7 @@ const Header = async () => {
                   Hello ,
                 </span>
                 <span className="text-black-500 text-[16px] font-semibold">
-                  Khaled Mohsen
+                Ahmad Altamimi
                 </span>
               </div>
             </div>

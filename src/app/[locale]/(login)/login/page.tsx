@@ -2,14 +2,17 @@
 import Image from "next/image";
 import { FiMail } from "react-icons/fi";
 import Password from "../../../../components/form/password";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { handleLogin } from "../../(dashboard)/actions";
 import { Button } from "@/components/ui/button";
-
+import { ILoginResponse } from "@/entities/dashboard";
+import { useRouter } from "@/i18n/navigation";
+import Cookies from "js-cookie";
+import { useUserStore } from "@/store/useStroeUser";
 export default function LoginPage() {
   interface LoginState {
     success: boolean;
-    data: null;
+    data: null|ILoginResponse;
     error: string | null;
   }
 
@@ -18,11 +21,28 @@ export default function LoginPage() {
     data: null,
     error: null,
   };
+      const router = useRouter();
 
   const [formState, formAction, isPending] = useActionState<LoginState>(
-    handleLogin,
+    (prevState, formData) => handleLogin(prevState, formData),
     initialState
   );
+  const { user, setUser, clearUser } = useUserStore();
+useEffect(() => {
+  if (formState.success && formState.data) {
+    setUser(formState.data)
+    Cookies.set("user", JSON.stringify(formState.data.user));
+    Cookies.set("role", JSON.stringify(formState.data.user.roles[0].code));
+    Cookies.set("permissions", JSON.stringify(formState.data.permissions));
+    const targetPath =
+      formState.data.user.roles[0].code === "super-admin"
+        ? "/dashboard"
+        : "/dashboard/customers";
+    router.push(targetPath);
+  }
+}, [formState, router]);
+
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-green-50 to-white relative">
       <div className="absolute top-30 left-10 z-10">
@@ -67,13 +87,13 @@ export default function LoginPage() {
             Fill Your Account Information to login
           </p>
 
-          <form className="space-y-4" action={formAction} method="POST">
+          <form className="space-y-4" action={formAction} >
             <div className="relative">
               <input
                 type="email"
                 disabled={isPending}
                 name="email"
-                defaultValue={"superadmin@uaeicons.com"}
+                // defaultValue={"superadmin@uaeicons.com"}
                 placeholder="Email Address"
                 className="w-full px-4 py-3 pr-10 pl-12 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
               />

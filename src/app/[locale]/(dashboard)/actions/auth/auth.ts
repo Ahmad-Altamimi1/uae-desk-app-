@@ -5,6 +5,7 @@ import { z } from "zod";
 import { cookies } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
+import { json } from "stream/consumers";
 getLocale();
 interface LoginState {
   success: boolean;
@@ -47,8 +48,14 @@ export async function handleLogin(prevState: LoginState, formData: FormData) {
   try {
     const loginResponse = await AuthService.login(rawFormData);
     const cookieStore = await cookies();
-
+    cookieStore.set("permissions",JSON.stringify( loginResponse.permissions));
+    cookieStore.set("user",JSON.stringify( loginResponse.user ));
     cookieStore.set("token", loginResponse.access_token);
+ return {
+      success: true,
+      error: null,
+      data:loginResponse
+    };
 
     isOk = true;
   } catch (error) {
@@ -59,20 +66,25 @@ export async function handleLogin(prevState: LoginState, formData: FormData) {
     };
   }
   if (isOk) {
-    redirect({
-      href: "/dashboard",
-      locale: locale,
-    });
+    return {
+      success: true,
+      error: null,
+      data:loginResponse
+    };
   }
 }
 export const HandleLogOut = async () => {
-  const locale = await getLocale();
   const response = await AuthService.logout();
-  if (response.success) {
+  console.log("responseresponseresponse", response);
+  
+  if (response) {
+    
+    (await cookies()).delete("token");
+    (await cookies()).delete("permissions");
+    (await cookies()).delete("user");
+    
+
   }
-  (await cookies()).delete("token");
-  redirect({
-    href: "/login",
-    locale: locale,
-  });
+  return response;
+ 
 };

@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { Button } from "../ui/button";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 
 interface CreateButtonProps {
   title: string;
@@ -11,15 +11,16 @@ interface CreateButtonProps {
   type?: "submit" | "button";
 }
 
-const CreateButton =  ({
+const CreateButton = async ({
   title,
   href,
   type = "button",
 }: CreateButtonProps) => {
- const t = useTranslations()
+  const locale = await getLocale();
+  const t = await getTranslations({ locale });
 
   const Comp: React.ElementType = href ? Link : "div";
-  
+
   return (
     <Comp {...(href ? { href } : {})}>
       <Button

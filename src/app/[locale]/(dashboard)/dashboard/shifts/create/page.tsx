@@ -40,7 +40,6 @@ export default function ShiftsCreateForm() {
   const onSubmit = (data: ShiftCreateFormValues) => {
     startTransition(async () => {
       response = await createShifts(data);
-      console.log("responseresponse", response);
 
       if (response.success) {
         toast.success(response.message);

@@ -2,10 +2,24 @@
 import { HandleLogOut } from "@/app/[locale]/(dashboard)/actions";
 import { IconLogout } from "@tabler/icons-react";
 import React from "react";
+import Cookies from "js-cookie";
+import { useLocale } from "next-intl";
 
-const LogOut = () => {
+const LogOutForm = () => {
+  const lang = useLocale()
+  const LogOut =async () => {
+     const logOut= await HandleLogOut();
+     
+    if (logOut) {
+      Cookies.remove("user");
+    Cookies.remove("permissions");
+    // router.push("/login");
+    window.location.replace(`${lang}/login`);
+    
+    }
+}
   return (
-    <form action={HandleLogOut}>
+    <form action={LogOut}>
       <div className="flex items-center gap-2 text-left text-sm leading-tight text-red-500 ml-5 py-2">
         <IconLogout />
         <button
@@ -19,4 +33,4 @@ const LogOut = () => {
   );
 };
 
-export default LogOut;
+export default LogOutForm;

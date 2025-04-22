@@ -8,20 +8,24 @@ export default async function middleware(req: NextRequest) {
   intlMiddleware(req);
 
   const { pathname } = req.nextUrl;
+    const user = req.cookies.get("user")?.value;
+  const parsedUser = user ? JSON.parse(user) : null;
+  const isSuperAdmin = parsedUser?.roles[0].code === "super-admin" || parsedUser?.roles[0].name === "admin";
   if (pathname === "/") {
     return NextResponse.redirect(
-      `http://localhost:3000/${req.nextUrl.locale || "en"}/dashboard` //TODO
+      `http://localhost:3000/${req.nextUrl.locale || "en"}${isSuperAdmin ? "/dashboard" : "/dashboard/customers"}` //TODO
     );
   }
   if (pathname === `/${req.nextUrl.locale || "en"}`) {
     return NextResponse.redirect(
-      `http://localhost:3000/${req.nextUrl.locale || "en"}/dashboard` //TODO
+      `http://localhost:3000/${req.nextUrl.locale || "en"}${isSuperAdmin ? "/dashboard":"/dashboard/customers"}` //TODO
     );
   }
 
   const isProtectedRoute = /^\/(ar|en)\/dashboard(\/.*)?$/.test(pathname);
   const isLoginRoutes = /^\/(ar|en)\/login$/.test(pathname);
   const token = req.cookies.get("token")?.value;
+
   let isLoggedIn = false;
 
   if (token) {
@@ -44,7 +48,7 @@ export default async function middleware(req: NextRequest) {
 
   if (isLoginRoutes && isLoggedIn) {
     const dashboardUrl = req.nextUrl.clone();
-    dashboardUrl.pathname = `/${req.nextUrl.locale || "en"}/dashboard`;
+    dashboardUrl.pathname = `/${req.nextUrl.locale || "en"}${isSuperAdmin ? "/dashboard":"/dashboard/customers"}`;
     return NextResponse.redirect(dashboardUrl);
   }
 

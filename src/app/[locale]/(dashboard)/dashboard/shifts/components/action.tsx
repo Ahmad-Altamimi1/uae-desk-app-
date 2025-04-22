@@ -8,6 +8,7 @@ import { Modal } from "@/components/modal/modal";
 import { toast } from "sonner";
 import { IResponseShifts, IShiftsData } from "@/entities/dashboard/shifts";
 import { deleteShifts } from "../../../actions/shifts";
+import { PermissionTypesOptions } from "@/constants";
 
 interface ShiftActionProps {
   id: number;
@@ -70,8 +71,8 @@ const ShiftAction: React.FC<ShiftActionProps> = React.memo(
           <ActionCell
             id={id}
             name={name}
-            editAction={handleEdit}
-            onDeleted={handleDelete}
+            edit={{Action:handleEdit,permission:PermissionTypesOptions["shift-edit"]}}
+            onDeleted={{  Action:handleDelete,permission:PermissionTypesOptions["shift-delete"]}}
           />
         </div>
 

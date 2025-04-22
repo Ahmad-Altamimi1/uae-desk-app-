@@ -20,6 +20,7 @@ export function NavMain({
     title: string;
     url: string;
     icon?: Icon;
+    visable: boolean;
   }[];
 }) {
   const pathname = usePathname();
@@ -29,8 +30,8 @@ export function NavMain({
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) => {
+            if (!item.visable) return null;
             const fullUrl = "/dashboard" + (item.url === "/" ? "" : item.url);
-            console.log("fullUrl", fullUrl);
 
             const isActive =
               pathname == "/" + locale + fullUrl ||
@@ -39,13 +40,13 @@ export function NavMain({
             return (
               <SidebarMenuItem
                 key={item.title}
-                className="hover:bg-white hover:text-primary rounded-md"
+                className="hover:bg-white hover:text-primary w-full text-xl rounded-md"
               >
                 <SidebarMenuButton
                   asChild
                   className={cn(
                     isActive && "bg-white text-primary",
-                    "transition-all duration-300 ease-in-out transform hover:bg-white hover:text-primary hover:scale-105"
+                    "transition-all duration-300 ease-in-out text-center transform hover:bg-white hover:text-primary hover:scale-105"
                   )}
                 >
                   <Link
@@ -53,9 +54,9 @@ export function NavMain({
                     className="flex items-center gap-2 w-full hover:text-primary"
                   >
                     {item.icon && (
-                      <item.icon className="h-4 w-4 transition-transform duration-300 ease-in-out hover:rotate-12" />
+                      <item.icon className="h-6 w-6 transition-transform duration-300 ease-in-out hover:rotate-12" />
                     )}
-                    <span className="transition-opacity duration-300 ease-in-out hover:opacity-80">
+                    <span className="transition-opacity text-[16px] duration-300 ease-in-out hover:opacity-80">
                       {item.title}
                     </span>
                   </Link>

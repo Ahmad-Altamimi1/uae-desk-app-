@@ -17,6 +17,7 @@ const Page = async () => {
         addButton={{
           title: "dashboard.customers.AddNewCustomer",
           href: "customers/create",
+          permission: "customers-create",
         }}
       />
 

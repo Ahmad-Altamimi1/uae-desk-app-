@@ -13,6 +13,9 @@ import UploadMediaFromModal from "./UploadMediaFromModal";
 import ProcessTimeTracking from "./tabs/ProcessTimeTracking";
 import ExpertActions from "./tabs/ExpertActions";
 import FtaDocument from "./tabs/fatDocument";
+import {  useHasPermission } from "@/hooks/useHasPermission";
+import { useHasRole } from "@/hooks/hasRole";
+import { PermissionTypesOptions, RoleTypesOptions } from "@/constants";
 
 interface CustomerTabsProps {
   data: ICustomerData;
@@ -27,6 +30,8 @@ const CustomerTabs = ({
 }: CustomerTabsProps) => {
   const t = useTranslations("dashboard.customers");
   const [activeHeader, setActiveHeader] = useState(0);
+  const hasPermission=useHasPermission()
+  const hasRole=useHasRole()
   const defaultContent = () => {
     return (
       <div className="flex items-center justify-between ">
@@ -90,64 +95,63 @@ const CustomerTabs = ({
     defaultContent,
     defaultContent,
   ];
-
+const items = [
+  hasPermission(PermissionTypesOptions["customers-view"]) && {
+    component: <CustomerFTAInformation customer={data.customer} />,
+    name: "dashboard.customers.tabs.CustomerFTAInformation",
+  },
+  hasPermission(PermissionTypesOptions["customers-view"]) && {
+    component: (
+      <ServicesAndPaymentDetails
+        customer={data.customer}
+        selectedServices={data.selectedServices}
+        serviceOptions={serviceOptions}
+      />
+    ),
+    name: "dashboard.customers.tabs.ServicesAndPaymentDetails",
+  },
+  hasPermission(PermissionTypesOptions["customers-view"]) && hasRole(RoleTypesOptions.expert)&&{
+    component: (
+      <ExpertActions
+        customer={data.customer}
+        selectedServices={data.selectedServices}
+        serviceOptions={allServiceOptions}
+      />
+    ),
+    name: "dashboard.customers.tabs.ExpertActions",
+  },
+  hasPermission(PermissionTypesOptions["customers-view"]) &&PermissionTypesOptions["customers-upload-media"]&& {
+    component: (
+      <UploadedMedia
+        media={data.customer.media}
+        customer={data.customer}
+      />
+    ),
+    name: "dashboard.customers.tabs.UploadedMedia",
+  },
+  hasPermission(PermissionTypesOptions["customers-view"]) && hasRole(RoleTypesOptions.supervisor)&& {
+    component: (
+      <FtaDocument
+        ftaDocument={data.customer.ftamedia}
+        customer={data.customer}
+      />
+    ),
+    name: "dashboard.customers.tabs.fat",
+  },
+  hasPermission(PermissionTypesOptions["customers-view"]) &&( hasRole(RoleTypesOptions.admin)||hasRole(RoleTypesOptions["super-admin"]))&& {
+    component: (
+      <ProcessTimeTracking processTime={data.processTime.original} />
+    ),
+    name: "dashboard.customers.tabs.ProcessTimeTracking",
+  },
+].filter(Boolean);
   return (
     <>
       <div className="mb-4">{headerContents[activeHeader]?.()}</div>
 
       <TabsComponent
         setActiveHeader={setActiveHeader}
-        items={[
-          {
-            component: <CustomerFTAInformation customer={data.customer} />,
-            name: "dashboard.customers.tabs.CustomerFTAInformation",
-          },
-          {
-            component: (
-              <ServicesAndPaymentDetails
-                customer={data.customer}
-                selectedServices={data.selectedServices}
-                serviceOptions={serviceOptions}
-              />
-            ),
-            name: "dashboard.customers.tabs.ServicesAndPaymentDetails",
-          },
-          {
-            component: (
-              <ExpertActions
-                customer={data.customer}
-                selectedServices={data.selectedServices}
-                serviceOptions={allServiceOptions}
-              />
-            ),
-            name: "dashboard.customers.tabs.ExpertActions",
-          },
-          {
-            component: (
-              <UploadedMedia
-                media={data.customer.media}
-                customer={data.customer}
-              />
-            ),
-            name: "dashboard.customers.tabs.UploadedMedia",
-          },
-
-          {
-            component: (
-              <FtaDocument
-                ftaDocument={data.customer.ftamedia}
-                customer={data.customer}
-              />
-            ),
-            name: "dashboard.customers.tabs.fat",
-          },
-          {
-            component: (
-              <ProcessTimeTracking processTime={data.processTime.original} />
-            ),
-            name: "dashboard.customers.tabs.ProcessTimeTracking",
-          },
-        ]}
+        items={items}
       />
     </>
   );

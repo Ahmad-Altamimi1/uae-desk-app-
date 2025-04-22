@@ -4,9 +4,18 @@ export interface ILoginRequest {
 }
 export interface ILoginResponse {
   access_token: string;
-  password: string;
+  user:{
+roles:IRole[]
+    password: string;
+  }
+  permissions: string[];
 }
 export interface ILogoutResponse {
   success: boolean;
   message: string;
+}
+interface IRole{
+    id: string;
+    name: string;
+    code: string;
 }

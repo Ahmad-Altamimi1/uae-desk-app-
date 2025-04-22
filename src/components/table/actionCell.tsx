@@ -10,15 +10,19 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ConfirmDeleteDialog } from "../common/ConfirmDeleteDialog";
+import { PermissionTypes } from "@/utils/type";
+import {  useHasPermission } from "@/hooks/useHasPermission";
 
 interface ActionCellProps {
   id: number;
   name: string;
-  editAction: () => void;
-  onDeleted?: () => void;
+  edit: {permission:PermissionTypes, Action:() => void};
+  onDelete?: {permission:PermissionTypes, Action:() => void};
 }
 
-const ActionCell = ({ id, name, editAction, onDeleted }: ActionCellProps) => {
+const ActionCell = ({ id, name, edit, onDelete }: ActionCellProps) => {
+    const hasPermission=useHasPermission()
+  
   const handleDeleteClick = () => {
     ConfirmDeleteDialog({
       title: "Delete Confirmation",
@@ -26,8 +30,9 @@ const ActionCell = ({ id, name, editAction, onDeleted }: ActionCellProps) => {
       itemName: `name : ${name} id : ${id} `,
 
       onDelete: async () => {
-        if (onDeleted) {
-          onDeleted();
+        if (onDelete?.Action) {
+          onDelete.Action();
+
         }
       },
     });
@@ -35,15 +40,16 @@ const ActionCell = ({ id, name, editAction, onDeleted }: ActionCellProps) => {
 
   return (
     <div className="flex gap-4">
+          { hasPermission(edit.permission) &&
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger asChild>
+            <TooltipTrigger asChild>
             <Button
               size="sm"
               variant="link"
-              onClick={editAction}
+              onClick={edit.Action}
               className="bg-[#00713a13] rounded-3xl flex items-center gap-2 cursor-pointer"
-            >
+              >
               <IconEdit className="text-[#00713B]" />
             </Button>
           </TooltipTrigger>
@@ -52,6 +58,8 @@ const ActionCell = ({ id, name, editAction, onDeleted }: ActionCellProps) => {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+            }
+          { onDelete?.permission && hasPermission(onDelete.permission) &&
 
       <TooltipProvider>
         <Tooltip>
@@ -70,6 +78,7 @@ const ActionCell = ({ id, name, editAction, onDeleted }: ActionCellProps) => {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+}
     </div>
   );
 };
