@@ -3,7 +3,7 @@ import { Modal } from '@/components/modal/modal'
 import Image from 'next/image'
 import React from 'react'
 import { FiLock } from 'react-icons/fi';
-
+import  unlock from "@/public/images/dashboard/commn/unlock.png"
 interface Props {
   title?: string;
   description?: string;
@@ -16,7 +16,7 @@ const ResetPassword = () => {
     <Modal title={'dashboard.updatePassword.title'} description={"dashboard.updatePassword.description"}
       triggerButton={<ResetPasswordButton />}
     >
-      <Image src="/unlock.png" alt="Logo" width={136} height={58} />
+      <Image src={unlock} alt="unlock" width={136} height={58} />
       <Password />
       <Password name='confirmPassword' placeholder='confirmPassword' />
 

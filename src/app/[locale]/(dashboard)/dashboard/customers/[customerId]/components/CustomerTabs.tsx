@@ -110,12 +110,13 @@ const items = [
     ),
     name: "dashboard.customers.tabs.ServicesAndPaymentDetails",
   },
-  hasPermission(PermissionTypesOptions["customers-view"]) && hasRole(RoleTypesOptions.expert)&&{
+  hasPermission(PermissionTypesOptions["customers-view"]) || hasRole(RoleTypesOptions.expert)&&{
     component: (
       <ExpertActions
         customer={data.customer}
         selectedServices={data.selectedServices}
         serviceOptions={allServiceOptions}
+        key={3}
       />
     ),
     name: "dashboard.customers.tabs.ExpertActions",
@@ -129,7 +130,7 @@ const items = [
     ),
     name: "dashboard.customers.tabs.UploadedMedia",
   },
-  hasPermission(PermissionTypesOptions["customers-view"]) && hasRole(RoleTypesOptions.supervisor)&& {
+  hasPermission(PermissionTypesOptions["customers-view"]) &&  hasRole(RoleTypesOptions.supervisor)||hasRole(RoleTypesOptions["super-admin"])&& {
     component: (
       <FtaDocument
         ftaDocument={data.customer.ftamedia}
@@ -138,7 +139,7 @@ const items = [
     ),
     name: "dashboard.customers.tabs.fat",
   },
-  hasPermission(PermissionTypesOptions["customers-view"]) &&( hasRole(RoleTypesOptions.admin)||hasRole(RoleTypesOptions["super-admin"]))&& {
+  hasPermission(PermissionTypesOptions["customers-view"]) &&( hasRole(RoleTypesOptions["super-admin"])||hasRole(RoleTypesOptions["super-admin"]))&& {
     component: (
       <ProcessTimeTracking processTime={data.processTime.original} />
     ),

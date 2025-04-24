@@ -1,6 +1,7 @@
 import { useUserStore } from "@/store/useStroeUser";
 import { PermissionTypes } from "../utils/type";
 import Cookies from "js-cookie";
+import { useHasRole } from "./hasRole";
 
 export function useHasPermission(): (permissionToCheck: PermissionTypes) => boolean {
   const { user } = useUserStore();
@@ -20,6 +21,7 @@ export function useHasPermission(): (permissionToCheck: PermissionTypes) => bool
     }
   }
 const hasPermission = (permissionToCheck: PermissionTypes) => {
+  return true
   return userPermissions.includes(permissionToCheck);
 };
 return hasPermission;

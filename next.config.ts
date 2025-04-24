@@ -12,12 +12,13 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  poweredByHeader: false,
   images: {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "localhost",
-        port: "8000",
+        hostname: "stageapi.uaedesk.com",
+        // port: "8000",
       },
     ],
   },

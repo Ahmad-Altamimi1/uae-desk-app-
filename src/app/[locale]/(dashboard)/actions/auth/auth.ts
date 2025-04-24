@@ -3,10 +3,8 @@ import { ILoginResponse } from "@/entities/dashboard";
 import { AuthService } from "@/api/services/dashboard";
 import { z } from "zod";
 import { cookies } from "next/headers";
-import { redirect } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
-import { json } from "stream/consumers";
-getLocale();
+
 interface LoginState {
   success: boolean;
   data: ILoginResponse;
@@ -47,17 +45,17 @@ export async function handleLogin(prevState: LoginState, formData: FormData) {
 
   try {
     const loginResponse = await AuthService.login(rawFormData);
+    console.log("loginResponse");
+    
     const cookieStore = await cookies();
-    cookieStore.set("permissions",JSON.stringify( loginResponse.permissions));
-    cookieStore.set("user",JSON.stringify( loginResponse.user ));
     cookieStore.set("token", loginResponse.access_token);
+
  return {
       success: true,
       error: null,
       data:loginResponse
     };
 
-    isOk = true;
   } catch (error) {
     return {
       success: false,
@@ -75,7 +73,6 @@ export async function handleLogin(prevState: LoginState, formData: FormData) {
 }
 export const HandleLogOut = async () => {
   const response = await AuthService.logout();
-  console.log("responseresponseresponse", response);
   
   if (response) {
     

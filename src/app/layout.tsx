@@ -40,9 +40,9 @@ export async function generateMetadata(
         en: "/en",
         ar: "/ar",
       },
-      icons: {
-        icon: "./app.ico",
-      },
+    },
+    icons: {
+      icon: "./app.ico",
     },
   };
 }

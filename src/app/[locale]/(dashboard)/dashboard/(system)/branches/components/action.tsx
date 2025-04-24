@@ -3,11 +3,11 @@ import ActionCell from "@/components/table/actionCell";
 import { deleteServices } from "@/app/[locale]/(dashboard)/actions/services";
 import { IBranchesData, ILocation, IResponseBranches, IResponseSingleServices, IServicesData } from "@/entities/dashboard";
 import { api } from "@/lib/api/serverCore";
-import { UpdateShiftForm } from "../[shiftId]/edit/components/updateShiftForm";
 import { toast } from "sonner";
 import { deleteBranches } from "@/app/[locale]/(dashboard)/actions/branches";
 import { UpdateBranchForm } from "../[branchId]/edit/components/updateBranchForm";
 import { Modal } from "@/components/modal/modal";
+import { PermissionTypesOptions } from "@/constants";
 
 interface BranchActionProps {
   id: number;
@@ -79,8 +79,8 @@ const BranchAction: React.FC<BranchActionProps> = React.memo(
           <ActionCell
             id={id}
             name={branch_name}
-            editAction={handleEdit}
-            onDeleted={handleDelete}
+            edit={{Action:handleEdit,permission:PermissionTypesOptions["branches-edit"]}}
+            onDelete={{Action:handleDelete,permission:PermissionTypesOptions["branches-delete"]}}
           />
         </div>
 

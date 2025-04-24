@@ -13,8 +13,8 @@ const LogOutForm = () => {
     if (logOut) {
       Cookies.remove("user");
     Cookies.remove("permissions");
-    // router.push("/login");
-    window.location.replace(`${lang}/login`);
+    Cookies.remove("role");
+    window.location.replace(`/${lang}/login`);
     
     }
 }

@@ -131,86 +131,55 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 const [user, setUser] = useState(null);
-  const hasPermission=useHasPermission()
-  const hasRole=useHasRole()
-const navMain: NavItem[] =   [
-    {
-      title: "Home",
-      url: "",
-      icon: IconHome,
-      visable: hasRole(RoleTypesOptions.admin) || hasRole(RoleTypesOptions["super-admin"]),
-    },
-    {
-      title: "Customers",
-      url: "/customers",
-      icon: IconUsers,
-      visable: hasPermission(PermissionTypesOptions["customers-list"]),
-    },
-    // {
-    //   title: "Employees",
-    //   url: "/employees",
-    //   icon: IconUserCog,
-    // },
+  const hasPermission = useHasPermission();
+  const hasRole = useHasRole();
+  const [navMain, setNavMain] = useState<NavItem[]>([]);
 
-    // {
-    //   title: "Roles",
-    //   url: "/roles",
-    //   icon: IconShieldCheck,
-    // },
-    // {
-    //   title: "Permissions",
-    //   url: "/permissions",
-    //   icon: IconShieldLock,
-    // },
-    {
-      title: "User Activity",
-      url: "/useractivity",
-      icon: IconActivity,
-      visable: hasPermission("user-activity"),
-    },
-   
-    {
-      title: "Services",
-      url: "/services",
-      icon: IconFileWord,
-      visable: hasPermission("services-list"),
+  useEffect(() => {
+    const loadNavItems = async () => {
+      const updatedNavMain: NavItem[] = [
+        {
+          title: "Home",
+          url: "",
+          icon: IconHome,
+          visable: hasRole(RoleTypesOptions.admin) || hasRole(RoleTypesOptions["super-admin"]),
+        },
+        {
+          title: "Customers",
+          url: "/customers",
+          icon: IconUsers,
+          visable: await hasPermission(PermissionTypesOptions["customers-list"]),
+        },
+        {
+          title: "User Activity",
+          url: "/useractivity",
+          icon: IconActivity,
+          visable: await hasPermission("user-activity"),
+        },
+        {
+          title: "Services",
+          url: "/services",
+          icon: IconFileWord,
+          visable: await hasPermission("services-list"),
+        },
+        {
+          title: "Branches",
+          url: "/branches",
+          icon: IconGitBranch,
+          visable: await hasPermission("branches-list"),
+        },
+        {
+          title: "shifts",
+          url: "/shifts",
+          icon: IconClock,
+          visable: true,
+        },
+      ];
+      setNavMain(updatedNavMain.filter((item) => item.visable));
+    };
 
-    },
-    {
-      title: "Branches",
-      url: "/branches",
-      icon: IconGitBranch,
-      visable: hasPermission("branches-list"),
-    },
-    {
-      title: "shifts",
-      url: "/shifts",
-      icon: IconClock,
-      // visable: hasPermission("shifts-list"),
-      visable: true,
-    },
-    // {
-    //   title: "Attendances",
-    //   url: "/attendance",
-    //   icon: IconChecklist,
-    // },
-
-    // {
-    //   title: "Settings",
-    //   url: "#",
-    //   icon: IconSettings,
-    // },
-    // {
-    //   title: "Website Settings",
-    //   url: "#",
-    //   icon: IconWorldCog,
-    // },
-    // {
-    //   title: "File Manager",
-    //   url: "#",
-    //   icon: IconFolderPlus,
-    // },
-  ]
+    loadNavItems();
+  }, []);
   useEffect(() => {
   const cookieValue = document.cookie
     .split("; ")
@@ -222,7 +191,6 @@ const navMain: NavItem[] =   [
   }
 }, []);
 
-console.log("user",user);
   return (
     <Sidebar collapsible="icon" {...props} className="  text-white">
       <SidebarBackground />
@@ -256,8 +224,15 @@ console.log("user",user);
       </SidebarHeader>
 
       <SidebarContent className="bg-transparent ">
-        <div className="flex flex-col  items-center flex-1 w-full ">
-          <NavMain items={navMain} />
+        
+        <div className="flex flex-col items-center flex-1 w-full">
+          {navMain.length === 0 ? (
+            <div className="flex items-center justify-center h-full">
+              <span className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></span>
+            </div>
+          ) : (
+            <NavMain items={navMain} />
+          )}
         </div>
         {/* <NavDocuments items={data.documents} /> */}
         {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}

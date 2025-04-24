@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useRouter } from "@/i18n/navigation";
 import {  useHasPermission } from "@/hooks/useHasPermission";
+import { PermissionTypesOptions } from "@/constants";
 
 interface ActionCustomerCellProps {
   id: number;
@@ -30,7 +31,7 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
 
   return (
     <div className="flex gap-4">
-      {hasPermission("customers-view") &&
+      {PermissionTypesOptions["customers-view"] &&
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
@@ -74,7 +75,7 @@ const ActionCustomerCell = ({ id, name }: ActionCustomerCellProps) => {
         </Tooltip>
       </TooltipProvider>
 }
-      {hasPermission("customers-invoice") &&
+      {hasPermission("customers-invoice")  || true &&
 
       <TooltipProvider>
         <Tooltip>

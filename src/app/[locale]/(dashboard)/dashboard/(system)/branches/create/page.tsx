@@ -13,6 +13,7 @@ import CustomSelect from "@/components/form/select";
 import { ISelectOption } from "@/utils/type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
+import  customer from "@/public/images/dashboard/commn/customer.png"
 
 interface BranchesCreateFormProps {
   locations: ISelectOption[];
@@ -67,7 +68,7 @@ export default function BranchesCreateForm({
     <ToolBarModal
       title="dashboard.branches.title"
       description="dashboard.branches.description"
-      image="/customer.png"
+      image={customer}
       addButton={{
         title: "dashboard.branches.Add",
       }}

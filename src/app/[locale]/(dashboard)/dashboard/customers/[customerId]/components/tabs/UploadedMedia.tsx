@@ -218,7 +218,7 @@ const UploadedMedia = ({
           <div className="w-24 h-32 bg-gray-200 rounded-md relative flex items-center justify-center">
             <div className="absolute top-0 right-0 w-0 h-0 border-t-8 border-r-8 border-t-gray-300 border-r-gray-300"></div>
             <span className="text-gray-600 font-bold">
-              {fileType.split("/").pop()?.toUpperCase()}
+              {fileType?.split("/").pop()?.toUpperCase()}
             </span>
           </div>
         </div>

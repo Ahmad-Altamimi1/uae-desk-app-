@@ -6,19 +6,19 @@ const intlMiddleware = createMiddleware(routing);
 
 export default async function middleware(req: NextRequest) {
   intlMiddleware(req);
-
+const AppUrl=process.env.NEXT_PUBLIC_APP_URL 
   const { pathname } = req.nextUrl;
     const user = req.cookies.get("user")?.value;
   const parsedUser = user ? JSON.parse(user) : null;
-  const isSuperAdmin = parsedUser?.roles[0].code === "super-admin" || parsedUser?.roles[0].name === "admin";
+  const isSuperAdmin = parsedUser?.roles?.length>0 &&( parsedUser?.roles[0].code === "super-admin" || parsedUser?.roles[0].name === "admin");
   if (pathname === "/") {
     return NextResponse.redirect(
-      `http://localhost:3000/${req.nextUrl.locale || "en"}${isSuperAdmin ? "/dashboard" : "/dashboard/customers"}` //TODO
+      `${AppUrl}${req.nextUrl.locale || "en"}${isSuperAdmin ? "/dashboard" : "/dashboard/customers"}` //TODO
     );
   }
   if (pathname === `/${req.nextUrl.locale || "en"}`) {
     return NextResponse.redirect(
-      `http://localhost:3000/${req.nextUrl.locale || "en"}${isSuperAdmin ? "/dashboard":"/dashboard/customers"}` //TODO
+      `${AppUrl}${req.nextUrl.locale || "en"}${isSuperAdmin ? "/dashboard":"/dashboard/customers"}` //TODO
     );
   }
 

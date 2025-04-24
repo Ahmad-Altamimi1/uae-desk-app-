@@ -6,6 +6,7 @@ import { api } from "@/lib/api/serverCore";
 import { UpdateServiceForm } from "../[serviceId]/edit/components/updateServiceForm";
 import { Modal } from "@/components/modal/modal";
 import { toast } from "sonner";
+import { PermissionTypesOptions } from "@/constants";
 
 interface ServiceActionProps {
   id: number;
@@ -17,8 +18,6 @@ const ServiceAction: React.FC<ServiceActionProps> = React.memo(
     const [itemForUpdate, setItemForUpdate] = useState<number | boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [service, setService] = useState<IServicesData | null>(null);
-    let x = 0;
-    console.log("count", ++x);
 
     const handleEdit = useCallback(async (id: number) => {
       try {
@@ -61,12 +60,12 @@ const ServiceAction: React.FC<ServiceActionProps> = React.memo(
           <ActionCell
             id={id}
             name={name}
-            editAction={() => {
+            edit={{Action:() => {
               handleEdit(id);
-            }}
-            onDeleted={() => {
+            },permission:PermissionTypesOptions["services-edit"]}}
+            onDelete={{Action:() => {
               handleDelete(id);
-            }}
+            },permission:PermissionTypesOptions["services-delete"]}}
           />
         </div>
 

@@ -4,7 +4,6 @@ import {
   setRequestLocale,
   getTranslations,
 } from "next-intl/server";
-// Removed unused imports for fonts
 import "../../globals.css";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
