@@ -103,6 +103,7 @@ export default function LoginPage() {
                 type="email"
                 name="email"
                 disabled={isPending}
+                defaultValue={"superadmin@uaeicons.com"}
                 placeholder="Email Address"
                 className="w-full px-4 py-3 pr-10 pl-12 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
               />

@@ -29,13 +29,13 @@ export function NavMain({
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
-          {items.map((item) => {
+            {items.map((item) => {
             if (!item.visable) return null;
             const fullUrl = "/dashboard" + (item.url === "/" ? "" : item.url);
 
             const isActive =
-              pathname == "/" + locale + fullUrl ||
-              (pathname === "/dashboard" && item.url === "/");
+              pathname.startsWith("/" + locale + fullUrl) ||
+              (pathname.startsWith("/dashboard") && item.url === "/");
 
             return (
               <SidebarMenuItem

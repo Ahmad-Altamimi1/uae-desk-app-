@@ -29,11 +29,12 @@ const TabsComponent = ({
   const [activeTab, setActiveTab] = React.useState(
     defaultValue || items[0]?.name
   );
+  
   return (
     <div className={cn("w-full flex flex-col", className)}>
       <div className="w-full flex border-0 border-b-3">
         {items.map((item, index) => (
-          <React.Fragment key={item.name}>
+          <React.Fragment key={`${item.name }${index}`}>
             <button
               className={cn(
                 "flex-1 py-4 px-2 text-gray-600 relative transition-colors cursor-pointer",

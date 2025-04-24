@@ -30,6 +30,7 @@ import { useHasPermission } from "@/hooks/useHasPermission";
 import { type Icon } from "@tabler/icons-react";
 import { useHasRole } from "@/hooks/hasRole";
 import { PermissionTypesOptions, RoleTypesOptions } from "@/constants";
+import CompanyLogo from "@/public/images/dashboard/commn/Group 8.png";
 
 type NavItem = {
   title: string;
@@ -214,7 +215,7 @@ const [user, setUser] = useState(null);
         <div className="bg-white  rounded-xl border py-6 shadow-sm  ">
 
           <div className="flex items-center space-x-2">
-            <Image src="/group 8.png" alt="Logo" width={136} height={58} />
+            <Image src={CompanyLogo} alt="Logo" width={136} height={58} />
 
             <div className="bg-[#00713a1e] p-1 py-5 w-[35px] h-[60px] rounded-xl ">
               <SidebarTrigger />

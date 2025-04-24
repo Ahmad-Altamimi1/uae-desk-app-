@@ -123,7 +123,7 @@ const ServiceForms = ({
         </div>
         {groupedMediaArray.map(([key, value]) => {
           const Component = documentComponentsMap[key as DocumentType];
-
+     
           return value.map((_, index) => <Component key={`${key}-${index}`} />);
         })}
         <Button type="submit" disabled={!formState.isDirty || isPending}>

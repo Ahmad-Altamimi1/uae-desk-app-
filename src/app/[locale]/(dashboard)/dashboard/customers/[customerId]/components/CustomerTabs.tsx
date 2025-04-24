@@ -13,7 +13,7 @@ import UploadMediaFromModal from "./UploadMediaFromModal";
 import ProcessTimeTracking from "./tabs/ProcessTimeTracking";
 import ExpertActions from "./tabs/ExpertActions";
 import FtaDocument from "./tabs/fatDocument";
-import {  useHasPermission } from "@/hooks/useHasPermission";
+import { useHasPermission } from "@/hooks/useHasPermission";
 import { useHasRole } from "@/hooks/hasRole";
 import { PermissionTypesOptions, RoleTypesOptions } from "@/constants";
 
@@ -49,7 +49,7 @@ const CustomerTabs = ({
   };
   // Custom headers for each tab
   const headerContents = [
-    () => (
+    hasPermission(PermissionTypesOptions["customers-view"]) && (() => (
       <div>
         <div className="flex items-center gap-6">
           <div className="flex flex-col items-center gap-4">
@@ -72,15 +72,16 @@ const CustomerTabs = ({
           </div>
         </div>
       </div>
-    ),
-    defaultContent,
-    defaultContent,
-    () => (
-      <div className="flex items-center justify-between ">
-        <div className="flex flex-col items-center gap-4">
-          <h2 className="text-[25px] font-bold text-gray-800">
-            {data.customer.business_name}
-          </h2>
+    )),
+    hasPermission(PermissionTypesOptions["customers-view"]) && defaultContent,
+    hasPermission(PermissionTypesOptions["customers-view"]) && defaultContent,
+   ( hasPermission(PermissionTypesOptions["customers-view"]) &&hasPermission(PermissionTypesOptions["customers-upload-media"]) )&&
+      (() => (
+        <div className="flex items-center justify-between ">
+          <div className="flex flex-col items-center gap-4">
+            <h2 className="text-[25px] font-bold text-gray-800">
+                    {data.customer.business_name}
+            </h2>
           <div className="flex items-center gap-2">
             <p className="text-sm text-gray-500">{t("ApplicationID")}:</p>
             <span>{data.customer.invoice_number}</span>
@@ -90,7 +91,7 @@ const CustomerTabs = ({
           <UploadMediaFromModal customerId={data.customer.id} />
         </div>
       </div>
-    ),
+    )),
 
     defaultContent,
     defaultContent,
@@ -100,7 +101,7 @@ const items = [
     component: <CustomerFTAInformation customer={data.customer} />,
     name: "dashboard.customers.tabs.CustomerFTAInformation",
   },
-  hasPermission(PermissionTypesOptions["customers-view"]) && {
+ ( hasPermission(PermissionTypesOptions["customers-view"]) )&& {
     component: (
       <ServicesAndPaymentDetails
         customer={data.customer}
@@ -110,18 +111,17 @@ const items = [
     ),
     name: "dashboard.customers.tabs.ServicesAndPaymentDetails",
   },
-  hasPermission(PermissionTypesOptions["customers-view"]) || hasRole(RoleTypesOptions.expert)&&{
+(  hasPermission(PermissionTypesOptions["customers-view"]) || (hasRole(RoleTypesOptions.expert)||hasRole(RoleTypesOptions["super-admin"])))&&{
     component: (
       <ExpertActions
         customer={data.customer}
         selectedServices={data.selectedServices}
         serviceOptions={allServiceOptions}
-        key={3}
       />
     ),
     name: "dashboard.customers.tabs.ExpertActions",
   },
-  hasPermission(PermissionTypesOptions["customers-view"]) &&PermissionTypesOptions["customers-upload-media"]&& {
+ ( hasPermission(PermissionTypesOptions["customers-view"]) &&PermissionTypesOptions["customers-upload-media"])&& {
     component: (
       <UploadedMedia
         media={data.customer.media}
@@ -130,7 +130,7 @@ const items = [
     ),
     name: "dashboard.customers.tabs.UploadedMedia",
   },
-  hasPermission(PermissionTypesOptions["customers-view"]) &&  hasRole(RoleTypesOptions.supervisor)||hasRole(RoleTypesOptions["super-admin"])&& {
+  (hasPermission(PermissionTypesOptions["customers-view"]) &&  hasRole(RoleTypesOptions.supervisor)||hasRole(RoleTypesOptions["super-admin"]))&& {
     component: (
       <FtaDocument
         ftaDocument={data.customer.ftamedia}
@@ -139,7 +139,7 @@ const items = [
     ),
     name: "dashboard.customers.tabs.fat",
   },
-  hasPermission(PermissionTypesOptions["customers-view"]) &&( hasRole(RoleTypesOptions["super-admin"])||hasRole(RoleTypesOptions["super-admin"]))&& {
+ ( hasPermission(PermissionTypesOptions["customers-view"]) ||( hasRole(RoleTypesOptions["super-admin"])||hasRole(RoleTypesOptions["super-admin"])))&& {
     component: (
       <ProcessTimeTracking processTime={data.processTime.original} />
     ),

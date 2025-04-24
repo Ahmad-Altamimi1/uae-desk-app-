@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { InvoiceDetails } from "@/entities/dashboard/invoice";
 import PrintButton from "../../invoice/components/PrintButton";
+import CompanyLogo from "@/public/images/dashboard/commn/Group 8.png";
 
 interface ReceiptProps {
   data: InvoiceDetails;
@@ -40,7 +41,7 @@ export default function Receipt({ data }: ReceiptProps) {
           <div className="header-center flex flex-col items-center">
             <div className="relative w-70 h-70 mb-[-20%] mt-[-20%]">
               <Image
-                src="/Group 8.png"
+                src={CompanyLogo}
                 alt="Company Logo"
                 fill
                 className="object-contain"

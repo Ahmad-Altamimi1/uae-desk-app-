@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { InvoiceDetails } from "@/entities/dashboard/invoice";
 import PrintButton from "../../invoice/components/PrintButton";
-
+import CompanyLogo from "@/public/images/dashboard/commn/Group 8.png";
 interface InvoiceProps {
   data: InvoiceDetails;
 }
@@ -42,8 +42,8 @@ export default function Invoice({ data }: InvoiceProps) {
             <div className="header-center flex flex-col items-center">
               <div className="relative w-70 h-70 mb-[-20%] mt-[-20%]">
                 <Image
-                  src="/Group 8.png"
-                  alt="Company Logo"
+                  src="CompanyLogo"
+                  alt="CompanyLogo"
                   fill
                   className="object-contain"
                 />
